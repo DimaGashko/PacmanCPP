@@ -1,8 +1,13 @@
 #include "pch.h"
 
 #include "PacmanGame.h"
+#include "../Pacman/pg/PacmanGame.h"
 
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
+TEST(pgPacmanGame, Init) {
+	pg::PacmanGame game();
+
+
+
+	EXPECT_EQ(1, 1);
+	EXPECT_TRUE(true);
 }
