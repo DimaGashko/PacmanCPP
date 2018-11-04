@@ -15,6 +15,8 @@ namespace pg {
 		sf::RenderWindow window;
 		std::string title;
 
+		unsigned short maxFps = 300;
+
 		void initWindow();
 	};
 

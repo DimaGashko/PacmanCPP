@@ -11,12 +11,9 @@ namespace pg {
 	}
 
 	void GWindow::initWindow() {
-		sf::VideoMode display = sf::VideoMode::getDesktopMode();
-
-		window.create(
-			sf::VideoMode(display.width, display.height),
-			title/*, sf::Style::Fullscreen*/
-		);
+		window.create(sf::VideoMode::getFullscreenModes()[0], title/*, sf::Style::Fullscreen*/);
+		window.setPosition(sf::Vector2i(0, 0));
+		window.setFramerateLimit(maxFps);
 
 		while (window.isOpen()) {
 			sf::Event event;
