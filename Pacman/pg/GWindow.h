@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
-
+ 
 namespace pg {
 
 	class GWindow {
@@ -18,6 +18,7 @@ namespace pg {
 		unsigned short maxFps = 300;
 
 		void initWindow();
+		void draw();
 	};
 
 } // namespace pg

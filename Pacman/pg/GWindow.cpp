@@ -23,9 +23,13 @@ namespace pg {
 			}
 
 			window.clear();
-
+			draw();
 			window.display();
 		}
+	}
+
+	void GWindow::draw() {
+		
 	}
 
 
