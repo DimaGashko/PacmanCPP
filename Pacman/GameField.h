@@ -1,9 +1,9 @@
 #pragma once
-class GameField
-{
+
+class GameField {
 public:
 	GameField();
-	void build();
+	void create();
 	void update();
 	void render();
 	void checkCollision();
