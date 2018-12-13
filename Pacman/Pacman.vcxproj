@@ -24,12 +24,16 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="StaticObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PacmanGame.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="StaticObject.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
