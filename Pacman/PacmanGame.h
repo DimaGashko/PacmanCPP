@@ -1,5 +1,10 @@
 #pragma once
 
+#include "GameField.h"
+#include "Player.h"
+#include "GameInfo.h"
+#include "Menu.h"
+
 class PacmanGame {
 public:
 	PacmanGame();
@@ -14,6 +19,9 @@ public:
 	~PacmanGame();
 
 private:
-
+	GameField _gameField;
+	Player *_player;
+	GameInfo *_gameInfo;
+	Menu *_menu;
 };
 
