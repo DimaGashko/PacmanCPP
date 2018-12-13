@@ -19,10 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameField.cpp" />
+    <ClCompile Include="GameInfo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameField.h" />
+    <ClInclude Include="GameInfo.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="PacmanGame.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
