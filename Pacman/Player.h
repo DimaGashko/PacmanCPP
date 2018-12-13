@@ -1,13 +1,15 @@
 #pragma once
-class Player
-{
+
+#include "Actor.h"
+
+class Player {
 public:
 	Player();
 	void moveActor(float x, float y);
 	int getScore();
 	int addScore(int val);
-	setTarg(); 
-	getTarg();
+	void setTarg(Actor &actor); 
+	Actor& getTarg();
 	~Player();
 };
 
