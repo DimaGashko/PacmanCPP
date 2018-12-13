@@ -23,8 +23,10 @@
     <ClCompile Include="DinamicObject.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameInfo.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="StaticObject.cpp" />
@@ -35,7 +37,9 @@
     <ClInclude Include="DinamicObject.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameInfo.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Pacman.h" />
     <ClInclude Include="PacmanGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="StaticObject.h" />
