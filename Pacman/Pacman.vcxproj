@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="DinamicObject.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameInfo.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="DinamicObject.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameInfo.h" />
