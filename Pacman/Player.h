@@ -6,10 +6,11 @@ class Player {
 public:
 	Player();
 	void moveActor(float x, float y);
-	int getScore();
-	int addScore(int val);
-	void setTarg(Actor &actor); 
-	Actor& getTarg();
+	void setActor(Actor &actor); 
+	Actor& getActor();
 	~Player();
+
+private:
+	Actor *_actor;
 };
 

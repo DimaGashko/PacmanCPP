@@ -19,9 +19,9 @@ public:
 	~PacmanGame();
 
 private:
-	GameField _gameField;
+	GameField *_gameField;
 	Player *_player;
 	GameInfo *_gameInfo;
-	Menu *_menu;
+	Menu _menu;
 };
 

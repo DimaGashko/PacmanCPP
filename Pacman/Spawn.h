@@ -6,7 +6,7 @@
 class Spawn : public StaticObject {
 public:
 	Spawn();
-	Ghost generateGhost();
+	Ghost& generateGhost();
 	~Spawn();
 };
 

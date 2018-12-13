@@ -7,5 +7,8 @@ public:
 	Actor();
 	void eat(Actor food);
 	~Actor();
+
+private:
+	int _power;
 };
 

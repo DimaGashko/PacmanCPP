@@ -7,5 +7,8 @@ public:
 	virtual ~StaticObject();
 private:
 	void _setPrevCoords();
+
+	int _x;
+	int _y;
 };
 
