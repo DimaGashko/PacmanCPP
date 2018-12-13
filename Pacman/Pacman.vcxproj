@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="BigPoint.cpp" />
+    <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="DinamicObject.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameInfo.cpp" />
@@ -29,11 +31,15 @@
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Spawn.cpp" />
     <ClCompile Include="StaticObject.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="BigPoint.h" />
+    <ClInclude Include="Bonus.h" />
     <ClInclude Include="DinamicObject.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameInfo.h" />
@@ -42,6 +48,8 @@
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="PacmanGame.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Spawn.h" />
     <ClInclude Include="StaticObject.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
