@@ -18,6 +18,13 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PacmanGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PacmanGame.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{77FC6F2C-A12A-4A4D-8C65-FA868FAAA343}</ProjectGuid>
@@ -142,15 +149,6 @@
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="pg\GWindow.cpp" />
-    <ClCompile Include="pg\PacmanGame.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="pg\GWindow.h" />
-    <ClInclude Include="pg\PacmanGame.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

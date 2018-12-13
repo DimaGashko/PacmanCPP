@@ -15,21 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="pg\PacmanGame.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="pg\GWindow.cpp">
+    <ClCompile Include="PacmanGame.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pg\PacmanGame.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="pg\GWindow.h">
+    <ClInclude Include="PacmanGame.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
