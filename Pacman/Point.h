@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Bonus.h"
-#include "Pacman.h"
+#include "Actor.h"
 
 class Point : public Bonus {
 public:
 	Point();
-	void addScore(Pacman pacman);
+	void addScore(Actor pacman);
 	~Point();
 };
 
