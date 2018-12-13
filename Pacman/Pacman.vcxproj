@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DinamicObject.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameInfo.cpp" />
     <ClCompile Include="main.cpp" />
@@ -26,14 +27,17 @@
     <ClCompile Include="PacmanGame.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="StaticObject.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DinamicObject.h" />
     <ClInclude Include="GameField.h" />
     <ClInclude Include="GameInfo.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="PacmanGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
