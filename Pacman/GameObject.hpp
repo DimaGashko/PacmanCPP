@@ -1,15 +1,18 @@
 #pragma once
 
-class GameObject {
-public:
-	GameObject();
-	void interact();
-	void move(float x, float y);
-	virtual ~GameObject();
-private:
-	void _setPrevCoords();
+#include <SFML/Graphics.hpp>
 
-	int _x;
-	int _y;
-};
+namespace pg {
 
+	class GameObject {
+	public:
+		GameObject();
+		void interact();
+		void move(float x, float y);
+		virtual ~GameObject();
+	private:
+		void _setPrevCoords();
+
+	};
+
+} // namespace pg

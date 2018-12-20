@@ -1,12 +1,18 @@
-#include "PacmanGame.h"
+#include "PacmanGame.hpp"
+
+namespace pg {
+
+	PacmanGame::PacmanGame() {
+
+	}
+
+	void PacmanGame::run() {
+
+	}
 
 
+	PacmanGame::~PacmanGame() {
 
-PacmanGame::PacmanGame()
-{
-}
+	}
 
-
-PacmanGame::~PacmanGame()
-{
-}
+} // namespace pg

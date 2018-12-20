@@ -1,27 +1,16 @@
 #pragma once
 
-#include "GameField.hpp"
-#include "Player.hpp"
-#include "GameInfo.hpp"
-#include "Menu.hpp"
+namespace pg {
 
-class PacmanGame {
-public:
-	PacmanGame();
-	void run();
+	class PacmanGame {
+	public:
+		PacmanGame();
+		void run();
 
-	void start();
-	void pause();
-	void resume();
-	void load();
-	void update();
-	void render();
-	~PacmanGame();
+		~PacmanGame();
 
-private:
-	GameField *_gameField;
-	Player *_player;
-	GameInfo *_gameInfo;
-	Menu _menu;
-};
+	private:
+		
+	};
 
+} // namespace pg
