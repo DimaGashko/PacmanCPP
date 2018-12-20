@@ -1,7 +1,7 @@
 #pragma once
 
-#include "StaticObject.h"
-#include "Ghost.h"
+#include "StaticObject.hpp"
+#include "Ghost.hpp"
 
 class Spawn : public StaticObject {
 public:

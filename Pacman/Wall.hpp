@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StaticObject.h"
+#include "StaticObject.hpp"
 
 class Wall : public StaticObject {
 public:

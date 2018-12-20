@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Bonus.h"
-#include "Actor.h"
+#include "Bonus.hpp"
+#include "Actor.hpp"
 
 class Point : public Bonus {
 public:

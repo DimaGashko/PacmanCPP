@@ -1,5 +1,5 @@
 #pragma once
-#include "Bonus.h"
+#include "Bonus.hpp"
 class BigPoint : public Bonus {
 public:
 	BigPoint();

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "GameField.h"
-#include "Player.h"
-#include "GameInfo.h"
-#include "Menu.h"
+#include "GameField.hpp"
+#include "Player.hpp"
+#include "GameInfo.hpp"
+#include "Menu.hpp"
 
 class PacmanGame {
 public:

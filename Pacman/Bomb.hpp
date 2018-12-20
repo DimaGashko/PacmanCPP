@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Bonus.h"
+#include "Bonus.hpp"
 
 class Bomb : public Bonus {
 public:

@@ -1,5 +1,7 @@
 #pragma once
-#include "Bonus.h"
+
+#include "Bonus.hpp"
+
 class LifeBonus : public Bonus {
 public:
 	LifeBonus();

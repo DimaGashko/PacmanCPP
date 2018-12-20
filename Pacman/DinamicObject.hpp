@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StaticObject.h"
+#include "StaticObject.hpp"
 
 class DinamicObject : public StaticObject {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "StaticObject.h"
+#include "StaticObject.hpp"
 
 class GameField {
 public:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DinamicObject.h"
+#include "DinamicObject.hpp"
 
 class Actor : public DinamicObject {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "StaticObject.h"
-#include "Actor.h"
+#include "StaticObject.hpp"
+#include "Actor.hpp"
 
 class Bonus : public StaticObject {
 public:
