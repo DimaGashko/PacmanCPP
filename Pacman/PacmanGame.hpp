@@ -20,6 +20,8 @@ namespace pg {
 		void update();
 		void render();
 
+		void _updateView();
+
 		void _initWindow();
 		
 	};
