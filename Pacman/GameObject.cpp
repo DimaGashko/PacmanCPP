@@ -2,18 +2,15 @@
  
 namespace pg {
 
-	GameObject::GameObject() :
-		m_sprite(sf::Sprite())
-	{
-		
-	}
-	
-	GameObject::GameObject(sf::Vector2f position) :
-		GameObject()
-	{
-		m_sprite.setPosition(position);
+	GameObject::GameObject() {
+		m_rect.setSize(sf::Vector2f(16, 16));
+		m_rect.setPosition(sf::Vector2f(16, 16));
+		m_rect.setFillColor(sf::Color::Green);
 	}
 
+	void GameObject::draw(sf::RenderTarget &window) {
+		window.draw(m_rect);
+	}
 
 	GameObject::~GameObject() {
 
