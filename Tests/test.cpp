@@ -1,9 +1,11 @@
 #include "pch.hpp"
 
-#include "PacmanGame.hpp"
+#include "SFML/Graphics.hpp"
 
-TEST(pgPacmanGame, Init) {
-	
+#include "../Pacman/GameObject.hpp"
+
+TEST(pgGameObject, init) {
+	pg::GameObject obj1();
 	EXPECT_EQ(1, 1);
-	EXPECT_TRUE(true);
 }
+

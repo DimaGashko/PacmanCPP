@@ -1,10 +1,14 @@
 #pragma once
 
-#include "StaticObject.hpp"
+#include "GameObject.hpp"
 
-class Wall : public StaticObject {
-public:
-	Wall();
-	~Wall();
-};
+namespace pg {
+
+	class Wall : public GameObject {
+	public:
+		Wall();
+		~Wall();
+	};
+
+}; // namespace pg
 

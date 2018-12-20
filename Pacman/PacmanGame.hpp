@@ -13,4 +13,4 @@ namespace pg {
 		
 	};
 
-} // namespace pg
+}; // namespace pg
