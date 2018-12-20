@@ -19,47 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="BigPoint.cpp" />
-    <ClCompile Include="Bomb.cpp" />
-    <ClCompile Include="Bonus.cpp" />
-    <ClCompile Include="DinamicObject.cpp" />
-    <ClCompile Include="GameField.cpp" />
-    <ClCompile Include="GameInfo.cpp" />
-    <ClCompile Include="Ghost.cpp" />
-    <ClCompile Include="LifeBonus.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MastBonus.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Pacman.cpp" />
-    <ClCompile Include="PacmanGame.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Point.cpp" />
-    <ClCompile Include="SlowBonus.cpp" />
-    <ClCompile Include="Spawn.cpp" />
-    <ClCompile Include="StaticObject.cpp" />
-    <ClCompile Include="Wall.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Actor.hpp" />
-    <ClInclude Include="BigPoint.hpp" />
-    <ClInclude Include="Bomb.hpp" />
-    <ClInclude Include="Bonus.hpp" />
-    <ClInclude Include="DinamicObject.hpp" />
-    <ClInclude Include="GameField.hpp" />
-    <ClInclude Include="GameInfo.hpp" />
-    <ClInclude Include="Ghost.hpp" />
-    <ClInclude Include="LifeBonus.hpp" />
-    <ClInclude Include="MastBonus.hpp" />
-    <ClInclude Include="Menu.hpp" />
-    <ClInclude Include="Pacman.hpp" />
-    <ClInclude Include="PacmanGame.hpp" />
-    <ClInclude Include="Player.hpp" />
-    <ClInclude Include="Point.hpp" />
-    <ClInclude Include="SlowBonus.hpp" />
-    <ClInclude Include="Spawn.hpp" />
-    <ClInclude Include="StaticObject.hpp" />
-    <ClInclude Include="Wall.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
