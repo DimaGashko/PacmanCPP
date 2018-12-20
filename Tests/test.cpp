@@ -1,6 +1,6 @@
-#include "pch.h"
+#include "pch.hpp"
 
-#include "PacmanGame.h"
+#include "PacmanGame.hpp"
 
 TEST(pgPacmanGame, Init) {
 	

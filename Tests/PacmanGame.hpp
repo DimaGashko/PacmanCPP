@@ -1,6 +1,6 @@
 #pragma once
 
-#include "pch.h"
+#include "pch.hpp"
 
 TEST(TestCaseNamePG, TestNamePG) {
 	EXPECT_EQ(1, 1);
