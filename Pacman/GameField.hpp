@@ -1,17 +1,23 @@
 #pragma once
 
 #include <vector>
-#include "StaticObject.hpp"
 
-class GameField {
-public:
-	GameField();
-	void create();
-	void update();
-	void render();
-	void checkCollision();
-	~GameField();
-private: 
-	std::vector<std::vector<int>> _objects;
-};
+#include "GameObject.hpp"
 
+namespace pg {
+
+	class GameField {
+	public:
+		GameField(sf::Vector2f size, sf::Vector2f cellSize, std::vector<GameObject> objects);
+		
+		~GameField();
+	
+	private:
+		sf::Vector2f m_size;
+		sf::Vector2f m_cellSize;
+
+		void create(std::vector<GameObject> objects);
+		
+	};
+
+} // namespace pg
