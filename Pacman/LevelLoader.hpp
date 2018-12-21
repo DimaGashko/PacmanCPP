@@ -29,26 +29,26 @@ namespace pg {
 		~LevelLoader();
 
 	private:
-		struct LevelConfig {
+		struct _LevelConfig {
 			sf::Vector2i size, tileSize;
 			std::vector<int> gids;
 			std::string tilesetUrl;
 		};
 
-		struct TileConfig {
+		struct _TileConfig {
 			std::string type;
 		};
 
-		struct TilesetConfig {
+		struct _TilesetConfig {
 			sf::Image tileset;
 			int columns;
-			std::unordered_map<int, TileConfig> tiles;
+			std::unordered_map<int, _TileConfig> tiles;
 		};
 
 		Level _getDefLevel();
-		Level _creatLevel(LevelConfig levelConfig, TilesetConfig tilesetConfig);
-		LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
-		TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
+		Level _creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig);
+		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
+		_TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 	};
 
 } // namespace pg

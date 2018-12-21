@@ -17,7 +17,7 @@ namespace pg {
 			return _getDefLevel();
 		}
 		
-		LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
+		_LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
 		
 		status = xmlTileset.LoadFile(levelConfig.tilesetUrl.c_str());
 
@@ -26,12 +26,12 @@ namespace pg {
 			return _getDefLevel();
 		}
 		
-		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
+		_TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
 		
 		return _creatLevel(levelConfig, tilesetConfig);
 	}
 
-	LevelLoader::Level LevelLoader::_creatLevel(LevelConfig levelConfig, TilesetConfig tilesetConfig) {
+	LevelLoader::Level LevelLoader::_creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig) {
 		Level result;
 
 		auto size = levelConfig.size;
@@ -60,7 +60,7 @@ namespace pg {
 					continue;
 				}
 
-				TileConfig tileConfig = tilesetConfig.tiles[id];
+				_TileConfig tileConfig = tilesetConfig.tiles[id];
 				auto type = tileConfig.type;
 				GameObject *obj;
 
@@ -150,8 +150,8 @@ namespace pg {
 		return result;
 	}
 
-	LevelLoader::LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
-		LevelConfig config;
+	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
+		_LevelConfig config;
 
 		auto xmlMap = xmlLevel.FirstChildElement("map");
 		auto xmlTileset = xmlMap->FirstChildElement("tileset");
@@ -182,8 +182,8 @@ namespace pg {
 		return config;
 	}
 
-	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
-		TilesetConfig config;
+	LevelLoader::_TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
+		_TilesetConfig config;
 
 		auto xmlTileset = xmlTilesetDoc.FirstChildElement("tileset");
 
@@ -201,7 +201,7 @@ namespace pg {
 		auto nextTile = xmlTileset->FirstChildElement("tile");
 
 		while (nextTile) {
-			TileConfig tileConfig;
+			_TileConfig tileConfig;
 			tileConfig.type = nextTile->Attribute("type");
 
 			int id = nextTile->IntAttribute("id");
