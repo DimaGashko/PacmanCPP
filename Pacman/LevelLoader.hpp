@@ -10,12 +10,17 @@
 
 namespace pg {
 
+	struct Level {
+		GameField *gameField;
+		GameObject *player;
+	};
+
 	class LevelLoader {
 
 	public:
 		LevelLoader();
 
-		GameField* loadFromTxt(std::string url);
+		Level loadFromTxt(std::string url);
 
 		~LevelLoader();
 

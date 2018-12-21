@@ -6,11 +6,16 @@ namespace pg {
 
 	}
 
-	GameField* LevelLoader::loadFromTxt(std::string url) {
+	Level LevelLoader::loadFromTxt(std::string url) {
+		Level level;
+
 		std::ifstream fin(url);
 		
 		if (!fin) {
-			return new GameField();
+			level.gameField = new GameField();
+			level.player = NULL;
+
+			return level;
 		}
 
 		std::vector<GameObject*> objects;
@@ -34,6 +39,8 @@ namespace pg {
 				else if (key == 'p') {
 					auto packman = new GameObject(realCoords);
 					objects.push_back(packman);
+
+					level.player = packman;
 				}
 			}
 
@@ -46,7 +53,8 @@ namespace pg {
 		auto gameField = new GameField(size, tileSize);
 		gameField->addAllObjects(objects);
 
-		return gameField;
+		level.gameField = gameField;
+		return level;
 	}
 
 	
