@@ -27,12 +27,55 @@ namespace pg {
 		}
 		
 		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
+		
+		return _creatLevel(levelConfig, tilesetConfig);
+	}
+
+	LevelLoader::Level LevelLoader::_creatLevel(LevelConfig levelConfig, TilesetConfig tilesetConfig) {
 		Level result;
 		
-		std::cout << tilesetConfig.columns << std::endl;
+		auto size = levelConfig.size;
 		
+		for (int x = 0; x < size.x; x++) {
+			for (int y = 0; y < size.y; y++) {
+				sf::Vector2f coords(x, y);
+				int id = levelConfig.gids[y * size.x + x];
 
-		return _getDefLevel();
+				sf::Texture *texture = new sf::Texture;
+				sf::IntRect textureArea(
+					id / tilesetConfig.columns, id % tilesetConfig.columns,
+					levelConfig.tileSize.x, levelConfig.tileSize.y
+				);
+
+				texture->loadFromImage(tilesetConfig.tileset, textureArea);
+
+				if (tilesetConfig.tiles.count(id) == 0) {
+					GameObject *obj = new GameObject(texture);
+					result.gameField->addObject(obj);
+					continue;
+				}
+
+				TileConfig tileConfig = tilesetConfig.tiles[id];
+				auto type = tileConfig.type;
+				GameObject *obj;
+
+				if (type == "Wall") {
+					auto *obj = new GameObject(texture);
+				}
+				else if (type == "Point") {
+				
+				}
+				else if (type == "Pacman") {
+					auto *obj = new GameObject(texture);
+					result.player = obj;
+				}
+
+				obj->setPosition(coords);
+				result.gameField->addObject(obj);
+			}
+		}
+
+		return result;
 	}
 
 	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
@@ -53,22 +96,25 @@ namespace pg {
 		int width = 0, height = 0;
 
 		while (std::getline(fin, row)) {
-			width = row.length();
+			width = (int)row.length();
 			int y = height;
 
 			for (int x = 0; x < width; x++) {
 				char key = row[x];
-				sf::Vector2f realCoords(x * tileSize.x, y * tileSize.y);
+				sf::Vector2f realCoords(float(x * tileSize.x), float(y * tileSize.y));
+				GameObject *obj;
 
 				if (key == '#') {
-					objects.push_back(new GameObject(realCoords));
+					obj = new GameObject();
 				}
 				else if (key == 'p') {
-					auto packman = new GameObject(realCoords);
-					objects.push_back(packman);
+					obj = new GameObject();
 
-					result.player = packman;
+					result.player = obj;
 				}
+
+				obj->setPosition(realCoords);
+				objects.push_back(obj);
 			}
 
 			height++;

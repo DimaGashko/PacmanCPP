@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <unordered_map>
 
 #include "lib/tinyxml2.h"
 
@@ -41,10 +42,11 @@ namespace pg {
 		struct TilesetConfig {
 			sf::Image tileset;
 			int columns;
-			std::vector<TileConfig> tiles;
+			std::unordered_map<int, TileConfig> tiles;
 		};
 
 		Level _getDefLevel();
+		Level _creatLevel(LevelConfig levelConfig, TilesetConfig tilesetConfig);
 		LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 		TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 	};
