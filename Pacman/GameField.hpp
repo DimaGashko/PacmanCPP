@@ -11,7 +11,7 @@ namespace pg {
 	class GameField {
 	public:
 		GameField();
-		GameField(sf::Vector2f size, sf::Vector2f cellSize);
+		GameField(sf::Vector2i size, sf::Vector2i cellSize);
 
 		/**
 		 * Добавляет переданные объекты в сетку
