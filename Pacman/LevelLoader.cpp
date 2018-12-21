@@ -19,7 +19,7 @@ namespace pg {
 		
 		LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
 		
-		status = xmlLevel.LoadFile(levelConfig.tilesetUrl.c_str());
+		status = xmlTileset.LoadFile(levelConfig.tilesetUrl.c_str());
 
 		if (status != tinyxml2::XMLError::XML_SUCCESS) {
 			std::cerr << "Can't load the tileset" << std::endl;
@@ -28,13 +28,12 @@ namespace pg {
 		
 		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
 		Level result;
-		sf::Texture a;
+		
+		std::cout << tilesetConfig.columns << std::endl;
 		
 
 		return _getDefLevel();
 	}
-
-
 
 	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);
@@ -126,8 +125,23 @@ namespace pg {
 		return config;
 	}
 
-	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument & xmlTileset) {
-		return TilesetConfig();
+	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTileset) {
+		TilesetConfig config;
+
+		auto xmlTilesetElem = xmlTileset.FirstChildElement("tileset");
+
+		config.columns = xmlTilesetElem->IntAttribute("columns");
+		
+		std::string imgUrl = xmlTilesetElem->FirstChildElement("image")->Attribute("source");
+		imgUrl = imgUrl.substr(6);
+
+		config.tileset = sf::Image();
+
+		if (!config.tileset.loadFromFile(imgUrl)) {
+			std::cerr << "Cant't load the tileset image";
+		};
+
+		return config;
 	}
 
 	LevelLoader::~LevelLoader() {
