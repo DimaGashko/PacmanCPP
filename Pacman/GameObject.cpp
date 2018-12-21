@@ -4,8 +4,13 @@ namespace pg {
 
 	GameObject::GameObject() {
 		m_rect.setSize(sf::Vector2f(16, 16));
-		m_rect.setPosition(sf::Vector2f(16, 16));
 		m_rect.setFillColor(sf::Color::Green);
+	}
+
+	GameObject::GameObject(sf::Vector2f coords) :
+		GameObject()
+	{
+		m_rect.setPosition(coords);
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
@@ -14,6 +19,10 @@ namespace pg {
 
 	sf::Vector2f GameObject::getPosition() {
 		return m_rect.getPosition();
+	}
+
+	void GameObject::setPosition(sf::Vector2f coords) {
+		m_rect.setPosition(coords);
 	}
 
 	GameObject::~GameObject() {
