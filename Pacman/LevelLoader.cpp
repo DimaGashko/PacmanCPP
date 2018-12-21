@@ -29,16 +29,6 @@ namespace pg {
 		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
 		Level result;
 
-		std::cout << levelConfig.size.x << ":" << levelConfig.size.y << std::endl;
-		std::cout << levelConfig.tileSize.x << ":" << levelConfig.tileSize.y << std::endl;
-		
-
-		for (int a : levelConfig.gids) {
-			std::cout << a << " ";
-		}
-
-		std::cout << std::endl;
-
 		return _getDefLevel();
 	}
 
@@ -123,7 +113,6 @@ namespace pg {
 
 		std::string tilesetUrl = xmlTileset->Attribute("source");
 		config.tilesetUrl = "configs/" + tilesetUrl.substr(3);
-		std::cout << config.tilesetUrl << std::endl;
 
 		auto xmlNextGid = xmlGids->FirstChildElement("tile");
 
