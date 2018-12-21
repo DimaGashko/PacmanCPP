@@ -69,7 +69,7 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		auto level = m_levelLoader.loadFromTxt("configs/levels/level1.txt");
+		auto level = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
 
 		m_gameField = level.gameField;
 

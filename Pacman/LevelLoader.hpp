@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <sstream>
 
 #include "lib/tinyxml2.h"
 
@@ -29,6 +30,8 @@ namespace pg {
 
 	private:
 		Level _getDefLevel();
+
+		std::vector<int> _parseCsvGids(const std::string &str);
 	};
 
 } // namespace pg
