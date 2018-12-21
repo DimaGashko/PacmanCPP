@@ -16,7 +16,8 @@ namespace pg {
 	}
 
 	void GameField::addObject(GameObject *object) {
-		sf::Vector2i coords = getCoordsInGrid(object->getPosition());
+		sf::Vector2f objCoords = object->getPosition();
+		sf::Vector2i coords = getCoordsInGrid(objCoords);
 		
 		//Oбъект уже есть в сетке
 		if (m_objectCoords.count(object) != 0) {
@@ -27,11 +28,21 @@ namespace pg {
 				return;
 			}
 			else {
+				// Объект находится за сеткой
+				if (!hasCell(prev)) return;
+				auto cell = m_grid[prev.x][prev.y];
 
-			}
+				auto pos = std::find(cell.begin(), cell.end(), object);
+				cell.erase(pos);
+			} 
 		}
 
-
+		// Объект находится за сеткой
+		if (!hasCell(coords)) return;
+		auto cell = m_grid[coords.x][coords.y];
+		
+		m_objectCoords[object] = sf::Vector2i(objCoords.x, objCoords.y);
+		cell.push_back(object);
 	}
 
 	void GameField::createGrid() {
