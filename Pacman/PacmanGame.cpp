@@ -7,9 +7,9 @@ namespace pg {
 	{
 		m_gameField = new GameField(sf::Vector2f(100, 100), sf::Vector2f(16, 16));
 
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 50; j++) {
-				m_gameField->addObject(new GameObject(sf::Vector2f(17 * i, 17 * j)));
+		for (int i = 0; i < 20; i+=2) {
+			for (int j = 0; j < 10; j+=2) {
+				m_gameField->addObject(new GameObject(sf::Vector2f(16 * i, 16 * j)));
 			}
 		}
 
