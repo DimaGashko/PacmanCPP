@@ -20,25 +20,35 @@ namespace pg {
 		auto xmlMap = xmlLevel.FirstChildElement("map");
 		auto xmlTileset = xmlMap->FirstChildElement("tileset");
 
-		std::string csvGids = xmlMap->FirstChildElement("layer")
-			->FirstChildElement("data")->GetText();
+		auto xmlGids = xmlMap->FirstChildElement("layer")
+			->FirstChildElement("data");
 
-		std::vector<int> gids = _parseCsvGids(csvGids);
-		
 		sf::Vector2i size(
-			atoi(xmlMap->Attribute("widht")),
-			atoi(xmlMap->Attribute("height"))
+			xmlMap->IntAttribute("width"),
+			xmlMap->IntAttribute("height")
 		);
 		
 		sf::Vector2i tileSize(
-			atoi(xmlMap->Attribute("tilewidth")),
-			atoi(xmlMap->Attribute("tileheight"))
+			xmlMap->IntAttribute("tilewidth"),
+			xmlMap->IntAttribute("tileheight")
 		);
+
+		auto xmlNextGid = xmlGids->FirstChildElement("tile");
+		std::vector<int> gids;
+
+		while (xmlNextGid != NULL) {
+			gids.push_back(xmlNextGid->IntAttribute("gid"));
+			xmlNextGid = xmlNextGid->NextSiblingElement("tile");
+		}
 
 		std::cout << size.x << ":" << size.y << std::endl;
 		std::cout << tileSize.x << ":" << tileSize.y << std::endl;
-		std::cout << csvGids << std::endl;
-		for (auto gid : gids) std::cout << gid << " ";
+
+		for (int a : gids) {
+			std::cout << a << " ";
+		}
+
+		std::cout << std::endl;
 
 		return _getDefLevel();
 	}
@@ -97,17 +107,6 @@ namespace pg {
 
 		result.gameField = new GameField();
 		result.player = NULL;
-
-		return result;
-	}
-
-	std::vector<int> LevelLoader::_parseCsvGids(const std::string & str) {
-		std::vector<int> result;
-		std::istringstream iss(str);
-
-		for (std::string s; iss >> s;) {
-			result.push_back(atoi(s.c_str()));
-		}
 
 		return result;
 	}

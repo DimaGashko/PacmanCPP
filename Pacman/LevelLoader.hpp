@@ -30,8 +30,6 @@ namespace pg {
 
 	private:
 		Level _getDefLevel();
-
-		std::vector<int> _parseCsvGids(const std::string &str);
 	};
 
 } // namespace pg
