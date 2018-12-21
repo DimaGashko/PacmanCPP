@@ -59,7 +59,7 @@ namespace pg {
 	}
 
 	void PacmanGame::update() {
-		m_view.move(1/16.f * m_frameTime, 1/16.f * m_frameTime);
+		m_view.move(0.1 * m_frameTime, 0.1 * m_frameTime);
 		
 		_updateView();
 	}
@@ -68,8 +68,6 @@ namespace pg {
 		auto objects = m_gameField->getObjectsOfRange(
 			sf::Vector2f(-500, -500), sf::Vector2f(500, 500)
 		);
-
-		//std::cout << objects.size() << std::endl;
 
 		for (auto obj : objects) {
 			obj->draw(m_window);
