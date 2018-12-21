@@ -4,15 +4,7 @@ namespace pg {
 
 	PacmanGame::PacmanGame() :
 		m_view(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
-	{
-		m_gameField = new GameField(sf::Vector2f(100, 100), sf::Vector2f(16, 16));
-
-		for (int i = 0; i < 20; i+=2) {
-			for (int j = 0; j < 10; j+=2) {
-				m_gameField->addObject(new GameObject(sf::Vector2f(16 * i, 16 * j)));
-			}
-		} 
-
+	{		
 		_initWindow();
 	}
 
@@ -22,11 +14,13 @@ namespace pg {
 
 		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default, settings);
 		m_window.setFramerateLimit(180);
-		
+
 		_updateView();
 	}
 
 	void PacmanGame::run() {
+		_createGame();
+
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
@@ -46,7 +40,7 @@ namespace pg {
 
 			update();
 			render();
-			
+
 			m_window.display();
 		}
 	}
@@ -60,7 +54,7 @@ namespace pg {
 
 	void PacmanGame::update() {
 		//m_view.move(0.1 * m_frameTime, 0.1 * m_frameTime);
-		
+
 		_updateView();
 	}
 
@@ -72,6 +66,10 @@ namespace pg {
 		for (auto obj : objects) {
 			obj->draw(m_window);
 		}
+	}
+
+	void PacmanGame::_createGame() {
+		m_gameField = m_levelLoader.loadFromTxt("configs/levels/level1.txt");
 	}
 
 	PacmanGame::~PacmanGame() {

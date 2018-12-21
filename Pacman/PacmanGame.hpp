@@ -4,6 +4,7 @@
 
 #include "GameField.hpp"
 #include "GameObject.hpp"
+#include "LevelLoader.hpp"
 
 namespace pg {
 
@@ -16,6 +17,7 @@ namespace pg {
 
 	private:
 		GameField *m_gameField;
+		LevelLoader m_levelLoader;
 		
 		sf::RenderWindow m_window;
 		sf::View m_view;
@@ -25,8 +27,8 @@ namespace pg {
 		void update();
 		void render();
 
+		void _createGame();
 		void _updateView();
-
 		void _initWindow();
 		
 	};
