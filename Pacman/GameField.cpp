@@ -10,7 +10,8 @@ namespace pg {
 
 	GameField::GameField(sf::Vector2f size, sf::Vector2f cellSize) :
 		m_size(size),
-		m_cellSize(cellSize)
+		m_cellSize(cellSize),
+		m_grid(size.x, std::vector<std::vector<GameObject*>>(size.y))
 	{
 		createGrid();
 	}
@@ -80,11 +81,7 @@ namespace pg {
 	}
 
 	void GameField::createGrid() {
-		m_grid = new std::vector<GameObject *>*[m_size.x];
-
-		for (int i = 0; i < m_size.x; i++) {
-			m_grid[i] = new std::vector<GameObject *>[m_size.y];
-		}
+		
 
 	}
 
@@ -98,11 +95,7 @@ namespace pg {
 	}
 
 	GameField::~GameField() {
-		for (int i = 0; i < m_size.x; i++) {
-			delete[] m_grid[i];
-		}
 
-		delete[] m_grid;
 	}
 
 } // namespace pg

@@ -41,7 +41,7 @@ namespace pg {
 		sf::Vector2f m_cellSize;
 		 
 		// Cетка игры
-		std::vector<GameObject *> **m_grid;
+		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
 
 		// Объект, содержащий координаты всех объектов в сетке по их id
 	    // Используется для быстрого определения где в данный момент находится объект

@@ -71,8 +71,10 @@ namespace pg {
 		m_window.draw(rect);
 
 		auto objects = m_gameField->getObjectsOfRange(
-			sf::Vector2f(-500, 500), sf::Vector2f(-500, 500)
+			sf::Vector2f(-500, -500), sf::Vector2f(500, 500)
 		);
+
+		//std::cout << objects.size() << std::endl;
 
 		for (auto obj : objects) {
 			obj->draw(m_window);
