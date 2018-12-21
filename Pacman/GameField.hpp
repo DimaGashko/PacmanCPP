@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include <unordered_map>
 
@@ -26,6 +27,13 @@ namespace pg {
 		 */
 		void addObject(GameObject *object);
 
+		/**
+		 * Возвращает все объекты находящихся в переданном диапазоне
+		 * @param start Левый верхний угол диапазона
+		 * @param ned Правый нижний угол диапазона
+		*/
+		std::vector<GameObject*> getObjectsOfRange(sf::Vector2f start, sf::Vector2f end);
+
 		~GameField();
 	
 	private:
@@ -33,7 +41,7 @@ namespace pg {
 		sf::Vector2f m_cellSize;
 		 
 		// Cетка игры
-		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
+		std::vector<GameObject *> **m_grid;
 
 		// Объект, содержащий координаты всех объектов в сетке по их id
 	    // Используется для быстрого определения где в данный момент находится объект
@@ -42,12 +50,6 @@ namespace pg {
 		bool hasCell(sf::Vector2i coords);
 		sf::Vector2i getCoordsInGrid(sf::Vector2f coords);
 
-		/**
-		 * Возвращает все объекты находящихся в переданном диапазоне
-		 * @param start Левый верхний угол диапазона
-		 * @param ned Правый нижний угол диапазона
-		*/
-		std::vector<GameObject*> getObjectsOfRange(sf::Vector2f start, sf::Vector2f end);
 		void createGrid();
 		
 	};

@@ -80,11 +80,12 @@ namespace pg {
 	}
 
 	void GameField::createGrid() {
-		m_grid.reserve(m_size.x);
-		
-		for (auto row : m_grid) {
-			row.reserve(m_size.y);
+		m_grid = new std::vector<GameObject *>*[m_size.x];
+
+		for (int i = 0; i < m_size.x; i++) {
+			m_grid[i] = new std::vector<GameObject *>[m_size.y];
 		}
+
 	}
 
 	bool GameField::hasCell(sf::Vector2i coords) {
@@ -97,7 +98,11 @@ namespace pg {
 	}
 
 	GameField::~GameField() {
+		for (int i = 0; i < m_size.x; i++) {
+			delete[] m_grid[i];
+		}
 
+		delete[] m_grid;
 	}
 
 } // namespace pg

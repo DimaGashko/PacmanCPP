@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "GameField.hpp"
+#include "GameObject.hpp"
 
 namespace pg {
 

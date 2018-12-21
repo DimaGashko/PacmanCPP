@@ -5,8 +5,14 @@ namespace pg {
 	PacmanGame::PacmanGame() :
 		m_view(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
 	{
-		m_gameField = &GameField(sf::Vector2f(100, 100), sf::Vector2f(16, 16));
-		
+		m_gameField = new GameField(sf::Vector2f(100, 100), sf::Vector2f(16, 16));
+
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 50; j++) {
+				m_gameField->addObject(new GameObject(sf::Vector2f(17 * i, 17 * j)));
+			}
+		}
+
 		_initWindow();
 	}
 
@@ -63,6 +69,14 @@ namespace pg {
 		rect.setPosition(sf::Vector2f(-8, -8));
 			
 		m_window.draw(rect);
+
+		auto objects = m_gameField->getObjectsOfRange(
+			sf::Vector2f(-500, 500), sf::Vector2f(-500, 500)
+		);
+
+		for (auto obj : objects) {
+			obj->draw(m_window);
+		}
 	}
 
 	PacmanGame::~PacmanGame() {
