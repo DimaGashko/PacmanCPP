@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "GameField.hpp"
+
 namespace pg {
 
 	class PacmanGame {
@@ -12,6 +14,8 @@ namespace pg {
 		~PacmanGame();
 
 	private:
+		GameField *m_gameField;
+		
 		sf::RenderWindow m_window;
 		sf::View m_view;
 

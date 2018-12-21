@@ -2,7 +2,13 @@
 
 namespace pg {
 
-	GameField::GameField(sf::Vector2f size, sf::Vector2f cellSize):
+	GameField::GameField() :
+		GameField(sf::Vector2f(10, 10), sf::Vector2f(16, 16))
+	{
+	
+	}
+
+	GameField::GameField(sf::Vector2f size, sf::Vector2f cellSize) :
 		m_size(size),
 		m_cellSize(cellSize)
 	{
@@ -56,7 +62,7 @@ namespace pg {
 		for (int x = _start.x; x <= _end.x; x++) {
 			for (int y = _start.y; y <= _end.y; y++) {
 
-				if (!hasCell(sf::Vector2i(x, y))) return;
+				if (!hasCell(sf::Vector2i(x, y))) continue;
 				auto cell = m_grid[x][y];
 
 				for (auto obj : cell) {

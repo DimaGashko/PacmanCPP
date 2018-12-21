@@ -5,6 +5,8 @@ namespace pg {
 	PacmanGame::PacmanGame() :
 		m_view(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
 	{
+		m_gameField = &GameField(sf::Vector2f(100, 100), sf::Vector2f(16, 16));
+		
 		_initWindow();
 	}
 

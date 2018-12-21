@@ -9,6 +9,7 @@ namespace pg {
 
 	class GameField {
 	public:
+		GameField();
 		GameField(sf::Vector2f size, sf::Vector2f cellSize);
 
 		/**
