@@ -29,7 +29,19 @@ namespace pg {
 		~LevelLoader();
 
 	private:
+		struct LevelConfig {
+			sf::Vector2i size, tileSize;
+			std::vector<int> gids;
+			std::string tilesetUrl;
+		};
+
+		struct TilesetConfig {
+			
+		};
+
 		Level _getDefLevel();
+		LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
+		TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTileset);
 	};
 
 } // namespace pg

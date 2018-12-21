@@ -7,44 +7,33 @@ namespace pg {
 	}
 
 	LevelLoader::Level LevelLoader::loadFromTmx(std::string url) {
+		tinyxml2::XMLDocument xmlTileset;
 		tinyxml2::XMLDocument xmlLevel;
+
 		auto status = xmlLevel.LoadFile(url.c_str());
 
 		if (status != tinyxml2::XMLError::XML_SUCCESS) {
-			std::cerr << "Can't load level" << std::endl;
+			std::cerr << "Can't load the level" << std::endl;
 			return _getDefLevel();
 		}
+		
+		LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
+		
+		status = xmlLevel.LoadFile(levelConfig.tilesetUrl.c_str());
 
+		if (status != tinyxml2::XMLError::XML_SUCCESS) {
+			std::cerr << "Can't load the tileset" << std::endl;
+			return _getDefLevel();
+		}
+		
+		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
 		Level result;
 
-		auto xmlMap = xmlLevel.FirstChildElement("map");
-		auto xmlTileset = xmlMap->FirstChildElement("tileset");
-
-		auto xmlGids = xmlMap->FirstChildElement("layer")
-			->FirstChildElement("data");
-
-		sf::Vector2i size(
-			xmlMap->IntAttribute("width"),
-			xmlMap->IntAttribute("height")
-		);
+		std::cout << levelConfig.size.x << ":" << levelConfig.size.y << std::endl;
+		std::cout << levelConfig.tileSize.x << ":" << levelConfig.tileSize.y << std::endl;
 		
-		sf::Vector2i tileSize(
-			xmlMap->IntAttribute("tilewidth"),
-			xmlMap->IntAttribute("tileheight")
-		);
 
-		auto xmlNextGid = xmlGids->FirstChildElement("tile");
-		std::vector<int> gids;
-
-		while (xmlNextGid != NULL) {
-			gids.push_back(xmlNextGid->IntAttribute("gid"));
-			xmlNextGid = xmlNextGid->NextSiblingElement("tile");
-		}
-
-		std::cout << size.x << ":" << size.y << std::endl;
-		std::cout << tileSize.x << ":" << tileSize.y << std::endl;
-
-		for (int a : gids) {
+		for (int a : levelConfig.gids) {
 			std::cout << a << " ";
 		}
 
@@ -52,6 +41,8 @@ namespace pg {
 
 		return _getDefLevel();
 	}
+
+
 
 	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);
@@ -109,6 +100,43 @@ namespace pg {
 		result.player = NULL;
 
 		return result;
+	}
+
+	LevelLoader::LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
+		LevelConfig config;
+
+		auto xmlMap = xmlLevel.FirstChildElement("map");
+		auto xmlTileset = xmlMap->FirstChildElement("tileset");
+
+		auto xmlGids = xmlMap->FirstChildElement("layer")
+			->FirstChildElement("data");
+
+		config.size = sf::Vector2i(
+			xmlMap->IntAttribute("width"),
+			xmlMap->IntAttribute("height")
+		);
+
+		config.tileSize = sf::Vector2i(
+			xmlMap->IntAttribute("tilewidth"),
+			xmlMap->IntAttribute("tileheight")
+		);
+
+		std::string tilesetUrl = xmlTileset->Attribute("source");
+		config.tilesetUrl = "configs/" + tilesetUrl.substr(3);
+		std::cout << config.tilesetUrl << std::endl;
+
+		auto xmlNextGid = xmlGids->FirstChildElement("tile");
+
+		while (xmlNextGid != NULL) {
+			config.gids.push_back(xmlNextGid->IntAttribute("gid"));
+			xmlNextGid = xmlNextGid->NextSiblingElement("tile");
+		}
+
+		return config;
+	}
+
+	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument & xmlTileset) {
+		return TilesetConfig();
 	}
 
 	LevelLoader::~LevelLoader() {
