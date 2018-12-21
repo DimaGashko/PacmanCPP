@@ -6,25 +6,37 @@ namespace pg {
 
 	}
 
-	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
-		Level level;
+	LevelLoader::Level LevelLoader::loadFromTmx(std::string url) {
+		tinyxml2::XMLDocument level;
+		auto status = level.LoadFile(url.c_str());
 
-		std::ifstream fin(url);
-		
-		if (!fin) {
-			level.gameField = new GameField();
-			level.player = NULL;
-
-			return level;
+		if (status != tinyxml2::XMLError::XML_SUCCESS) {
+			std::cerr << "Can't load level" << std::endl;
+			return _getDefLevel();
 		}
 
+		Level result;
+
+
+	}
+
+	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
+		std::ifstream fin(url);
+
+		if (!fin) {
+			std::cerr << "Can't load level" << std::endl;
+			return _getDefLevel();
+		}
+
+		Level result;
+
 		std::vector<GameObject*> objects;
-	    sf::Vector2i tileSize(16, 16);
+		sf::Vector2i tileSize(16, 16);
 		sf::Vector2i size(0, 0);
 
 		std::string row;
 		int width = 0, height = 0;
-		
+
 		while (std::getline(fin, row)) {
 			width = row.length();
 			int y = height;
@@ -35,12 +47,12 @@ namespace pg {
 
 				if (key == '#') {
 					objects.push_back(new GameObject(realCoords));
-				} 
+				}
 				else if (key == 'p') {
 					auto packman = new GameObject(realCoords);
 					objects.push_back(packman);
 
-					level.player = packman;
+					result.player = packman;
 				}
 			}
 
@@ -49,16 +61,22 @@ namespace pg {
 
 		size.x = width;
 		size.y = height;
-		
+
 		auto gameField = new GameField(size, tileSize);
 		gameField->addAllObjects(objects);
 
-		level.gameField = gameField;
-		return level;
+		result.gameField = gameField;
+		return result;
 	}
 
-	
+	LevelLoader::Level LevelLoader::_getDefLevel() {
+		Level result;
 
+		result.gameField = new GameField();
+		result.player = NULL;
+
+		return result;
+	}
 
 	LevelLoader::~LevelLoader() {
 

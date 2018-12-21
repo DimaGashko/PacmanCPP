@@ -22,6 +22,7 @@
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="lib\tinyxml2.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -30,6 +31,7 @@
     <ClInclude Include="GameField.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
+    <ClInclude Include="lib\tinyxml2.h" />
     <ClInclude Include="PacmanGame.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Wall.hpp" />
