@@ -33,17 +33,22 @@ namespace pg {
 
 	LevelLoader::Level LevelLoader::_creatLevel(LevelConfig levelConfig, TilesetConfig tilesetConfig) {
 		Level result;
-		
+
 		auto size = levelConfig.size;
-		
+		auto tileSize = levelConfig.tileSize;
+
+		result.gameField = new GameField(size, tileSize);
+
 		for (int x = 0; x < size.x; x++) {
 			for (int y = 0; y < size.y; y++) {
-				sf::Vector2f coords(x, y);
-				int id = levelConfig.gids[y * size.x + x];
+				int id = levelConfig.gids[y * size.x + x] - 1;
+
+				sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
 
 				sf::Texture *texture = new sf::Texture;
 				sf::IntRect textureArea(
-					id / tilesetConfig.columns, id % tilesetConfig.columns,
+					(id % tilesetConfig.columns) * tileSize.x, 
+					(id / tilesetConfig.columns) * tileSize.y,
 					levelConfig.tileSize.x, levelConfig.tileSize.y
 				);
 
@@ -60,14 +65,17 @@ namespace pg {
 				GameObject *obj;
 
 				if (type == "Wall") {
-					auto *obj = new GameObject(texture);
+					obj = new GameObject(texture);
 				}
 				else if (type == "Point") {
-				
+					obj = new GameObject(texture);
 				}
 				else if (type == "Pacman") {
-					auto *obj = new GameObject(texture);
+					obj = new GameObject(texture);
 					result.player = obj;
+				}
+				else {
+					obj = new GameObject(texture);
 				}
 
 				obj->setPosition(coords);
@@ -111,6 +119,9 @@ namespace pg {
 					obj = new GameObject();
 
 					result.player = obj;
+				}
+				else {
+					obj = new GameObject();
 				}
 
 				obj->setPosition(realCoords);
