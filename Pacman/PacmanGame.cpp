@@ -11,7 +11,7 @@ namespace pg {
 			for (int j = 0; j < 10; j+=2) {
 				m_gameField->addObject(new GameObject(sf::Vector2f(16 * i, 16 * j)));
 			}
-		}
+		} 
 
 		_initWindow();
 	}

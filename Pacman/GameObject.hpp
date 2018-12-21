@@ -14,6 +14,8 @@ namespace pg {
 		~GameObject();
 	private:
 		sf::RectangleShape m_rect;
+
+		bool m_real;
 	};
 
 }; // namespace pg
