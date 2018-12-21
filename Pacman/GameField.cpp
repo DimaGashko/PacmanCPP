@@ -28,7 +28,6 @@ namespace pg {
 				return;
 			}
 			else {
-				// Объект находится за сеткой
 				if (!hasCell(prev)) return;
 				auto cell = m_grid[prev.x][prev.y];
 
@@ -37,12 +36,41 @@ namespace pg {
 			} 
 		}
 
-		// Объект находится за сеткой
 		if (!hasCell(coords)) return;
 		auto cell = m_grid[coords.x][coords.y];
 		
 		m_objectCoords[object] = sf::Vector2i(objCoords.x, objCoords.y);
 		cell.push_back(object);
+	}
+
+	std::vector<GameObject*> GameField::getObjectsOfRange(sf::Vector2f start, sf::Vector2f end) {
+		std::vector<GameObject *> result;
+
+		//Координаты должны идти последовательно
+		if (start.x > end.x) std::swap(start.x, end.x);
+		if (start.y > end.y) std::swap(start.y, end.y);
+
+		auto _start = getCoordsInGrid(start);
+		auto _end = getCoordsInGrid(end);
+
+		for (int x = _start.x; x <= _end.x; x++) {
+			for (int y = _start.y; y <= _end.y; y++) {
+
+				if (!hasCell(sf::Vector2i(x, y))) return;
+				auto cell = m_grid[x][y];
+
+				for (auto obj : cell) {
+					auto coords = obj->getPosition();
+
+					bool check = (coords.x >= start.x && coords.x <= end.x
+						&& coords.y >= start.y && coords.y <= end.y);
+
+					if (check) result.push_back(obj);
+				}
+			}
+		}
+
+		return result;
 	}
 
 	void GameField::createGrid() {

@@ -12,17 +12,17 @@ namespace pg {
 		GameField(sf::Vector2f size, sf::Vector2f cellSize);
 
 		/**
-		* Добавляет переданные объекты в сетку
-		* Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
-		* @param object добавляемый объект
-		*/
+		 * Добавляет переданные объекты в сетку
+		 * Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
+		 * @param object добавляемый объект
+		 */
 		void addAllObjects(std::vector<GameObject*> objects);
 
 		/**
-		* Добавляет объект в сетку
-		* Если объект уже был в сетке, то от сначала удаляется с предыдущего места
-		* @param object добавляемый объект
-		*/
+		 * Добавляет объект в сетку
+		 * Если объект уже был в сетке, то от сначала удаляется с предыдущего места
+		 * @param object добавляемый объект
+		 */
 		void addObject(GameObject *object);
 
 		~GameField();
@@ -38,9 +38,15 @@ namespace pg {
 	    // Используется для быстрого определения где в данный момент находится объект
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
+		bool hasCell(sf::Vector2i coords);
+		sf::Vector2i getCoordsInGrid(sf::Vector2f coords);
 
-		sf::Vector2i getCoordsInGrid(sf::Vector2f);
-
+		/**
+		 * Возвращает все объекты находящихся в переданном диапазоне
+		 * @param start Левый верхний угол диапазона
+		 * @param ned Правый нижний угол диапазона
+		*/
+		std::vector<GameObject*> getObjectsOfRange(sf::Vector2f start, sf::Vector2f end);
 		void createGrid();
 		
 	};

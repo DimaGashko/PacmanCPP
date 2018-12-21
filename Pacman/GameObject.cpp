@@ -12,6 +12,10 @@ namespace pg {
 		window.draw(m_rect);
 	}
 
+	sf::Vector2f GameObject::getPosition() {
+		return m_rect.getPosition();
+	}
+
 	GameObject::~GameObject() {
 
 	}
