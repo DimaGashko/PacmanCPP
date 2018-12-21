@@ -24,7 +24,7 @@ namespace pg {
 
 	void GameField::addObject(GameObject *object) {
 		sf::Vector2f objCoords = object->getPosition();
-		sf::Vector2i coords = getCoordsInGrid(objCoords);
+		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 		
 		//Oбъект уже есть в сетке
 		if (m_objectCoords.count(object) != 0) {
@@ -35,7 +35,7 @@ namespace pg {
 				return;
 			}
 			else {
-				if (!hasCell(prev)) return;
+				if (!_hasCell(prev)) return;
 				auto cell = m_grid[prev.x][prev.y];
 
 				auto pos = std::find(cell.begin(), cell.end(), object);
@@ -43,7 +43,7 @@ namespace pg {
 			} 
 		}
 
-		if (!hasCell(coords)) return;
+		if (!_hasCell(coords)) return;
 		auto &cell = m_grid[coords.x][coords.y];
 		
 		m_objectCoords[object] = sf::Vector2i(objCoords.x, objCoords.y);
@@ -57,13 +57,13 @@ namespace pg {
 		if (start.x > end.x) std::swap(start.x, end.x);
 		if (start.y > end.y) std::swap(start.y, end.y);
 
-		auto _start = getCoordsInGrid(start);
-		auto _end = getCoordsInGrid(end);
+		auto _start = _getCoordsInGrid(start);
+		auto _end = _getCoordsInGrid(end);
 
 		for (int x = _start.x; x <= _end.x; x++) {
 			for (int y = _start.y; y <= _end.y; y++) {
 
-				if (!hasCell(sf::Vector2i(x, y))) continue;
+				if (!_hasCell(sf::Vector2i(x, y))) continue;
 				auto cell = m_grid[x][y];
 
 				for (auto obj : cell) {
@@ -85,12 +85,12 @@ namespace pg {
 
 	}
 
-	bool GameField::hasCell(sf::Vector2i coords) {
+	bool GameField::_hasCell(sf::Vector2i coords) {
 		return coords.x >= 0 && coords.y >= 0
 			&& coords.y < m_size.y && coords.x < m_size.x;
 	}
 
-	sf::Vector2i GameField::getCoordsInGrid(sf::Vector2f coords) {
+	sf::Vector2i GameField::_getCoordsInGrid(sf::Vector2f coords) {
 		return sf::Vector2i(coords.x / m_cellSize.x, coords.y / m_cellSize.y);
 	}
 

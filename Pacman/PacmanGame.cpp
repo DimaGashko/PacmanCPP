@@ -30,7 +30,7 @@ namespace pg {
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
-			m_fps = 16.f / clock.restart().asMilliseconds();
+			m_timeK = 16.f / clock.restart().asMilliseconds();
 
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
@@ -59,14 +59,15 @@ namespace pg {
 	}
 
 	void PacmanGame::update() {
-		m_view.move(2 * m_fps, 2 * m_fps);
+		std::cout << m_timeK << std::endl;
+		m_view.move(1 * m_timeK, 1 * m_timeK);
 		
 		_updateView();
 	}
 
 	void PacmanGame::render() {
 		auto objects = m_gameField->getObjectsOfRange(
-			sf::Vector2f(-500, -500), sf::Vector2f(500, 500)
+			sf::Vector2f(-1000, -1000), sf::Vector2f(1000, 1000)
 		);
 
 		//std::cout << objects.size() << std::endl;

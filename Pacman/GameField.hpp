@@ -47,8 +47,9 @@ namespace pg {
 	    // Используется для быстрого определения где в данный момент находится объект
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
-		bool hasCell(sf::Vector2i coords);
-		sf::Vector2i getCoordsInGrid(sf::Vector2f coords);
+		
+		bool _hasCell(sf::Vector2i coords);
+		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
 
 		void createGrid();
 		
