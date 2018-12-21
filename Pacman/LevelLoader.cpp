@@ -30,6 +30,10 @@ namespace pg {
 
 				if (key == '#') {
 					objects.push_back(new GameObject(realCoords));
+				} 
+				else if (key == 'p') {
+					auto packman = new GameObject(realCoords);
+					objects.push_back(packman);
 				}
 			}
 

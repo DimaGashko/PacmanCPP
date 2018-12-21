@@ -3,12 +3,12 @@
 namespace pg {
 
 	GameField::GameField() :
-		GameField(sf::Vector2f(10, 10), sf::Vector2f(16, 16))
+		GameField(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
 	{
 	
 	}
 
-	GameField::GameField(sf::Vector2f size, sf::Vector2f cellSize) :
+	GameField::GameField(sf::Vector2i size, sf::Vector2i cellSize) :
 		m_size(size),
 		m_cellSize(cellSize),
 		m_grid(size.x, std::vector<std::vector<GameObject*>>(size.y))
