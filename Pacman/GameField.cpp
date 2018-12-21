@@ -44,7 +44,7 @@ namespace pg {
 		}
 
 		if (!hasCell(coords)) return;
-		auto cell = m_grid[coords.x][coords.y];
+		auto &cell = m_grid[coords.x][coords.y];
 		
 		m_objectCoords[object] = sf::Vector2i(objCoords.x, objCoords.y);
 		cell.push_back(object);
