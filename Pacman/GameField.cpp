@@ -16,21 +16,22 @@ namespace pg {
 	}
 
 	void GameField::addObject(GameObject *object) {
-		auto coords = getCoordsInGrid(object.getPosition());
+		sf::Vector2i coords = getCoordsInGrid(object->getPosition());
 		
 		//Oбъект уже есть в сетке
 		if (m_objectCoords.count(object) != 0) {
 			auto prev = m_objectCoords[object];
 			
 			if (prev.x == coords.x && prev.y == coords.y) {
-				//И если он уже находится в нужной ячейке, то ничего не делаем
+				//И уже находится в нужной ячейке
 				return;
-
 			}
 			else {
 
 			}
 		}
+
+
 	}
 
 	void GameField::createGrid() {
@@ -41,6 +42,14 @@ namespace pg {
 		}
 	}
 
+	bool GameField::hasCell(sf::Vector2i coords) {
+		return coords.x >= 0 && coords.y >= 0
+			&& coords.y < m_size.y && coords.x < m_size.x;
+	}
+
+	sf::Vector2i GameField::getCoordsInGrid(sf::Vector2f coords) {
+		return sf::Vector2i(coords.x / m_cellSize.x, coords.y / m_cellSize.y);
+	}
 
 	GameField::~GameField() {
 

@@ -39,6 +39,7 @@ namespace pg {
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
 
+		sf::Vector2i getCoordsInGrid(sf::Vector2f);
 
 		void createGrid();
 		
