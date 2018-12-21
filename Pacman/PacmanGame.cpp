@@ -72,7 +72,10 @@ namespace pg {
 		auto level = m_levelLoader.loadFromTxt("configs/levels/level1.txt");
 
 		m_gameField = level.gameField;
-		m_view.setCenter(level.player->getPosition());
+
+		if (level.player) {
+			m_view.setCenter(level.player->getPosition());
+		}
 	}
 
 	PacmanGame::~PacmanGame() {

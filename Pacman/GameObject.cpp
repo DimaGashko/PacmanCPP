@@ -6,7 +6,7 @@ namespace pg {
 		m_real(false)
 	{
 		m_rect.setSize(sf::Vector2f(16, 16));
-		m_rect.setFillColor(sf::Color::Green);
+		m_rect.setFillColor(sf::Color::Blue);
 	}
 
 	GameObject::GameObject(sf::Vector2f coords) :

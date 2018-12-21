@@ -11,8 +11,8 @@
 namespace pg {
 
 	struct Level {
-		GameField *gameField;
-		GameObject *player;
+		GameField *gameField = NULL;
+		GameObject *player = NULL;
 	};
 
 	class LevelLoader {
