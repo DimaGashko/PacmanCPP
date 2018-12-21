@@ -125,14 +125,14 @@ namespace pg {
 		return config;
 	}
 
-	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTileset) {
+	LevelLoader::TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
 		TilesetConfig config;
 
-		auto xmlTilesetElem = xmlTileset.FirstChildElement("tileset");
+		auto xmlTileset = xmlTilesetDoc.FirstChildElement("tileset");
 
-		config.columns = xmlTilesetElem->IntAttribute("columns");
+		config.columns = xmlTileset->IntAttribute("columns");
 		
-		std::string imgUrl = xmlTilesetElem->FirstChildElement("image")->Attribute("source");
+		std::string imgUrl = xmlTileset->FirstChildElement("image")->Attribute("source");
 		imgUrl = imgUrl.substr(6);
 
 		config.tileset = sf::Image();
@@ -140,6 +140,18 @@ namespace pg {
 		if (!config.tileset.loadFromFile(imgUrl)) {
 			std::cerr << "Cant't load the tileset image";
 		};
+
+		auto nextTile = xmlTileset->FirstChildElement("tile");
+
+		while (nextTile) {
+			TileConfig tileConfig;
+			tileConfig.type = nextTile->Attribute("type");
+
+			int id = nextTile->IntAttribute("id");
+			config.tiles[id] = tileConfig;
+
+			nextTile = nextTile->NextSiblingElement();
+		}
 
 		return config;
 	}

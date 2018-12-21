@@ -46,7 +46,7 @@ namespace pg {
 
 		Level _getDefLevel();
 		LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
-		TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTileset);
+		TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 	};
 
 } // namespace pg

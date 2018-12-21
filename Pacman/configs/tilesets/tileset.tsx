@@ -10,5 +10,5 @@
  </tile>
  <tile id="10" type="Wall"/>
  <tile id="11" type="Point"/>
-</tileset>
+</tileset> 
 
