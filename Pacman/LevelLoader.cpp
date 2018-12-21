@@ -6,7 +6,7 @@ namespace pg {
 
 	}
 
-	Level LevelLoader::loadFromTxt(std::string url) {
+	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
 		Level level;
 
 		std::ifstream fin(url);

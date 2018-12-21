@@ -44,13 +44,13 @@
     <ClInclude Include="Wall.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="GameField.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoader.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

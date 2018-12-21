@@ -11,6 +11,13 @@ namespace pg {
 	class PacmanGame {
 	public:
 		PacmanGame();
+
+		enum gameState {
+			eMainMenu,
+			eGame,
+			ePause,
+		};
+
 		void run();
 
 		~PacmanGame();

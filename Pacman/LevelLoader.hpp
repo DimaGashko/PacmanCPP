@@ -10,15 +10,15 @@
 
 namespace pg {
 
-	struct Level {
-		GameField *gameField = NULL;
-		GameObject *player = NULL;
-	};
-
 	class LevelLoader {
 
 	public:
 		LevelLoader();
+
+		struct Level {
+			GameField *gameField = NULL;
+			GameObject *player = NULL;
+		};
 
 		Level loadFromTxt(std::string url);
 
