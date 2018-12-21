@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <unordered_map>
 
 #include "GameObject.hpp"
 
@@ -15,14 +16,14 @@ namespace pg {
 		* Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
 		* @param object добавляемый объект
 		*/
-		void addAllObjects(std::vector<GameObject> objects);
+		void addAllObjects(std::vector<GameObject*> objects);
 
 		/**
 		* Добавляет объект в сетку
 		* Если объект уже был в сетке, то от сначала удаляется с предыдущего места
 		* @param object добавляемый объект
 		*/
-		void addObject(GameObject &object);
+		void addObject(GameObject *object);
 
 		~GameField();
 	
@@ -30,7 +31,14 @@ namespace pg {
 		sf::Vector2f m_size;
 		sf::Vector2f m_cellSize;
 		 
-		std::vector<std::vector<std::vector<GameObject *>>> grid;
+		// Cетка игры
+		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
+
+		// Объект, содержащий координаты всех объектов в сетке по их id
+	    // Используется для быстрого определения где в данный момент находится объект
+	    // (используется, что бы удаялять объект из предыдущего места)
+		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
+
 
 		void createGrid();
 		
