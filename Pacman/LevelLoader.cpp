@@ -28,6 +28,8 @@ namespace pg {
 		
 		TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
 		Level result;
+		sf::Texture a;
+		
 
 		return _getDefLevel();
 	}

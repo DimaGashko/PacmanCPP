@@ -4,7 +4,6 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <sstream>
 
 #include "lib/tinyxml2.h"
 
@@ -35,8 +34,14 @@ namespace pg {
 			std::string tilesetUrl;
 		};
 
+		struct TileConfig {
+			std::string type;
+		};
+
 		struct TilesetConfig {
-			
+			sf::Image tileset;
+			int columns;
+			std::vector<TileConfig> tiles;
 		};
 
 		Level _getDefLevel();
