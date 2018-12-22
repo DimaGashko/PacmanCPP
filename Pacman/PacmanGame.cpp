@@ -13,7 +13,7 @@ namespace pg {
 		settings.antialiasingLevel = 0;
 
 		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default, settings);
-		m_window.setFramerateLimit(180);
+		m_window.setFramerateLimit(120);
 
 		_positionView();
 		_updateView();
