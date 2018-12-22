@@ -1,12 +1,14 @@
-#include "Actor.h"
+#include "Actor.hpp"
+
+namespace pg {
+
+	Actor::Actor() {
+
+	}
 
 
+	Actor::~Actor() {
 
-Actor::Actor()
-{
-}
+	}
 
-
-Actor::~Actor()
-{
-}
+} // namespace pg

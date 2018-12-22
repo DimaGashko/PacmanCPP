@@ -19,19 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="lib\tinyxml2.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.hpp" />
     <ClInclude Include="GameField.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
     <ClInclude Include="lib\tinyxml2.h" />
+    <ClInclude Include="Pacman.hpp" />
     <ClInclude Include="PacmanGame.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Wall.hpp" />

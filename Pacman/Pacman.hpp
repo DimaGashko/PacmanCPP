@@ -2,14 +2,15 @@
 
 #include "Actor.hpp"
 
-class Pacman :	public Actor {
-public:
-	Pacman();
-	int getScore();
-	int addScore(int val);
-	~Pacman();
+namespace pg {
 
-private:
-	int _score;
-};
+	class Pacman : public Actor {
+	public:
+		Pacman();
+		~Pacman();
 
+	private:
+		
+	};
+
+} // namespace pg

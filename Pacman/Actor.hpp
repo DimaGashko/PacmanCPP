@@ -1,14 +1,16 @@
 #pragma once
 
-#include "DinamicObject.hpp"
+#include "GameObject.hpp"
 
-class Actor : public DinamicObject {
-public:
-	Actor();
-	void eat(Actor food);
-	~Actor();
+namespace pg {
 
-private:
-	int _power;
-};
+	class Actor : public GameObject {
+	public:
+		Actor();
+		~Actor();
 
+	private:
+		
+	};
+
+}

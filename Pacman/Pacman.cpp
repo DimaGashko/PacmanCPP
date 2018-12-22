@@ -1,12 +1,13 @@
-#include "Pacman.h"
+#include "Pacman.hpp"
+
+namespace pg {
+
+	Pacman::Pacman() {
+
+	}
 
 
+	Pacman::~Pacman() {
+	}
 
-Pacman::Pacman()
-{
-}
-
-
-Pacman::~Pacman()
-{
 }

@@ -48,6 +48,8 @@ namespace pg {
 	}
 
 	void PacmanGame::update() {
+		//m_gameField.update();
+
 		//m_view.move(0.1 * m_frameTime, 0.1 * m_frameTime);
 
 		_updateView();

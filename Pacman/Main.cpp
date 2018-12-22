@@ -9,13 +9,13 @@ using namespace std;
 using namespace tinyxml2;
 
 int main() {
-	system("pause");
+	//system("pause");
 
 	{
 		pg::PacmanGame pacmanGame;
 		pacmanGame.run();
 	}
 
-	system("pause");
+	//system("pause");
 	return 0;
 }
