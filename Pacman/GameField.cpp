@@ -33,8 +33,17 @@ namespace pg {
 		}
 	}
 
-	void GameField::update(sf::Vector2f visibleRange, int frameTime) {
+	void GameField::update(sf::Vector2f gameSize, int frameTime) {
+		auto activeObjects = _getActiveObjects(gameSize);
 
+
+	}
+
+	std::vector<GameObject*> GameField::_getActiveObjects(sf::Vector2f gameSize) {
+		auto activeSize = gameSize * (3.f / 2.f);
+		auto center = m_player->getCenter();
+
+		return getObjectsOfRange(center - activeSize, center + activeSize);
 	}
 
 	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {

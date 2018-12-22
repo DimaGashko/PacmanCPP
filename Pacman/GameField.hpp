@@ -61,8 +61,10 @@ namespace pg {
 		 */
 		void addObjectToGrid(GameObject *object);
 
+		std::vector<GameObject*> _getActiveObjects(sf::Vector2f gameSize);
+
 		bool _hasCell(sf::Vector2i coords);
-		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);		
+		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
 	};
 
 } // namespace pg
