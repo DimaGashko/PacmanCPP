@@ -36,7 +36,8 @@ namespace pg {
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		auto activeObjects = _getActiveObjects(gameSize);
 
-		// Collision
+		//std::cout << activeObjects.size() << std::endl;
+
 		for (auto obj : activeObjects) {
 			auto pos = obj->getPosition();
 		
@@ -53,23 +54,28 @@ namespace pg {
 				obj->update();
 				obj2->update();
 				
-				if (obj->intersects(obj2)) {
+				/*if (obj->intersects(obj2)) {
 					std::cout << "! ";
 					obj->setPosition(objPrevPos);
 					obj2->setPosition(obj2PrevPos);
-				}
+				}*/
 
 			}
 
 		}
 
+		//std::cout << "- ";
+		//addAllObjectsToGrid(activeObjects);
 	}
 
 	std::vector<GameObject*> GameField::_getActiveObjects(sf::Vector2f gameSize) {
 		auto activeSize = gameSize * (3.f / 2.f);
 		auto pos = m_player->getPosition();
 
-		return getObjectsOfRange(pos - activeSize, pos + activeSize);
+		auto activeObjects = getObjectsOfRange(pos - activeSize, pos + activeSize);
+		activeObjects.push_back(m_player);
+
+		return activeObjects;
 	}
 
 	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {
@@ -92,10 +98,22 @@ namespace pg {
 			}
 			else {
 				if (!_hasCell(prev)) return;
-				auto cell = m_grid[prev.x][prev.y];
+				return;
+				/*auto cell = m_grid[prev.x][prev.y];
 
-				auto pos = std::find(cell.begin(), cell.end(), object);
-				cell.erase(pos);
+				int index = -1;
+
+				for (int i = 0; i < cell.size(); i++) {
+					if (cell[i] == object) {
+						index = i;
+						break;
+					}
+				}
+
+				if (index != -1) {
+					cell.erase(cell.begin() + index);
+				}*/
+				
 			} 
 		}
 
