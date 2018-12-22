@@ -13,18 +13,7 @@ namespace pg {
 		GameField();
 		GameField(sf::Vector2i size, sf::Vector2i cellSize);
 
-		/**
-		 * Добавляет переданные объекты в сетку
-		 * Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
-		 * @param object добавляемый объект
-		 */
 		void addAllObjects(std::vector<GameObject*> objects);
-
-		/**
-		 * Добавляет объект в сетку
-		 * Если объект уже был в сетке, то от сначала удаляется с предыдущего места
-		 * @param object добавляемый объект
-		 */
 		void addObject(GameObject *object);
 
 		/**
@@ -48,6 +37,20 @@ namespace pg {
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
 		
+		/**
+		 * Добавляет переданные объекты в сетку
+		 * Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
+		 * @param object добавляемый объект
+		 */
+		void addAllObjectsToGrid(std::vector<GameObject*> objects);
+
+		/**
+		 * Добавляет объект в сетку
+		 * Если объект уже был в сетке, то от сначала удаляется с предыдущего места
+		 * @param object добавляемый объект
+		 */
+		void addObjectToGrid(GameObject *object);
+
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
 

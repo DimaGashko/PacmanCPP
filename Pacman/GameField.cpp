@@ -23,6 +23,16 @@ namespace pg {
 	}
 
 	void GameField::addObject(GameObject *object) {
+		addObjectToGrid(object);
+	}
+
+	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {
+		for (auto obj : objects) {
+			addObjectToGrid(obj);
+		}
+	}
+
+	void GameField::addObjectToGrid(GameObject *object) {
 		sf::Vector2f objCoords = object->getPosition();
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 		
