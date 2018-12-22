@@ -9,6 +9,8 @@ using namespace std;
 using namespace tinyxml2;
 
 int main() {
+	system("pause");
+
 	{
 		pg::PacmanGame pacmanGame;
 		pacmanGame.run();
