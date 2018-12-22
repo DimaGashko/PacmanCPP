@@ -27,6 +27,10 @@ namespace pg {
 		m_rect.setPosition(coords);
 	}
 
+	void GameObject::move(sf::Vector2f offset) {
+		m_rect.move(offset);
+	}
+
 	void GameObject::setSize(sf::Vector2f size) {
 		m_rect.setSize(size);
 	}

@@ -12,6 +12,7 @@ namespace pg {
 		GameObject(sf::Texture *texture);
 		sf::Vector2f getPosition();
 		void setPosition(sf::Vector2f coords);
+		void move(sf::Vector2f offset);
 		void setSize(sf::Vector2f size);
 		~GameObject();
 	private:
