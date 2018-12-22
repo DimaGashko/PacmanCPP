@@ -35,6 +35,24 @@ namespace pg {
 		m_rect.setSize(size);
 	}
 
+	sf::Vector2f GameObject::getSize() {
+		return m_rect.getSize();
+	}
+
+	sf::Vector2f GameObject::getCenter() {
+		auto coords = getPosition();
+		auto size = getSize();
+
+		return sf::Vector2f(
+			coords.x + size.x / 2,
+			coords.y + size.y / 2
+		);
+	}
+
+	void GameObject::setCenter(sf::Vector2f) {
+
+	}
+
 	GameObject::~GameObject() {
 		delete m_rect.getTexture();
 	}

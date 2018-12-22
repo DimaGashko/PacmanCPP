@@ -14,6 +14,9 @@ namespace pg {
 		void setPosition(sf::Vector2f coords);
 		void move(sf::Vector2f offset);
 		void setSize(sf::Vector2f size);
+		sf::Vector2f getSize();
+		sf::Vector2f getCenter();
+		void setCenter(sf::Vector2f);
 		~GameObject();
 	private:
 		sf::RectangleShape m_rect;
