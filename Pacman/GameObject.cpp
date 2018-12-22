@@ -21,6 +21,9 @@ namespace pg {
 
 	void GameObject::updatePos() {
 		move(m_speed);
+
+		m_speed.x = 0;
+		m_speed.y = 0;
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
