@@ -1,8 +1,14 @@
+#include <SFML/Graphics.hpp>
+
 #include "Actor.hpp"
 
 namespace pg {
 
-	Actor::Actor() {
+	Actor::Actor() : GameObject() {
+
+	}
+
+	Actor::Actor(sf::Texture *texture) : GameObject(texture) {
 
 	}
 

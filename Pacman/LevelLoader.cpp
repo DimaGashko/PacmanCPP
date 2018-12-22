@@ -71,14 +71,17 @@ namespace pg {
 					obj = new GameObject(texture);
 				}
 				else if (type == "Pacman") {
-					obj = new GameObject(texture);
-					result.player = obj;
+					Pacman *pacman = new Pacman(texture);
+					result.player = pacman;
+
+					obj = pacman;
 				}
 				else {
 					obj = new GameObject(texture);
 				}
 
 				obj->setPosition(coords);
+				obj->setSize(tileSize.x, tileSize.y);
 				result.gameField->addObject(obj);
 			}
 		}
@@ -113,17 +116,19 @@ namespace pg {
 				GameObject *obj;
 
 				if (key == '#') {
-					obj = new GameObject();
+					obj = new Wall();
 				}
 				else if (key == 'p') {
-					obj = new GameObject();
+					Pacman *pacman = new Pacman();
+					obj = pacman;
 
-					result.player = obj;
+					result.player = pacman;
 				}
 				else {
-					obj = new GameObject();
+					obj = new Wall();
 				}
 
+				obj->setSize(16, 16);
 				obj->setPosition(realCoords);
 				objects.push_back(obj);
 			}

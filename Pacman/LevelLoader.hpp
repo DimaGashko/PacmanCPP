@@ -8,8 +8,11 @@
 
 #include "lib/tinyxml2.h"
 
-#include "GameObject.hpp"
 #include "GameField.hpp"
+#include "GameObject.hpp"
+#include "Actor.hpp"
+#include "Pacman.hpp"
+#include "Wall.hpp"
 
 namespace pg {
 
@@ -20,7 +23,7 @@ namespace pg {
 
 		struct Level {
 			GameField *gameField = NULL;
-			GameObject *player = NULL;
+			Actor *player = NULL;
 		};
 
 		Level loadFromTxt(std::string url);

@@ -12,11 +12,14 @@ namespace pg {
 		GameObject(sf::Texture *texture);
 		sf::Vector2f getPosition();
 		void setPosition(sf::Vector2f coords);
+		void setSize(sf::Vector2f size);
 		~GameObject();
 	private:
 		sf::RectangleShape m_rect;
 
-		bool m_real;
+		bool m_isBarrier = false;
+
+		void init();
 	};
 
 }; // namespace pg

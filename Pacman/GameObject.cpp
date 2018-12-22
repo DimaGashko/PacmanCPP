@@ -2,16 +2,17 @@
  
 namespace pg {
 
-	GameObject::GameObject() :
-		m_real(false)
-	{
-		m_rect.setSize(sf::Vector2f(16, 16));
+	GameObject::GameObject() {
+		init();
 	}
 
-	GameObject::GameObject(sf::Texture *texture) :
-		GameObject()
-	{
+	GameObject::GameObject(sf::Texture *texture) {
+		init();
 		m_rect.setTexture(texture);
+	}
+
+	void GameObject::init() {
+		
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
@@ -24,6 +25,10 @@ namespace pg {
 
 	void GameObject::setPosition(sf::Vector2f coords) {
 		m_rect.setPosition(coords);
+	}
+
+	void GameObject::setSize(sf::Vector2f size) {
+		m_rect.setSize(size);
 	}
 
 	GameObject::~GameObject() {
