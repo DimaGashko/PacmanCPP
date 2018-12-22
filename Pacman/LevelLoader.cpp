@@ -80,6 +80,7 @@ namespace pg {
 
 				obj->setPosition(coords);
 				obj->setSize(sf::Vector2f(tileSize));
+
 				gameField->addObject(obj);
 			}
 		}
