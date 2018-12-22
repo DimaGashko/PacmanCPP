@@ -28,10 +28,10 @@ namespace pg {
 	sf::FloatRect GameObject::getBounds() {
 		auto bounds = m_rect.getGlobalBounds();
 
-		bounds.left += 5;
-		bounds.top += 5;
-		bounds.width -= 5;
-		bounds.height -= 5;
+		bounds.left += 1;
+		bounds.top += 1;
+		bounds.width -= 1;
+		bounds.height -= 1;
 
 		return bounds;
 	}
