@@ -48,7 +48,11 @@ namespace pg {
 	}
 
 	void PacmanGame::update() {
+		m_player.update(m_frameTime);
 
+		if (m_player.getActor()) {
+			m_view.setCenter(m_player.getActor()->getPosition());
+		}
 
 		//m_gameField.update();
 
@@ -71,10 +75,7 @@ namespace pg {
 		auto level = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
 
 		m_gameField = level.gameField;
-
-		if (level.player) {
-			m_view.setCenter(level.player->getPosition());
-		}
+		m_player.setActor(level.player);
 	}
 
 	void PacmanGame::_updateView() {
