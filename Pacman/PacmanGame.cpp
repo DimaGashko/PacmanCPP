@@ -15,6 +15,7 @@ namespace pg {
 		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default, settings);
 		m_window.setFramerateLimit(180);
 
+		_positionView();
 		_updateView();
 	}
 
@@ -32,6 +33,7 @@ namespace pg {
 					m_window.close();
 				}
 				else if (event.type == sf::Event::Resized) {
+					_positionView();
 					_updateView();
 				}
 			}
@@ -43,13 +45,6 @@ namespace pg {
 
 			m_window.display();
 		}
-	}
-
-	void PacmanGame::_updateView() {
-		auto size = m_window.getSize();
-		m_view.setSize(sf::Vector2f(size.x / 2.f, size.y / 2.f));
-
-		m_window.setView(m_view);
 	}
 
 	void PacmanGame::update() {
@@ -78,8 +73,17 @@ namespace pg {
 		}
 	}
 
-	PacmanGame::~PacmanGame() {
+	void PacmanGame::_updateView() {
+		m_window.setView(m_view);
+	}
 
+	void PacmanGame::_positionView() {
+		auto size = m_window.getSize();
+		m_view.setSize(sf::Vector2f(size.x / 2.f, size.y / 2.f));
+	}
+
+	PacmanGame::~PacmanGame() {
+		delete m_gameField;
 	}
 
 } // namespace pg

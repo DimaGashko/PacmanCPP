@@ -95,6 +95,13 @@ namespace pg {
 	}
 
 	GameField::~GameField() {
+		for (auto row : m_grid) {
+			for (auto cell : row) {
+				for (auto obj : cell) {
+					delete obj;
+				}
+			}
+		}
 
 	}
 

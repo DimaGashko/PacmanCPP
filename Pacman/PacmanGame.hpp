@@ -36,6 +36,7 @@ namespace pg {
 
 		void _createGame();
 		void _updateView();
+		void _positionView();
 		void _initWindow();
 		
 	};

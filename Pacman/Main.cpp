@@ -9,11 +9,13 @@ using namespace std;
 using namespace tinyxml2;
 
 int main() {
-	pg::PacmanGame pacmanGame;
-	pacmanGame.run();
+	{
+		pg::PacmanGame pacmanGame;
+		pacmanGame.run();
 
-	sf::View view(sf::IntRect());
+		sf::View view(sf::IntRect());
+	}
 
-
+	system("pause");
 	return 0;
 }

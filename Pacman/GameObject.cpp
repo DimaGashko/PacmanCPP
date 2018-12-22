@@ -27,7 +27,7 @@ namespace pg {
 	}
 
 	GameObject::~GameObject() {
-
+		delete m_rect.getTexture();
 	}
 
 } //namespace pg
