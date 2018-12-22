@@ -24,6 +24,7 @@ namespace pg {
 		bool m_isBarrier = false;
 
 		void init();
+
 	};
 
 }; // namespace pg

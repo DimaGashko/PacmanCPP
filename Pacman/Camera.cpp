@@ -20,7 +20,25 @@ namespace pg {
 	void Camera::update() {
 		if (!m_target) return;
 
-		m_view.setCenter(m_target->getPosition());
+		auto cameraSize = sf::Vector2f(50, 50);
+		auto targCenter = m_target->getCenter();
+		auto cameraCenter = m_view.getCenter();
+
+		if (targCenter.x > cameraCenter.x + cameraSize.x) {
+			cameraCenter.x = targCenter.x - cameraSize.x;
+		}
+		else if (cameraCenter.x > targCenter.x + cameraSize.x) {
+			cameraCenter.x = targCenter.x + cameraSize.x;
+		}
+
+		if (targCenter.y > cameraCenter.y + cameraSize.y) {
+			cameraCenter.y = targCenter.y - cameraSize.y;
+		}
+		else if (cameraCenter.y > targCenter.y + cameraSize.y) {
+			cameraCenter.y = targCenter.y + cameraSize.y;
+		}
+
+		m_view.setCenter(cameraCenter);
 
 		use();
 	}
@@ -32,6 +50,10 @@ namespace pg {
 
 	void Camera::setTarget(GameObject * target) {
 		m_target = target;
+
+		if (!m_target) return;
+
+		m_view.setCenter(m_target->getPosition());
 	}
 
 	GameObject* Camera::getTarget() {
