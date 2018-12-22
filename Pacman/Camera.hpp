@@ -16,6 +16,7 @@ namespace pg {
 		void updateSize();
 		void setTarget(GameObject *target);
 		GameObject* getTarget();
+		sf::Vector2f getCenter();
 		~Camera();
 
 	private:

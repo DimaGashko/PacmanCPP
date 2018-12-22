@@ -2,7 +2,7 @@
 
 namespace pg {
 
-	PacmanGame::PacmanGame() : m_carera(&m_window) {		
+	PacmanGame::PacmanGame() : m_camera(&m_window) {		
 		_initWindow();
 	}
 
@@ -13,7 +13,7 @@ namespace pg {
 		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default , settings);
 		m_window.setFramerateLimit(120);
 
-		m_carera.init();
+		m_camera.init();
 	}
 
 	void PacmanGame::run() {
@@ -30,7 +30,7 @@ namespace pg {
 					m_window.close();
 				}
 				else if (event.type == sf::Event::Resized) {
-					m_carera.updateSize();
+					m_camera.updateSize();
 				}
 			}
 
@@ -53,13 +53,9 @@ namespace pg {
 	}
 
 	void PacmanGame::_drawGameField() {
-		auto size = m_window.mapPixelToCoords(sf::Vector2i(m_window.getSize() / 2u));
-
-		auto center = (m_player.getActor()) ?
-			m_player.getActor()->getCenter() : sf::Vector2f(0, 0);
-
 		auto visibleObjects = m_gameField->getObjectsOfRange(
-			center - size, center + size
+			m_window.mapPixelToCoords(sf::Vector2i(-100, -100)),
+			m_window.mapPixelToCoords(sf::Vector2i(m_window.getSize()))
 		);
 
 		m_gameField->draw(m_window, visibleObjects);
@@ -71,7 +67,7 @@ namespace pg {
 
 	void PacmanGame::_updateGameField() {
 		m_player.update(m_frameTime);
-		m_carera.update();
+		m_camera.update();
 
 		m_gameField->update(sf::Vector2f(m_window.getSize()), m_frameTime);
 	}
@@ -82,7 +78,7 @@ namespace pg {
 		m_gameField = level.gameField;
 
 		m_player.setActor(level.player);
-		m_carera.setTarget(level.player);
+		m_camera.setTarget(level.player);
 	}
 
 	PacmanGame::~PacmanGame() {

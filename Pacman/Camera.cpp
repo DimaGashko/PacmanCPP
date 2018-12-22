@@ -62,6 +62,10 @@ namespace pg {
 		return m_target;
 	}
 
+	sf::Vector2f Camera::getCenter() {
+		return m_view.getCenter();
+	}
+
 	Camera::~Camera() {
 
 	}

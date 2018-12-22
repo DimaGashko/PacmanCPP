@@ -30,7 +30,7 @@ namespace pg {
 		LevelLoader m_levelLoader;
 
 		Player m_player;
-		Camera m_carera;
+		Camera m_camera;
 		
 		sf::RenderWindow m_window;
 
