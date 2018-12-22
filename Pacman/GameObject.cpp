@@ -12,7 +12,15 @@ namespace pg {
 	}
 
 	void GameObject::init() {
-		auto a = m_rect.getLocalBounds();
+		
+	}
+
+	void GameObject::update() {
+		updatePos();
+	}
+
+	void GameObject::updatePos() {
+		move(m_speed);
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
@@ -60,12 +68,20 @@ namespace pg {
 		return getPosition() + getSize() / 2.f;
 	}
 
-	void GameObject::setCenter(sf::Vector2f center) {
-		setPosition(center - getSize() / 2.f);
+	void GameObject::addToSpeed(sf::Vector2f dSpeed) {
+		m_speed += dSpeed;
 	}
 
-	void GameObject::update() {
-		
+	void GameObject::setSpeed(sf::Vector2f speed) {
+		m_speed = speed;
+	}
+
+	sf::Vector2f GameObject::getSpeed() {
+		return m_speed;
+	}
+
+	void GameObject::setCenter(sf::Vector2f center) {
+		setPosition(center - getSize() / 2.f);
 	}
 
 	GameObject::~GameObject() {
