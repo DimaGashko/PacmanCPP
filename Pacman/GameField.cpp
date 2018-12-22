@@ -36,11 +36,6 @@ namespace pg {
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		auto activeObjects = _getActiveObjects(gameSize);
 
-		// Update
-		for (auto obj : activeObjects) {
-			obj->update();
-		}
-
 		// Collision
 		for (auto obj : activeObjects) {
 			auto pos = obj->getPosition();
@@ -49,10 +44,22 @@ namespace pg {
 				pos - m_cellSize, pos + m_cellSize
 			);
 
-			for (auto candidate : interactedCandidates) {
+			for (int i = 0; i < interactedCandidates.size(); i++) {
+				auto obj2 = interactedCandidates[i];
+
+				auto 
+
+				obj->update();
+				obj2->update();
+
 				
+				if (!obj->intersects(obj2)) continue;
+
+
 			}
+
 		}
+
 	}
 
 	std::vector<GameObject*> GameField::_getActiveObjects(sf::Vector2f gameSize) {

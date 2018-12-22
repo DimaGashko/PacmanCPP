@@ -12,11 +12,21 @@ namespace pg {
 	}
 
 	void GameObject::init() {
-		
+		auto a = m_rect.getLocalBounds();
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
 		window.draw(m_rect);
+	}
+
+	bool GameObject::intersects(GameObject *obj) {
+		if (obj == this) return false;
+
+		return getBounds().intersects(obj->getBounds());
+	}
+
+	sf::FloatRect GameObject::getBounds() {
+		return m_rect.getLocalBounds();
 	}
 
 	sf::Vector2f GameObject::getPosition() {
@@ -45,6 +55,10 @@ namespace pg {
 
 	void GameObject::setCenter(sf::Vector2f center) {
 		setPosition(center - getSize() / 2.f);
+	}
+
+	void GameObject::update() {
+		
 	}
 
 	GameObject::~GameObject() {

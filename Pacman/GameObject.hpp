@@ -18,6 +18,10 @@ namespace pg {
 		sf::Vector2f getSize();
 		sf::Vector2f getCenter();
 		void setCenter(sf::Vector2f center);
+		void update();
+		sf::FloatRect getBounds();
+		bool intersects(GameObject *obj);
+
 		~GameObject();
 	private:
 		sf::RectangleShape m_rect;
