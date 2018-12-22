@@ -2,7 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Camera.hpp"
 #include "GameField.hpp"
+
 #include "GameObject.hpp"
 #include "LevelLoader.hpp"
 #include "Player.hpp"
@@ -28,9 +30,9 @@ namespace pg {
 		LevelLoader m_levelLoader;
 
 		Player m_player;
+		Camera m_carera;
 		
 		sf::RenderWindow m_window;
-		sf::View m_view;
 
 		int m_frameTime = 0;
 
@@ -38,8 +40,6 @@ namespace pg {
 		void render();
 
 		void _createGame();
-		void _updateView();
-		void _positionView();
 		void _initWindow();
 		
 	};

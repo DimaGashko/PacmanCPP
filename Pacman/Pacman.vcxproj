@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -35,6 +36,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.hpp" />
     <ClInclude Include="Bonus.hpp" />
+    <ClInclude Include="Camera.hpp" />
     <ClInclude Include="GameField.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="LevelLoader.hpp" />

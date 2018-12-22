@@ -2,9 +2,7 @@
 
 namespace pg {
 
-	PacmanGame::PacmanGame() :
-		m_view(sf::Vector2f(0, 0), sf::Vector2f(0, 0))
-	{		
+	PacmanGame::PacmanGame() : m_carera(&m_window) {		
 		_initWindow();
 	}
 
@@ -13,10 +11,9 @@ namespace pg {
 		settings.antialiasingLevel = 0;
 
 		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default, settings);
-		m_window.setFramerateLimit(120);
+		m_window.setFramerateLimit(500);
 
-		_positionView();
-		_updateView();
+		m_carera.init();
 	}
 
 	void PacmanGame::run() {
@@ -33,8 +30,8 @@ namespace pg {
 					m_window.close();
 				}
 				else if (event.type == sf::Event::Resized) {
-					_positionView();
-					_updateView();
+					m_carera.updateSize();
+					m_carera.use();
 				}
 			}
 
@@ -49,16 +46,9 @@ namespace pg {
 
 	void PacmanGame::update() {
 		m_player.update(m_frameTime);
-
-		if (m_player.getActor()) {
-			m_view.setCenter(m_player.getActor()->getPosition());
-		}
-
+		m_carera.update();
+		
 		//m_gameField.update();
-
-		//m_view.move(0.1 * m_frameTime, 0.1 * m_frameTime);
-
-		_updateView();
 	}
 
 	void PacmanGame::render() {
@@ -80,16 +70,9 @@ namespace pg {
 		auto level = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
 
 		m_gameField = level.gameField;
+
 		m_player.setActor(level.player);
-	}
-
-	void PacmanGame::_updateView() {
-		m_window.setView(m_view);
-	}
-
-	void PacmanGame::_positionView() {
-		auto size = m_window.getSize();
-		m_view.setSize(sf::Vector2f(size.x / 2.f, size.y / 2.f));
+		m_carera.setTarget(level.player);
 	}
 
 	PacmanGame::~PacmanGame() {
