@@ -6,7 +6,7 @@ namespace pg {
 
 	}
 
-	LevelLoader::Level LevelLoader::loadFromTmx(std::string url) {
+	GameField* LevelLoader::loadFromTmx(std::string url) {
 		tinyxml2::XMLDocument xmlTileset;
 		tinyxml2::XMLDocument xmlLevel;
 
@@ -14,7 +14,7 @@ namespace pg {
 
 		if (status != tinyxml2::XMLError::XML_SUCCESS) {
 			std::cerr << "Can't load the level" << std::endl;
-			return _getDefLevel();
+			return new GameField();
 		}
 		
 		_LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
@@ -23,7 +23,7 @@ namespace pg {
 
 		if (status != tinyxml2::XMLError::XML_SUCCESS) {
 			std::cerr << "Can't load the tileset" << std::endl;
-			return _getDefLevel();
+			return new GameField();
 		}
 		
 		_TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
@@ -31,13 +31,11 @@ namespace pg {
 		return _creatLevel(levelConfig, tilesetConfig);
 	}
 
-	LevelLoader::Level LevelLoader::_creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig) {
-		Level result;
-
+	GameField* LevelLoader::_creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig) {
 		auto size = levelConfig.size;
 		auto tileSize = levelConfig.tileSize;
 
-		result.gameField = new GameField(size, tileSize);
+		GameField* gameField = new GameField(size, tileSize);
 
 		for (int x = 0; x < size.x; x++) {
 			for (int y = 0; y < size.y; y++) {
@@ -56,7 +54,7 @@ namespace pg {
 
 				if (tilesetConfig.tiles.count(id) == 0) {
 					GameObject *obj = new GameObject(texture);
-					result.gameField->addObject(obj);
+					gameField->addObject(obj);
 					continue;
 				}
 
@@ -72,8 +70,8 @@ namespace pg {
 				}
 				else if (type == "Pacman") {
 					Pacman *pacman = new Pacman(texture);
-					result.player = pacman;
 
+					gameField->setPlayer(pacman);
 					obj = pacman;
 				}
 				else {
@@ -82,22 +80,22 @@ namespace pg {
 
 				obj->setPosition(coords);
 				obj->setSize(sf::Vector2f(tileSize));
-				result.gameField->addObject(obj);
+				gameField->addObject(obj);
 			}
 		}
 
-		return result;
+		return gameField;
 	}
 
-	LevelLoader::Level LevelLoader::loadFromTxt(std::string url) {
+	GameField* LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);
 
 		if (!fin) {
 			std::cerr << "Can't load level" << std::endl;
-			return _getDefLevel();
+			return new GameField();
 		}
 
-		Level result;
+		Actor *player = nullptr;
 
 		std::vector<GameObject*> objects;
 		sf::Vector2i tileSize(16, 16);
@@ -120,9 +118,9 @@ namespace pg {
 				}
 				else if (key == 'p') {
 					Pacman *pacman = new Pacman();
-					obj = pacman;
+					player = pacman;
 
-					result.player = pacman;
+					obj = pacman;
 				}
 				else {
 					obj = new Wall();
@@ -141,18 +139,9 @@ namespace pg {
 
 		auto gameField = new GameField(size, tileSize);
 		gameField->addAllObjects(objects);
+		gameField->setPlayer(player);
 
-		result.gameField = gameField;
-		return result;
-	}
-
-	LevelLoader::Level LevelLoader::_getDefLevel() {
-		Level result;
-
-		result.gameField = new GameField();
-		result.player = NULL;
-
-		return result;
+		return gameField;
 	}
 
 	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {

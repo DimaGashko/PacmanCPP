@@ -110,6 +110,14 @@ namespace pg {
 		return sf::Vector2i(int(coords.x / m_cellSize.x), int(coords.y / m_cellSize.y));
 	}
 
+	void GameField::setPlayer(Actor* player) {
+		m_player = player;
+	}
+
+	Actor* GameField::getPlayer() {
+		return m_player;
+	}
+
 	GameField::~GameField() {
 
 		for (auto row : m_grid) {

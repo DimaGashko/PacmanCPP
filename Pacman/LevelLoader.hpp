@@ -21,15 +21,10 @@ namespace pg {
 
 	public:
 		LevelLoader();
-
-		struct Level {
-			GameField *gameField = NULL;
-			Actor *player = NULL;
-		};
-
-		Level loadFromTxt(std::string url);
-		Level loadFromTmx(std::string url);
-
+		
+		GameField* loadFromTmx(std::string url);
+		GameField* loadFromTxt(std::string url);
+		
 		~LevelLoader();
 
 	private:
@@ -49,8 +44,7 @@ namespace pg {
 			std::unordered_map<int, _TileConfig> tiles;
 		};
 
-		Level _getDefLevel();
-		Level _creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig);
+		GameField* _creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 		_TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 	};

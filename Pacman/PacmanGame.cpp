@@ -74,12 +74,8 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		auto level = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
-
-		m_gameField = level.gameField;
-
-		m_player.setActor(level.player);
-		m_camera.setTarget(level.player);
+		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
+		m_player.setActor(m_gameField->getPlayer());
 	}
 
 	PacmanGame::~PacmanGame() {

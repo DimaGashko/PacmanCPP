@@ -5,6 +5,7 @@
 #include <unordered_map>
 
 #include "GameObject.hpp"
+#include "Actor.hpp"
 
 namespace pg {
 
@@ -19,6 +20,9 @@ namespace pg {
 		void draw(sf::RenderWindow &window, std::vector<GameObject*> visibleObjects);
 		void update(sf::Vector2f gameSize, int frameTime);
 
+		void setPlayer(Actor *actor);
+		Actor* getPlayer();
+
 		/**
 		 * Возвращает все объекты находящихся в переданном диапазоне
 		 * @param start Левый верхний угол диапазона
@@ -30,6 +34,7 @@ namespace pg {
 	
 	private:
 		int m_pointsCount = 0;
+		Actor *m_player;
 
 		sf::Vector2f m_size;
 		sf::Vector2f m_cellSize;
