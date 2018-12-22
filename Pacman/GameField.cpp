@@ -54,6 +54,7 @@ namespace pg {
 				obj2->update();
 				
 				if (obj->intersects(obj2)) {
+					std::cout << "! ";
 					obj->setPosition(objPrevPos);
 					obj2->setPosition(obj2PrevPos);
 				}

@@ -26,7 +26,14 @@ namespace pg {
 	}
 
 	sf::FloatRect GameObject::getBounds() {
-		return m_rect.getLocalBounds();
+		auto bounds = m_rect.getGlobalBounds();
+
+		bounds.left += 5;
+		bounds.top += 5;
+		bounds.width -= 5;
+		bounds.height -= 5;
+
+		return bounds;
 	}
 
 	sf::Vector2f GameObject::getPosition() {
