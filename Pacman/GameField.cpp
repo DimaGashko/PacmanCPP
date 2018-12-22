@@ -47,14 +47,16 @@ namespace pg {
 			for (int i = 0; i < interactedCandidates.size(); i++) {
 				auto obj2 = interactedCandidates[i];
 
-				auto 
+				auto objPrevPos = obj->getPosition();
+				auto obj2PrevPos = obj2->getPosition();
 
 				obj->update();
 				obj2->update();
-
 				
-				if (!obj->intersects(obj2)) continue;
-
+				if (obj->intersects(obj2)) {
+					obj->setPosition(objPrevPos);
+					obj2->setPosition(obj2PrevPos);
+				}
 
 			}
 
