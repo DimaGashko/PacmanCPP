@@ -13,6 +13,7 @@
 #include "Actor.hpp"
 #include "Pacman.hpp"
 #include "Wall.hpp"
+#include "Point.hpp"
 
 namespace pg {
 
