@@ -40,17 +40,11 @@ namespace pg {
 	}
 
 	sf::Vector2f GameObject::getCenter() {
-		auto coords = getPosition();
-		auto size = getSize();
-
-		return sf::Vector2f(
-			coords.x + size.x / 2,
-			coords.y + size.y / 2
-		);
+		return getPosition() + getSize() / 2.f;
 	}
 
-	void GameObject::setCenter(sf::Vector2f) {
-
+	void GameObject::setCenter(sf::Vector2f center) {
+		setPosition(center - getSize() / 2.f);
 	}
 
 	GameObject::~GameObject() {
