@@ -40,6 +40,7 @@ namespace pg {
 		for (int x = 0; x < size.x; x++) {
 			for (int y = 0; y < size.y; y++) {
 				int id = levelConfig.gids[y * size.x + x] - 1;
+				if (id == -1) continue;
 
 				sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
 
@@ -84,63 +85,6 @@ namespace pg {
 				gameField->addObject(obj);
 			}
 		}
-
-		return gameField;
-	}
-
-	GameField* LevelLoader::loadFromTxt(std::string url) {
-		std::ifstream fin(url);
-
-		if (!fin) {
-			std::cerr << "Can't load level" << std::endl;
-			return new GameField();
-		}
-
-		Actor *player = nullptr;
-
-		std::vector<GameObject*> objects;
-		sf::Vector2i tileSize(16, 16);
-		sf::Vector2i size(0, 0);
-
-		std::string row;
-		int width = 0, height = 0;
-
-		while (std::getline(fin, row)) {
-			width = (int)row.length();
-			int y = height;
-
-			for (int x = 0; x < width; x++) {
-				char key = row[x];
-				sf::Vector2f realCoords(float(x * tileSize.x), float(y * tileSize.y));
-				GameObject *obj;
-
-				if (key == '#') {
-					obj = new Wall();
-				}
-				else if (key == 'p') {
-					Pacman *pacman = new Pacman();
-					player = pacman;
-
-					obj = pacman;
-				}
-				else {
-					obj = new Wall();
-				}
-
-				obj->setSize(sf::Vector2f(16, 16));
-				obj->setPosition(realCoords);
-				objects.push_back(obj);
-			}
-
-			height++;
-		}
-
-		size.x = width;
-		size.y = height;
-
-		auto gameField = new GameField(size, tileSize);
-		gameField->addAllObjects(objects);
-		gameField->setPlayer(player);
 
 		return gameField;
 	}
@@ -206,6 +150,62 @@ namespace pg {
 		}
 
 		return config;
+	}
+
+	GameField* LevelLoader::loadFromTxt(std::string url) {
+		std::ifstream fin(url);
+
+		if (!fin) {
+			std::cerr << "Can't load level" << std::endl;
+			return new GameField();
+		}
+
+		Actor *player = nullptr;
+
+		std::vector<GameObject*> objects;
+		sf::Vector2i tileSize(16, 16);
+		sf::Vector2i size(0, 0);
+
+		std::string row;
+		int width = 0, height = 0;
+
+		while (std::getline(fin, row)) {
+			width = (int)row.length();
+			int y = height;
+
+			for (int x = 0; x < width; x++) {
+				char key = row[x];
+				sf::Vector2f realCoords(float(x * tileSize.x), float(y * tileSize.y));
+				GameObject *obj = nullptr;
+
+				if (key == '#') {
+					obj = new Wall();
+				}
+				else if (key == 'p') {
+					Pacman *pacman = new Pacman();
+					player = pacman;
+
+					obj = pacman;
+				}
+
+				if (obj == nullptr) continue; 
+
+				obj->setSize(sf::Vector2f(16, 16));
+				obj->setPosition(realCoords);
+				objects.push_back(obj);
+			}
+
+			height++;
+		}
+
+		size.x = width;
+		size.y = height;
+
+		auto gameField = new GameField(size, tileSize);
+		gameField->addAllObjects(objects);
+		gameField->setPlayer(player);
+
+		return gameField;
 	}
 
 	LevelLoader::~LevelLoader() {
