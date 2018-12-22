@@ -44,7 +44,6 @@ namespace pg {
 
 		void _createGame();
 		void _initWindow();
-		
 	};
 
 }; // namespace pg

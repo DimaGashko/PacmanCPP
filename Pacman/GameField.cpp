@@ -33,7 +33,7 @@ namespace pg {
 		}
 	}
 
-	void GameField::update(int frameTime) {
+	void GameField::update(sf::Vector2f visibleRange, int frameTime) {
 
 	}
 

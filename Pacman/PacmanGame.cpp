@@ -68,7 +68,7 @@ namespace pg {
 		m_player.update(m_frameTime);
 		m_carera.update();
 
-		m_gameField->update(m_frameTime);
+		m_gameField->update(sf::Vector2f(m_window.getSize()), m_frameTime);
 	}
 
 	void PacmanGame::_createGame() {

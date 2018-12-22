@@ -17,7 +17,7 @@ namespace pg {
 		void addObject(GameObject *object);
 
 		void draw(sf::RenderWindow &window, std::vector<GameObject*> visibleObjects);
-		void update(int frameTime); 
+		void update(sf::Vector2f gameSize, int frameTime);
 
 		/**
 		 * Возвращает все объекты находящихся в переданном диапазоне
