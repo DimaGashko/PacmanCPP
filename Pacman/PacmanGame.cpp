@@ -53,8 +53,13 @@ namespace pg {
 	}
 
 	void PacmanGame::_drawGameField() {
+		auto size = m_window.mapPixelToCoords(sf::Vector2i(m_window.getSize() / 2u));
+
+		auto center = (m_player.getActor()) ?
+			m_player.getActor()->getCenter() : sf::Vector2f(0, 0);
+
 		auto visibleObjects = m_gameField->getObjectsOfRange(
-			sf::Vector2f(-500, -500), sf::Vector2f(500, 500)
+			center - size, center + size
 		);
 
 		m_gameField->draw(m_window, visibleObjects);
