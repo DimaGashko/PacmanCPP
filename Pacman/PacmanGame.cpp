@@ -69,6 +69,11 @@ namespace pg {
 		for (auto obj : objects) {
 			obj->draw(m_window);
 		}
+
+		if (m_player.getActor()) {
+			m_player.getActor()->draw(m_window);
+		}
+		
 	}
 
 	void PacmanGame::_createGame() {
