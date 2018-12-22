@@ -10,7 +10,7 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 0;
 
-		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default , settings);
+		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default , settings);
 		m_window.setFramerateLimit(120);
 
 		m_camera.init();
@@ -45,11 +45,19 @@ namespace pg {
 
 	void PacmanGame::update() {
 		_updateGameField();
+	
 	}
 
 	void PacmanGame::draw() {
 		_drawGameField();
-		
+
+	}
+
+	void PacmanGame::_updateGameField() {
+		m_player.update(m_frameTime);
+		m_gameField->update(sf::Vector2f(m_window.getSize()), m_frameTime);
+
+		m_camera.update();
 	}
 
 	void PacmanGame::_drawGameField() {
@@ -63,13 +71,6 @@ namespace pg {
 		if (m_player.getActor()) {
 			m_player.getActor()->draw(m_window);
 		}
-	}
-
-	void PacmanGame::_updateGameField() {
-		m_player.update(m_frameTime);
-		m_camera.update();
-
-		m_gameField->update(sf::Vector2f(m_window.getSize()), m_frameTime);
 	}
 
 	void PacmanGame::_createGame() {
