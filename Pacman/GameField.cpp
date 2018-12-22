@@ -13,7 +13,7 @@ namespace pg {
 		m_cellSize(cellSize),
 		m_grid(size.x, std::vector<std::vector<GameObject*>>(size.y))
 	{
-		createGrid();
+		
 	}
 
 	void GameField::addAllObjects(std::vector<GameObject*> objects) {
@@ -24,6 +24,17 @@ namespace pg {
 
 	void GameField::addObject(GameObject *object) {
 		addObjectToGrid(object);
+		
+	}
+
+	void GameField::draw(sf::RenderWindow & window, std::vector<GameObject*> visibleObjects) {
+		for (auto obj : visibleObjects) {
+			obj->draw(window);
+		}
+	}
+
+	void GameField::update(int frameTime) {
+
 	}
 
 	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {
@@ -90,11 +101,6 @@ namespace pg {
 		return result;
 	}
 
-	void GameField::createGrid() {
-		
-
-	}
-
 	bool GameField::_hasCell(sf::Vector2i coords) {
 		return coords.x >= 0 && coords.y >= 0
 			&& coords.y < m_size.y && coords.x < m_size.x;
@@ -105,6 +111,7 @@ namespace pg {
 	}
 
 	GameField::~GameField() {
+
 		for (auto row : m_grid) {
 			for (auto cell : row) {
 				for (auto obj : cell) {

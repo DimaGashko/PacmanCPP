@@ -37,7 +37,10 @@ namespace pg {
 		int m_frameTime = 0;
 
 		void update();
-		void render();
+		void _updateGameField();
+
+		void draw();
+		void _drawGameField();
 
 		void _createGame();
 		void _initWindow();

@@ -16,6 +16,9 @@ namespace pg {
 		void addAllObjects(std::vector<GameObject*> objects);
 		void addObject(GameObject *object);
 
+		void draw(sf::RenderWindow &window, std::vector<GameObject*> visibleObjects);
+		void update(int frameTime); 
+
 		/**
 		 * Возвращает все объекты находящихся в переданном диапазоне
 		 * @param start Левый верхний угол диапазона
@@ -26,6 +29,8 @@ namespace pg {
 		~GameField();
 	
 	private:
+		int m_pointsCount = 0;
+
 		sf::Vector2f m_size;
 		sf::Vector2f m_cellSize;
 		 
@@ -52,10 +57,7 @@ namespace pg {
 		void addObjectToGrid(GameObject *object);
 
 		bool _hasCell(sf::Vector2i coords);
-		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
-
-		void createGrid();
-		
+		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);		
 	};
 
 } // namespace pg

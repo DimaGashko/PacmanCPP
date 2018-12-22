@@ -10,7 +10,7 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 0;
 
-		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default, settings);
+		m_window.create(sf::VideoMode(1000, 600), "Pacman", sf::Style::Default , settings);
 		m_window.setFramerateLimit(500);
 
 		m_carera.init();
@@ -31,39 +31,44 @@ namespace pg {
 				}
 				else if (event.type == sf::Event::Resized) {
 					m_carera.updateSize();
-					m_carera.use();
 				}
 			}
 
 			m_window.clear();
 
 			update();
-			render();
+			draw();
 
 			m_window.display();
 		}
 	}
 
 	void PacmanGame::update() {
-		m_player.update(m_frameTime);
-		m_carera.update();
-		
-		//m_gameField.update();
+		_updateGameField();
 	}
 
-	void PacmanGame::render() {
-		auto objects = m_gameField->getObjectsOfRange(
+	void PacmanGame::draw() {
+		_drawGameField();
+		
+	}
+
+	void PacmanGame::_drawGameField() {
+		auto visibleObjects = m_gameField->getObjectsOfRange(
 			sf::Vector2f(-500, -500), sf::Vector2f(500, 500)
 		);
 
-		for (auto obj : objects) {
-			obj->draw(m_window);
-		}
+		m_gameField->draw(m_window, visibleObjects);
 
 		if (m_player.getActor()) {
 			m_player.getActor()->draw(m_window);
 		}
-		
+	}
+
+	void PacmanGame::_updateGameField() {
+		m_player.update(m_frameTime);
+		m_carera.update();
+
+		m_gameField->update(m_frameTime);
 	}
 
 	void PacmanGame::_createGame() {
@@ -80,3 +85,5 @@ namespace pg {
 	}
 
 } // namespace pg
+
+
