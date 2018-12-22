@@ -36,7 +36,9 @@ namespace pg {
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		auto activeObjects = _getActiveObjects(gameSize);
 
-		//std::cout << activeObjects.size() << std::endl;
+		for (auto obj : activeObjects) {
+			obj->update();
+		}
 
 		for (auto obj : activeObjects) {
 			auto pos = obj->getPosition();
@@ -46,13 +48,8 @@ namespace pg {
 			);
 
 			for (int i = 0; i < interactedCandidates.size(); i++) {
-				auto obj2 = interactedCandidates[i];
-
-				auto objPrevPos = obj->getPosition();
-				auto obj2PrevPos = obj2->getPosition();
-
-				obj->update();
-				obj2->update();
+				//auto obj2 = interactedCandidates[i];
+				//if (obj == obj2) continue;
 				
 				/*if (obj->intersects(obj2)) {
 					std::cout << "! ";
@@ -72,10 +69,7 @@ namespace pg {
 		auto activeSize = gameSize * (3.f / 2.f);
 		auto pos = m_player->getPosition();
 
-		auto activeObjects = getObjectsOfRange(pos - activeSize, pos + activeSize);
-		activeObjects.push_back(m_player);
-
-		return activeObjects;
+		return getObjectsOfRange(pos - activeSize, pos + activeSize);
 	}
 
 	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {
