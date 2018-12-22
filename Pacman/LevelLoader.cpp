@@ -65,10 +65,10 @@ namespace pg {
 				GameObject *obj;
 
 				if (type == "Wall") {
-					obj = new GameObject(texture);
+					obj = new Wall(texture);
 				}
 				else if (type == "Point") {
-					obj = new GameObject(texture);
+					obj = new Point(texture);
 				}
 				else if (type == "Pacman") {
 					Pacman *pacman = new Pacman(texture);
@@ -81,7 +81,7 @@ namespace pg {
 				}
 
 				obj->setPosition(coords);
-				obj->setSize(tileSize.x, tileSize.y);
+				obj->setSize(sf::Vector2f(tileSize));
 				result.gameField->addObject(obj);
 			}
 		}
@@ -128,7 +128,7 @@ namespace pg {
 					obj = new Wall();
 				}
 
-				obj->setSize(16, 16);
+				obj->setSize(sf::Vector2f(16, 16));
 				obj->setPosition(realCoords);
 				objects.push_back(obj);
 			}

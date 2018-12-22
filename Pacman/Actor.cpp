@@ -1,5 +1,3 @@
-#include <SFML/Graphics.hpp>
-
 #include "Actor.hpp"
 
 namespace pg {

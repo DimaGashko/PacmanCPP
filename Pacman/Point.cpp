@@ -1,12 +1,18 @@
-#include "Point.h"
+#include "Point.hpp"
+
+namespace pg {
+
+	Point::Point() : Bonus() {
+
+	}
+
+	Point::Point(sf::Texture *texture) : Bonus(texture) {
+
+	}
 
 
+	Point::~Point() {
 
-Point::Point()
-{
-}
+	}
 
-
-Point::~Point()
-{
-}
+} // namespace pg

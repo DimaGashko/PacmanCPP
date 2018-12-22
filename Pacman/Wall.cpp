@@ -2,10 +2,13 @@
 
 namespace pg {
 
-	Wall::Wall() {
+	Wall::Wall() : GameObject {
 
 	}
 
+	Wall::Wall(sf::Texture texture) : GameObject(texture) {
+
+	}
 
 	Wall::~Wall() {
 	

@@ -1,12 +1,17 @@
 #pragma once
 
-#include "StaticObject.hpp"
-#include "Actor.hpp"
+#include "GameObject.hpp"
 
-class Bonus : public StaticObject {
-public:
-	Bonus();
-	void use(Actor actor);
-	~Bonus();
-};
+namespace pg {
 
+	class Bonus : public GameObject {
+	public:
+		Bonus();
+		Bonus(sf::Texture *texture);
+		~Bonus();
+
+	private:
+		
+	};
+
+}

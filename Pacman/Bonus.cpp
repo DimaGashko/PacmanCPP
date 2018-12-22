@@ -1,12 +1,18 @@
-#include "Bonus.h"
+#include "Bonus.hpp"
+
+namespace pg {
+
+	Bonus::Bonus() : GameObject() {
+
+	}
+
+	Bonus::Bonus(sf::Texture *texture) : GameObject(texture) {
+
+	}
 
 
+	Bonus::~Bonus() {
 
-Bonus::Bonus()
-{
-}
+	}
 
-
-Bonus::~Bonus()
-{
-}
+} // namespace pg
