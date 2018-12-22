@@ -46,7 +46,7 @@ namespace pg {
 		if (!_hasCell(coords)) return;
 		auto &cell = m_grid[coords.x][coords.y];
 		
-		m_objectCoords[object] = sf::Vector2i(objCoords.x, objCoords.y);
+		m_objectCoords[object] = sf::Vector2i((int)objCoords.x, (int)objCoords.y);
 		cell.push_back(object);
 	}
 
@@ -91,7 +91,7 @@ namespace pg {
 	}
 
 	sf::Vector2i GameField::_getCoordsInGrid(sf::Vector2f coords) {
-		return sf::Vector2i(coords.x / m_cellSize.x, coords.y / m_cellSize.y);
+		return sf::Vector2i(int(coords.x / m_cellSize.x), int(coords.y / m_cellSize.y));
 	}
 
 	GameField::~GameField() {

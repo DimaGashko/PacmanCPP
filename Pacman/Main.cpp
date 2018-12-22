@@ -12,8 +12,6 @@ int main() {
 	{
 		pg::PacmanGame pacmanGame;
 		pacmanGame.run();
-
-		sf::View view(sf::IntRect());
 	}
 
 	system("pause");
