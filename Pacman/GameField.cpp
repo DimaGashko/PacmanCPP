@@ -34,7 +34,31 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
+		auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
+		std::cout << activeObjects.size() << std::endl;
+
+		for (auto obj1 : activeObjects) {
+			auto prevPos = obj1->getPosition();
+			obj1->update();
+
+			sf::FloatRect candidatesRange(prevPos - m_cellSize, prevPos + m_cellSize);
+			auto candidates = getObjectsOfRange(candidatesRange);
+
+			for (auto obj2 : candidates) {
+				if (!obj2->isObstacle() || !obj1->isObstacle()) return;
+
+				if (!obj1->intersects(obj2)) return;
+
+				std::cout << obj1->getPosition().x << " "
+					<< obj1->getPosition().y << " | "
+					<< obj2->getPosition().x << " "
+					<< obj2->getPosition().y << std::endl;
+				obj1->setPosition(prevPos);
+			}
+		}
+
+
+		/*forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
 			auto prevPos = obj1->getPosition();
 			obj1->update();
 			//addObjectToGrid(obj1);
@@ -51,7 +75,7 @@ namespace pg {
 					<< obj2->getPosition().y << std::endl;
 				obj1->setPosition(prevPos);
 			});
-		});
+		});*/
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
@@ -126,6 +150,36 @@ namespace pg {
 			}
 		}
 
+	}
+
+	std::vector<GameObject*> GameField::getObjectsOfRange(sf::FloatRect range) {
+		std::vector<GameObject*> result;
+
+		auto _range = sf::IntRect(
+			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
+			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
+		);
+
+		for (int x = _range.left; x <= _range.left + _range.width; x++) {
+			for (int y = _range.top; y <= _range.top + _range.height; y++) {
+
+				if (!_hasCell(sf::Vector2i(x, y))) continue;
+
+				for (auto obj : m_grid[x][y]) {
+					auto coords = obj->getPosition();
+
+					bool check = (coords.x >= range.left && coords.y >= range.top
+						&& coords.x <= (range.left + range.width)
+						&& coords.y <= (range.top + range.height)
+					);
+
+					if (check) result.push_back(obj);
+				}
+			}
+
+		}
+
+		return result;
 	}
 
 	inline bool GameField::_hasCell(sf::Vector2i coords) {

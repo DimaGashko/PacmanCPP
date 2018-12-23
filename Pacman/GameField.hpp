@@ -25,9 +25,6 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
-		template<typename F>
-		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
-
 		~GameField();
 	
 	private:
@@ -45,6 +42,11 @@ namespace pg {
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
 		
+		std::vector<GameObject*> getObjectsOfRange(sf::FloatRect range);
+
+		template<typename F>
+		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
+
 		/**
 		 * Добавляет переданные объекты в сетку
 		 * Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
@@ -63,6 +65,7 @@ namespace pg {
 
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
+			
 	};
 
 } // namespace pg
