@@ -28,38 +28,25 @@ namespace pg {
 	}
 
 	void GameField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
-		forEachObjectsOfRange(visibleRange, [&window](auto obj) {
+		forEachObjectsOfRange(visibleRange, [&window](GameObject *obj) {
 			obj->draw(window);
 		});
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		forEachObjectsOfRange(_getActiveRange(gameSize), [](auto obj1) {
-			auto prevPos = obj->curPosition();
-			obj1.update();
+		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
+			auto prevPos = obj1->getPosition();
+			obj1->update();
 
 			sf::FloatRect candidatesRange(prevPos - m_cellSize, prevPos + m_cellSize);
 
-			forEachObjectsOfRange(candidatesRange, [](auto obj2) {
-				
+			forEachObjectsOfRange(candidatesRange, [&](auto obj2) {
+				if (!obj1->intersects(obj2)) return;
+
+				obj1->setPosition(prevPos);
 			});
 		});
 
-			//for (int i = 0; i < interactedCandidates.size(); i++) {
-				//auto obj2 = interactedCandidates[i];
-				//if (obj == obj2) continue;
-				
-				/*if (obj->intersects(obj2)) {
-					std::cout << "! ";
-					obj->setPosition(objPrevPos);
-					obj2->setPosition(obj2PrevPos);
-				}*/
-
-			//}
-
-		//}
-
-		//std::cout << "- ";
 		//addAllObjectsToGrid(activeObjects);
 	}
 
