@@ -34,8 +34,7 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
-		std::cout << activeObjects.size() << std::endl;
+		/*auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
 
 		for (auto obj1 : activeObjects) {
 			auto prevPos = obj1->getPosition();
@@ -45,20 +44,23 @@ namespace pg {
 			auto candidates = getObjectsOfRange(candidatesRange);
 
 			for (auto obj2 : candidates) {
-				if (!obj2->isObstacle() || !obj1->isObstacle()) return;
-
-				if (!obj1->intersects(obj2)) return;
+				if (!obj2->isObstacle() || !obj1->isObstacle()) continue;
+				
+				if (!obj1->intersects(obj2)) continue;
 
 				std::cout << obj1->getPosition().x << " "
 					<< obj1->getPosition().y << " | "
 					<< obj2->getPosition().x << " "
 					<< obj2->getPosition().y << std::endl;
+
 				obj1->setPosition(prevPos);
 			}
-		}
+		}*/
 
 
-		/*forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
+
+
+		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
 			auto prevPos = obj1->getPosition();
 			obj1->update();
 			//addObjectToGrid(obj1);
@@ -69,13 +71,15 @@ namespace pg {
 				if (!obj2->isObstacle() || !obj1->isObstacle()) return;
 
 				if (!obj1->intersects(obj2)) return;
+
 				std::cout << obj1->getPosition().x << " "
 					<< obj1->getPosition().y << " | "
 					<< obj2->getPosition().x << " "
 					<< obj2->getPosition().y << std::endl;
+
 				obj1->setPosition(prevPos);
 			});
-		});*/
+		});
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
@@ -171,12 +175,11 @@ namespace pg {
 					bool check = (coords.x >= range.left && coords.y >= range.top
 						&& coords.x <= (range.left + range.width)
 						&& coords.y <= (range.top + range.height)
-					);
+						);
 
 					if (check) result.push_back(obj);
 				}
 			}
-
 		}
 
 		return result;
