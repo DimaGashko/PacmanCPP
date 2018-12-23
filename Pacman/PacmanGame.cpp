@@ -23,7 +23,7 @@ namespace pg {
 
 		while (m_window.isOpen()) {
 			m_frameTime = clock.restart().asMilliseconds();
-			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
+			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
@@ -35,12 +35,14 @@ namespace pg {
 				}
 			}
 
-			m_window.clear();
 
-			update();
-			draw();
+			if (m_window.hasFocus()) {
+				m_window.clear();
+				update();
+				draw();
+				m_window.display();
+			}
 
-			m_window.display();
 		}
 	}
 
