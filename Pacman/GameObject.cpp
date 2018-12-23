@@ -33,26 +33,32 @@ namespace pg {
 	bool GameObject::intersects(GameObject *obj) {
 		if (obj == this) return false;
 
-		return getBounds().intersects(obj->getBounds());
-	}
+		auto aPos = getPosition();
+		auto aEndPos = getEndPos();
 
-	sf::FloatRect GameObject::getBounds() {
-		auto bounds = m_rect.getGlobalBounds();
+		auto bPos = obj->getPosition();
+		auto bEndPos = obj->getEndPos();
 
-		bounds.left += 1;
-		bounds.top += 1;
-		bounds.width -= 1;
-		bounds.height -= 1;
-
-		return bounds;
+		return Math::intersectsNormalRect(
+			aPos.x, aPos.y, aEndPos.x, aEndPos.y,
+			bPos.x, bPos.y, bEndPos.x, bEndPos.y
+		);
 	}
 
 	sf::Vector2f GameObject::getPosition() {
 		return m_rect.getPosition();
 	}
 
+	sf::Vector2f GameObject::getEndPos() {
+		return getPosition() + getSize();
+	}
+
 	void GameObject::setPosition(sf::Vector2f coords) {
 		m_rect.setPosition(coords);
+	}
+
+	void GameObject::setEndPos(sf::Vector2f coords) {
+		m_rect.setPosition(coords - getSize());
 	}
 
 	void GameObject::move(sf::Vector2f offset) {
