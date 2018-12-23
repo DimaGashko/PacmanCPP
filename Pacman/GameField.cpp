@@ -43,7 +43,10 @@ namespace pg {
 
 			forEachObjectsOfRange(candidatesRange, [&](auto obj2) {
 				if (!obj1->intersects(obj2)) return;
-
+				std::cout << obj1->getPosition().x << " "
+					<< obj1->getPosition().y << " | "
+					<< obj2->getPosition().x << " "
+					<< obj2->getPosition().y << std::endl;
 				obj1->setPosition(prevPos);
 			});
 		});

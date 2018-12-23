@@ -10,6 +10,9 @@ namespace pg {
 	public:
 		Pacman();
 		Pacman(sf::Texture *texture);
+
+		sf::FloatRect getBounds();
+
 		~Pacman();
 
 	private:

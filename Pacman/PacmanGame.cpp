@@ -23,7 +23,7 @@ namespace pg {
 
 		while (m_window.isOpen()) {
 			m_frameTime = clock.restart().asMilliseconds();
-			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
+			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			
 			sf::Event event;
 			while (m_window.pollEvent(event)) {

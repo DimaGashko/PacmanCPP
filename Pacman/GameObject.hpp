@@ -29,12 +29,14 @@ namespace pg {
 		sf::Vector2f getSpeed();
 		sf::Vector2f getSize();
 
+		virtual sf::FloatRect getBounds();
+
 		void move(sf::Vector2f offset);
 		void addToSpeed(sf::Vector2f dSpeed);
 
 		bool intersects(GameObject *obj);
 
-		~GameObject();
+	    ~GameObject();
 	private:
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;

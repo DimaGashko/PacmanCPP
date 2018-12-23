@@ -33,16 +33,20 @@ namespace pg {
 	bool GameObject::intersects(GameObject *obj) {
 		if (obj == this) return false;
 
-		auto aPos = getPosition();
-		auto aEndPos = getEndPos();
-
-		auto bPos = obj->getPosition();
-		auto bEndPos = obj->getEndPos();
+		auto a = getBounds();
+		auto b = obj->getBounds();
 
 		return Math::intersectsNormalRect(
-			aPos.x, aPos.y, aEndPos.x, aEndPos.y,
-			bPos.x, bPos.y, bEndPos.x, bEndPos.y
+			a.left, a.top, a.left + a.width, a.top + a.height,
+			b.left, b.top, b.left + b.width, b.top + b.height
 		);
+	}
+
+	sf::FloatRect GameObject::getBounds() {
+		auto pos = getPosition();
+		auto size = getSize();
+
+		return sf::FloatRect(pos.x, pos.y, size.x, size.y);
 	}
 
 	sf::Vector2f GameObject::getPosition() {
