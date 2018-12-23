@@ -11,7 +11,7 @@ namespace pg {
 		settings.antialiasingLevel = 0;
 
 		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default , settings);
-		m_window.setFramerateLimit(120);
+		//m_window.setFramerateLimit(120);
 
 		m_camera.init();
 	}
@@ -23,7 +23,8 @@ namespace pg {
 
 		while (m_window.isOpen()) {
 			m_frameTime = clock.restart().asMilliseconds();
-
+			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
+			
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
 				if (event.type == sf::Event::Closed) {

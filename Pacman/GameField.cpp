@@ -37,6 +37,7 @@ namespace pg {
 		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
 			auto prevPos = obj1->getPosition();
 			obj1->update();
+			//addObjectToGrid(obj1);
 
 			sf::FloatRect candidatesRange(prevPos - m_cellSize, prevPos + m_cellSize);
 
@@ -46,8 +47,6 @@ namespace pg {
 				obj1->setPosition(prevPos);
 			});
 		});
-
-		//addAllObjectsToGrid(activeObjects);
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
@@ -77,23 +76,17 @@ namespace pg {
 			}
 			else {
 				if (!_hasCell(prev)) return;
-				return;
-				/*auto cell = m_grid[prev.x][prev.y];
+				auto cell = m_grid[prev.x][prev.y];
+				std::vector<GameObject*> newCell;
 
-				int index = -1;
-
-				for (int i = 0; i < cell.size(); i++) {
-					if (cell[i] == object) {
-						index = i;
-						break;
+				for (auto item : cell) {
+					if (item != object) {
+						newCell.push_back(item);
 					}
 				}
-
-				if (index != -1) {
-					cell.erase(cell.begin() + index);
-				}*/
 				
-			} 
+				m_grid[prev.x][prev.y] = newCell;
+			}
 		}
 
 		if (!_hasCell(coords)) return;
