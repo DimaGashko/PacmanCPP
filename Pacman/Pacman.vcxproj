@@ -27,7 +27,6 @@
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="lib\tinyxml2.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Math.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanGame.cpp" />
     <ClCompile Include="Player.cpp" />
