@@ -10,4 +10,8 @@ namespace pg {
 
 	}
 
+	Wall::~Wall() {
+
+	}
+
 }; // namespace gp

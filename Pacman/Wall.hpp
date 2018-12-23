@@ -10,7 +10,11 @@ namespace pg {
 	public:
 		Wall();
 		Wall(sf::Texture *texture);
+
 		~Wall();
+
+	protected:
+		bool m_isBarrier = true;
 
 	private:
 

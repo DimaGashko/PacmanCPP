@@ -99,6 +99,10 @@ namespace pg {
 		setPosition(center - getSize() / 2.f);
 	}
 
+	bool GameObject::isBarrier() {
+		return m_isBarrier;
+	}
+
 	GameObject::~GameObject() {
 		delete m_rect.getTexture();
 	}
