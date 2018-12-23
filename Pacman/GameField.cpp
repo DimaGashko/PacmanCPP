@@ -34,16 +34,16 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		forEachObjectsOfRange(_getActiveRange(gameSize), [](auto obj) {
-			obj->update();
+		forEachObjectsOfRange(_getActiveRange(gameSize), [](auto obj1) {
+			auto prevPos = obj->curPosition();
+			obj1.update();
+
+			sf::FloatRect candidatesRange(prevPos - m_cellSize, prevPos + m_cellSize);
+
+			forEachObjectsOfRange(candidatesRange, [](auto obj2) {
+				
+			});
 		});
-
-		//for (auto obj : activeObjects) {
-			//auto pos = obj->getPosition();
-
-			//auto interactedCandidates = getObjectsOfRange(
-			//pos - m_cellSize; pos + m_cellSize;
-			//);
 
 			//for (int i = 0; i < interactedCandidates.size(); i++) {
 				//auto obj2 = interactedCandidates[i];
