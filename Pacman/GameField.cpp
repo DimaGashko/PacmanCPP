@@ -5,7 +5,9 @@ namespace pg {
 	GameField::GameField() :
 		GameField(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
 	{
-	
+		/*forEach([] {
+			std::cout << "Labmda ";
+		});*/
 	}
 
 	GameField::GameField(sf::Vector2i size, sf::Vector2i cellSize) :
@@ -42,12 +44,12 @@ namespace pg {
 
 		for (auto obj : activeObjects) {
 			auto pos = obj->getPosition();
-		
-			auto interactedCandidates = getObjectsOfRange(
-				pos - m_cellSize, pos + m_cellSize
-			);
+			std::find(0, 0, [] {});
+			//auto interactedCandidates = getObjectsOfRange(
+			pos - m_cellSize; pos + m_cellSize;
+			//);
 
-			for (int i = 0; i < interactedCandidates.size(); i++) {
+			//for (int i = 0; i < interactedCandidates.size(); i++) {
 				//auto obj2 = interactedCandidates[i];
 				//if (obj == obj2) continue;
 				
@@ -57,7 +59,7 @@ namespace pg {
 					obj2->setPosition(obj2PrevPos);
 				}*/
 
-			}
+			//}
 
 		}
 

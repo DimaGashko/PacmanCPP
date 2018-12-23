@@ -30,6 +30,13 @@ namespace pg {
 		 * @param start Левый верхний угол диапазона
 		 * @param ned Правый нижний угол диапазона
 		*/
+		/*template<typename F>
+		void forEach(F &&func) {
+			for (int i = 0; i < 10; i++) {
+				func();
+			}
+		}*/
+
 		std::vector<GameObject*> getObjectsOfRange(sf::Vector2f start, sf::Vector2f end);
 
 		~GameField();
