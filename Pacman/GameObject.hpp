@@ -41,7 +41,7 @@ namespace pg {
 	    virtual ~GameObject();
 
 	protected:
-		bool m_isBarrier = false;
+		bool m_isBarrier = true;
 
 	private:
 		sf::RectangleShape m_rect;

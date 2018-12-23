@@ -14,7 +14,7 @@ namespace pg {
 		~Wall();
 
 	protected:
-		bool m_isBarrier = true;
+		bool m_isObstacle = true;
 
 	private:
 
