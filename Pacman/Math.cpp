@@ -4,8 +4,12 @@ namespace pg {
 
 	
 
-	inline bool Math::intersectsNormalRect() {
-		return false;
+	inline bool Math::intersectsNormalRect(
+		float ax1, float ay1, float ax2, float ay2,
+		float bx1, float by1, float bx2, float by2
+	) {
+		return Math::intersectsL1(ax1, ax2, bx1, bx2) &&
+			Math::intersectsL1(ay1, ay2, by1, by2);
 	}
 
 	inline bool Math::intersectsL2() {
