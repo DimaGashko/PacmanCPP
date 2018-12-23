@@ -44,6 +44,8 @@ namespace pg {
 
 		void _createGame();
 		void _initWindow();
+
+		sf::FloatRect _getVisibleRange();
 	};
 
 }; // namespace pg

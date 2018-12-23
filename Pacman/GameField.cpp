@@ -118,10 +118,10 @@ namespace pg {
 
 	template<typename F>
 	void GameField::forEachObjectsOfRange(sf::FloatRect range, F &&func) {
-		auto _range = sf::FloatRect(
+		auto _range = sf::IntRect(
 			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
 			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
-		); 
+		);
 
 		for (int x = _range.left; x <= _range.left + _range.width; x++) {
 			for (int y = _range.top; y <= _range.top + _range.height; y++) {
@@ -134,7 +134,7 @@ namespace pg {
 					bool check = (coords.x >= range.left && coords.y >= range.top
 						&& coords.x <= (range.left + range.width)
 						&& coords.y <= (range.top + range.height)
-					);
+						);
 
 					if (check) func(obj);
 				}
