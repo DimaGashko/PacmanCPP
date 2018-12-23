@@ -22,8 +22,8 @@ namespace pg {
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
+			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			m_frameTime = clock.restart().asMilliseconds();
-			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
@@ -72,7 +72,7 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level2.tmx");
+		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
 	}

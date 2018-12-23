@@ -42,7 +42,7 @@ namespace pg {
 			sf::FloatRect candidatesRange(prevPos - m_cellSize, prevPos + m_cellSize);
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				if (!obj2->isBarrier() || !obj1->isBarrier()) return;
+				if (!obj2->isObstacle() || !obj1->isObstacle()) return;
 
 				if (!obj1->intersects(obj2)) return;
 				std::cout << obj1->getPosition().x << " "

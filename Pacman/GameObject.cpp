@@ -24,8 +24,6 @@ namespace pg {
 
 		m_speed.x = 0;
 		m_speed.y = 0;
-
-
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
@@ -99,8 +97,8 @@ namespace pg {
 		setPosition(center - getSize() / 2.f);
 	}
 
-	bool GameObject::isBarrier() {
-		return m_isBarrier;
+	bool GameObject::isObstacle() {
+		return m_isObstacle;
 	}
 
 	GameObject::~GameObject() {

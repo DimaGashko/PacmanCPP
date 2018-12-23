@@ -29,7 +29,7 @@ namespace pg {
 		sf::Vector2f getSpeed();
 		sf::Vector2f getSize();
 
-		bool isBarrier();
+		bool isObstacle();
 
 		sf::FloatRect getBounds();
 
@@ -41,7 +41,7 @@ namespace pg {
 	    virtual ~GameObject();
 
 	protected:
-		bool m_isBarrier = true;
+		bool m_isObstacle = true;
 
 	private:
 		sf::RectangleShape m_rect;
