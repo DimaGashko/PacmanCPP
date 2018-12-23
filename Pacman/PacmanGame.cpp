@@ -61,12 +61,12 @@ namespace pg {
 	}
 
 	void PacmanGame::_drawGameField() {
-		auto visibleObjects = m_gameField->getObjectsOfRange(
+		auto visibleRange = sf::FloatRect(
 			m_window.mapPixelToCoords(sf::Vector2i(-100, -100)),
 			m_window.mapPixelToCoords(sf::Vector2i(m_window.getSize()))
 		);
 
-		m_gameField->draw(m_window, visibleObjects);
+		m_gameField->draw(m_window, visibleRange);
 
 		if (m_player.getActor()) {
 			m_player.getActor()->draw(m_window);

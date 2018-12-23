@@ -19,25 +19,14 @@ namespace pg {
 		void addAllObjects(std::vector<GameObject*> objects);
 		void addObject(GameObject *object);
 
-		void draw(sf::RenderWindow &window, std::vector<GameObject*> visibleObjects);
+		void draw(sf::RenderWindow &window, sf::FloatRect visibleRange);
 		void update(sf::Vector2f gameSize, int frameTime);
 
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
-		/**
-		 * Возвращает все объекты находящихся в переданном диапазоне
-		 * @param start Левый верхний угол диапазона
-		 * @param ned Правый нижний угол диапазона
-		*/
-		/*template<typename F>
-		void forEach(F &&func) {
-			for (int i = 0; i < 10; i++) {
-				func();
-			}
-		}*/
-
-		std::vector<GameObject*> getObjectsOfRange(sf::Vector2f start, sf::Vector2f end);
+		template<typename F>
+		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
 
 		~GameField();
 	
@@ -70,7 +59,7 @@ namespace pg {
 		 */
 		void addObjectToGrid(GameObject *object);
 
-		std::vector<GameObject*> _getActiveObjects(sf::Vector2f gameSize);
+		sf::FloatRect _getActiveRange(sf::Vector2f gameSize);
 
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
