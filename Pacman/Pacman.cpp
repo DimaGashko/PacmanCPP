@@ -10,15 +10,8 @@ namespace pg {
 
 	}
 
-	sf::FloatRect Pacman::getBounds() {
-		auto pos = getPosition();
-		auto size = getSize();
-
-		return sf::FloatRect(pos.x+1, pos.y+1, size.x-2, size.y-2);
-	}
-
-
 	Pacman::~Pacman() {
+
 	}
 
 }

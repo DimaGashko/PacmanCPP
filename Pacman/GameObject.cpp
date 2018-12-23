@@ -24,6 +24,8 @@ namespace pg {
 
 		m_speed.x = 0;
 		m_speed.y = 0;
+
+
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {
@@ -46,7 +48,7 @@ namespace pg {
 		auto pos = getPosition();
 		auto size = getSize();
 
-		return sf::FloatRect(pos.x, pos.y, size.x, size.y);
+		return sf::FloatRect(pos.x+1, pos.y+1, size.x-2, size.y-2);
 	}
 
 	sf::Vector2f GameObject::getPosition() {
