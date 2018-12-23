@@ -10,6 +10,10 @@ namespace pg {
 			Math::intersectsL1(ay1, ay2, by1, by2);
 	}
 
+	inline bool Math::intersectsL1(float a1, float a2, float b1, float b2) {
+		return (a1 < b1) ? (b1 < a2) : (a1 < b2);
+	}
+
 	bool Math::intersectsL2(sf::Vector2f start1, sf::Vector2f end1, sf::Vector2f start2, sf::Vector2f end2) {
 		sf::Vector2f dir1 = end1 - start1;
 		sf::Vector2f dir2 = end2 - start2;
@@ -35,10 +39,6 @@ namespace pg {
 			return false;
 
 		return true;
-	}
-
-	inline bool Math::intersectsL1(float a1, float a2, float b1, float b2) {
-		return (a1 < b1) ? (b1 < a2) : (a1 < b2);
 	}
 
 }; // namespace pg
