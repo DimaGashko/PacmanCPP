@@ -20,8 +20,8 @@ namespace pg {
 	void Camera::update() {
 		if (!m_target) return;
 
-		auto winSize = m_window->getSize();
-		auto cameraSize = sf::Vector2f(winSize.x * 0.1f, winSize.x * 0.1f);
+		auto winSize = m_view.getSize();
+		auto cameraSize = sf::Vector2f(winSize.x * 0.25f, winSize.x * 0.25f);
 		auto targCenter = m_target->getCenter();
 		auto cameraCenter = m_view.getCenter();
 
@@ -65,6 +65,10 @@ namespace pg {
 
 	sf::Vector2f Camera::getCenter() {
 		return m_view.getCenter();
+	}
+
+	sf::View Camera::getView() {
+		return m_view;
 	}
 
 	Camera::~Camera() {

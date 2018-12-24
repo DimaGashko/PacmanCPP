@@ -57,7 +57,7 @@ namespace pg {
 
 	void PacmanGame::_updateGameField() {
 		m_player.update(m_frameTime);
-		m_gameField->update(sf::Vector2f(m_window.getSize()) / 4.f, m_frameTime);
+		m_gameField->update(sf::Vector2f(m_camera.getView().getSize()), m_frameTime);
 		m_camera.update();
 	}
 
@@ -70,14 +70,17 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level2.tmx");
+		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level3.tmx");
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
 	}
 
 	sf::FloatRect PacmanGame::_getVisibleRange() {
 		sf::Vector2f start = m_window.mapPixelToCoords(sf::Vector2i(-50, -50));
-		sf::Vector2f end = m_window.mapPixelToCoords(sf::Vector2i(m_window.getSize()));
+
+		sf::Vector2f end = m_window.mapPixelToCoords(
+			sf::Vector2i(m_window.getSize())
+		);
 
 		return sf::FloatRect(start, end - start);
 	}
