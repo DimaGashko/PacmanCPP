@@ -49,6 +49,7 @@ namespace pg {
 				if (!intersects) return; 
 				
 				procCollision(obj1, obj2);
+				//interact
 			});
 		});
 
@@ -60,17 +61,25 @@ namespace pg {
 
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
 		if (!obj1->isObstacle() || !obj2->isObstacle()) {
-			//interact
+			return;
+		}
+
+		auto obj1Speed = obj1->getSpeed();
+		auto obj2Speed = obj2->getSpeed();
+
+		if (obj1Speed.x * obj1Speed.y < obj2Speed.x * obj2Speed.y) {
 			return;
 		}
 
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
+		std::cout << typeid(*obj1).name() << " ";
+
 		if (intersectSide == Left) std::cout << "Left";
 		if (intersectSide == Top) std::cout << "Top";
 		if (intersectSide == Right) std::cout << "Right";
 		if (intersectSide == Bottom) std::cout << "Bottom";
-
+		
 		std::cout << std::endl;
 		
 		//interact
