@@ -79,7 +79,7 @@ namespace pg {
 			obj1->move(sf::Vector2f(1, 0));
 		}
 		else if (intersectSide == Bottom) {
-			obj1->setPosition(sf::Vector2f(speed.x, 0));
+			obj1->setSpeed(sf::Vector2f(speed.x, 0));
 			obj1->move(sf::Vector2f(0, 1));
 		}
 		
