@@ -42,7 +42,9 @@ namespace pg {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
+			int count = 0;
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
+				count++;
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
@@ -51,6 +53,8 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			});
+
+			//std::cout << count << std::endl;
 
 			obj1->update();
 		});
@@ -146,16 +150,17 @@ namespace pg {
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 
 		//Oбъект уже есть в сетке
-		if (m_objectCoords.find(object) != m_objectCoords.end()) {
-			auto prev = m_objectCoords[object];
-			
-			if (prev.x == coords.x && prev.y == coords.y) {
+		auto prev = m_objectCoords[object];
+
+		if (prev != NULL) {		
+
+			if (prev->x == coords.x && prev->y == coords.y) {
 				//И уже находится в нужной ячейке
 				return;
 			}
 			else {
-				if (!_hasCell(prev)) return;
-				auto &cell = m_grid[prev.x][prev.y];
+				if (!_hasCell(*prev)) return;
+				auto &cell = m_grid[prev->x][prev->y];
 				auto size = cell.size();
 
 				std::vector<GameObject*> newCell(size - 1);
@@ -166,14 +171,14 @@ namespace pg {
 					}
 				}
 				
-				m_grid[prev.x][prev.y] = newCell;
+				m_grid[prev->x][prev->y] = newCell;
 			}
 		}
 
 		if (!_hasCell(coords)) return;
 		auto &cell = m_grid[coords.x][coords.y];
 		
-		m_objectCoords[object] = coords;
+		m_objectCoords[object] = &coords;
 		cell.push_back(object);
 	}
 
