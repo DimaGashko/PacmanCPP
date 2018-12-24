@@ -56,8 +56,14 @@ namespace pg {
 		});
 
 		for (auto obj : activeObjects) {
+			auto oldPos = obj->getPosition();
 			obj->update();
-			addObjectToGrid(obj);
+			auto newPos = obj->getPosition();
+
+			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
+				addObjectToGrid(obj);
+			}
+			
 		}
 	}
 
@@ -128,7 +134,7 @@ namespace pg {
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
-		auto size = gameSize * 3.f;
+		auto size = gameSize * 1.f;
 		auto coords = m_player->getPosition() - size / 2.f;
 
 		return sf::FloatRect(coords, size);
@@ -144,10 +150,8 @@ namespace pg {
 		sf::Vector2f objCoords = object->getPosition();
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 
-		auto type = typeid(*object).name();
-
 		//Oбъект уже есть в сетке
-		if (m_objectCoords.count(object) != 0) {
+		if (m_objectCoords.find(object) != m_objectCoords.end()) {
 			auto prev = m_objectCoords[object];
 			
 			if (prev.x == coords.x && prev.y == coords.y) {
@@ -164,9 +168,6 @@ namespace pg {
 				for (int i = 0; i < size; i++) {
 					if (cell[i] != object) {
 						newCell[i] = cell[i];
-					}
-					else {
-						std::cout << "=" << i << std::endl;
 					}
 				}
 				
