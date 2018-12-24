@@ -29,7 +29,7 @@ namespace pg {
 
 	private:
 		// Текстуры тайлов (ключ - id тайла
-		std::unordered_map<int, sf::Texture*> textures;
+		std::unordered_map<int, sf::Texture*> m_textures;
 
 		struct _LevelConfig {
 			sf::Vector2i size;

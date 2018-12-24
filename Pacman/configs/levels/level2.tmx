@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-up" width="19" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="1">
+<map version="1.2" tiledversion="1.2.1" orientation="orthogonal" renderorder="left-up" width="19" height="19" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1">
  <tileset firstgid="1" source="../tilesets/tileset.tsx"/>
- <layer id="6" name="tiles" width="19" height="19">
+ <layer id="12" name="tiles" width="19" height="19">
   <data>
    <tile gid="11"/>
    <tile gid="11"/>

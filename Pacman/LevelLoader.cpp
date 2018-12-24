@@ -84,7 +84,7 @@ namespace pg {
 	}
 
 	sf::Texture* LevelLoader::_getTexture(LevelLoader::_TilesetConfig tilesetConfig, int gid, int id) {
-		if (textures.find(gid) == textures.end()) {
+		if (m_textures.find(gid) == m_textures.end()) {
 			sf::Texture *texture = new sf::Texture;
 
 			sf::IntRect textureArea(
@@ -95,10 +95,10 @@ namespace pg {
 
 			texture->loadFromImage(tilesetConfig.tileset, textureArea);
 
-			textures[gid] = texture;
+			m_textures[gid] = texture;
 		}
 
-		return textures[gid];
+		return m_textures[gid];
 	}
 
 	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
@@ -221,7 +221,11 @@ namespace pg {
 	}
 
 	LevelLoader::~LevelLoader() {
+		for (auto item : m_textures) {
+			delete item.second;
+		}
 
-	}
+		m_textures.clear();
+	} 
 
 } // namespace pg
