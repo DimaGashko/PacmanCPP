@@ -40,20 +40,10 @@ namespace pg {
 			activeObjects.push_back(obj1);
 
 			auto oldPos = obj1->getPosition();
-			auto oldCenter = obj1->getCenter();
-
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				auto obj2Pos = obj2->getPosition();
-				auto obj2Center = obj2->getCenter();
-				auto obj2EndPos = obj2->getEndPos();
-
-				auto obj2TopRight = sf::Vector2f(obj2EndPos.x, obj2Pos.y);
-				auto obj2BottomLeft = sf::Vector2f(obj2Pos.x, obj2EndPos.y);
-
 				obj1->updatePos();
-				auto newPos = obj1->getPosition();
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
 
@@ -61,22 +51,7 @@ namespace pg {
 					return;
 				}
 				
-				sf::Vector2f dir = newPos - oldPos;
-
-				auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
-				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
-
-				bool hIntersects = (hSide == eSides::Right) ?
-					Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2EndPos) :
-					Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2BottomLeft);
-				
-				auto intersectSide = (hIntersects) ? hSide : vSide;
-
-
-
-
-
-
+				auto intersectSide = getCollitionSide(obj1, obj2);
 
 
 				if (!obj1->isObstacle() || !obj2->isObstacle()) {
@@ -98,10 +73,6 @@ namespace pg {
 
 		auto obj2Pos = obj2->getPosition();
 		auto obj2Center = obj2->getCenter();
-		auto obj2EndPos = obj2->getEndPos();
-
-		auto obj2TopRight = sf::Vector2f(obj2EndPos.x, obj2Pos.y);
-		auto obj2BottomLeft = sf::Vector2f(obj2Pos.x, obj2EndPos.y);
 
 		obj1->updatePos();
 		auto newPos = obj1->getPosition();
@@ -113,8 +84,8 @@ namespace pg {
 		auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
 
 		bool hIntersects = (hSide == eSides::Right) ?
-			Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2EndPos) :
-			Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2BottomLeft);
+			Math::intersectsL2(oldCenter, obj2Center, obj2->getTopRight(), obj2->getEndPos()) :
+			Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2->getBottomLeft());
 
 		return (hIntersects) ? hSide : vSide;
 	}

@@ -58,18 +58,12 @@ namespace pg {
 		template<typename F>
 		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
 
-		/**
-		 * Добавляет переданные объекты в сетку
-		 * Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
-		 * @param object добавляемый объект
-		 */
+		// Добавляет переданные объекты в сетку
+		// Если какой-то объект уже был в сетке, то от сначала удаляется с предыдущего места
 		void addAllObjectsToGrid(std::vector<GameObject*> objects);
 
-		/**
-		 * Добавляет объект в сетку
-		 * Если объект уже был в сетке, то от сначала удаляется с предыдущего места
-		 * @param object добавляемый объект
-		 */
+		// Добавляет объект в сетку
+		// Если объект уже был в сетке, то от сначала удаляется с предыдущего места
 		void addObjectToGrid(GameObject *object);
 
 		sf::FloatRect _getActiveRange(sf::Vector2f gameSize);
