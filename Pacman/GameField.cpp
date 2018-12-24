@@ -45,19 +45,12 @@ namespace pg {
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				if (!obj1->isObstacle() || !obj2->isObstacle()) {
-					//interact only
-					return;
-				}
-
 				auto obj2Pos = obj2->getPosition();
 				auto obj2Center = obj2->getCenter();
 				auto obj2EndPos = obj2->getEndPos();
 
-				auto obj2TopLeft = obj2Pos;
 				auto obj2TopRight = sf::Vector2f(obj2EndPos.x, obj2Pos.y);
 				auto obj2BottomLeft = sf::Vector2f(obj2Pos.x, obj2EndPos.y);
-				auto obj2BottomRight = obj2EndPos;
 
 				obj1->updatePos();
 				auto newPos = obj1->getPosition();
@@ -74,19 +67,22 @@ namespace pg {
 				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
 
 				bool hIntersects = (hSide == eSides::Right) ?
-					Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2BottomRight) :
-					Math::intersectsL2(oldCenter, obj2Center, obj2TopLeft, obj2BottomLeft);
+					Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2EndPos) :
+					Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2BottomLeft);
 				
-				bool vIntersects = false;
+				auto intersectSide = (hIntersects) ? hSide : vSide;
 
-				if (!hIntersects) {
-					vIntersects = (hSide == eSides::Bottom) ? 
-						Math::intersectsL2(oldCenter, obj2Center, obj2BottomLeft, obj2BottomRight) :
-						Math::intersectsL2(oldCenter, obj2Center, obj2TopLeft, obj2TopRight);
+
+
+
+
+
+
+
+				if (!obj1->isObstacle() || !obj2->isObstacle()) {
+					//interact only
+					return;
 				}
-
-
-
 			});
 		});
 
@@ -94,6 +90,33 @@ namespace pg {
 			obj->update();
 			//addObjectToGrid(obj);
 		}
+	}
+
+	GameField::eSides GameField::getCollitionSide(GameObject *obj1, GameObject *obj2) {
+		auto oldPos = obj1->getPosition();
+		auto oldCenter = obj1->getCenter();
+
+		auto obj2Pos = obj2->getPosition();
+		auto obj2Center = obj2->getCenter();
+		auto obj2EndPos = obj2->getEndPos();
+
+		auto obj2TopRight = sf::Vector2f(obj2EndPos.x, obj2Pos.y);
+		auto obj2BottomLeft = sf::Vector2f(obj2Pos.x, obj2EndPos.y);
+
+		obj1->updatePos();
+		auto newPos = obj1->getPosition();
+		obj1->setPosition(oldPos);
+
+		sf::Vector2f dir = newPos - oldPos;
+
+		auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
+		auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
+
+		bool hIntersects = (hSide == eSides::Right) ?
+			Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2EndPos) :
+			Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2BottomLeft);
+
+		return (hIntersects) ? hSide : vSide;
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
