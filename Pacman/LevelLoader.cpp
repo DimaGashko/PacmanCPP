@@ -84,7 +84,7 @@ namespace pg {
 	}
 
 	sf::Texture* LevelLoader::_getTexture(LevelLoader::_TilesetConfig tilesetConfig, int gid, int id) {
-		if (m_textures.find(gid) == m_textures.end()) {
+		if (m_textures[gid] == NULL) {
 			sf::Texture *texture = new sf::Texture;
 
 			sf::IntRect textureArea(
