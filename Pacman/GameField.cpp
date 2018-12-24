@@ -89,34 +89,22 @@ namespace pg {
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
 		if (intersectSide == Left) {
-			obj1->setSpeed(sf::Vector2f(-0.01, speed.y));
-			obj1->move(sf::Vector2f(-1, 0));
+			obj1->setSpeed(sf::Vector2f(-0.01f, speed.y));
+			obj1->move(sf::Vector2f(-1.f, 0.f));
 		}
 		else if (intersectSide == Top) {
-			obj1->setSpeed(sf::Vector2f(speed.x, -0.01));
-			obj1->move(sf::Vector2f(0, -1));
+			obj1->setSpeed(sf::Vector2f(speed.x, -0.01f));
+			obj1->move(sf::Vector2f(0.f, -1.f));
 		}
 		else if (intersectSide == Right) {
-			obj1->setSpeed(sf::Vector2f(0.01, speed.y));
-			obj1->move(sf::Vector2f(1, 0));
+			obj1->setSpeed(sf::Vector2f(0.01f, speed.y));
+			obj1->move(sf::Vector2f(1.f, 0.f));
 		}
 		else if (intersectSide == Bottom) {
-			obj1->setSpeed(sf::Vector2f(speed.x, 0.01));
-			obj1->move(sf::Vector2f(0, 1));
+			obj1->setSpeed(sf::Vector2f(speed.x, 0.01f));
+			obj1->move(sf::Vector2f(0.f, 1.f));
 		}
-		else obj1->setSpeed(sf::Vector2f(0, 0));
-		
-		if (0) {
-			std::cout << typeid(*obj1).name() << " ";
-
-			if (intersectSide == Left) std::cout << "Left";
-			else if (intersectSide == Top) std::cout << "Top";
-			else if (intersectSide == Right) std::cout << "Right";
-			else if (intersectSide == Bottom) std::cout << "Bottom";
-			else if (intersectSide == None) std::cout << "None";
-
-			std::cout << std::endl;
-		}
+		else obj1->setSpeed(sf::Vector2f(0.f, 0.f));
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
