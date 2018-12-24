@@ -67,22 +67,22 @@ namespace pg {
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
 		if (intersectSide == Left) {
-			obj1->setSpeed(sf::Vector2f(-0.1, speed.y));
+			obj1->setSpeed(sf::Vector2f(-0.01, speed.y));
 			obj1->move(sf::Vector2f(-1, 0));
 		}
 		else if (intersectSide == Top) {
-			obj1->setSpeed(sf::Vector2f(speed.x, -0.1));
+			obj1->setSpeed(sf::Vector2f(speed.x, -0.01));
 			obj1->move(sf::Vector2f(0, -1));
 		}
 		else if (intersectSide == Right) {
-			obj1->setSpeed(sf::Vector2f(0.1, speed.y));
+			obj1->setSpeed(sf::Vector2f(0.01, speed.y));
 			obj1->move(sf::Vector2f(1, 0));
 		}
 		else if (intersectSide == Bottom) {
-			obj1->setSpeed(sf::Vector2f(speed.x, 0.1));
+			obj1->setSpeed(sf::Vector2f(speed.x, 0.01));
 			obj1->move(sf::Vector2f(0, 1));
 		}
-		//else obj1->setSpeed(sf::Vector2f(0, 0));
+		else obj1->setSpeed(sf::Vector2f(0, 0));
 		
 		std::cout << typeid(*obj1).name() << " ";
 

@@ -72,7 +72,7 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
+		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level2.tmx");
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
 	}
