@@ -94,26 +94,21 @@ namespace pg {
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
-		auto oldPos = obj1->getPosition();
-		auto oldCenter = obj1->getCenter();
+		auto speed = obj1->getSpeed();
+
+		auto o1 = obj1->getCenter();
+		auto o2 = obj2->getCenter();
 
 		auto obj2Pos = obj2->getPosition();
-		auto obj2Center = obj2->getCenter();
+		auto obj2TopRight = obj2->getTopRight();
+		auto obj2EndPos = obj2->getEndPos();
+		auto obj2BottomLeft = obj2->getBottomLeft();
 
-		obj1->move(obj1->getSpeed());
-		auto newPos = obj1->getPosition();
-		obj1->setPosition(oldPos);
-
-		sf::Vector2f dir = newPos - oldPos;
-
-		auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
-		auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
-
-		bool hIntersects = (hSide == eSides::Right) ?
-			Math::intersectsL2(oldCenter, obj2Center, obj2->getTopRight(), obj2->getEndPos()) :
-			Math::intersectsL2(oldCenter, obj2Center, obj2Pos, obj2->getBottomLeft());
-
-		return (hIntersects) ? hSide : vSide;
+		if (Math::intersectsL2(o1, o2, obj2TopRight, obj2EndPos)) return eSides::Right;
+		if (Math::intersectsL2(o1, o2, obj2Pos, obj2BottomLeft)) return eSides::Left;
+		
+		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) return eSides::Bottom;
+		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) return eSides::Top;
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {

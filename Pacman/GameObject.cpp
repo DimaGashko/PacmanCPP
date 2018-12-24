@@ -54,7 +54,7 @@ namespace pg {
 	}
 
 	void GameObject::setPosition(sf::Vector2f coords) {
-		m_rect.setPosition(coords);
+		m_rect.setPosition(coords); 
 	}
 
 	void GameObject::setEndPos(sf::Vector2f coords) {
