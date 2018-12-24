@@ -41,7 +41,6 @@ namespace pg {
 
 			auto oldPos = obj1->getPosition();
 			auto oldCenter = obj1->getCenter();
-			auto oldEndPos = obj1->getEndPos();
 
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
@@ -51,6 +50,7 @@ namespace pg {
 					return;
 				}
 
+				auto obj2Pos = obj2->getPosition();
 				auto obj2Center = obj2->getCenter();
 				auto obj2EndPos = obj2->getEndPos();
 
@@ -65,20 +65,23 @@ namespace pg {
 				
 				sf::Vector2f dir = newPos - oldPos;
 
+				auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
+				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
 
 				bool hIntersects;
 
-				if (dir.x < 0) {
-					hIntersects = Math::intersectsL2(
-						oldCenter, obj2Center,
-
+				if (hSide == eSides::Right) {
+					hIntersects = Math::intersectsL2(oldCenter, obj2Center,
+						sf::Vector2f(obj2EndPos.x, obj2Pos.y), obj2EndPos
+					);
+				}
+				else {
+					hIntersects = Math::intersectsL2(oldCenter, obj2Center,
+						obj2Pos, sf::Vector2f(obj2Pos.x, obj2EndPos.y)
 					);
 				}
 
-
-
-				auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
-				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
+				bool vIntersects;
 
 			});
 		});
