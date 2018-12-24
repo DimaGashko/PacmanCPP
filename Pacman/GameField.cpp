@@ -28,46 +28,35 @@ namespace pg {
 	}
 
 	void GameField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
-		forEachObjectsOfRange(visibleRange, [&window](GameObject *obj) {
+		std::vector<GameObject*> visibleObjects;
+		getObjectsOfRange(visibleRange, visibleObjects);
+
+		for (auto obj : visibleObjects) {
 			obj->draw(window);
-			});
+		}
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		std::vector<GameObject*> activeObjects;
+		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
-		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
-			activeObjects.push_back(obj1);
-
+		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
-			int count = 0;
-			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				count++;
+			std::vector<GameObject*> candidates;
+			getObjectsOfRange(candidatesRange, candidates);
+			
+			for (auto obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
-				if (!intersects) return;
+				if (!intersects) continue;
 
 				procCollision(obj1, obj2);
 				//interact
-				});
+			}
 
-			//std::cout << count << std::endl;
-
-			obj1->update();
-			});
-
-		bool playerIsActive = false;
-		for (auto obj : activeObjects) {
-			if (obj != m_player) continue;
-			playerIsActive = true;
-			break;
-		}
-
-		if (!playerIsActive) {
-			activeObjects.push_back(m_player);
 		}
 
 		for (auto obj : activeObjects) {
@@ -109,7 +98,7 @@ namespace pg {
 			obj1->move(sf::Vector2f(0.f, 1.f));
 		}
 		else obj1->setSpeed(sf::Vector2f(0.f, 0.f));
-	}
+	} 
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
 		auto speed = obj1->getSpeed();
@@ -182,8 +171,7 @@ namespace pg {
 		cell.push_back(object);
 	}
 
-	template<typename F>
-	void GameField::forEachObjectsOfRange(sf::FloatRect range, F &&func) {
+	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res) {
 		auto _range = sf::IntRect(
 			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
 			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
@@ -202,7 +190,7 @@ namespace pg {
 						&& coords.y <= (range.top + range.height)
 						);
 
-					if (check) func(obj);
+					if (check) res.push_back(obj);
 				}
 			}
 		}

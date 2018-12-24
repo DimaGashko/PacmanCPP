@@ -41,10 +41,7 @@ namespace pg {
 		// Cетка игры
 		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
 
-		std::vector<GameObject*> getObjectsOfRange(sf::FloatRect range);
-
-		template<typename F>
-		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
+		void getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res);
 
 		// Добавляет объект в сетку
 		// Если объект уже был в сетке, то от сначала удаляется с предыдущего места
