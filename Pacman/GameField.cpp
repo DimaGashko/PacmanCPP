@@ -39,7 +39,7 @@ namespace pg {
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		std::vector<GameObject*> activeObjects;
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
-		std::cout << activeObjects.size() << std::endl;
+
 		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);

@@ -23,7 +23,7 @@ namespace pg {
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
-			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
+			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			m_frameTime = clock.restart().asMilliseconds();
 			
 			sf::Event event;
@@ -57,7 +57,7 @@ namespace pg {
 
 	void PacmanGame::_updateGameField() {
 		m_player.update(m_frameTime);
-		m_gameField->update(sf::Vector2f(sf::Vector2f(200, 200)), m_frameTime);
+		m_gameField->update(sf::Vector2f(m_window.getSize()) / 4.f, m_frameTime);
 		m_camera.update();
 	}
 
