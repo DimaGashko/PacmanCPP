@@ -66,38 +66,36 @@ namespace pg {
 
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
-		if ((intersectSide & Left) != 0) {
+		if (intersectSide == Left) {
 			obj1->setSpeed(sf::Vector2f(-0.1, speed.y));
 			obj1->move(sf::Vector2f(-1, 0));
 		}
-		if ((intersectSide & Top) != 0) {
+		else if (intersectSide == Top) {
 			obj1->setSpeed(sf::Vector2f(speed.x, -0.1));
 			obj1->move(sf::Vector2f(0, -1));
 		}
-		if ((intersectSide & Right) != 0) {
+		else if (intersectSide == Right) {
 			obj1->setSpeed(sf::Vector2f(0.1, speed.y));
 			obj1->move(sf::Vector2f(1, 0));
 		}
-		if ((intersectSide & Bottom) != 0) {
+		else if (intersectSide == Bottom) {
 			obj1->setSpeed(sf::Vector2f(speed.x, 0.1));
 			obj1->move(sf::Vector2f(0, 1));
 		}
-		if (intersectSide == None) {
-			//obj1->setSpeed(sf::Vector2f(0, 0));
-		}
+		//else obj1->setSpeed(sf::Vector2f(0, 0));
 		
-		std::cout << intersectSide << typeid(*obj1).name() << " ";
+		std::cout << typeid(*obj1).name() << " ";
 
-		if ((intersectSide & Left) != 0) std::cout << "Left ";
-		if ((intersectSide & Top) != 0) std::cout << "Top ";
-		if ((intersectSide & Right) != 0) std::cout << "Right ";
-		if ((intersectSide & Bottom) != 0) std::cout << "Bottom ";
-		if (intersectSide == None) std::cout << "None ";
+		if (intersectSide == Left) std::cout << "Left";
+		else if (intersectSide == Top) std::cout << "Top";
+		else if (intersectSide == Right) std::cout << "Right";
+		else if (intersectSide == Bottom) std::cout << "Bottom";
+		else if (intersectSide == None) std::cout << "None";
 		
 		std::cout << std::endl;
 	}
 
-	int GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
+	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
 		auto speed = obj1->getSpeed();
 
 		auto o1 = obj1->getCenter();
@@ -108,15 +106,14 @@ namespace pg {
 		auto obj2EndPos = obj2->getEndPos();
 		auto obj2BottomLeft = obj2->getBottomLeft();
 
-		int side = (int)eSides::None;
-
-		if (Math::intersectsL2(o1, o2, obj2TopRight, obj2EndPos)) side = (side | (int)eSides::Right);
-		if (Math::intersectsL2(o1, o2, obj2Pos, obj2BottomLeft)) side = (side | (int)eSides::Left);
+		if (Math::intersectsL2(o1, o2, obj2TopRight, obj2EndPos)) return eSides::Right;
+		if (Math::intersectsL2(o1, o2, obj2Pos, obj2BottomLeft)) return eSides::Left;
 		
-		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) side = (side | (int)eSides::Bottom);
-		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) side = (side | (int)eSides::Top);
+		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) return eSides::Bottom;
+		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) return eSides::Top;
 
-		return side;
+		// Например, если объект внутри другова объекта
+		return eSides::None;
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {

@@ -27,13 +27,7 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
-		enum eSides { 
-			Left = 1 << 1, 
-			Top = 1 << 2, 
-			Right = 1 << 3, 
-			Bottom = 1 << 4, 
-			None = 0 
-		};
+		enum eSides { Left, Top, Right, Bottom, None };
 
 		~GameField();
 	
@@ -71,7 +65,7 @@ namespace pg {
 		void procCollision(GameObject *obj1, GameObject *obj2);
 
 		// ¬озвращает сторону obj2, с которой столкнулс€ obj1
-		int _getCollisionSide(GameObject *obj1, GameObject *obj2);
+		eSides _getCollisionSide(GameObject *obj1, GameObject *obj2);
 	};
 
 } // namespace pg
