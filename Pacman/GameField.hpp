@@ -71,8 +71,10 @@ namespace pg {
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
 
+		void procCollision(GameObject *obj1, GameObject *obj2);
+
 		// ¬озвращает сторону obj2, с которой столкнулс€ obj1
-		eSides getCollitionSide(GameObject *obj1, GameObject *obj2);
+		eSides _getCollisionSide(GameObject *obj1, GameObject *obj2);
 	};
 
 } // namespace pg

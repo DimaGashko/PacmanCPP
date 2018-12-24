@@ -44,20 +44,10 @@ namespace pg {
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
 				obj1->updatePos();
-				bool intersects = obj1->intersects(obj2);
+				if (!obj1->intersects(obj2)) return; 
 				obj1->setPosition(oldPos);
-
-				if (!intersects) {
-					return;
-				}
 				
-				auto intersectSide = getCollitionSide(obj1, obj2);
-
-
-				if (!obj1->isObstacle() || !obj2->isObstacle()) {
-					//interact only
-					return;
-				}
+				procCollision(obj1, obj2);
 			});
 		});
 
@@ -67,7 +57,15 @@ namespace pg {
 		}
 	}
 
-	GameField::eSides GameField::getCollitionSide(GameObject *obj1, GameObject *obj2) {
+	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
+		if (!obj1->isObstacle() || !obj2->isObstacle()) {
+			
+		}
+
+		auto intersectSide = _getCollisionSide(obj1, obj2);
+	}
+
+	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
 		auto oldPos = obj1->getPosition();
 		auto oldCenter = obj1->getCenter();
 
