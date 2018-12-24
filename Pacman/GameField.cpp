@@ -55,6 +55,17 @@ namespace pg {
 			obj1->update();
 		});
 
+		bool playerIsActive = false;
+		for (auto obj : activeObjects) {
+			if (obj != m_player) continue;
+			playerIsActive = true;
+			break;
+		}
+
+		if (!playerIsActive) {
+			activeObjects.push_back(m_player);
+		}
+
 		for (auto obj : activeObjects) {
 			auto oldPos = obj->getPosition();
 			obj->update();
@@ -74,10 +85,6 @@ namespace pg {
 
 		auto speed = obj1->getSpeed();
 		auto obj2Speed = obj2->getSpeed();
-
-		if (abs(speed.x * speed.y) < abs(obj2Speed.x * obj2Speed.y)) {
-			return;
-		}
 
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
