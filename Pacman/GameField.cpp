@@ -34,7 +34,11 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
+		std::vector<GameObject*> activeObjects;
+
 		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
+			activeObjects.push_back(obj1);
+
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
@@ -50,6 +54,10 @@ namespace pg {
 
 			obj1->update();
 		});
+
+		for (auto obj : activeObjects) {
+			obj->update();
+		}
 	}
 
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
@@ -84,15 +92,17 @@ namespace pg {
 		}
 		else obj1->setSpeed(sf::Vector2f(0, 0));
 		
-		std::cout << typeid(*obj1).name() << " ";
+		if (0) {
+			std::cout << typeid(*obj1).name() << " ";
 
-		if (intersectSide == Left) std::cout << "Left";
-		else if (intersectSide == Top) std::cout << "Top";
-		else if (intersectSide == Right) std::cout << "Right";
-		else if (intersectSide == Bottom) std::cout << "Bottom";
-		else if (intersectSide == None) std::cout << "None";
-		
-		std::cout << std::endl;
+			if (intersectSide == Left) std::cout << "Left";
+			else if (intersectSide == Top) std::cout << "Top";
+			else if (intersectSide == Right) std::cout << "Right";
+			else if (intersectSide == Bottom) std::cout << "Bottom";
+			else if (intersectSide == None) std::cout << "None";
+
+			std::cout << std::endl;
+		}
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
@@ -112,7 +122,7 @@ namespace pg {
 		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) return eSides::Bottom;
 		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) return eSides::Top;
 
-		// Например, если объект внутри другова объекта
+		// Например, если объект внутри другого объекта
 		return eSides::None;
 	}
 
