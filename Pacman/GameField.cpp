@@ -54,6 +54,11 @@ namespace pg {
 				auto obj2Center = obj2->getCenter();
 				auto obj2EndPos = obj2->getEndPos();
 
+				auto obj2TopLeft = obj2Pos;
+				auto obj2TopRight = sf::Vector2f(obj2EndPos.x, obj2Pos.y);
+				auto obj2BottomLeft = sf::Vector2f(obj2Pos.x, obj2EndPos.y);
+				auto obj2BottomRight = obj2EndPos;
+
 				obj1->updatePos();
 				auto newPos = obj1->getPosition();
 				bool intersects = obj1->intersects(obj2);
@@ -68,20 +73,19 @@ namespace pg {
 				auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
 				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
 
-				bool hIntersects;
+				bool hIntersects = (hSide == eSides::Right) ?
+					Math::intersectsL2(oldCenter, obj2Center, obj2TopRight, obj2BottomRight) :
+					Math::intersectsL2(oldCenter, obj2Center, obj2TopLeft, obj2BottomLeft);
+				
+				bool vIntersects = false;
 
-				if (hSide == eSides::Right) {
-					hIntersects = Math::intersectsL2(oldCenter, obj2Center,
-						sf::Vector2f(obj2EndPos.x, obj2Pos.y), obj2EndPos
-					);
-				}
-				else {
-					hIntersects = Math::intersectsL2(oldCenter, obj2Center,
-						obj2Pos, sf::Vector2f(obj2Pos.x, obj2EndPos.y)
-					);
+				if (!hIntersects) {
+					vIntersects = (hSide == eSides::Bottom) ? 
+						Math::intersectsL2(oldCenter, obj2Center, obj2BottomLeft, obj2BottomRight) :
+						Math::intersectsL2(oldCenter, obj2Center, obj2TopLeft, obj2TopRight);
 				}
 
-				bool vIntersects;
+
 
 			});
 		});
