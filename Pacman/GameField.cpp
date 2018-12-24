@@ -34,28 +34,56 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		std::vector<GameObject*> toUpdate;
+		std::vector<GameObject*> activeObjects;
 
 		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
+			activeObjects.push_back(obj1);
+
 			auto oldPos = obj1->getPosition();
+			auto oldCenter = obj1->getCenter();
+			auto oldEndPos = obj1->getEndPos();
+
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
 				if (!obj1->isObstacle() || !obj2->isObstacle()) {
 					//interact only
-					toUpdate.push_back(obj1);
 					return;
 				}
 
-				if (!obj1->intersects(obj2)) {
+				auto obj2Center = obj2->getCenter();
+				auto obj2EndPos = obj2->getEndPos();
+
+				obj1->updatePos();
+				auto newPos = obj1->getPosition();
+				bool intersects = obj1->intersects(obj2);
+				obj1->setPosition(oldPos);
+
+				if (!intersects) {
 					return;
 				}
+				
+				sf::Vector2f dir = newPos - oldPos;
 
+
+				bool hIntersects;
+
+				if (dir.x < 0) {
+					hIntersects = Math::intersectsL2(
+						oldCenter, obj2Center,
+
+					);
+				}
+
+
+
+				auto hSide = (dir.x < 0) ? eSides::Right : eSides::Left;
+				auto vSide = (dir.y < 0) ? eSides::Bottom : eSides::Top;
 
 			});
 		});
 
-		for (auto obj : toUpdate) {
+		for (auto obj : activeObjects) {
 			obj->update();
 			//addObjectToGrid(obj);
 		}
