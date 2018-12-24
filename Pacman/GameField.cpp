@@ -83,14 +83,14 @@ namespace pg {
 			obj1->move(sf::Vector2f(0, 1));
 		}
 		
-		/*std::cout << typeid(*obj1).name() << " ";
+		std::cout << typeid(*obj1).name() << " ";
 
 		if (intersectSide == Left) std::cout << "Left";
 		else if (intersectSide == Top) std::cout << "Top";
 		else if (intersectSide == Right) std::cout << "Right";
 		else if (intersectSide == Bottom) std::cout << "Bottom";
 		
-		std::cout << std::endl;*/
+		std::cout << std::endl;
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
@@ -104,11 +104,15 @@ namespace pg {
 		auto obj2EndPos = obj2->getEndPos();
 		auto obj2BottomLeft = obj2->getBottomLeft();
 
+
 		if (Math::intersectsL2(o1, o2, obj2TopRight, obj2EndPos)) return eSides::Right;
 		if (Math::intersectsL2(o1, o2, obj2Pos, obj2BottomLeft)) return eSides::Left;
 		
 		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) return eSides::Bottom;
 		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) return eSides::Top;
+
+		//throw "!!!!!";
+		std::cout << "!!!!!!!!!!!!!!!!!" << std::endl;
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
