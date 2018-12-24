@@ -65,7 +65,7 @@ namespace pg {
 			playerIsActive = true;
 			break;
 		}
-
+		   
 		if (!playerIsActive) {
 			activeObjects.push_back(m_player);
 		}
