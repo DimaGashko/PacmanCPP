@@ -39,16 +39,15 @@ namespace pg {
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		std::vector<GameObject*> activeObjects;
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
-
-		auto size = activeObjects.size();
-
-		for (int i = 0; i < size; i++) {
-			auto obj1 = activeObjects[i];
+		std::cout << activeObjects.size() << std::endl;
+		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
+			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
-			for (int j = 0; j < size; j++) {
-				auto obj2 = activeObjects[j];
-
+			std::vector<GameObject*> candidates;
+			getObjectsOfRange(candidatesRange, candidates);
+			
+			for (auto obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
@@ -57,6 +56,7 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			}
+
 		}
 
 		for (auto obj : activeObjects) {
