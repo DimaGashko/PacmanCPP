@@ -46,8 +46,8 @@ namespace pg {
 
 	void Camera::updateSize() {
 		auto size = m_window->getSize();
-		m_view.setSize(sf::Vector2f(size.x / 2.f, size.y / 2.f));
-
+		m_view.setSize(sf::Vector2f(size.x, size.y));
+		m_view.zoom(0.5);
 		use();
 	}
 
