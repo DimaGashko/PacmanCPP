@@ -34,11 +34,7 @@ namespace pg {
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		std::vector<GameObject*> activeObjects;
-
 		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
-			activeObjects.push_back(obj1);
-
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
@@ -51,12 +47,9 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			});
-		});
 
-		for (auto obj : activeObjects) {
-			obj->update();
-			//addObjectToGrid(obj);
-		}
+			obj1->update();
+		});
 	}
 
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
@@ -64,25 +57,40 @@ namespace pg {
 			return;
 		}
 
-		auto obj1Speed = obj1->getSpeed();
+		auto speed = obj1->getSpeed();
 		auto obj2Speed = obj2->getSpeed();
 
-		if (obj1Speed.x * obj1Speed.y < obj2Speed.x * obj2Speed.y) {
+		if (abs(speed.x * speed.y) < abs(obj2Speed.x * obj2Speed.y)) {
 			return;
 		}
 
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
-		std::cout << typeid(*obj1).name() << " ";
+		if (intersectSide == Left) {
+			obj1->setSpeed(sf::Vector2f(0, speed.y));
+			obj1->move(sf::Vector2f(-1, 0));
+		}
+		else if (intersectSide == Top) {
+			obj1->setSpeed(sf::Vector2f(speed.x, 0));
+			obj1->move(sf::Vector2f(0, -1));
+		}
+		else if (intersectSide == Right) {
+			obj1->setSpeed(sf::Vector2f(0, speed.y));
+			obj1->move(sf::Vector2f(1, 0));
+		}
+		else if (intersectSide == Bottom) {
+			obj1->setPosition(sf::Vector2f(speed.x, 0));
+			obj1->move(sf::Vector2f(0, 1));
+		}
+		
+		/*std::cout << typeid(*obj1).name() << " ";
 
 		if (intersectSide == Left) std::cout << "Left";
-		if (intersectSide == Top) std::cout << "Top";
-		if (intersectSide == Right) std::cout << "Right";
-		if (intersectSide == Bottom) std::cout << "Bottom";
+		else if (intersectSide == Top) std::cout << "Top";
+		else if (intersectSide == Right) std::cout << "Right";
+		else if (intersectSide == Bottom) std::cout << "Bottom";
 		
-		std::cout << std::endl;
-		
-		//interact
+		std::cout << std::endl;*/
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
