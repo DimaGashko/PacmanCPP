@@ -39,20 +39,21 @@ namespace pg {
 		auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
 			
 		for (int i = 0; activeObjects[i] != NULL; i++) {
-			//auto obj1 = activeObjects[i];
-			//auto oldPos = obj1->getPosition();
+			auto obj1 = activeObjects[i];
+			auto oldPos = obj1->getPosition();
 
-			//for (int j = i + 1; activeObjects[j] != NULL; j++) {
-				/*auto obj2 = activeObjects[j];
+			for (int j = i + 1; activeObjects[j] != NULL; j++) {
+				auto obj2 = activeObjects[j];
+				if (!obj1 || !obj2) return;
 
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
 				if (!intersects) continue;
 
-				procCollision(obj1, obj2);*/
+				procCollision(obj1, obj2);
 				//interact
-			//}
+			}
 		}
 		
 		/*for (auto obj1 : activeObjects) {
@@ -73,7 +74,7 @@ namespace pg {
 		}*/
 
 		for (int i = 0; activeObjects[i] != NULL; i++) {
-			/*auto obj = activeObjects[i];
+			auto obj = activeObjects[i];
 
 			auto oldPos = obj->getPosition();
 			obj->update();
@@ -81,7 +82,7 @@ namespace pg {
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
 				addObjectToGrid(obj);
-			*/
+			}
 		}
 	}
 
