@@ -6,6 +6,7 @@
 #include <unordered_set>
 #include <algorithm>
 
+#include "Math.hpp"
 #include "GameObject.hpp"
 #include "Actor.hpp"
 
@@ -25,6 +26,18 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
+		// Перечисление возможных сторон
+		// Для получения противоположной стороны:
+		// auto side = eSides::Left;
+		// auto coSide = eSides(-side);
+		enum eSides {
+			Left = -1,
+			Right = 1,
+
+			Top = -2,
+			Bottom = 2,
+		};
+
 		~GameField();
 	
 	private:
@@ -41,8 +54,6 @@ namespace pg {
 	    // Используется для быстрого определения где в данный момент находится объект
 	    // (используется, что бы удаялять объект из предыдущего места)
 		std::unordered_map<GameObject*, sf::Vector2i> m_objectCoords;
-		
-		std::vector<GameObject*> getObjectsOfRange(sf::FloatRect range);
 
 		template<typename F>
 		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
@@ -65,7 +76,9 @@ namespace pg {
 
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
-			
+
+		// Возвращает сторону obj2, с которой столкнулся obj1
+		eSides getCollitionSide(GameObject *obj1, GameObject *obj2);
 	};
 
 } // namespace pg

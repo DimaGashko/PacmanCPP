@@ -17,12 +17,16 @@ namespace pg {
 		void update();
 		void updatePos();
 
+		void setBottomLeft(sf::Vector2f coords);
+		void setTopRight(sf::Vector2f coords);
 		void setPosition(sf::Vector2f coords);
 		void setCenter(sf::Vector2f center);
 		void setEndPos(sf::Vector2f coords);
 		void setSpeed(sf::Vector2f speed);
 		void setSize(sf::Vector2f size);
 
+		sf::Vector2f getBottomLeft();
+		sf::Vector2f getTopRight();
 		sf::Vector2f getPosition();
 		sf::Vector2f getCenter();
 		sf::Vector2f getEndPos();
