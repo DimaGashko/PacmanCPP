@@ -33,25 +33,19 @@ namespace pg {
 
 	GameField* LevelLoader::_creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig) {
 		auto size = levelConfig.size;
-		auto tileSize = levelConfig.tileSize;
+		auto tileSize = tilesetConfig.tileSize;
 
 		GameField* gameField = new GameField(size, tileSize);
 
 		for (int x = 0; x < size.x; x++) {
 			for (int y = 0; y < size.y; y++) {
-				int id = levelConfig.gids[y * size.x + x] - 1;
-				if (id == -1) continue;
+				int gid = levelConfig.gids[y * size.x + x];
+				if (gid == 0) continue;
+				int id = gid - 1;
 
 				sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
-
-				sf::Texture *texture = new sf::Texture;
-				sf::IntRect textureArea(
-					(id % tilesetConfig.columns) * tileSize.x, 
-					(id / tilesetConfig.columns) * tileSize.y,
-					levelConfig.tileSize.x, levelConfig.tileSize.y
-				);
-
-				texture->loadFromImage(tilesetConfig.tileset, textureArea);
+				
+				auto texture = _getTexture(tilesetConfig, gid, id);
 
 				if (tilesetConfig.tiles.count(id) == 0) {
 					GameObject *obj = new GameObject(texture);
@@ -89,6 +83,24 @@ namespace pg {
 		return gameField;
 	}
 
+	sf::Texture* LevelLoader::_getTexture(LevelLoader::_TilesetConfig tilesetConfig, int gid, int id) {
+		if (textures.find(gid) == textures.end()) {
+			sf::Texture *texture = new sf::Texture;
+
+			sf::IntRect textureArea(
+				(id % tilesetConfig.columns) * tilesetConfig.tileSize.x,
+				(id / tilesetConfig.columns) * tilesetConfig.tileSize.y,
+				tilesetConfig.tileSize.x, tilesetConfig.tileSize.y
+			);
+
+			texture->loadFromImage(tilesetConfig.tileset, textureArea);
+
+			textures[gid] = texture;
+		}
+
+		return textures[gid];
+	}
+
 	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
 		_LevelConfig config;
 
@@ -101,11 +113,6 @@ namespace pg {
 		config.size = sf::Vector2i(
 			xmlMap->IntAttribute("width"),
 			xmlMap->IntAttribute("height")
-		);
-
-		config.tileSize = sf::Vector2i(
-			xmlMap->IntAttribute("tilewidth"),
-			xmlMap->IntAttribute("tileheight")
 		);
 
 		std::string tilesetUrl = xmlTileset->Attribute("source");
@@ -128,6 +135,11 @@ namespace pg {
 
 		config.columns = xmlTileset->IntAttribute("columns");
 		
+		config.tileSize = sf::Vector2i(
+			xmlTileset->IntAttribute("tilewidth"),
+			xmlTileset->IntAttribute("tileheight")
+		);
+
 		std::string imgUrl = xmlTileset->FirstChildElement("image")->Attribute("source");
 		imgUrl = imgUrl.substr(6);
 
