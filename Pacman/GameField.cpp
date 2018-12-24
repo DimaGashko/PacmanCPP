@@ -42,9 +42,7 @@ namespace pg {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
-			int count = 0;
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				count++;
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
@@ -53,8 +51,6 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			});
-
-			//std::cout << count << std::endl;
 
 			obj1->update();
 		});
@@ -133,7 +129,7 @@ namespace pg {
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
-		auto size = gameSize * 1.f;
+		auto size = gameSize * 0.1f;
 		auto coords = m_player->getPosition() - size / 2.f;
 
 		return sf::FloatRect(coords, size);
