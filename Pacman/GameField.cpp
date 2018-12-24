@@ -43,9 +43,10 @@ namespace pg {
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
 			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
-				obj1->updatePos();
-				if (!obj1->intersects(obj2)) return; 
+				obj1->move(obj1->getSpeed());
+				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
+				if (!intersects) return; 
 				
 				procCollision(obj1, obj2);
 			});
@@ -59,10 +60,20 @@ namespace pg {
 
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
 		if (!obj1->isObstacle() || !obj2->isObstacle()) {
-			
+			//interact
+			return;
 		}
 
 		auto intersectSide = _getCollisionSide(obj1, obj2);
+
+		if (intersectSide == Left) std::cout << "Left";
+		if (intersectSide == Top) std::cout << "Top";
+		if (intersectSide == Right) std::cout << "Right";
+		if (intersectSide == Bottom) std::cout << "Bottom";
+
+		std::cout << std::endl;
+		
+		//interact
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
@@ -72,7 +83,7 @@ namespace pg {
 		auto obj2Pos = obj2->getPosition();
 		auto obj2Center = obj2->getCenter();
 
-		obj1->updatePos();
+		obj1->move(obj1->getSpeed());
 		auto newPos = obj1->getPosition();
 		obj1->setPosition(oldPos);
 

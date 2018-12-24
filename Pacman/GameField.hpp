@@ -26,17 +26,7 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
-		// Перечисление возможных сторон
-		// Для получения противоположной стороны:
-		// auto side = eSides::Left;
-		// auto coSide = eSides(-side);
-		enum eSides {
-			Left = -1,
-			Right = 1,
-
-			Top = -2,
-			Bottom = 2,
-		};
+		enum eSides { Left, Top, Right, Bottom };
 
 		~GameField();
 	
