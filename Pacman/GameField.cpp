@@ -57,6 +57,7 @@ namespace pg {
 
 		for (auto obj : activeObjects) {
 			obj->update();
+			addObjectToGrid(obj);
 		}
 	}
 
@@ -142,7 +143,9 @@ namespace pg {
 	void GameField::addObjectToGrid(GameObject *object) {
 		sf::Vector2f objCoords = object->getPosition();
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
-		
+
+		auto type = typeid(*object).name();
+
 		//Oбъект уже есть в сетке
 		if (m_objectCoords.count(object) != 0) {
 			auto prev = m_objectCoords[object];
@@ -153,12 +156,17 @@ namespace pg {
 			}
 			else {
 				if (!_hasCell(prev)) return;
-				auto cell = m_grid[prev.x][prev.y];
-				std::vector<GameObject*> newCell;
+				auto &cell = m_grid[prev.x][prev.y];
+				auto size = cell.size();
 
-				for (auto item : cell) {
-					if (item != object) {
-						newCell.push_back(item);
+				std::vector<GameObject*> newCell(size - 1);
+
+				for (int i = 0; i < size; i++) {
+					if (cell[i] != object) {
+						newCell[i] = cell[i];
+					}
+					else {
+						std::cout << "=" << i << std::endl;
 					}
 				}
 				
@@ -169,7 +177,7 @@ namespace pg {
 		if (!_hasCell(coords)) return;
 		auto &cell = m_grid[coords.x][coords.y];
 		
-		m_objectCoords[object] = sf::Vector2i((int)objCoords.x, (int)objCoords.y);
+		m_objectCoords[object] = coords;
 		cell.push_back(object);
 	}
 

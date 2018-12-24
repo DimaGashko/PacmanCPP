@@ -14,6 +14,7 @@ namespace pg {
 		//m_window.setFramerateLimit(120);
 
 		m_camera.init();
+		
 	}
 
 	void PacmanGame::run() {
@@ -22,7 +23,7 @@ namespace pg {
 		sf::Clock clock;
 
 		while (m_window.isOpen()) {
-			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
+			std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
 			m_frameTime = clock.restart().asMilliseconds();
 			
 			sf::Event event;
