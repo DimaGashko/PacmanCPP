@@ -28,42 +28,31 @@ namespace pg {
 	}
 
 	void GameField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
-		forEachObjectsOfRange(visibleRange, [&window](GameObject *obj) {
+		auto visisbleObjects = getObjectsOfRange(visibleRange);
+
+		for (auto obj : visisbleObjects) {
 			obj->draw(window);
-		});
+		}
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		std::vector<GameObject*> activeObjects;
-
-		forEachObjectsOfRange(_getActiveRange(gameSize), [&](GameObject *obj1) {
-			activeObjects.push_back(obj1);
-
+		auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
+			
+		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
-			forEachObjectsOfRange(candidatesRange, [&](GameObject *obj2) {
+			auto candidates = getObjectsOfRange(candidatesRange);
+
+			for (auto obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
-				if (!intersects) return; 
-				
+				if (!intersects) continue;
+
 				procCollision(obj1, obj2);
 				//interact
-			});
-
-			obj1->update();
-		});
-
-		bool playerIsActive = false;
-		for (auto obj : activeObjects) {
-			if (obj != m_player) continue;
-			playerIsActive = true;
-			break;
-		}
-
-		if (!playerIsActive) {
-			activeObjects.push_back(m_player);
+			}
 		}
 
 		for (auto obj : activeObjects) {
@@ -74,7 +63,6 @@ namespace pg {
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
 				addObjectToGrid(obj);
 			}
-			
 		}
 	}
 
@@ -129,16 +117,10 @@ namespace pg {
 	}
 
 	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
-		auto size = gameSize * 0.1f;
+		auto size = gameSize * 1.f;
 		auto coords = m_player->getPosition() - size / 2.f;
 
 		return sf::FloatRect(coords, size);
-	}
-
-	void GameField::addAllObjectsToGrid(std::vector<GameObject*> objects) {
-		for (auto obj : objects) {
-			addObjectToGrid(obj);
-		}
 	}
 
 	void GameField::addObjectToGrid(GameObject *object) {
@@ -184,8 +166,9 @@ namespace pg {
 		cell.push_back(object);
 	}
 
-	template<typename F>
-	void GameField::forEachObjectsOfRange(sf::FloatRect range, F &&func) {
+	std::vector<GameObject*> GameField::getObjectsOfRange(sf::FloatRect range) {
+		std::vector<GameObject*> result;
+
 		auto _range = sf::IntRect(
 			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
 			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
@@ -204,16 +187,17 @@ namespace pg {
 						&& coords.y <= (range.top + range.height)
 						);
 
-					if (check) func(obj);
+					if (check) result.push_back(obj);
 				}
 			}
 		}
 
+		return result;
 	}
 
 	inline bool GameField::_hasCell(sf::Vector2i coords) {
 		return coords.x >= 0 && coords.y >= 0
-			&& coords.y < m_size.y && coords.x < m_size.x;
+			&& coords.x < m_size.x && coords.y < m_size.y;
 	}
 
 	inline sf::Vector2i GameField::_getCoordsInGrid(sf::Vector2f coords) {
