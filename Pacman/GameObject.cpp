@@ -53,16 +53,40 @@ namespace pg {
 		return m_rect.getPosition();
 	}
 
-	sf::Vector2f GameObject::getEndPos() {
-		return getPosition() + getSize();
-	}
-
 	void GameObject::setPosition(sf::Vector2f coords) {
 		m_rect.setPosition(coords);
 	}
 
 	void GameObject::setEndPos(sf::Vector2f coords) {
 		m_rect.setPosition(coords - getSize());
+	}
+
+	sf::Vector2f GameObject::getEndPos() {
+		return getPosition() + getSize();
+	}
+
+	sf::Vector2f GameObject::getTopRight() {
+		auto pos = getPosition();
+		auto size = getSize();
+
+		return sf::Vector2f(pos.x + size.x, pos.y);
+	}
+
+	void GameObject::setTopRight(sf::Vector2f coords) {
+		auto size = getSize();
+		setPosition(sf::Vector2f(coords.x - size.x, coords.y));
+	}
+
+	sf::Vector2f GameObject::getBottomLeft() {
+		auto pos = getPosition();
+		auto size = getSize();
+
+		return sf::Vector2f(pos.x, pos.y + size.y);
+	}
+
+	void GameObject::setBottomLeft(sf::Vector2f coords) {
+		auto size = getSize();
+		setPosition(sf::Vector2f(coords.x, coords.y - size.y));
 	}
 
 	void GameObject::move(sf::Vector2f offset) {
