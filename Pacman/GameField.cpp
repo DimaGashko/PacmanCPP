@@ -68,6 +68,7 @@ namespace pg {
 				obj1->setPosition(oldPos);
 				if (!intersects) continue;
 
+<<<<<<< HEAD
 				procCollision(obj1, obj2);
 				//interact
 			}
@@ -75,6 +76,18 @@ namespace pg {
 
 		for (int i = 0; activeObjects[i] != NULL; i++) {
 			auto obj = activeObjects[i];
+=======
+		bool playerIsActive = false;
+		for (auto obj : activeObjects) {
+			if (obj != m_player) continue;
+			playerIsActive = true;
+			break;
+		}
+		   
+		if (!playerIsActive) {
+			activeObjects.push_back(m_player);
+		}
+>>>>>>> textures
 
 			auto oldPos = obj->getPosition();
 			obj->update();
