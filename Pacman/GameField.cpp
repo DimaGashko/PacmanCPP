@@ -150,10 +150,9 @@ namespace pg {
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 
 		//Oбъект уже есть в сетке
-		auto prev = m_objectCoords[object];
+		auto prev = object->getPosInGrid();
 
-		if (prev != NULL) {		
-
+		if (prev) {			
 			if (prev->x == coords.x && prev->y == coords.y) {
 				//И уже находится в нужной ячейке
 				return;
@@ -174,11 +173,18 @@ namespace pg {
 				m_grid[prev->x][prev->y] = newCell;
 			}
 		}
+		else {
+			object->setPosInGrid(new sf::Vector2i());
+		}
 
 		if (!_hasCell(coords)) return;
 		auto &cell = m_grid[coords.x][coords.y];
-		
-		m_objectCoords[object] = &coords;
+
+		auto posInGrid = object->getPosInGrid();
+
+		posInGrid->x = coords.x;
+		posInGrid->y = coords.y;
+
 		cell.push_back(object);
 	}
 

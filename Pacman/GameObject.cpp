@@ -101,6 +101,14 @@ namespace pg {
 		return m_rect.getSize();
 	}
 
+	void GameObject::setPosInGrid(sf::Vector2i *coords) {
+		m_posInGrid = coords;
+	}
+
+	sf::Vector2i* GameObject::getPosInGrid() {
+		return m_posInGrid;
+	}
+
 	sf::Vector2f GameObject::getCenter() {
 		return getPosition() + getSize() / 2.f;
 	}
@@ -126,7 +134,7 @@ namespace pg {
 	}
 
 	GameObject::~GameObject() {
-		
+		delete m_posInGrid;
 	}
 
 } //namespace pg

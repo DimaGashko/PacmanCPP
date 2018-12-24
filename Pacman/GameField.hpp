@@ -41,11 +41,6 @@ namespace pg {
 		// Cетка игры
 		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
 
-		// Объект, содержащий координаты всех объектов в сетке по их id
-	    // Используется для быстрого определения где в данный момент находится объект
-	    // (используется, что бы удаялять объект из предыдущего места)
-		std::unordered_map<GameObject*, sf::Vector2i*> m_objectCoords;
-
 		template<typename F>
 		void forEachObjectsOfRange(sf::FloatRect range, F &&func);
 
