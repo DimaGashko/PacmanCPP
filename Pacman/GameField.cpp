@@ -85,7 +85,7 @@ namespace pg {
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
 		if (!obj1->isObstacle() || !obj2->isObstacle()) {
 			return;
-		}
+		} 
 
 		auto speed = obj1->getSpeed();
 		auto obj2Speed = obj2->getSpeed();
