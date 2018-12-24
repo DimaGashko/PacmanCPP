@@ -30,15 +30,32 @@ namespace pg {
 	void GameField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
 		auto visisbleObjects = getObjectsOfRange(visibleRange);
 
-		for (auto obj : visisbleObjects) {
-			obj->draw(window);
+		for (int i = 1; visisbleObjects[i] != NULL; i++) {
+			visisbleObjects[i]->draw(window);
 		}
 	}
 
 	void GameField::update(sf::Vector2f gameSize, int frameTime) {
 		auto activeObjects = getObjectsOfRange(_getActiveRange(gameSize));
 			
-		for (auto obj1 : activeObjects) {
+		for (int i = 0; activeObjects[i] != NULL; i++) {
+			//auto obj1 = activeObjects[i];
+			//auto oldPos = obj1->getPosition();
+
+			//for (int j = i + 1; activeObjects[j] != NULL; j++) {
+				/*auto obj2 = activeObjects[j];
+
+				obj1->move(obj1->getSpeed());
+				bool intersects = obj1->intersects(obj2);
+				obj1->setPosition(oldPos);
+				if (!intersects) continue;
+
+				procCollision(obj1, obj2);*/
+				//interact
+			//}
+		}
+		
+		/*for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
 
@@ -53,16 +70,18 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			}
-		}
+		}*/
 
-		for (auto obj : activeObjects) {
+		for (int i = 0; activeObjects[i] != NULL; i++) {
+			/*auto obj = activeObjects[i];
+
 			auto oldPos = obj->getPosition();
 			obj->update();
 			auto newPos = obj->getPosition();
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
 				addObjectToGrid(obj);
-			}
+			*/
 		}
 	}
 
@@ -167,7 +186,8 @@ namespace pg {
 	}
 
 	std::vector<GameObject*> GameField::getObjectsOfRange(sf::FloatRect range) {
-		std::vector<GameObject*> result;
+		std::vector<GameObject*> result(1000);
+		int index = 0;
 
 		auto _range = sf::IntRect(
 			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
@@ -185,13 +205,14 @@ namespace pg {
 					bool check = (coords.x >= range.left && coords.y >= range.top
 						&& coords.x <= (range.left + range.width)
 						&& coords.y <= (range.top + range.height)
-						);
+					);
 
-					if (check) result.push_back(obj);
+					if (check) result[index++] = obj;
 				}
 			}
 		}
 
+		result[index] = NULL;
 		return result;
 	}
 
