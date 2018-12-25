@@ -2,7 +2,10 @@
 
 namespace pg {
 
-	Animation::Animation() {
+	Animation::Animation(sf::RectangleShape *rect, sf::Texture &texture) :
+		m_rect(rect),
+		m_texture(texture)
+	{
 	
 	}
 

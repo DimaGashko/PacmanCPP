@@ -30,7 +30,6 @@ namespace pg {
 			m_tilesetConfig = _parseXmlTileset(xmlTileset);
 		}
 		
-		
 		return _creatLevel(levelConfig);
 	}
 	 
