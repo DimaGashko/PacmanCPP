@@ -54,7 +54,7 @@ namespace pg {
 
 			std::unordered_map<std::string, std::vector<std::string>> animationNames;
 			std::unordered_map<std::string, std::vector<std::vector<sf::IntRect>>> animationFrames;
-			std::unordered_map<std::string, std::vector<std::vector<int>>> animationTimes;
+			std::unordered_map<std::string, std::vector<std::vector<int>>> animationDurations;
 		};
 
 		_TilesetConfig *m_tilesetConfig;
@@ -65,8 +65,6 @@ namespace pg {
 
 		GameField* _creatLevel(_LevelConfig levelConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
-
-		sf::Texture* _getTexture(int gid, int id);
 	
 		static constexpr char TILESET_URL[] = "configs/tilesets/tileset.tsx";
 	};

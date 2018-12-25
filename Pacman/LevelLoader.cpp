@@ -11,6 +11,8 @@ namespace pg {
 			loadTileset();
 		}
 
+
+
 		tinyxml2::XMLDocument xmlLevel;
 
 		auto status = xmlLevel.LoadFile(url.c_str());
@@ -38,9 +40,8 @@ namespace pg {
 					int id = gid - 1;
 
 					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
-					auto texture = _getTexture(gid, id);
 
-					auto type = m_tilesetConfig->tileTypes[id];
+					auto type = m_tilesetConfig->tiles[id].type;
 					GameObject *obj;
 
 					if (type == "Pacman") {
@@ -58,7 +59,7 @@ namespace pg {
 					else obj = new GameObject();
 
 					obj->setPosition(coords);
-					obj->setTexture(texture);
+					//obj->setTexture(texture);
 					obj->setSize(sf::Vector2f(tileSize));
 
 					gameField->addObject(obj);
@@ -67,24 +68,6 @@ namespace pg {
 		}
 
 		return gameField;
-	}
-
-	sf::Texture* LevelLoader::_getTexture(int gid, int id) {
-		if (m_textures[gid] == NULL) {
-			sf::Texture *texture = new sf::Texture;
-
-			sf::IntRect textureArea(
-				(id % m_tilesetConfig->columns) * m_tilesetConfig->tileSize.x,
-				(id / m_tilesetConfig->columns) * m_tilesetConfig->tileSize.y,
-				m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
-			);
-
-			texture->loadFromImage(m_tilesetConfig->tileset, textureArea);
-
-			m_textures[gid] = texture;
-		}
-
-		return m_textures[gid];
 	}
 
 	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
@@ -168,12 +151,13 @@ namespace pg {
 			auto type = nextTile->Attribute("type");
 			tile.type = (type) ? type : "";
 
-			auto xmlProperties = xmlTileset->FirstChildElement("properties");
-			auto xmlAnimation = xmlTileset->FirstChildElement("animation");
+			auto xmlProperties = nextTile->FirstChildElement("properties");
+			auto xmlAnimation = nextTile->FirstChildElement("animation");
 
-			auto nextProperty = xmlProperties->FirstChildElement("property");
-			while (nextProperty != NULL) {
-				
+			auto nextProperty = (xmlProperties) ?
+				xmlProperties->FirstChildElement("property") : NULL;
+
+			while (nextProperty != NULL) {	
 				auto name = nextProperty->Attribute("name");
 				auto type = nextProperty->Attribute("type");
 				auto value = nextProperty->Attribute("value");
@@ -185,7 +169,9 @@ namespace pg {
 				nextProperty = nextProperty->NextSiblingElement("property");
 			}
 
-			auto nextFrame = xmlAnimation->FirstChildElement("frame");
+			auto nextFrame = (xmlAnimation) ?
+				xmlAnimation->FirstChildElement("frame") : NULL;
+
 			while (nextFrame != NULL) {
 
 				auto tileid = nextFrame->IntAttribute("tileid");
@@ -210,20 +196,21 @@ namespace pg {
 			const std::string ANIMATION_PREFIX = "animation_";
 
 			std::vector<std::string> names;
-			std::vector< std::vector<sf::IntRect>> frames;
-			std::vector< std::vector<int>> times;
+			std::vector<std::vector<sf::IntRect>> frames;
+			std::vector<std::vector<int>> durations;
 
 			for (int i = 0; i < tile.propertyNames.size(); i++) {
 				auto name = tile.propertyNames[i];
 
-				std::vector<int> frameIds;
-				std::vector<int> durations;
+				std::vector<int> _frameIds;
+				std::vector<int> _durations;
+				std::vector<sf::IntRect> _frames;
 
 				if (name == "animationName") {
 					names.push_back(tile.propetryValues[i]);
 
-					durations = tile.animationDurations;
-					frameIds = tile.animationFrameIds;
+					_durations = tile.animationDurations;
+					_frameIds = tile.animationFrameIds;
 				}
 				else if (name.rfind(ANIMATION_PREFIX, 0) == 0) {
 					names.push_back(name.substr(ANIMATION_PREFIX.size()));
@@ -231,37 +218,26 @@ namespace pg {
 					auto animationTileId = atoi(tile.propetryValues[i].c_str());
 					auto animationTile = m_tilesetConfig->tiles[animationTileId];
 
-					durations = animationTile.animationDurations;
-					frameIds = animationTile.animationFrameIds;
+					_durations = animationTile.animationDurations;
+					_frameIds = animationTile.animationFrameIds;
 				}
 
-				times.push_back(durations);
+				durations.push_back(_durations);
 
-
+				for (auto frameId : _frameIds) {
+					_frames.push_back(sf::IntRect(
+						(frameId % m_tilesetConfig->columns) * m_tilesetConfig->tileSize.x,
+						(frameId / m_tilesetConfig->columns) * m_tilesetConfig->tileSize.y,
+						m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
+					));
+				}
 			}
 
 			m_tilesetConfig->animationNames[tile.type] = names;
-			m_tilesetConfig->animationTimes[tile.type] = times;
 			m_tilesetConfig->animationFrames[tile.type] = frames;
+			m_tilesetConfig->animationDurations[tile.type] = durations;
 		}
 	}
-
-/*
-
-<tile id="22" type="Ghost">
-  <properties>
-   <property name="animation_afraid" type="int" value="30"/>
-   <property name="animation_bottom" type="int" value="28"/>
-   <property name="animation_left" type="int" value="24"/>
-   <property name="animation_top" type="int" value="26"/>
-  </properties>
-  <animation>
-   <frame tileid="22" duration="150"/>
-   <frame tileid="23" duration="150"/>
-  </animation>
- </tile>
-	
-*/
 
 	GameField* LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);
@@ -275,7 +251,7 @@ namespace pg {
 
 		std::vector<GameObject*> objects;
 		sf::Vector2i tileSize(16, 16);
-	sf::Vector2i size(0, 0);
+	    sf::Vector2i size(0, 0);
 
 		std::string row;
 		int width = 0, height = 0;
@@ -320,12 +296,6 @@ namespace pg {
 	}
 
 	LevelLoader::~LevelLoader() {
-		for (auto item : m_textures) {
-			delete item.second;
-		}
-
-		m_textures.clear();
-
 		delete m_tilesetConfig;
 	} 
 
