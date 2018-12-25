@@ -49,8 +49,6 @@ namespace pg {
 	    virtual ~GameObject();
 
 	protected:
-		virtual void _initProperties();
-
 		bool m_isDead = false;
 		bool m_isObstacle;
 		bool m_isMovable;

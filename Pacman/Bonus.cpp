@@ -3,14 +3,8 @@
 namespace pg {
 
 	Bonus::Bonus() : GameObject() {
-		_initProperties();
+		
 	}
-
-	void Bonus::_initProperties() {
-		m_isMovable = false;
-		m_isObstacle = false;
-	}
-
 
 	Bonus::~Bonus() {
 

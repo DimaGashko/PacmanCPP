@@ -12,7 +12,6 @@ namespace pg {
 		~Bonus();
 
 	protected: 
-		void _initProperties() override;
 
 	private:
 		

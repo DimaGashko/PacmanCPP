@@ -14,7 +14,6 @@ namespace pg {
 
 	private:
 
-		void _initProperties() override;
 	};
 
 }; // namespace pg

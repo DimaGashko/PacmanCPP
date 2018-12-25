@@ -13,8 +13,6 @@ namespace pg {
 
 	protected:
 
-		void _initProperties() override;
-
 	private:
 		
 	};

@@ -3,12 +3,7 @@
 namespace pg {
 
 	GameObject::GameObject() {
-		_initProperties();
-	}
-
-	void GameObject::_initProperties() {
-		m_isObstacle = false;
-		m_isMovable = false;
+		
 	}
 
 	void GameObject::update() {
