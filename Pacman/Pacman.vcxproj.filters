@@ -119,16 +119,16 @@
     <ClInclude Include="AnimationManager.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Blinky.h">
+    <ClInclude Include="Blinky.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Pinky.h">
+    <ClInclude Include="Inky.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Inky.h">
+    <ClInclude Include="Pinky.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Clyde.h">
+    <ClInclude Include="Clyde.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

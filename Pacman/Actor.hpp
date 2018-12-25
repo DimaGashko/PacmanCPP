@@ -11,8 +11,6 @@ namespace pg {
 		Actor();
 		~Actor();
 
-	protected:
-
 	private:
 		
 	};
