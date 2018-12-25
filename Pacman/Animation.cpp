@@ -16,8 +16,23 @@ namespace pg {
 		
 	}
 
-	void update(int time) {
+	void Animation::update(int renderFrameTime) {
+		if (!m_playing) return;
+
+		m_timeToFrameChange -= renderFrameTime;
+		if (m_timeToFrameChange > 0) return;
+
+		m_currentFrame = (m_currentFrame + 1) % m_frames.size();
 		
+		m_shape->setTextureRect(m_frames[m_currentFrame]);
+	}
+
+	void Animation::play() {
+		m_playing = true;
+	}
+
+	void Animation::pause() {
+		m_playing = false;
 	}
 
 	Animation::~Animation() {

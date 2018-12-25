@@ -14,18 +14,23 @@ namespace pg {
 			std::vector<int> &times
 		);
 
-		void update(int time);
+		void update(int renderFrameTime);
+
+		void play();
+		void pause();
 		
 		~Animation();
 
 	private:
-		int m_currentFrame = 0;
+		int m_currentFrame = -1;
+		bool m_playing = false;
+
+		int m_timeToFrameChange;
 
 		sf::Shape *m_shape;
 		sf::Texture m_texture;
 		std::vector<sf::IntRect> m_frames;
 		std::vector<int> m_times;
-
 	};
 
 }
