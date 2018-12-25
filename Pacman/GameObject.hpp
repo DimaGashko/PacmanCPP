@@ -11,10 +11,17 @@ namespace pg {
 	class GameObject {
 	public:
 		GameObject();
-		void draw(sf::RenderTarget &window);
 
-		void update();
+		void draw(sf::RenderTarget &window);
+		void setTexture(sf::Texture *texture);
+
+		bool intersects(GameObject *obj);
 		void updatePos();
+		void update();
+
+		bool isObstacle();
+		bool isMovable();
+		bool isDead();
 
 		void setBottomLeft(sf::Vector2f coords);
 		void setTopRight(sf::Vector2f coords);
@@ -32,19 +39,10 @@ namespace pg {
 		sf::Vector2f getSpeed();
 		sf::Vector2f getSize();
 
-		void setPosInGrid(sf::Vector2i *coords);
-		sf::Vector2i* getPosInGrid();
-
-		bool isDead();
-		bool isObstacle();
-		bool isMovable();
-
 		sf::FloatRect getBounds();
 
 		void move(sf::Vector2f offset);
 		void addToSpeed(sf::Vector2f dSpeed);
-
-		bool intersects(GameObject *obj);
 
 	    virtual ~GameObject();
 

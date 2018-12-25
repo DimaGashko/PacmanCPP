@@ -24,6 +24,10 @@ namespace pg {
 		window.draw(m_rect);
 	}
 
+	void GameObject::setTexture(sf::Texture *texture) {
+		m_rect.setTexture(texture);
+	}
+
 	bool GameObject::intersects(GameObject *obj) {
 		if (obj == this) return false;
 
