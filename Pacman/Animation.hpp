@@ -14,11 +14,12 @@ namespace pg {
 			std::vector<int> &times
 		);
 
-		void update(int frameTime);
+		void update(int time);
 		
 		~Animation();
 
 	private:
+		int m_currentFrame = 0;
 
 		sf::Shape *m_shape;
 		sf::Texture m_texture;
