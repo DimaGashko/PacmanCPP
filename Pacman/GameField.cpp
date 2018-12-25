@@ -40,9 +40,11 @@ namespace pg {
 		std::vector<GameObject*> activeObjects;
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
+		auto cellSize2 = m_cellSize * 2.f;
+
 		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
-			sf::FloatRect candidatesRange(oldPos - m_cellSize, oldPos + m_cellSize);
+			sf::FloatRect candidatesRange(oldPos - m_cellSize, cellSize2);
 
 			std::vector<GameObject*> candidates;
 			getObjectsOfRange(candidatesRange, candidates);
@@ -56,7 +58,6 @@ namespace pg {
 				procCollision(obj1, obj2);
 				//interact
 			}
-
 		}
 
 		for (auto obj : activeObjects) {
@@ -77,8 +78,6 @@ namespace pg {
 		}
 
 		auto speed = obj1->getSpeed();
-		auto obj2Speed = obj2->getSpeed();
-
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
 		if (intersectSide == Left) {
@@ -101,21 +100,14 @@ namespace pg {
 	}
 
 	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
-		auto speed = obj1->getSpeed();
-
 		auto o1 = obj1->getCenter();
 		auto o2 = obj2->getCenter();
 
-		auto obj2Pos = obj2->getPosition();
-		auto obj2TopRight = obj2->getTopRight();
-		auto obj2EndPos = obj2->getEndPos();
-		auto obj2BottomLeft = obj2->getBottomLeft();
+		if (Math::intersectsL2(o1, o2, obj2->getTopRight(), obj2->getEndPos())) return eSides::Right;
+		if (Math::intersectsL2(o1, o2, obj2->getPosition(), obj2->getBottomLeft())) return eSides::Left;
 
-		if (Math::intersectsL2(o1, o2, obj2TopRight, obj2EndPos)) return eSides::Right;
-		if (Math::intersectsL2(o1, o2, obj2Pos, obj2BottomLeft)) return eSides::Left;
-
-		if (Math::intersectsL2(o1, o2, obj2BottomLeft, obj2EndPos)) return eSides::Bottom;
-		if (Math::intersectsL2(o1, o2, obj2Pos, obj2TopRight)) return eSides::Top;
+		if (Math::intersectsL2(o1, o2, obj2->getBottomLeft(), obj2->getEndPos())) return eSides::Bottom;
+		if (Math::intersectsL2(o1, o2, obj2->getPosition(), obj2->getTopRight())) return eSides::Top;
 
 		// Например, если объект внутри другого объекта
 		return eSides::None;
@@ -184,15 +176,9 @@ namespace pg {
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
 
 				for (auto obj : m_grid[x][y]) {
-					auto coords = obj->getPosition();
-
-					bool check = (coords.x >= range.left && coords.y >= range.top
-						&& coords.x <= (range.left + range.width)
-						&& coords.y <= (range.top + range.height)
-						);
-
-					if (check) res.push_back(obj);
+					res.push_back(obj);
 				}
+
 			}
 		}
 
