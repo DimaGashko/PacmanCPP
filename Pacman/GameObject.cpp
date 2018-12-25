@@ -45,7 +45,7 @@ namespace pg {
 		auto size = getSize();
 
 		return sf::FloatRect(pos.x+1, pos.y+1, size.x-2, size.y-2);
-	} 
+	}
 
 	sf::Vector2f GameObject::getPosition() {
 		return m_rect.getPosition();

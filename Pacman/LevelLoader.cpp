@@ -101,22 +101,33 @@ namespace pg {
 		auto xmlMap = xmlLevel.FirstChildElement("map");
 		auto xmlTileset = xmlMap->FirstChildElement("tileset");
 
-		auto xmlGids = xmlMap->FirstChildElement("layer")
-			->FirstChildElement("data");
-
 		config.size = sf::Vector2i(
 			xmlMap->IntAttribute("width"),
 			xmlMap->IntAttribute("height")
 		);
 
+		int gidsLen = config.size.x * config.size.y;
+
 		std::string tilesetUrl = xmlTileset->Attribute("source");
 		config.tilesetUrl = "configs/" + tilesetUrl.substr(3);
+		
+		auto xmlNextLayer = xmlMap->FirstChildElement("layer");
 
-		auto xmlNextGid = xmlGids->FirstChildElement("tile");
+		while (xmlNextLayer != NULL) {
+			std::vector<int> layerGids(gidsLen);
 
-		while (xmlNextGid != NULL) {
-			config.gids.push_back(xmlNextGid->IntAttribute("gid"));
-			xmlNextGid = xmlNextGid->NextSiblingElement("tile");
+			auto xmlNextGid = xmlNextLayer->FirstChildElement("data")->FirstChildElement("tile");
+
+			for (int i = 0; xmlNextGid != NULL; i++) {
+				int gid = xmlNextGid->IntAttribute("gid");
+				if (gid > 0) layerGids[i] = gid;
+
+				if (name == "actors" && gid > 0) std::cout << "actor ";
+
+				xmlNextGid = xmlNextGid->NextSiblingElement("tile");
+			}
+
+			xmlNextLayer = xmlNextLayer->NextSiblingElement("layer");
 		}
 
 		return config;
