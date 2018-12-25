@@ -2,6 +2,12 @@
 <tileset version="1.2" tiledversion="1.2.1" name="tileset" tilewidth="16" tileheight="16" tilecount="200" columns="20">
  <image source="../../img/tileset.png" width="320" height="160"/>
  <tile id="0" type="Pacman">
+  <properties>
+   <property name="animationBottom" type="int" value="80"/>
+   <property name="animationDie" type="int" value="3"/>
+   <property name="animationLeft" type="int" value="40"/>
+   <property name="animationTop" type="int" value="60"/>
+  </properties>
   <animation>
    <frame tileid="0" duration="150"/>
    <frame tileid="1" duration="150"/>
@@ -27,6 +33,12 @@
  <tile id="20" type="Wall"/>
  <tile id="21" type="Point"/>
  <tile id="22" type="Ghost">
+  <properties>
+   <property name="animationAfraid" type="int" value="30"/>
+   <property name="animationBottom" type="int" value="28"/>
+   <property name="animationLeft" type="int" value="24"/>
+   <property name="animationTop" type="int" value="26"/>
+  </properties>
   <animation>
    <frame tileid="22" duration="150"/>
    <frame tileid="23" duration="150"/>
@@ -64,6 +76,12 @@
   </animation>
  </tile>
  <tile id="42" type="Ghost">
+  <properties>
+   <property name="animationAfraid" type="int" value="30"/>
+   <property name="animationBottom" type="int" value="48"/>
+   <property name="animationLeft" type="int" value="44"/>
+   <property name="animationTop" type="int" value="46"/>
+  </properties>
   <animation>
    <frame tileid="42" duration="150"/>
    <frame tileid="43" duration="150"/>
@@ -95,6 +113,12 @@
   </animation>
  </tile>
  <tile id="62" type="Ghost">
+  <properties>
+   <property name="animationAfraid" type="int" value="30"/>
+   <property name="animationBottom" type="int" value="68"/>
+   <property name="animationLeft" type="int" value="64"/>
+   <property name="animationTop" type="int" value="66"/>
+  </properties>
   <animation>
    <frame tileid="62" duration="150"/>
    <frame tileid="63" duration="150"/>
@@ -126,6 +150,12 @@
   </animation>
  </tile>
  <tile id="82" type="Ghost">
+  <properties>
+   <property name="animationAfraid" type="int" value="30"/>
+   <property name="animationBottom" type="int" value="88"/>
+   <property name="animationLeft" type="int" value="84"/>
+   <property name="animationTop" type="int" value="86"/>
+  </properties>
   <animation>
    <frame tileid="82" duration="150"/>
    <frame tileid="83" duration="150"/>
