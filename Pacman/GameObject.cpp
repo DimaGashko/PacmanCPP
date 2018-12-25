@@ -46,6 +46,11 @@ namespace pg {
 		
 	}
 
+	void GameObject::setTexture(sf::Texture &texture, sf::IntRect &textureRect) {
+		m_rect.setTexture(&texture);
+		m_rect.setTextureRect(textureRect);
+	}
+
 	bool GameObject::intersects(GameObject *obj) {
 		if (obj == this) return false;
 

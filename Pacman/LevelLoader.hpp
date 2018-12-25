@@ -36,6 +36,8 @@ namespace pg {
 
 		struct _TileConfig {
 			std::string type;
+
+			sf::IntRect textureRect;
 			
 			std::vector<std::string> propertyNames;
 			std::vector<std::string> propertyTypes;
@@ -66,6 +68,8 @@ namespace pg {
 		GameField* _creatLevel(_LevelConfig levelConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 	
+		sf::IntRect _getTextureRectByTileId(int id);
+
 		static constexpr char TILESET_URL[] = "configs/tilesets/tileset.tsx";
 	};
 

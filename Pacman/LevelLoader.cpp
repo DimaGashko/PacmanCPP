@@ -33,14 +33,17 @@ namespace pg {
 		for (auto gids : levelConfig.gids) {
 			for (int x = 0; x < size.x; x++) {
 				for (int y = 0; y < size.y; y++) {
+
 					int gid = gids[y * size.x + x];
 					if (gid == 0) continue;
 					int id = gid - 1;
 
-					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
+					auto tile = m_tilesetConfig->tiles[id];
+					auto type = tile.type;
 
-					auto type = m_tilesetConfig->tiles[id].type;
 					GameObject *obj;
+
+					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
 
 					if (type == "Pacman") {
 						Pacman *pacman = new Pacman();
@@ -57,11 +60,10 @@ namespace pg {
 					else obj = new GameObject();
 
 					obj->setPosition(coords);
-					//obj->setTexture(texture);
 					obj->setSize(sf::Vector2f(tileSize));
 
 					auto animNames = m_tilesetConfig->animationNames;
-					if (animNames.find(type) != animNames.end()) {
+					if (0 && animNames.find(type) != animNames.end()) {
 						obj->setAnimations(
 							m_tilesetConfig->tilesetTexture,
 							m_tilesetConfig->animationNames[type],
@@ -70,7 +72,10 @@ namespace pg {
 						);
 					}
 					else {
-						
+						obj->setTexture(
+							m_tilesetConfig->tilesetTexture,
+							tile.textureRect
+						);
 					}
 
 					gameField->addObject(obj);
@@ -158,6 +163,7 @@ namespace pg {
 		while (nextTile) {
 			_TileConfig tile;
 			int id = nextTile->IntAttribute("id");
+			tile.textureRect = _getTextureRectByTileId(id);
 
 			auto type = nextTile->Attribute("type");
 			tile.type = (type) ? type : "";
@@ -236,11 +242,7 @@ namespace pg {
 				durations.push_back(_durations);
 
 				for (auto frameId : _frameIds) {
-					_frames.push_back(sf::IntRect(
-						(frameId % m_tilesetConfig->columns) * m_tilesetConfig->tileSize.x,
-						(frameId / m_tilesetConfig->columns) * m_tilesetConfig->tileSize.y,
-						m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
-					));
+					_frames.push_back(m_tilesetConfig->tiles[frameId].textureRect);
 				}
 
 				frames.push_back(_frames);
@@ -250,6 +252,14 @@ namespace pg {
 			m_tilesetConfig->animationFrames[tile.type] = frames;
 			m_tilesetConfig->animationDurations[tile.type] = durations;
 		}
+	}
+
+	sf::IntRect LevelLoader::_getTextureRectByTileId(int tileid) {
+		return sf::IntRect(
+			(tileid % m_tilesetConfig->columns) * m_tilesetConfig->tileSize.x,
+			(tileid / m_tilesetConfig->columns) * m_tilesetConfig->tileSize.y,
+			m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
+		);
 	}
 
 	GameField* LevelLoader::loadFromTxt(std::string url) {

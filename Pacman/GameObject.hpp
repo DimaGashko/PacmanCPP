@@ -22,6 +22,8 @@ namespace pg {
 			std::vector<std::vector<int>> &durations
 		);
 
+		void setTexture(sf::Texture &texture, sf::IntRect &textureRect);
+
 		bool intersects(GameObject *obj);
 		void updatePos();
 		void update();
@@ -56,14 +58,15 @@ namespace pg {
 
 	    virtual ~GameObject();
 
+	protected:
+		bool m_isDead = false;
+		bool m_isObstacle;
+		bool m_isMovable;
+
 	private:
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
-
-		bool m_isDead = false;
-		bool m_isObstacle;
-		bool m_isMovable;
 
 		pg::AnimationManager *m_animationManager;
 	};
