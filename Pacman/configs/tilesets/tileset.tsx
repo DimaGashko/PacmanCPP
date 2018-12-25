@@ -32,7 +32,7 @@
  </tile>
  <tile id="20" type="Wall"/>
  <tile id="21" type="Point"/>
- <tile id="22" type="Ghost">
+ <tile id="22" type="Blinky">
   <properties>
    <property name="animationAfraid" type="int" value="30"/>
    <property name="animationBottom" type="int" value="28"/>
@@ -75,7 +75,7 @@
    <frame tileid="2" duration="150"/>
   </animation>
  </tile>
- <tile id="42" type="Ghost">
+ <tile id="42" type="Pinky">
   <properties>
    <property name="animationAfraid" type="int" value="30"/>
    <property name="animationBottom" type="int" value="48"/>
@@ -112,7 +112,7 @@
    <frame tileid="2" duration="150"/>
   </animation>
  </tile>
- <tile id="62" type="Ghost">
+ <tile id="62" type="Inky">
   <properties>
    <property name="animationAfraid" type="int" value="30"/>
    <property name="animationBottom" type="int" value="68"/>
@@ -149,7 +149,7 @@
    <frame tileid="2" duration="150"/>
   </animation>
  </tile>
- <tile id="82" type="Ghost">
+ <tile id="82" type="Clyde">
   <properties>
    <property name="animationAfraid" type="int" value="30"/>
    <property name="animationBottom" type="int" value="88"/>
