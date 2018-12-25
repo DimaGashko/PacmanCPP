@@ -153,6 +153,7 @@ namespace pg {
 		};
 
 		parseTiles(xmlTileset);
+		createAnimationConfigs();
 	}
 	
 	void LevelLoader::parseTiles(tinyxml2::XMLElement *xmlTileset) {
@@ -198,6 +199,29 @@ namespace pg {
 
 			config->tiles[id] = tile;
 			nextTile = nextTile->NextSiblingElement("tile");
+		}
+	}
+
+	void LevelLoader::createAnimationConfigs() {
+		for (auto item : m_tilesetConfig->tiles) {
+			auto tile = item.second;
+			if (tile.type.empty()) continue;
+
+			std::vector<std::string> names;
+			std::vector< std::vector<sf::IntRect>> frames;
+			std::vector< std::vector<int>> times;
+
+			for (int i = 0; i < tile.propertyNames.size(); i++) {
+				auto name = tile.propertyNames[i];
+
+				if (name == "animationName") {
+					names.push_back(tile.propetryValues[i]);
+				}
+			}
+
+			m_tilesetConfig->animationNames[tile.type] = names;
+			m_tilesetConfig->animationTimes[tile.type] = times;
+			m_tilesetConfig->animationFrames[tile.type] = frames;
 		}
 	}
 

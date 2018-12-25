@@ -51,21 +51,20 @@ namespace pg {
 			sf::Texture tilesetTexture;
 
 			std::unordered_map<int, _TileConfig> tiles;
-			
-			std::vector<std::string> animationNames;
-			std::vector<std::vector<sf::IntRect>> animationFrames;
-			std::vector<std::vector<int>> animationsTimes;
 
+			std::unordered_map<std::string, std::vector<std::string>> animationNames;
+			std::unordered_map<std::string, std::vector<std::vector<sf::IntRect>>> animationFrames;
+			std::unordered_map<std::string, std::vector<std::vector<int>>> animationTimes;
 		};
 
 		_TilesetConfig *m_tilesetConfig;
 
 		void loadTileset();
+		void createAnimationConfigs();
 		void parseTiles(tinyxml2::XMLElement *xmlTileset);
 
 		GameField* _creatLevel(_LevelConfig levelConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
-		_TilesetConfig* _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 
 		sf::Texture* _getTexture(int gid, int id);
 	
