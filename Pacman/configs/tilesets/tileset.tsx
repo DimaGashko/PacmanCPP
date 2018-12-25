@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.2" tiledversion="1.2.1" name="tileset" tilewidth="16" tileheight="16" tilecount="200" columns="20">
  <image source="../../img/tileset.png" width="320" height="160"/>
- <tile id="0">
+ <tile id="0" type="Pacman">
   <animation>
    <frame tileid="0" duration="150"/>
    <frame tileid="1" duration="150"/>
    <frame tileid="2" duration="150"/>
   </animation>
  </tile>
- <tile id="1" type="Pacman"/>
  <tile id="3">
   <animation>
    <frame tileid="2" duration="500"/>
@@ -25,8 +24,7 @@
    <frame tileid="13" duration="150"/>
   </animation>
  </tile>
- <tile id="10" type="Wall"/>
- <tile id="11" type="Point"/>
+ <tile id="20" type="Wall"/>
  <tile id="21" type="Point"/>
  <tile id="22" type="Ghost">
   <animation>
