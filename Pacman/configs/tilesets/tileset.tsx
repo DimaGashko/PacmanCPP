@@ -3,10 +3,10 @@
  <image source="../../img/tileset.png" width="320" height="160"/>
  <tile id="0" type="Pacman">
   <properties>
-   <property name="animationBottom" type="int" value="80"/>
-   <property name="animationDie" type="int" value="3"/>
-   <property name="animationLeft" type="int" value="40"/>
-   <property name="animationTop" type="int" value="60"/>
+   <property name="animation_bottom" type="int" value="80"/>
+   <property name="animation_die" type="int" value="3"/>
+   <property name="animation_left" type="int" value="40"/>
+   <property name="animation_top" type="int" value="60"/>
   </properties>
   <animation>
    <frame tileid="0" duration="150"/>
@@ -34,10 +34,10 @@
  <tile id="21" type="Point"/>
  <tile id="22" type="Ghost">
   <properties>
-   <property name="animationAfraid" type="int" value="30"/>
-   <property name="animationBottom" type="int" value="28"/>
-   <property name="animationLeft" type="int" value="24"/>
-   <property name="animationTop" type="int" value="26"/>
+   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_bottom" type="int" value="28"/>
+   <property name="animation_left" type="int" value="24"/>
+   <property name="animation_top" type="int" value="26"/>
   </properties>
   <animation>
    <frame tileid="22" duration="150"/>
@@ -77,10 +77,10 @@
  </tile>
  <tile id="42" type="Ghost">
   <properties>
-   <property name="animationAfraid" type="int" value="30"/>
-   <property name="animationBottom" type="int" value="48"/>
-   <property name="animationLeft" type="int" value="44"/>
-   <property name="animationTop" type="int" value="46"/>
+   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_bottom" type="int" value="48"/>
+   <property name="animation_left" type="int" value="44"/>
+   <property name="animation_top" type="int" value="46"/>
   </properties>
   <animation>
    <frame tileid="42" duration="150"/>
