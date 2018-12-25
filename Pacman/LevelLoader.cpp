@@ -7,28 +7,19 @@ namespace pg {
 	}
 
 	GameField* LevelLoader::loadFromTmx(std::string url) {
-		tinyxml2::XMLDocument xmlTileset;
+		if (!m_tilesetConfig) {
+			loadTileset();
+		}
+
 		tinyxml2::XMLDocument xmlLevel;
 
 		auto status = xmlLevel.LoadFile(url.c_str());
 
 		if (status != tinyxml2::XMLError::XML_SUCCESS) {
 			std::cerr << "Can't load the level" << std::endl;
-			return new GameField();
 		}
 		
 		_LevelConfig levelConfig = _parseXmlLevel(xmlLevel);
-		
-		status = xmlTileset.LoadFile(levelConfig.tilesetUrl.c_str());
-
-		if (status != tinyxml2::XMLError::XML_SUCCESS) {
-			std::cerr << "Can't load the tileset" << std::endl;
-			return new GameField();
-		}
-		
-		if (m_tilesetConfig == NULL) {
-			m_tilesetConfig = _parseXmlTileset(xmlTileset);
-		}
 		
 		return _creatLevel(levelConfig);
 	}
@@ -49,8 +40,7 @@ namespace pg {
 					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
 					auto texture = _getTexture(gid, id);
 
-					_TileConfig tileConfig = m_tilesetConfig->tiles[id];
-					auto type = tileConfig.type;
+					auto type = m_tilesetConfig->tileTypes[id];
 					GameObject *obj;
 
 					if (type == "Pacman") {
@@ -133,13 +123,21 @@ namespace pg {
 		return config;
 	}
 
-	LevelLoader::_TilesetConfig* LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
-		_TilesetConfig *config = new _TilesetConfig;
+	void LevelLoader::loadTileset() {
+		tinyxml2::XMLDocument xmlTilesetDoc;
+		auto status = xmlTilesetDoc.LoadFile(TILESET_URL);
+
+		if (status != tinyxml2::XMLError::XML_SUCCESS) {
+			std::cerr << "Can't load the tileset" << std::endl;
+		}
+
+		m_tilesetConfig = new _TilesetConfig;
+		auto config = m_tilesetConfig;
 
 		auto xmlTileset = xmlTilesetDoc.FirstChildElement("tileset");
 
 		config->columns = xmlTileset->IntAttribute("columns");
-		
+
 		config->tileSize = sf::Vector2i(
 			xmlTileset->IntAttribute("tilewidth"),
 			xmlTileset->IntAttribute("tileheight")
@@ -148,27 +146,28 @@ namespace pg {
 		std::string imgUrl = xmlTileset->FirstChildElement("image")->Attribute("source");
 		imgUrl = imgUrl.substr(6);
 
-		config->tileset = sf::Image();
+		config->tilesetTexture = sf::Texture();
 
-		if (!config->tileset.loadFromFile(imgUrl)) {
+		if (!config->tilesetTexture.loadFromFile(imgUrl)) {
 			std::cerr << "Cant't load the tileset image";
 		};
+
+		parseTiles(xmlTileset);
+	}
+
+	void LevelLoader::parseTiles(tinyxml2::XMLElement *xmlTileset) {
+		auto config = m_tilesetConfig;
 
 		auto nextTile = xmlTileset->FirstChildElement("tile");
 
 		while (nextTile) {
-			_TileConfig tileConfig;
-
-			auto type = nextTile->Attribute("type");
-			tileConfig.type = (type) ? type : "";
-
 			int id = nextTile->IntAttribute("id");
-			config->tiles[id] = tileConfig;
+			auto type = nextTile->Attribute("type");
+
+			config->tileTypes[id] = (type) ? type : "";
 
 			nextTile = nextTile->NextSiblingElement();
 		}
-
-		return config;
 	}
 
 	GameField* LevelLoader::loadFromTxt(std::string url) {
@@ -183,7 +182,7 @@ namespace pg {
 
 		std::vector<GameObject*> objects;
 		sf::Vector2i tileSize(16, 16);
-		sf::Vector2i size(0, 0);
+	sf::Vector2i size(0, 0);
 
 		std::string row;
 		int width = 0, height = 0;

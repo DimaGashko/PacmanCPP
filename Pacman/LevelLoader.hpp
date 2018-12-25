@@ -28,34 +28,37 @@ namespace pg {
 		~LevelLoader();
 
 	private:
-		// Текстуры тайлов (ключ - id тайла
-		std::unordered_map<int, sf::Texture*> m_textures;
-
 		struct _LevelConfig {
 			sf::Vector2i size;
 			std::vector<std::vector<int>> gids;
 			std::string tilesetUrl;
 		};
 
-		struct _TileConfig {
-			std::string type;
-		};
-
 		struct _TilesetConfig {
 			int columns;
 			sf::Vector2i tileSize;
-			sf::Image tileset;
-			std::unordered_map<int, _TileConfig> tiles;
+			sf::Texture tilesetTexture;
+
+			std::unordered_map<int, std::string> tileTypes;
+			
+			std::vector<std::string> animationNames;
+			std::vector<std::vector<sf::IntRect>> animationFrames;
+			std::vector<std::vector<int>> animationsTimes;
 
 		};
 
 		_TilesetConfig *m_tilesetConfig;
+
+		void loadTileset();
+		void parseTiles(tinyxml2::XMLElement *xmlTileset);
 
 		GameField* _creatLevel(_LevelConfig levelConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 		_TilesetConfig* _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
 
 		sf::Texture* _getTexture(int gid, int id);
+	
+		static constexpr char TILESET_URL[] = "configs/tilesets/tileset.tsx";
 	};
 
 } // namespace pg
