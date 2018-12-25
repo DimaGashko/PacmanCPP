@@ -70,7 +70,7 @@ namespace pg {
 	}
 
 	void PacmanGame::_createGame() {
-		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level0.tmx");
+		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level1.tmx");
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
 	}
@@ -82,7 +82,7 @@ namespace pg {
 			sf::Vector2i(m_window.getSize())
 		);
 
-		return sf::FloatRect(start, end - start);
+		return sf::FloatRect(start, end - start + sf::Vector2f(20, 20));
 	}
 
 	PacmanGame::~PacmanGame() {

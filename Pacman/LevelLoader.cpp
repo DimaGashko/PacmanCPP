@@ -35,7 +35,7 @@ namespace pg {
 		auto size = levelConfig.size;
 		auto tileSize = tilesetConfig.tileSize;
 
-		GameField* gameField = new GameField(size, tileSize);
+		GameField* gameField = new GameField(size, tileSize * 4);
 
 		for (int x = 0; x < size.x; x++) {
 			for (int y = 0; y < size.y; y++) {

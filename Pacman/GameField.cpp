@@ -149,7 +149,8 @@ namespace pg {
 
 				for (int i = 0; i < size; i++) {
 					if (cell[i] != object) {
-						newCell[i] = cell[i];
+						if (i < size - 1) newCell[i] = cell[i];
+						else newCell.push_back(cell[i]);
 					}
 				}
 

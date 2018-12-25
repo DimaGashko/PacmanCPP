@@ -3,16 +3,17 @@
 namespace pg {
 
 	GameObject::GameObject() {
-		init();
+		_initProperties();
 	}
 
 	GameObject::GameObject(sf::Texture *texture) {
-		init();
+		_initProperties();
 		m_rect.setTexture(texture);
 	}
 
-	void GameObject::init() {
-		
+	void GameObject::_initProperties() {
+		m_isObstacle = false;
+		m_isMovable = false;
 	}
 
 	void GameObject::update() {
@@ -131,6 +132,14 @@ namespace pg {
 
 	bool GameObject::isObstacle() {
 		return m_isObstacle;
+	}
+
+	bool GameObject::isDead() {
+		return m_isDead;
+	}
+
+	bool GameObject::isMovable() {
+		return m_isMovable;
 	}
 
 	GameObject::~GameObject() {

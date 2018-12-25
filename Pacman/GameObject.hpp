@@ -36,7 +36,9 @@ namespace pg {
 		void setPosInGrid(sf::Vector2i *coords);
 		sf::Vector2i* getPosInGrid();
 
+		bool isDead();
 		bool isObstacle();
+		bool isMovable();
 
 		sf::FloatRect getBounds();
 
@@ -48,14 +50,17 @@ namespace pg {
 	    virtual ~GameObject();
 
 	protected:
-		bool m_isObstacle = true;
 
 	private:
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
 
-		void init();
+		bool m_isDead = false;
+		bool m_isObstacle;
+		bool m_isMovable;
+
+		virtual void _initProperties();
 
 	};
 
