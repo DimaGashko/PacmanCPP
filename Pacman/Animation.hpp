@@ -18,12 +18,13 @@ namespace pg {
 
 		void play();
 		void pause();
+		void reset();
 		
 		~Animation();
 
 	private:
-		int m_currentFrame = -1;
-		bool m_playing = false;
+		int m_currentFrame;
+		bool m_playing;
 
 		int m_timeToFrameChange;
 

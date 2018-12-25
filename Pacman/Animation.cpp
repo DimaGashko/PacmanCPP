@@ -13,7 +13,7 @@ namespace pg {
 		m_frames(frames),
 		m_durations(durations)
 	{
-		
+		restart();
 	}
 
 	void Animation::update(int renderFrameTime) {
@@ -34,6 +34,12 @@ namespace pg {
 
 	void Animation::pause() {
 		m_playing = false;
+	}
+
+	void Animation::reset() {
+		m_playing = false;
+		m_currentFrame = -1;
+		m_timeToFrameChange = 0;
 	}
 
 	Animation::~Animation() {

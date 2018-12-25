@@ -20,8 +20,9 @@ namespace pg {
 
 	}
 
-	void GameObject::update() {
+	void GameObject::update(int frameTime) {
 		updatePos();
+		updateAnimation(frameTime);
 	}
 
 	void GameObject::updatePos() {
@@ -29,6 +30,11 @@ namespace pg {
 
 		m_speed.x = 0;
 		m_speed.y = 0;
+	}
+
+	void GameObject::updateAnimation(int frameTime) {
+		//m_animationManager.
+		m_animationManager->update(frameTime);
 	}
 
 	void GameObject::draw(sf::RenderTarget &window) {

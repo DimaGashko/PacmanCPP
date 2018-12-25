@@ -15,6 +15,7 @@ namespace pg {
 	) :
 		m_texture(texture)
 	{
+
 		for (auto i = 0; i < names.size(); i++) {
 			m_animations[names[i]] = new pg::Animation(
 				shape, texture, frames[i], durations[i]
@@ -23,12 +24,21 @@ namespace pg {
 		}
 	}
 
+	bool AnimationManager::set(std::string animationName) {
+		auto animate = m_animations[animationName];
+		if (animate == NULL) return false;
+
+		m_currectAnimation = animate;
+		m_currectAnimation->reset();
+		m_currectAnimation->play();
+	}
+
 	void AnimationManager::update(int renderFrameTime) {
-		m_animations[m_currectAnimation]->update(renderFrameTime);
+		m_currectAnimation->update(renderFrameTime);
 	}
 	 
 	void AnimationManager::play() {
-		m_animations[m_currectAnimation]->play();
+		m_currectAnimation->play();
 	}
 
 	void AnimationManager::pause() {

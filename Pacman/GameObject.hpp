@@ -25,8 +25,10 @@ namespace pg {
 		void setTexture(sf::Texture &texture, sf::IntRect &textureRect);
 
 		bool intersects(GameObject *obj);
+
+		virtual void update(int frameTime);
+		virtual void updateAnimation(int frameTime);
 		void updatePos();
-		void update();
 
 		bool isObstacle();
 		bool isMovable();

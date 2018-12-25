@@ -24,6 +24,8 @@ namespace pg {
 
 		void update(int renderFrameTime);
 
+		bool set(std::string animationName);
+
 		void play();
 		void pause();
 
@@ -32,7 +34,7 @@ namespace pg {
 	private:
 		sf::Texture m_texture;
 
-		std::string m_currectAnimation;
+		pg::Animation *m_currectAnimation;
 		std::unordered_map<std::string, pg::Animation*> m_animations;
 
 	};
