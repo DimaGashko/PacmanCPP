@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 namespace pg {
 
@@ -9,7 +10,7 @@ namespace pg {
 	public:
 		Animation(
 			sf::Shape *shape, 
-			sf::Texture &texture, 
+			sf::Texture *texture, 
 			std::vector<sf::IntRect> &frames, 
 			std::vector<int> &durations
 		);
@@ -23,13 +24,13 @@ namespace pg {
 		~Animation();
 
 	private:
-		int m_currentFrame;
-		bool m_playing;
+		bool m_playing = false;
 
-		int m_timeToFrameChange;
+		int m_currentFrame = -1;
+		int m_timeToFrameChange = 0;
 
 		sf::Shape *m_shape;
-		sf::Texture m_texture;
+		sf::Texture *m_texture;
 		std::vector<sf::IntRect> m_frames;
 		std::vector<int> m_durations;
 	};

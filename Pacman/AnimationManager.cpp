@@ -8,7 +8,7 @@ namespace pg {
 
 	AnimationManager::AnimationManager(
 		sf::RectangleShape *shape,
-		sf::Texture &texture,
+		sf::Texture *texture,
 		std::vector<std::string> &names,
 		std::vector<std::vector<sf::IntRect>> &frames,
 		std::vector<std::vector<int>> &durations
@@ -25,12 +25,18 @@ namespace pg {
 	}
 
 	bool AnimationManager::set(std::string animationName) {
+		if (m_currentAnimationName == animationName) return false;
+		m_currentAnimationName = animationName;
+
 		auto animate = m_animations[animationName];
 		if (animate == NULL) return false;
 
+		animate->reset();
+		animate->play();
+
 		m_currectAnimation = animate;
-		m_currectAnimation->reset();
-		m_currectAnimation->play();
+
+		return true;
 	}
 
 	void AnimationManager::update(int renderFrameTime) {
@@ -42,7 +48,7 @@ namespace pg {
 	}
 
 	void AnimationManager::pause() {
-		m_animations[m_currectAnimation]->pause();
+		m_currectAnimation->pause();
 	}
 
 	AnimationManager::~AnimationManager() {

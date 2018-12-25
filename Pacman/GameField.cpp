@@ -17,7 +17,7 @@ namespace pg {
 	}
 
 	void GameField::addAllObjects(std::vector<GameObject*> objects) {
-		for (auto obj : objects) {
+		for (auto &obj : objects) {
 			addObject(obj);
 		}
 	}
@@ -31,7 +31,7 @@ namespace pg {
 		std::vector<GameObject*> visibleObjects;
 		getObjectsOfRange(visibleRange, visibleObjects);
 
-		for (auto obj : visibleObjects) {
+		for (auto &obj : visibleObjects) {
 			obj->draw(window);
 		}
 	}
@@ -43,7 +43,7 @@ namespace pg {
 		auto cellSize2 = m_cellSize * 2.f;
 		//int iter = 0;
 
-		for (auto obj1 : activeObjects) {
+		for (auto &obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, cellSize2);
 
@@ -52,7 +52,7 @@ namespace pg {
 			
 			//iter += candidates.size();
 
-			for (auto obj2 : candidates) {
+			for (auto &obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
 				obj1->setPosition(oldPos);
@@ -65,9 +65,9 @@ namespace pg {
 
 		//std::cout << iter << std::endl;
 
-		for (auto obj : activeObjects) {
+		for (auto &obj : activeObjects) {
 			auto oldPos = obj->getPosition();
-			obj->update();
+			obj->update(frameTime);
 			auto newPos = obj->getPosition();
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
@@ -183,7 +183,7 @@ namespace pg {
 
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
 
-				for (auto obj : m_grid[x][y]) {
+				for (auto &obj : m_grid[x][y]) {
 					tmp[len++] = obj;
 				}
 
@@ -214,9 +214,9 @@ namespace pg {
 
 	GameField::~GameField() {
 
-		for (auto row : m_grid) {
-			for (auto cell : row) {
-				for (auto obj : cell) {
+		for (auto &row : m_grid) {
+			for (auto &cell : row) {
+				for (auto &obj : cell) {
 					delete obj;
 				}
 			}

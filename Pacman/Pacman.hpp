@@ -10,6 +10,8 @@ namespace pg {
 	public:
 		Pacman();
 
+		void updateAnimation(int frameTime) override;
+
 		~Pacman();
 
 	private:

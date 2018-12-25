@@ -16,7 +16,7 @@ namespace pg {
 
 		AnimationManager(
 			sf::RectangleShape *shape,
-			sf::Texture &texture,
+			sf::Texture *texture,
 			std::vector<std::string> &names,
 			std::vector<std::vector<sf::IntRect>> &frames,
 			std::vector<std::vector<int>> &durations
@@ -32,9 +32,11 @@ namespace pg {
 		~AnimationManager();
 
 	private:
-		sf::Texture m_texture;
+		sf::Texture *m_texture;
 
 		pg::Animation *m_currectAnimation;
+		std::string m_currentAnimationName;
+
 		std::unordered_map<std::string, pg::Animation*> m_animations;
 
 	};

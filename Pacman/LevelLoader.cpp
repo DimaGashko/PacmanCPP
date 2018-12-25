@@ -78,7 +78,7 @@ namespace pg {
 
 						obj->setTexture(
 							m_tilesetConfig->tilesetTexture,
-							tile.textureRect
+							_getTextureRectByTileId(id)
 						);
 
 					}
@@ -150,13 +150,14 @@ namespace pg {
 		std::string imgUrl = xmlTileset->FirstChildElement("image")->Attribute("source");
 		imgUrl = imgUrl.substr(6);
 
-		config->tilesetTexture = sf::Texture();
+		config->tilesetTexture = new sf::Texture();
 
-		if (!config->tilesetTexture.loadFromFile(imgUrl)) {
+		if (!config->tilesetTexture->loadFromFile(imgUrl)) {
 			std::cerr << "Cant't load the tileset image";
 		};
 
 		parseTiles(xmlTileset);
+
 		createAnimationConfigs();
 	}
 	
@@ -168,7 +169,6 @@ namespace pg {
 		while (nextTile) {
 			_TileConfig tile;
 			int id = nextTile->IntAttribute("id");
-			tile.textureRect = _getTextureRectByTileId(id);
 
 			auto type = nextTile->Attribute("type");
 			tile.type = (type) ? type : "";
@@ -247,7 +247,7 @@ namespace pg {
 				durations.push_back(_durations);
 
 				for (auto frameId : _frameIds) {
-					_frames.push_back(m_tilesetConfig->tiles[frameId].textureRect);
+					_frames.push_back(_getTextureRectByTileId(frameId));
 				}
 
 				frames.push_back(_frames);
@@ -324,6 +324,7 @@ namespace pg {
 	}
 
 	LevelLoader::~LevelLoader() {
+		delete m_tilesetConfig->tilesetTexture;
 		delete m_tilesetConfig;
 	} 
 

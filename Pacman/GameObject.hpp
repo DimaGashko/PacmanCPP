@@ -16,13 +16,13 @@ namespace pg {
 		void draw(sf::RenderTarget &window);
 
 		void setAnimations(
-			sf::Texture &texture,
+			sf::Texture *texture,
 			std::vector<std::string> &names,
 			std::vector<std::vector<sf::IntRect>> &frames,
 			std::vector<std::vector<int>> &durations
 		);
 
-		void setTexture(sf::Texture &texture, sf::IntRect &textureRect);
+		void setTexture(sf::Texture *texture, sf::IntRect textureRect);
 
 		bool intersects(GameObject *obj);
 
@@ -65,12 +65,12 @@ namespace pg {
 		bool m_isObstacle;
 		bool m_isMovable;
 
+		pg::AnimationManager *m_animationManager;
+
 	private:
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
-
-		pg::AnimationManager *m_animationManager;
 	};
 
 }; // namespace pg

@@ -4,7 +4,7 @@ namespace pg {
 
 	Animation::Animation(
 		sf::Shape *shape,
-		sf::Texture &texture,
+		sf::Texture *texture,
 		std::vector<sf::IntRect> &frames,
 		std::vector<int> &durations
 	) :
@@ -13,7 +13,7 @@ namespace pg {
 		m_frames(frames),
 		m_durations(durations)
 	{
-		restart();
+		m_shape->setTexture(m_texture);
 	}
 
 	void Animation::update(int renderFrameTime) {

@@ -36,8 +36,6 @@ namespace pg {
 
 		struct _TileConfig {
 			std::string type;
-
-			sf::IntRect textureRect;
 			
 			std::vector<std::string> propertyNames;
 			std::vector<std::string> propertyTypes;
@@ -50,7 +48,7 @@ namespace pg {
 		struct _TilesetConfig {
 			int columns;
 			sf::Vector2i tileSize;
-			sf::Texture tilesetTexture;
+			sf::Texture *tilesetTexture;
 
 			std::unordered_map<int, _TileConfig> tiles;
 

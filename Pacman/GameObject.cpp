@@ -9,17 +9,6 @@ namespace pg {
 		
 	}
 
-	void initAnimations(
-		sf::Texture &texture,
-		std::vector<std::string> &names,
-		std::vector<std::vector<sf::IntRect>> &frames,
-		std::vector<std::vector<int>> &durations
-	) {
-	
-		
-
-	}
-
 	void GameObject::update(int frameTime) {
 		updatePos();
 		updateAnimation(frameTime);
@@ -33,7 +22,10 @@ namespace pg {
 	}
 
 	void GameObject::updateAnimation(int frameTime) {
-		//m_animationManager.
+		if (m_animationManager == NULL) return;
+
+		m_animationManager->set("bottom");
+
 		m_animationManager->update(frameTime);
 	}
 
@@ -42,7 +34,7 @@ namespace pg {
 	}
 
 	void GameObject::setAnimations(
-		sf::Texture &texture, 
+		sf::Texture *texture, 
 		std::vector<std::string> &names, 
 		std::vector<std::vector<sf::IntRect>> &frames, 
 		std::vector<std::vector<int>> &durations
@@ -52,8 +44,8 @@ namespace pg {
 		
 	}
 
-	void GameObject::setTexture(sf::Texture &texture, sf::IntRect &textureRect) {
-		m_rect.setTexture(&texture);
+	void GameObject::setTexture(sf::Texture *texture, sf::IntRect textureRect) {
+		m_rect.setTexture(texture);
 		m_rect.setTextureRect(textureRect);
 	}
 
