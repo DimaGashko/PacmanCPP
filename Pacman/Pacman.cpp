@@ -6,10 +6,6 @@ namespace pg {
 
 	}
 
-	Pacman::Pacman(sf::Texture *texture) : Actor(texture) {
-
-	}
-
 	Pacman::~Pacman() {
 
 	}

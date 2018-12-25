@@ -6,11 +6,6 @@ namespace pg {
 		_initProperties();
 	}
 
-	GameObject::GameObject(sf::Texture *texture) {
-		_initProperties();
-		m_rect.setTexture(texture);
-	}
-
 	void GameObject::_initProperties() {
 		m_isObstacle = false;
 		m_isMovable = false;

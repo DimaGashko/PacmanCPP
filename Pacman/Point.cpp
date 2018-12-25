@@ -6,11 +6,6 @@ namespace pg {
 
 	}
 
-	Point::Point(sf::Texture *texture) : Bonus(texture) {
-
-	}
-
-
 	Point::~Point() {
 
 	}

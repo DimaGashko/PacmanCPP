@@ -12,7 +12,6 @@ namespace pg {
 	public:
 		GameObject();
 		void draw(sf::RenderTarget &window);
-		GameObject(sf::Texture *texture);
 
 		void update();
 		void updatePos();

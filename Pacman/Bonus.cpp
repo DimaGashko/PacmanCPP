@@ -6,10 +6,6 @@ namespace pg {
 		_initProperties();
 	}
 
-	Bonus::Bonus(sf::Texture *texture) : GameObject(texture) {
-		_initProperties();
-	}
-
 	void Bonus::_initProperties() {
 		m_isMovable = false;
 		m_isObstacle = false;

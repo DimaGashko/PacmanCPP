@@ -6,10 +6,6 @@ namespace pg {
 		_initProperties();
 	}
 
-	Wall::Wall(sf::Texture *texture) : GameObject(texture) {
-		_initProperties();
-	}
-
 	void Wall::_initProperties() {
 		std::cout << "ASDF ";
 		m_isMovable = false;
