@@ -51,7 +51,7 @@ namespace pg {
 		GameField* _creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 		_TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
-	
+
 		sf::Texture* _getTexture(_TilesetConfig tilesetConfig, int gid, int id);
 	};
 

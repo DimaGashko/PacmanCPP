@@ -51,21 +51,22 @@ namespace pg {
 					auto type = tileConfig.type;
 					GameObject *obj;
 
-					if (type == "Wall") {
-						obj = new Wall();
-					}
-					else if (type == "Point") {
-						obj = new Point();
-					}
-					else if (type == "Pacman") {
+					if (type == "Pacman") {
 						Pacman *pacman = new Pacman();
 
 						gameField->setPlayer(pacman);
 						obj = pacman;
 					}
-					else {
-						obj = new GameObject();
-					}
+
+					else if (type == "Blinky") obj = new GameObject();
+					else if (type == "Pinky") obj = new GameObject();
+					else if (type == "Inky") obj = new GameObject();
+					else if (type == "Clyde") obj = new GameObject();
+
+					else if (type == "Wall") obj = new Wall();
+					else if (type == "Point") obj = new Point();
+
+					else obj = new GameObject();
 
 					obj->setPosition(coords);
 					obj->setTexture(texture);
