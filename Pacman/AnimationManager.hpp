@@ -17,7 +17,7 @@ namespace pg {
 			sf::Texture &texture,
 			std::vector<std::string> &names,
 			std::vector<std::vector<sf::IntRect>> &frames,
-			std::vector<std::vector<int>> &times
+			std::vector<std::vector<int>> &durations
 		);
 
 		void update(int renderFrameTime);

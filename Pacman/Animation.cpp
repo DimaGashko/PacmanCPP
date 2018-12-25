@@ -6,12 +6,12 @@ namespace pg {
 		sf::Shape *shape,
 		sf::Texture &texture,
 		std::vector<sf::IntRect> &frames,
-		std::vector<int> &times
+		std::vector<int> &durations
 	) :
 		m_shape(shape),
 		m_texture(texture),
 		m_frames(frames),
-		m_times(times)
+		m_durations(durations)
 	{
 		
 	}
@@ -24,6 +24,7 @@ namespace pg {
 
 		m_currentFrame = (m_currentFrame + 1) % m_frames.size();
 		
+		m_timeToFrameChange = m_durations[m_currentFrame];
 		m_shape->setTextureRect(m_frames[m_currentFrame]);
 	}
 

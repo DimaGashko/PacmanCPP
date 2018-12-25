@@ -207,6 +207,8 @@ namespace pg {
 			auto tile = item.second;
 			if (tile.type.empty()) continue;
 
+			const std::string ANIMATION_PREFIX = "animation_";
+
 			std::vector<std::string> names;
 			std::vector< std::vector<sf::IntRect>> frames;
 			std::vector< std::vector<int>> times;
@@ -214,9 +216,28 @@ namespace pg {
 			for (int i = 0; i < tile.propertyNames.size(); i++) {
 				auto name = tile.propertyNames[i];
 
+				std::vector<int> frameIds;
+				std::vector<int> durations;
+
 				if (name == "animationName") {
 					names.push_back(tile.propetryValues[i]);
+
+					durations = tile.animationDurations;
+					frameIds = tile.animationFrameIds;
 				}
+				else if (name.rfind(ANIMATION_PREFIX, 0) == 0) {
+					names.push_back(name.substr(ANIMATION_PREFIX.size()));
+
+					auto animationTileId = atoi(tile.propetryValues[i].c_str());
+					auto animationTile = m_tilesetConfig->tiles[animationTileId];
+
+					durations = animationTile.animationDurations;
+					frameIds = animationTile.animationFrameIds;
+				}
+
+				times.push_back(durations);
+
+
 			}
 
 			m_tilesetConfig->animationNames[tile.type] = names;

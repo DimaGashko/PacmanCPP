@@ -7,13 +7,13 @@ namespace pg {
 		sf::Texture &texture,
 		std::vector<std::string> &names,
 		std::vector<std::vector<sf::IntRect>> &frames,
-		std::vector<std::vector<int>> &times
+		std::vector<std::vector<int>> &durations
 	) :
 		m_texture(texture)
 	{
 		for (auto i = 0; i < names.size(); i++) {
 			m_animations[names[i]] = new pg::Animation(
-				shape, texture, frames[i], times[i]
+				shape, texture, frames[i], durations[i]
 			);
 		
 		}
