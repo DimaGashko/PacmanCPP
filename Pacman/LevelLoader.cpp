@@ -147,6 +147,7 @@ namespace pg {
 
 		while (nextTile) {
 			_TileConfig tileConfig;
+			auto a = nextTile->Attribute("type");
 			tileConfig.type = nextTile->Attribute("type");
 
 			int id = nextTile->IntAttribute("id");
