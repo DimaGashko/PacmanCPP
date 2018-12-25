@@ -13,11 +13,9 @@ namespace pg {
 
 		~Wall();
 
-	protected:
-		bool m_isObstacle = true;
-
 	private:
 
+		void _initProperties() override;
 	};
 
 }; // namespace pg

@@ -10,6 +10,11 @@ namespace pg {
 
 	}
 
+	void Bonus::_initProperties() {
+		m_isMovable = false;
+		m_isObstacle = false;
+	}
+
 
 	Bonus::~Bonus() {
 

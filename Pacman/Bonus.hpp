@@ -12,6 +12,9 @@ namespace pg {
 		Bonus(sf::Texture *texture);
 		~Bonus();
 
+	protected: 
+		void _initProperties() override;
+
 	private:
 		
 	};

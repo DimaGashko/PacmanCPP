@@ -10,6 +10,11 @@ namespace pg {
 
 	}
 
+	void Wall::_initProperties() {
+		m_isMovable = false;
+		m_isObstacle = true;
+	}
+
 	Wall::~Wall() {
 
 	}

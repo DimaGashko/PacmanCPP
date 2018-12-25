@@ -50,18 +50,16 @@ namespace pg {
 	    virtual ~GameObject();
 
 	protected:
-
-	private:
-		sf::RectangleShape m_rect;
-		sf::Vector2f m_speed;
-		sf::Vector2i *m_posInGrid;
+		virtual void _initProperties();
 
 		bool m_isDead = false;
 		bool m_isObstacle;
 		bool m_isMovable;
 
-		virtual void _initProperties();
-
+	private:
+		sf::RectangleShape m_rect;
+		sf::Vector2f m_speed;
+		sf::Vector2i *m_posInGrid;
 	};
 
 }; // namespace pg

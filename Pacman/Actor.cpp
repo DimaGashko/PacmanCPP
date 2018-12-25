@@ -10,6 +10,11 @@ namespace pg {
 
 	}
 
+	void Actor::_initProperties() {
+		m_isMovable = true;
+		m_isObstacle = false;
+	}
+
 
 	Actor::~Actor() {
 

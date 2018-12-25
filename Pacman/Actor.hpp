@@ -12,6 +12,10 @@ namespace pg {
 		Actor(sf::Texture *texture);
 		~Actor();
 
+	protected:
+
+		void _initProperties() override;
+
 	private:
 		
 	};
