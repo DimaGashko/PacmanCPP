@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameField.cpp" />
@@ -35,6 +37,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.hpp" />
+    <ClInclude Include="Animation.hpp" />
+    <ClInclude Include="AnimationManager.hpp" />
     <ClInclude Include="Bonus.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="GameField.hpp" />
