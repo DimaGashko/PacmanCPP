@@ -2,8 +2,12 @@
 
 namespace pg {
 
+	AnimationManager::AnimationManager() {
+		
+	}
+
 	AnimationManager::AnimationManager(
-		sf::Shape *shape,
+		sf::RectangleShape *shape,
 		sf::Texture &texture,
 		std::vector<std::string> &names,
 		std::vector<std::vector<sf::IntRect>> &frames,
@@ -15,7 +19,7 @@ namespace pg {
 			m_animations[names[i]] = new pg::Animation(
 				shape, texture, frames[i], durations[i]
 			);
-		
+
 		}
 	}
 
