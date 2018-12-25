@@ -60,6 +60,19 @@ namespace pg {
 					//obj->setTexture(texture);
 					obj->setSize(sf::Vector2f(tileSize));
 
+					auto animNames = m_tilesetConfig->animationNames;
+					if (animNames.find(type) != animNames.end()) {
+						obj->setAnimations(
+							m_tilesetConfig->tilesetTexture,
+							m_tilesetConfig->animationNames[type],
+							m_tilesetConfig->animationFrames[type],
+							m_tilesetConfig->animationDurations[type]
+						);
+					}
+					else {
+						
+					}
+
 					gameField->addObject(obj);
 				}
 			}

@@ -9,6 +9,17 @@ namespace pg {
 		
 	}
 
+	void initAnimations(
+		sf::Texture &texture,
+		std::vector<std::string> &names,
+		std::vector<std::vector<sf::IntRect>> &frames,
+		std::vector<std::vector<int>> &durations
+	) {
+	
+		
+
+	}
+
 	void GameObject::update() {
 		updatePos();
 	}
@@ -24,8 +35,15 @@ namespace pg {
 		window.draw(m_rect);
 	}
 
-	void GameObject::setTexture(sf::Texture *texture) {
-		m_rect.setTexture(texture);
+	void GameObject::setAnimations(
+		sf::Texture &texture, 
+		std::vector<std::string> &names, 
+		std::vector<std::vector<sf::IntRect>> &frames, 
+		std::vector<std::vector<int>> &durations
+	) { 
+		
+		m_animationManager = new AnimationManager(&m_rect, texture, names, frames, durations);
+		
 	}
 
 	bool GameObject::intersects(GameObject *obj) {

@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Math.hpp"
+#include "AnimationManager.hpp"
 
 namespace pg {
 
@@ -13,7 +14,13 @@ namespace pg {
 		GameObject();
 
 		void draw(sf::RenderTarget &window);
-		void setTexture(sf::Texture *texture);
+
+		void setAnimations(
+			sf::Texture &texture,
+			std::vector<std::string> &names,
+			std::vector<std::vector<sf::IntRect>> &frames,
+			std::vector<std::vector<int>> &durations
+		);
 
 		bool intersects(GameObject *obj);
 		void updatePos();
@@ -49,15 +56,16 @@ namespace pg {
 
 	    virtual ~GameObject();
 
-	protected:
-		bool m_isDead = false;
-		bool m_isObstacle;
-		bool m_isMovable;
-
 	private:
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
+
+		bool m_isDead = false;
+		bool m_isObstacle;
+		bool m_isMovable;
+
+		pg::AnimationManager *m_animationManager;
 	};
 
 }; // namespace pg

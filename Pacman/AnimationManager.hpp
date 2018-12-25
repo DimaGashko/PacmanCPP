@@ -12,8 +12,10 @@ namespace pg {
 	class AnimationManager {
 
 	public:
+		AnimationManager();
+
 		AnimationManager(
-			sf::Shape *shape,
+			sf::RectangleShape *shape,
 			sf::Texture &texture,
 			std::vector<std::string> &names,
 			std::vector<std::vector<sf::IntRect>> &frames,
