@@ -9,7 +9,7 @@ namespace pg {
 	void Player::update(int frameTime) {
 		if (!m_actor) return;
 
-		float step = float(0.1 * frameTime);
+		float step = float(0.15 * frameTime);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 			m_actor->addToSpeed(sf::Vector2f(-step, 0));

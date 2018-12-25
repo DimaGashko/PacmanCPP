@@ -86,19 +86,19 @@ namespace pg {
 		auto intersectSide = _getCollisionSide(obj1, obj2);
 
 		if (intersectSide == Left) {
-			obj1->setSpeed(sf::Vector2f(-0.01f, speed.y));
+			obj1->setSpeed(sf::Vector2f(-0.0f, speed.y));
 			obj1->move(sf::Vector2f(-1.f, 0.f));
 		}
 		else if (intersectSide == Top) {
-			obj1->setSpeed(sf::Vector2f(speed.x, -0.01f));
+			obj1->setSpeed(sf::Vector2f(speed.x, -0.0f));
 			obj1->move(sf::Vector2f(0.f, -1.f));
 		}
 		else if (intersectSide == Right) {
-			obj1->setSpeed(sf::Vector2f(0.01f, speed.y));
+			obj1->setSpeed(sf::Vector2f(0.0f, speed.y));
 			obj1->move(sf::Vector2f(1.f, 0.f));
 		}
 		else if (intersectSide == Bottom) {
-			obj1->setSpeed(sf::Vector2f(speed.x, 0.01f));
+			obj1->setSpeed(sf::Vector2f(speed.x, 0.0f));
 			obj1->move(sf::Vector2f(0.f, 1.f));
 		}
 		else obj1->setSpeed(sf::Vector2f(0.f, 0.f));
