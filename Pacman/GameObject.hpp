@@ -44,6 +44,9 @@ namespace pg {
 		void move(sf::Vector2f offset);
 		void addToSpeed(sf::Vector2f dSpeed);
 
+		void setPosInGrid(sf::Vector2i *coords);
+		sf::Vector2i* getPosInGrid();
+
 	    virtual ~GameObject();
 
 	protected:

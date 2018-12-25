@@ -44,36 +44,30 @@ namespace pg {
 				int id = gid - 1;
 
 				sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
-				
 				auto texture = _getTexture(tilesetConfig, gid, id);
-
-				if (tilesetConfig.tiles.count(id) == 0) {
-					GameObject *obj = new GameObject(texture);
-					gameField->addObject(obj);
-					continue;
-				}
 
 				_TileConfig tileConfig = tilesetConfig.tiles[id];
 				auto type = tileConfig.type;
 				GameObject *obj;
 
 				if (type == "Wall") {
-					obj = new Wall(texture);
+					obj = new Wall();
 				}
 				else if (type == "Point") {
-					obj = new Point(texture);
+					obj = new Point();
 				}
 				else if (type == "Pacman") {
-					Pacman *pacman = new Pacman(texture);
+					Pacman *pacman = new Pacman();
 
 					gameField->setPlayer(pacman);
 					obj = pacman;
 				}
 				else {
-					obj = new GameObject(texture);
+					obj = new GameObject();
 				}
 
 				obj->setPosition(coords);
+				obj->setTexture(texture);
 				obj->setSize(sf::Vector2f(tileSize));
 
 				gameField->addObject(obj);
