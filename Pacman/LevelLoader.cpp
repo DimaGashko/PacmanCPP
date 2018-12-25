@@ -9,9 +9,7 @@ namespace pg {
 	GameField* LevelLoader::loadFromTmx(std::string url) {
 		if (!m_tilesetConfig) {
 			loadTileset();
-		}
-
-
+		} 
 
 		tinyxml2::XMLDocument xmlLevel;
 
@@ -231,6 +229,8 @@ namespace pg {
 						m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
 					));
 				}
+
+				frames.push_back(_frames);
 			}
 
 			m_tilesetConfig->animationNames[tile.type] = names;
