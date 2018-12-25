@@ -2,7 +2,10 @@
  
 namespace pg {
 
-	GameObject::GameObject() {
+	GameObject::GameObject() :
+		m_isMovable(false),
+		m_isObstacle(false)
+	{
 		
 	}
 
