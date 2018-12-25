@@ -118,13 +118,14 @@ namespace pg {
 		while (xmlNextLayer != NULL) {
 			std::vector<int> layerGids(gidsLen);
 			
-
 			auto xmlNextGid = xmlNextLayer->FirstChildElement("data")->FirstChildElement("tile");
 
 			for (int i = 0; xmlNextGid != NULL; i++) {
 				layerGids[i] = xmlNextGid->IntAttribute("gid");
+
 				xmlNextGid = xmlNextGid->NextSiblingElement("tile");
 			}
+
 			config.gids.push_back(layerGids);
 			xmlNextLayer = xmlNextLayer->NextSiblingElement("layer");
 		}
