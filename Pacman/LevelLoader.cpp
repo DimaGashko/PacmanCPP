@@ -37,40 +37,42 @@ namespace pg {
 
 		GameField* gameField = new GameField(size, tileSize);
 
-		for (int x = 0; x < size.x; x++) {
-			for (int y = 0; y < size.y; y++) {
-				int gid = levelConfig.gids[y * size.x + x];
-				if (gid == 0) continue;
-				int id = gid - 1;
+		for (auto gids : levelConfig.gids) {
+			for (int x = 0; x < size.x; x++) {
+				for (int y = 0; y < size.y; y++) {
+					int gid = gids[y * size.x + x];
+					if (gid == 0) continue;
+					int id = gid - 1;
 
-				sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
-				auto texture = _getTexture(tilesetConfig, gid, id);
+					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
+					auto texture = _getTexture(tilesetConfig, gid, id);
 
-				_TileConfig tileConfig = tilesetConfig.tiles[id];
-				auto type = tileConfig.type;
-				GameObject *obj;
+					_TileConfig tileConfig = tilesetConfig.tiles[id];
+					auto type = tileConfig.type;
+					GameObject *obj;
 
-				if (type == "Wall") {
-					obj = new Wall();
+					if (type == "Wall") {
+						obj = new Wall();
+					}
+					else if (type == "Point") {
+						obj = new Point();
+					}
+					else if (type == "Pacman") {
+						Pacman *pacman = new Pacman();
+
+						gameField->setPlayer(pacman);
+						obj = pacman;
+					}
+					else {
+						obj = new GameObject();
+					}
+
+					obj->setPosition(coords);
+					obj->setTexture(texture);
+					obj->setSize(sf::Vector2f(tileSize));
+
+					gameField->addObject(obj);
 				}
-				else if (type == "Point") {
-					obj = new Point();
-				}
-				else if (type == "Pacman") {
-					Pacman *pacman = new Pacman();
-
-					gameField->setPlayer(pacman);
-					obj = pacman;
-				}
-				else {
-					obj = new GameObject();
-				}
-
-				obj->setPosition(coords);
-				obj->setTexture(texture);
-				obj->setSize(sf::Vector2f(tileSize));
-
-				gameField->addObject(obj);
 			}
 		}
 
@@ -115,18 +117,15 @@ namespace pg {
 
 		while (xmlNextLayer != NULL) {
 			std::vector<int> layerGids(gidsLen);
+			
 
 			auto xmlNextGid = xmlNextLayer->FirstChildElement("data")->FirstChildElement("tile");
 
 			for (int i = 0; xmlNextGid != NULL; i++) {
-				int gid = xmlNextGid->IntAttribute("gid");
-				if (gid > 0) layerGids[i] = gid;
-
-				if (name == "actors" && gid > 0) std::cout << "actor ";
-
+				layerGids[i] = xmlNextGid->IntAttribute("gid");
 				xmlNextGid = xmlNextGid->NextSiblingElement("tile");
 			}
-
+			config.gids.push_back(layerGids);
 			xmlNextLayer = xmlNextLayer->NextSiblingElement("layer");
 		}
 

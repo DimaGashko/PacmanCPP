@@ -50,7 +50,7 @@ namespace pg {
 	sf::Vector2f GameObject::getPosition() {
 		return m_rect.getPosition();
 	}
-
+	 
 	void GameObject::setPosition(sf::Vector2f coords) {
 		m_rect.setPosition(coords); 
 	}

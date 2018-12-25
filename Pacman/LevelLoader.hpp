@@ -33,7 +33,7 @@ namespace pg {
 
 		struct _LevelConfig {
 			sf::Vector2i size;
-			std::vector<int> gids;
+			std::vector<std::vector<int>> gids;
 			std::string tilesetUrl;
 		};
 
