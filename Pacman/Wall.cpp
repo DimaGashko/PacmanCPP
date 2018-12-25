@@ -11,6 +11,7 @@ namespace pg {
 	}
 
 	void Wall::_initProperties() {
+		std::cout << "ASDF ";
 		m_isMovable = false;
 		m_isObstacle = true;
 	}
