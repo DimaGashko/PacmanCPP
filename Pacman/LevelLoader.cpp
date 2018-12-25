@@ -154,21 +154,69 @@ namespace pg {
 
 		parseTiles(xmlTileset);
 	}
-
+	
 	void LevelLoader::parseTiles(tinyxml2::XMLElement *xmlTileset) {
 		auto config = m_tilesetConfig;
 
 		auto nextTile = xmlTileset->FirstChildElement("tile");
 
 		while (nextTile) {
+			_TileConfig tile;
 			int id = nextTile->IntAttribute("id");
+
 			auto type = nextTile->Attribute("type");
+			tile.type = (type) ? type : "";
 
-			config->tileTypes[id] = (type) ? type : "";
+			auto xmlProperties = xmlTileset->FirstChildElement("properties");
+			auto xmlAnimation = xmlTileset->FirstChildElement("animation");
 
-			nextTile = nextTile->NextSiblingElement();
+			auto nextProperty = xmlProperties->FirstChildElement("property");
+			while (nextProperty != NULL) {
+				
+				auto name = nextProperty->Attribute("name");
+				auto type = nextProperty->Attribute("type");
+				auto value = nextProperty->Attribute("value");
+
+				tile.propertyNames.push_back(name ? name : "");
+				tile.propetryValues.push_back(value ? value : "");
+				tile.propertyTypes.push_back(type ? type : "string");
+
+				nextProperty = nextProperty->NextSiblingElement("property");
+			}
+
+			auto nextFrame = xmlAnimation->FirstChildElement("frame");
+			while (nextFrame != NULL) {
+
+				auto tileid = nextFrame->IntAttribute("tileid");
+				auto duration = nextFrame->IntAttribute("duration");
+
+				tile.animationFrameIds.push_back(tileid);
+				tile.animationDurations.push_back(duration);
+
+				nextFrame = nextFrame->NextSiblingElement("frame");
+			}
+
+			config->tiles[id] = tile;
+			nextTile = nextTile->NextSiblingElement("tile");
 		}
 	}
+
+/*
+
+<tile id="22" type="Ghost">
+  <properties>
+   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_bottom" type="int" value="28"/>
+   <property name="animation_left" type="int" value="24"/>
+   <property name="animation_top" type="int" value="26"/>
+  </properties>
+  <animation>
+   <frame tileid="22" duration="150"/>
+   <frame tileid="23" duration="150"/>
+  </animation>
+ </tile>
+	
+*/
 
 	GameField* LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);

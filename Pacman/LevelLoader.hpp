@@ -34,12 +34,23 @@ namespace pg {
 			std::string tilesetUrl;
 		};
 
+		struct _TileConfig {
+			std::string type;
+			
+			std::vector<std::string> propertyNames;
+			std::vector<std::string> propertyTypes;
+			std::vector<std::string> propetryValues;
+
+			std::vector<int> animationFrameIds;
+			std::vector<int> animationDurations;
+		};
+
 		struct _TilesetConfig {
 			int columns;
 			sf::Vector2i tileSize;
 			sf::Texture tilesetTexture;
 
-			std::unordered_map<int, std::string> tileTypes;
+			std::unordered_map<int, _TileConfig> tiles;
 			
 			std::vector<std::string> animationNames;
 			std::vector<std::vector<sf::IntRect>> animationFrames;
