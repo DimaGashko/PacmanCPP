@@ -10,9 +10,11 @@ namespace pg {
 		Animation(
 			sf::Shape *shape, 
 			sf::Texture &texture, 
-			std::vector<sf::IntRect> &areas, 
+			std::vector<sf::IntRect> &frames, 
 			std::vector<int> &times
 		);
+
+		void update(int frameTime);
 		
 		~Animation();
 
@@ -20,8 +22,9 @@ namespace pg {
 
 		sf::Shape *m_shape;
 		sf::Texture m_texture;
-		std::vector<sf::IntRect> m_areas;
+		std::vector<sf::IntRect> m_frames;
 		std::vector<int> m_times;
+
 	};
 
 }
