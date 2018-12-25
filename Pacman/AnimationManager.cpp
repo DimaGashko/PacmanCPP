@@ -22,7 +22,7 @@ namespace pg {
 	void AnimationManager::update(int renderFrameTime) {
 		m_animations[m_currectAnimation]->update(renderFrameTime);
 	}
-
+	 
 	void AnimationManager::play() {
 		m_animations[m_currectAnimation]->play();
 	}
