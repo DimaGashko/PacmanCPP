@@ -41,14 +41,17 @@ namespace pg {
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
 		auto cellSize2 = m_cellSize * 2.f;
+		//int iter = 0;
 
 		for (auto obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, cellSize2);
 
 			std::vector<GameObject*> candidates;
-			getObjectsOfRange(candidatesRange, candidates);
+			getObjectsOfRange(candidatesRange, candidates, 50);
 			
+			//iter += candidates.size();
+
 			for (auto obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
 				bool intersects = obj1->intersects(obj2);
@@ -59,6 +62,8 @@ namespace pg {
 				//interact
 			}
 		}
+
+		//std::cout << iter << std::endl;
 
 		for (auto obj : activeObjects) {
 			auto oldPos = obj->getPosition();
@@ -164,7 +169,10 @@ namespace pg {
 		cell.push_back(object);
 	}
 
-	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res) {
+	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize) {
+		std::vector<GameObject*> tmp(maxSize);
+		int len = 0;
+
 		auto _range = sf::IntRect(
 			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
 			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
@@ -176,12 +184,15 @@ namespace pg {
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
 
 				for (auto obj : m_grid[x][y]) {
-					res.push_back(obj);
+					tmp[len++] = obj;
 				}
 
 			}
 		}
 
+		res.resize(len);
+
+		std::move(tmp.begin(), tmp.begin() + len, res.begin());
 	}
 
 	inline bool GameField::_hasCell(sf::Vector2i coords) {
