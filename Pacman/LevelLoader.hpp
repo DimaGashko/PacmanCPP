@@ -46,13 +46,16 @@ namespace pg {
 			sf::Vector2i tileSize;
 			sf::Image tileset;
 			std::unordered_map<int, _TileConfig> tiles;
+
 		};
 
-		GameField* _creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig);
-		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
-		_TilesetConfig _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
+		_TilesetConfig *m_tilesetConfig;
 
-		sf::Texture* _getTexture(_TilesetConfig tilesetConfig, int gid, int id);
+		GameField* _creatLevel(_LevelConfig levelConfig);
+		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
+		_TilesetConfig* _parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc);
+
+		sf::Texture* _getTexture(int gid, int id);
 	};
 
 } // namespace pg

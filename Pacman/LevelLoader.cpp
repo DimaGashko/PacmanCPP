@@ -26,14 +26,17 @@ namespace pg {
 			return new GameField();
 		}
 		
-		_TilesetConfig tilesetConfig = _parseXmlTileset(xmlTileset);
+		if (m_tilesetConfig == NULL) {
+			m_tilesetConfig = _parseXmlTileset(xmlTileset);
+		}
 		
-		return _creatLevel(levelConfig, tilesetConfig);
+		
+		return _creatLevel(levelConfig);
 	}
 	 
-	GameField* LevelLoader::_creatLevel(_LevelConfig levelConfig, _TilesetConfig tilesetConfig) {
+	GameField* LevelLoader::_creatLevel(_LevelConfig levelConfig) {
 		auto size = levelConfig.size;
-		auto tileSize = tilesetConfig.tileSize;
+		auto tileSize = m_tilesetConfig->tileSize;
 
 		GameField* gameField = new GameField(size, tileSize);
 
@@ -45,9 +48,9 @@ namespace pg {
 					int id = gid - 1;
 
 					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
-					auto texture = _getTexture(tilesetConfig, gid, id);
+					auto texture = _getTexture(gid, id);
 
-					_TileConfig tileConfig = tilesetConfig.tiles[id];
+					_TileConfig tileConfig = m_tilesetConfig->tiles[id];
 					auto type = tileConfig.type;
 					GameObject *obj;
 
@@ -77,17 +80,17 @@ namespace pg {
 		return gameField;
 	}
 
-	sf::Texture* LevelLoader::_getTexture(LevelLoader::_TilesetConfig tilesetConfig, int gid, int id) {
+	sf::Texture* LevelLoader::_getTexture(int gid, int id) {
 		if (m_textures[gid] == NULL) {
 			sf::Texture *texture = new sf::Texture;
 
 			sf::IntRect textureArea(
-				(id % tilesetConfig.columns) * tilesetConfig.tileSize.x,
-				(id / tilesetConfig.columns) * tilesetConfig.tileSize.y,
-				tilesetConfig.tileSize.x, tilesetConfig.tileSize.y
+				(id % m_tilesetConfig->columns) * m_tilesetConfig->tileSize.x,
+				(id / m_tilesetConfig->columns) * m_tilesetConfig->tileSize.y,
+				m_tilesetConfig->tileSize.x, m_tilesetConfig->tileSize.y
 			);
 
-			texture->loadFromImage(tilesetConfig.tileset, textureArea);
+			texture->loadFromImage(m_tilesetConfig->tileset, textureArea);
 
 			m_textures[gid] = texture;
 		}
@@ -131,14 +134,14 @@ namespace pg {
 		return config;
 	}
 
-	LevelLoader::_TilesetConfig LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
-		_TilesetConfig config;
+	LevelLoader::_TilesetConfig* LevelLoader::_parseXmlTileset(tinyxml2::XMLDocument &xmlTilesetDoc) {
+		_TilesetConfig *config = new _TilesetConfig;
 
 		auto xmlTileset = xmlTilesetDoc.FirstChildElement("tileset");
 
-		config.columns = xmlTileset->IntAttribute("columns");
+		config->columns = xmlTileset->IntAttribute("columns");
 		
-		config.tileSize = sf::Vector2i(
+		config->tileSize = sf::Vector2i(
 			xmlTileset->IntAttribute("tilewidth"),
 			xmlTileset->IntAttribute("tileheight")
 		);
@@ -146,9 +149,9 @@ namespace pg {
 		std::string imgUrl = xmlTileset->FirstChildElement("image")->Attribute("source");
 		imgUrl = imgUrl.substr(6);
 
-		config.tileset = sf::Image();
+		config->tileset = sf::Image();
 
-		if (!config.tileset.loadFromFile(imgUrl)) {
+		if (!config->tileset.loadFromFile(imgUrl)) {
 			std::cerr << "Cant't load the tileset image";
 		};
 
@@ -161,7 +164,7 @@ namespace pg {
 			tileConfig.type = (type) ? type : "";
 
 			int id = nextTile->IntAttribute("id");
-			config.tiles[id] = tileConfig;
+			config->tiles[id] = tileConfig;
 
 			nextTile = nextTile->NextSiblingElement();
 		}
@@ -231,6 +234,8 @@ namespace pg {
 		}
 
 		m_textures.clear();
+
+		delete m_tilesetConfig;
 	} 
 
 } // namespace pg
