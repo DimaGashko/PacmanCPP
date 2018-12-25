@@ -3,11 +3,11 @@
 namespace pg {
 
 	Bonus::Bonus() : GameObject() {
-
+		_initProperties();
 	}
 
 	Bonus::Bonus(sf::Texture *texture) : GameObject(texture) {
-
+		_initProperties();
 	}
 
 	void Bonus::_initProperties() {

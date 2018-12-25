@@ -72,7 +72,7 @@ namespace pg {
 	}
 
 	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
-		if (!obj1->isObstacle() || !obj2->isObstacle()) {
+		if (!obj1->isObstacle() || !obj2->isObstacle() || !obj1->isMovable()) {
 			return;
 		}
 

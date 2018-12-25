@@ -3,11 +3,11 @@
 namespace pg {
 
 	Wall::Wall() : GameObject() {
-	
+		_initProperties();
 	}
 
 	Wall::Wall(sf::Texture *texture) : GameObject(texture) {
-
+		_initProperties();
 	}
 
 	void Wall::_initProperties() {
