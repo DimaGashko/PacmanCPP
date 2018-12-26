@@ -16,7 +16,7 @@ namespace pg {
 		void interact(pg::GameObject *obj);
 
 		virtual void use(pg::GameObject *obj) = 0;
-		virtual bool itCanUseTheBonus(pg::GameObject *obj) = 0;
+		virtual bool canItUseTheBonus(pg::GameObject *obj) = 0;
 
 		~Bonus();
 

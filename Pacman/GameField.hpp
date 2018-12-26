@@ -28,7 +28,7 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
-		bool isWon();
+		bool checkWon();
 
 		enum eSides { Left, Top, Right, Bottom, None };
 
@@ -44,8 +44,6 @@ namespace pg {
 		 
 		// Cетка игры
 		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
-
-		void checkWon();
 
 		void getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize = 5000);
 

@@ -12,7 +12,7 @@ namespace pg {
 		Point();
 
 		void use(pg::GameObject *obj) override;
-		bool itCanUseTheBonus(pg::GameObject *obj) override;
+		bool canItUseTheBonus(pg::GameObject *obj) override;
 
 		~Point();
 

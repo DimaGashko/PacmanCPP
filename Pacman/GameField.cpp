@@ -25,12 +25,11 @@ namespace pg {
 	void GameField::addObject(GameObject *object) {
 		if (dynamic_cast<Point*>(object) != nullptr) {
 			m_pointsCount++;
-			std::cout << "IsPoint ";
+
 			object->setOnDead([&] {
 				m_pointsCount--;
-				std::cout << "Points: " << m_pointsCount << std::endl;
 
-				checkWon();
+				std::cout << "Points: " << m_pointsCount << std::endl;
 			});
 		}
 
@@ -185,9 +184,10 @@ namespace pg {
 		m_grid[coords->x][coords->y] = newCell;
 	}
 
-	void GameField::checkWon() {
-		std::cout << "Check won);";
+	bool GameField::checkWon() {
 		if (m_pointsCount <= 0) m_isWon = true;
+
+		return m_isWon;
 	}
 
 	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize) {
@@ -236,10 +236,6 @@ namespace pg {
 
 	Actor* GameField::getPlayer() {
 		return m_player;
-	}
-
-	bool GameField::isWon() {
-		return m_isWon;
 	}
 
 	GameField::~GameField() {
