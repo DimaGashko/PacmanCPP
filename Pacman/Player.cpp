@@ -6,25 +6,23 @@ namespace pg {
 
 	}
 
-	void Player::update(int frameTime) {
+	void Player::update() {
 		if (!m_actor) return;
 
-		float step = float(0.1 * frameTime);
-
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			m_actor->addToSpeed(sf::Vector2f(-step, 0));
+			m_actor->goLeft();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-			m_actor->addToSpeed(sf::Vector2f(0, -step));
+			m_actor->goTop();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			m_actor->addToSpeed(sf::Vector2f(step, 0));
+			m_actor->goRight();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			m_actor->addToSpeed(sf::Vector2f(0, step));
+			m_actor->goBottom();
 		}
 	}
 

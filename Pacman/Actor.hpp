@@ -8,19 +8,24 @@ namespace pg {
 	public:
 		Actor();
 
+		void update(int frameTime) override;
+
 		void goLeft();
-		void goRight();
 		void goTop();
+		void goRight();
 		void goBottom();
 
 		~Actor();
 
 	private:
+		float m_step;
+
 		bool m_goingLeft = false;
-		bool m_goingRight = false;
 		bool m_goingTop = false;
+		bool m_goingRight = false;
 		bool m_goingBottom = false;
 		
+		void go(int frameTime);
 	};
 
 }; // namespace pg

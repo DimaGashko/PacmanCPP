@@ -2,9 +2,35 @@
 
 namespace pg {
 
-	Actor::Actor() : GameObject() {
+	Actor::Actor() : 
+		GameObject(),
+		m_step(0.1f)
+	{
 		m_isMovable = true;
 		m_isObstacle = false;
+	}
+
+	void Actor::update(int frameTime) {
+		GameObject::update(frameTime);
+
+		go(frameTime);
+	}
+
+	void Actor::go(int frameTime) {
+		auto step = m_step * frameTime;
+		sf::Vector2f dir;
+
+		if (m_goingLeft) dir.x = -step;
+		if (m_goingTop) dir.y = -step;
+		if (m_goingRight) dir.x = step;
+		if (m_goingBottom) dir.y = step;
+
+		addToSpeed(dir);
+
+		m_goingLeft = false;
+		m_goingTop = false;
+		m_goingRight = false;
+		m_goingBottom = false;
 	}
 
 	void Actor::goLeft() {

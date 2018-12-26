@@ -10,7 +10,7 @@ namespace pg {
 	public:
 		Player();
 
-		void update(int frameTime);
+		void update();
 
 		void setActor(Actor *actor);
 		Actor *getActor();

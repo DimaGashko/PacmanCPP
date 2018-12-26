@@ -40,8 +40,11 @@ namespace pg {
 		std::vector<GameObject*> activeObjects;
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
+		for (auto &obj : activeObjects) {
+			obj->update(frameTime);
+		}
+
 		auto cellSize2 = m_cellSize * 2.f;
-		//int iter = 0;
 
 		for (auto &obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
@@ -49,8 +52,6 @@ namespace pg {
 
 			std::vector<GameObject*> candidates;
 			getObjectsOfRange(candidatesRange, candidates, 50);
-			
-			//iter += candidates.size();
 
 			for (auto &obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
@@ -63,11 +64,10 @@ namespace pg {
 			}
 		}
 
-		//std::cout << iter << std::endl;
-
 		for (auto &obj : activeObjects) {
 			auto oldPos = obj->getPosition();
 			obj->update(frameTime);
+			obj->updatePos();
 			auto newPos = obj->getPosition();
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {

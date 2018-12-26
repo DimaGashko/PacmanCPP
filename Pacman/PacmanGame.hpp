@@ -44,6 +44,8 @@ namespace pg {
 
 		void _createGame();
 		void _initWindow();
+		
+		sf::Vector2f _getGameSize();
 
 		sf::FloatRect _getVisibleRange();
 	};

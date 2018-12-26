@@ -36,7 +36,7 @@ namespace pg {
 				}
 			}
 
-			if (m_window.hasFocus() || 1) {
+			if (m_window.hasFocus()) {
 				m_window.clear();
 				update();
 				draw();
@@ -56,8 +56,9 @@ namespace pg {
 	}
 
 	void PacmanGame::_updateGameField() {
-		m_player.update(m_frameTime);
-		m_gameField->update(sf::Vector2f(m_camera.getView().getSize()), m_frameTime);
+		m_player.update();
+		m_gameField->update(_getGameSize(), m_frameTime);
+
 		m_camera.update();
 	}
 
@@ -87,10 +88,14 @@ namespace pg {
 		return sf::FloatRect(start, end - start + sf::Vector2f(20, 20));
 	}
 
+	sf::Vector2f PacmanGame::_getGameSize() {
+		return sf::Vector2f(m_camera.getView().getSize());
+	}
+
 	PacmanGame::~PacmanGame() {
 		delete m_gameField;
 	}
 
-} // namespace pg
+}; // namespace pg
 
 
