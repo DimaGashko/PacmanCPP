@@ -16,6 +16,10 @@ namespace pg {
 
 	}
 
+	void Wall::interact(pg::GameObject *obj) {
+	
+	}
+
 	Wall::~Wall() {
 
 	}

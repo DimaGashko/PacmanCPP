@@ -15,6 +15,10 @@ namespace pg {
 
 	}
 
+	void Bonus::interact(pg::GameObject *obj) {
+		use(obj);
+	}
+
 	Bonus::~Bonus() {
 
 	}

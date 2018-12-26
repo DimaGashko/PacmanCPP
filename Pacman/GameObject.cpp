@@ -125,6 +125,10 @@ namespace pg {
 		return m_posInGrid;
 	}
 
+	bool GameObject::die() {
+		return m_isDead = true;
+	}
+
 	sf::Vector2f GameObject::getCenter() {
 		return getPosition() + getSize() / 2.f;
 	}

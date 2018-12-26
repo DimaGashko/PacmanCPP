@@ -13,6 +13,9 @@ namespace pg {
 
 		void updateAnimation(int frameTime) override;
 		void setStartAnim() override;
+		void interact(pg::GameObject *obj);
+
+		virtual void use(pg::GameObject *obj) = 0;
 
 		~Bonus();
 

@@ -29,6 +29,7 @@ namespace pg {
 		virtual void update(int frameTime);
 		virtual void updateAnimation(int frameTime) = 0;
 		virtual void setStartAnim() = 0;
+		virtual void interact(pg::GameObject *obj) = 0;
 
 		void updatePos();
 
@@ -59,6 +60,8 @@ namespace pg {
 
 		void setPosInGrid(sf::Vector2i *coords);
 		sf::Vector2i* getPosInGrid();
+
+		bool die();
 
 	    virtual ~GameObject();
 

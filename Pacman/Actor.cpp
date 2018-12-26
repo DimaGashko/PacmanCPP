@@ -16,6 +16,10 @@ namespace pg {
 		go(frameTime);
 	}
 
+	void Actor::interact(pg::GameObject *obj) {
+
+	}
+
 	void Actor::go(int frameTime) {
 		auto step = m_step * frameTime;
 		sf::Vector2f dir;

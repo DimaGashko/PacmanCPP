@@ -9,6 +9,9 @@ namespace pg {
 	class Point : public Bonus {
 	public:
 		Point();
+
+		void use(pg::GameObject *obj) override;
+
 		~Point();
 
 	private:

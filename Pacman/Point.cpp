@@ -6,6 +6,11 @@ namespace pg {
 
 	}
 
+	void Point::use(pg::GameObject *obj) {
+		die();
+		std::cout << "Point Use ";
+	}
+
 	Point::~Point() {
 
 	}

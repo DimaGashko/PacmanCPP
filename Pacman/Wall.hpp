@@ -12,6 +12,7 @@ namespace pg {
 
 		void updateAnimation(int frameTime) override;
 		void setStartAnim() override;
+		void interact(pg::GameObject *obj);
 
 		~Wall();
 

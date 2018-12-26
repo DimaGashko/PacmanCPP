@@ -60,7 +60,7 @@ namespace pg {
 				if (!intersects) continue;
 
 				procCollision(obj1, obj2);
-				//interact
+				obj1->interact(obj2);
 			}
 		}
 
@@ -183,6 +183,11 @@ namespace pg {
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
 
 				for (auto &obj : m_grid[x][y]) {
+					if (obj->isDead()) {
+						//removeObjFromeGrid(obj);
+						continue;
+					}
+
 					tmp[len++] = obj;
 				}
 
