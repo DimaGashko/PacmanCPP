@@ -28,6 +28,7 @@
     <ClCompile Include="Clyde.cpp" />
     <ClCompile Include="GameField.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Inky.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="lib\tinyxml2.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Clyde.hpp" />
     <ClInclude Include="GameField.hpp" />
     <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="Ghost.hpp" />
     <ClInclude Include="Inky.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
     <ClInclude Include="lib\tinyxml2.h" />

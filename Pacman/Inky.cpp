@@ -1,12 +1,13 @@
-#include "Inky.h"
+#include "Inky.hpp"
 
+namespace pg {
 
+	Inky::Inky() : Ghost() {
 
-Inky::Inky()
-{
-}
+	}
 
+	Inky::~Inky() {
 
-Inky::~Inky()
-{
-}
+	}
+
+}; // namespace pg

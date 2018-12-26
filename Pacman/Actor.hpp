@@ -1,7 +1,5 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
 #include "GameObject.hpp"
 
 namespace pg {
@@ -15,4 +13,4 @@ namespace pg {
 		
 	};
 
-};
+}; // namespace pg

@@ -1,12 +1,13 @@
-#include "Clyde.h"
+#include "Clyde.hpp"
 
+namespace pg {
 
+	Clyde::Clyde() : Ghost() {
 
-Clyde::Clyde()
-{
-}
+	}
 
+	Clyde::~Clyde() {
 
-Clyde::~Clyde()
-{
-}
+	}
+
+}; // namespace pg

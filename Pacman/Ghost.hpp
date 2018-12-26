@@ -2,10 +2,12 @@
 
 #include "Actor.hpp"
 
-class Ghost : public Actor {
-public:
-	Ghost();
-	void findWay();
-	~Ghost();
-};
+namespace pg {
 
+	class Ghost : public Actor {
+	public:
+		Ghost();
+		~Ghost();
+	};
+
+}; // namespace pg

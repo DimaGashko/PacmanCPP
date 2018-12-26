@@ -10,10 +10,13 @@
 
 #include "GameField.hpp"
 #include "GameObject.hpp"
-#include "Actor.hpp"
-#include "Pacman.hpp"
 #include "Wall.hpp"
 #include "Point.hpp"
+#include "Pacman.hpp"
+#include "Blinky.hpp"
+#include "Pinky.hpp"
+#include "Inky.hpp"
+#include "Clyde.hpp"
 
 namespace pg {
 

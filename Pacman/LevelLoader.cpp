@@ -52,7 +52,10 @@ namespace pg {
 						obj = pacman;
 					}
 
-					else if (type == "Ghost") obj = new GameObject();
+					else if (type == "Blinky") obj = new Blinky();
+					else if (type == "Pinky") obj = new Pinky();
+					else if (type == "Inky") obj = new Inky();
+					else if (type == "Clyde") obj = new Clyde();
 
 					else if (type == "Wall") obj = new Wall();
 					else if (type == "Point") obj = new Point();

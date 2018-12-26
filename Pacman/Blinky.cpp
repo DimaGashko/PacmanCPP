@@ -1,12 +1,13 @@
-#include "Blinky.h"
+#include "Blinky.hpp"
 
+namespace pg {
 
+	Blinky::Blinky() : Ghost() {
 
-Blinky::Blinky()
-{
-}
+	}
 
+	Blinky::~Blinky() {
 
-Blinky::~Blinky()
-{
-}
+	}
+
+}; // namespace pg

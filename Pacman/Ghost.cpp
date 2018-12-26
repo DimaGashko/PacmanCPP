@@ -1,12 +1,13 @@
-#include "Ghost.h"
+#include "Ghost.hpp"
 
+namespace pg {
 
+	Ghost::Ghost() : Actor() {
 
-Ghost::Ghost()
-{
-}
+	}
+	
+	Ghost::~Ghost() {
 
+	}
 
-Ghost::~Ghost()
-{
-}
+}; //namespace pg

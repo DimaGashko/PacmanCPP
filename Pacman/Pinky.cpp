@@ -1,12 +1,13 @@
-#include "Pinky.h"
+#include "Pinky.hpp"
 
+namespace pg {
 
+	Pinky::Pinky() : Ghost() {
 
-Pinky::Pinky()
-{
-}
+	}
 
+	Pinky::~Pinky() {
 
-Pinky::~Pinky()
-{
-}
+	}
+
+}; // namespace pg
