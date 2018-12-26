@@ -17,6 +17,8 @@ namespace pg {
 		void go(int frameTime) override;
 
 	private:
+		std::string m_dir;
+		int m_stepsRest;
 		
 	};
 
