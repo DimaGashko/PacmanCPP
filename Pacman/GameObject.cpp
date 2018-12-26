@@ -11,6 +11,7 @@ namespace pg {
 
 	void GameObject::update(int frameTime) {
 		updateAnimation(frameTime);
+		_useAnimation(frameTime);
 	}
 
 	void GameObject::updatePos() {
@@ -23,8 +24,11 @@ namespace pg {
 	void GameObject::updateAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 
-		m_animationManager->set("bottom");
+		m_animationManager->set("top");
+	}
 
+	inline void GameObject::_useAnimation(int frameTime) {
+		if (m_animationManager == NULL) return;
 		m_animationManager->update(frameTime);
 	}
 

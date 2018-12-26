@@ -33,6 +33,16 @@ namespace pg {
 		m_goingBottom = false;
 	}
 
+	void Actor::updateAnimation(int frameTime) {
+		if (m_animationManager == NULL) return;
+
+		if (m_goingLeft) m_animationManager->set("left");
+		else if (m_goingRight) m_animationManager->set("right");
+		else if (m_goingTop) m_animationManager->set("top");
+		else if (m_goingBottom) m_animationManager->set("bottom");
+		else m_animationManager->set("stay");
+	}
+
 	void Actor::goLeft() {
 		m_goingLeft = true;
 	}

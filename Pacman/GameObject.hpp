@@ -71,6 +71,8 @@ namespace pg {
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
+
+		void _useAnimation(int frameTime);
 	};
 
 }; // namespace pg
