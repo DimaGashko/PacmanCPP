@@ -10,6 +10,7 @@
 #include "Math.hpp"
 #include "GameObject.hpp"
 #include "Actor.hpp"
+#include "Point.hpp"
 
 namespace pg {
 
@@ -27,11 +28,14 @@ namespace pg {
 		void setPlayer(Actor *actor);
 		Actor* getPlayer();
 
+		bool isWon();
+
 		enum eSides { Left, Top, Right, Bottom, None };
 
 		~GameField();
 	
 	private:
+		bool m_isWon = false;
 		int m_pointsCount = 0;
 		Actor *m_player;
 
@@ -41,11 +45,15 @@ namespace pg {
 		// Cетка игры
 		std::vector<std::vector<std::vector<GameObject *>>> m_grid;
 
+		void checkWon();
+
 		void getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize = 5000);
 
 		// Добавляет объект в сетку
 		// Если объект уже был в сетке, то от сначала удаляется с предыдущего места
-		void addObjectToGrid(GameObject *object);
+		void addToGrid(GameObject *object);
+
+		void removeFromGrid(GameObject *object);
 
 		sf::FloatRect _getActiveRange(sf::Vector2f gameSize);
 

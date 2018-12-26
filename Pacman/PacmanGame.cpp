@@ -60,6 +60,10 @@ namespace pg {
 		m_gameField->update(_getGameSize(), m_frameTime);
 
 		m_camera.update();
+
+		if (m_gameField->isWon()) {
+			//loadNextLevel();
+		}
 	}
 
 	void PacmanGame::_drawGameField() {

@@ -6,6 +6,7 @@
 
 #include "Math.hpp"
 #include "AnimationManager.hpp"
+#include <functional>
 
 namespace pg {
 
@@ -63,6 +64,8 @@ namespace pg {
 
 		bool die();
 
+		void setOnDead(std::function<void()> onDead);
+
 	    virtual ~GameObject();
 
 	protected:
@@ -76,6 +79,8 @@ namespace pg {
 		sf::RectangleShape m_rect;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
+
+		std::function<void()> m_onDead;
 
 		void _useAnimation(int frameTime);
 	};

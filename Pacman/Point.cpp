@@ -11,6 +11,11 @@ namespace pg {
 		std::cout << "Point Use ";
 	}
 
+	bool Point::itCanUseTheBonus(pg::GameObject *obj) {
+		if (dynamic_cast<Pacman*>(obj) != nullptr) return true;
+		return false;
+	}
+
 	Point::~Point() {
 
 	}

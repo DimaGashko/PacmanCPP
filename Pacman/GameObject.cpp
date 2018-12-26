@@ -126,7 +126,17 @@ namespace pg {
 	}
 
 	bool GameObject::die() {
-		return m_isDead = true;
+		m_isDead = true;
+
+		//if (m_onDead == NULL) {
+			m_onDead();
+		//}
+		
+		return true;
+	}
+
+	void GameObject::setOnDead(std::function<void()> onDead) {
+		m_onDead = onDead;
 	}
 
 	sf::Vector2f GameObject::getCenter() {

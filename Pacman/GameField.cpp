@@ -23,7 +23,18 @@ namespace pg {
 	}
 
 	void GameField::addObject(GameObject *object) {
-		addObjectToGrid(object);
+		if (dynamic_cast<Point*>(object) != nullptr) {
+			m_pointsCount++;
+			std::cout << "IsPoint ";
+			object->setOnDead([&] {
+				m_pointsCount--;
+				std::cout << "Points: " << m_pointsCount << std::endl;
+
+				checkWon();
+			});
+		}
+
+		addToGrid(object);
 
 	}
 
@@ -70,7 +81,7 @@ namespace pg {
 			auto newPos = obj->getPosition();
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
-				addObjectToGrid(obj);
+				addToGrid(obj);
 			}
 
 		}
@@ -124,7 +135,7 @@ namespace pg {
 		return sf::FloatRect(coords, size);
 	}
 
-	void GameField::addObjectToGrid(GameObject *object) {
+	void GameField::addToGrid(GameObject *object) {
 		sf::Vector2f objCoords = object->getPosition();
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 
@@ -137,20 +148,7 @@ namespace pg {
 				return;
 			}
 			else {
-				if (!_hasCell(*prev)) return;
-				auto &cell = m_grid[prev->x][prev->y];
-				auto size = cell.size();
-
-				std::vector<GameObject*> newCell(size - 1);
-
-				for (int i = 0; i < size; i++) {
-					if (cell[i] != object) {
-						if (i < size - 1) newCell[i] = cell[i];
-						else newCell.push_back(cell[i]);
-					}
-				}
-
-				m_grid[prev->x][prev->y] = newCell;
+				removeFromGrid(object);
 			}
 		}
 		else {
@@ -166,6 +164,30 @@ namespace pg {
 		posInGrid->y = coords.y;
 
 		cell.push_back(object);
+	}
+
+	void GameField::removeFromGrid(GameObject *object) {
+		auto coords = object->getPosInGrid();
+
+		if (!_hasCell(*coords)) return;
+		auto &cell = m_grid[coords->x][coords->y];
+		auto size = cell.size();
+
+		std::vector<GameObject*> newCell(size - 1);
+
+		for (int i = 0; i < size; i++) {
+			if (cell[i] != object) {
+				if (i < size - 1) newCell[i] = cell[i];
+				else newCell.push_back(cell[i]);
+			}
+		}
+
+		m_grid[coords->x][coords->y] = newCell;
+	}
+
+	void GameField::checkWon() {
+		std::cout << "Check won);";
+		if (m_pointsCount <= 0) m_isWon = true;
 	}
 
 	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize) {
@@ -184,7 +206,7 @@ namespace pg {
 
 				for (auto &obj : m_grid[x][y]) {
 					if (obj->isDead()) {
-						//removeObjFromeGrid(obj);
+						//removeFromGrid(obj);
 						continue;
 					}
 
@@ -214,6 +236,10 @@ namespace pg {
 
 	Actor* GameField::getPlayer() {
 		return m_player;
+	}
+
+	bool GameField::isWon() {
+		return m_isWon;
 	}
 
 	GameField::~GameField() {

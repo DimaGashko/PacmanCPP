@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Bonus.hpp"
+#include "Pacman.hpp"
 
 namespace pg {
 
@@ -11,6 +12,7 @@ namespace pg {
 		Point();
 
 		void use(pg::GameObject *obj) override;
+		bool itCanUseTheBonus(pg::GameObject *obj) override;
 
 		~Point();
 
