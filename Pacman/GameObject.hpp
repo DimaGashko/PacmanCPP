@@ -28,6 +28,7 @@ namespace pg {
 
 		virtual void update(int frameTime);
 		virtual void updateAnimation(int frameTime) = 0;
+		virtual void setStartAnim() = 0;
 
 		void updatePos();
 

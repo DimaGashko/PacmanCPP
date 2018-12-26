@@ -12,6 +12,10 @@ namespace pg {
 
 	}
 
+	void Wall::setStartAnim() {
+
+	}
+
 	Wall::~Wall() {
 
 	}

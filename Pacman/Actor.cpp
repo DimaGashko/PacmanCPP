@@ -56,6 +56,12 @@ namespace pg {
 		} 
 	}
 
+	void Actor::setStartAnim() {
+		if (m_animationManager == NULL) return;
+
+		m_animationManager->set("right");
+	}
+
 	void Actor::goLeft() {
 		m_goingLeft = true;
 	}

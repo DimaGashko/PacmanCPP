@@ -9,8 +9,7 @@ namespace pg {
 	void Ghost::updateAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 	
-		Actor::updateAnimation(frameTime);
-		//m_animationManager->set("right");
+		m_animationManager->set("right");
 	}
 	
 	Ghost::~Ghost() {

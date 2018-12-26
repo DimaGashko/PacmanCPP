@@ -38,7 +38,7 @@ namespace pg {
 	) { 
 		
 		m_animationManager = new AnimationManager(&m_rect, texture, names, frames, durations);
-		
+		setStartAnim();
 	}
 
 	void GameObject::setTexture(sf::Texture *texture, sf::IntRect textureRect) {

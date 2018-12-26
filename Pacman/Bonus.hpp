@@ -12,6 +12,7 @@ namespace pg {
 		Bonus();
 
 		void updateAnimation(int frameTime) override;
+		void setStartAnim() override;
 
 		~Bonus();
 

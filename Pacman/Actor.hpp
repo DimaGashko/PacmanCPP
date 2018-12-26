@@ -12,6 +12,7 @@ namespace pg {
 
 		void update(int frameTime) override;
 		void updateAnimation(int frameTime) override;
+		void setStartAnim() override;
 
 		void goLeft();
 		void goTop();

@@ -11,6 +11,10 @@ namespace pg {
 		if (m_animationManager == NULL) return;
 	}
 
+	void Bonus::setStartAnim() {
+
+	}
+
 	Bonus::~Bonus() {
 
 	}

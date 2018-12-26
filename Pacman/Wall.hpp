@@ -11,6 +11,7 @@ namespace pg {
 		Wall();
 
 		void updateAnimation(int frameTime) override;
+		void setStartAnim() override;
 
 		~Wall();
 
