@@ -10,7 +10,6 @@ namespace pg {
 		if (m_animationManager == NULL) return;
 		Actor::updateAnimation(frameTime);
 
-		m_animationManager->update(frameTime);
 	}
 
 	Pacman::~Pacman() {
