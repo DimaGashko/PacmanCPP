@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include <SFML/Graphics.hpp>
 
 #include "Camera.hpp"
@@ -36,14 +38,23 @@ namespace pg {
 
 		int m_frameTime = 0;
 
-		void update();
-		void _updateGameField();
+		int m_currentLevel = -1;
+		std::vector<std::string> m_levels;
 
+		void update();
 		void draw();
+
+		void openNextLevel();
+
+		void gameWon();
+
+		void _updateGameField();
 		void _drawGameField();
 
-		void _createGame();
+		void _loadLevel(std::string url);
+
 		void _initWindow();
+		void _initLevels();
 		
 		sf::Vector2f _getGameSize();
 

@@ -4,6 +4,7 @@ namespace pg {
 
 	PacmanGame::PacmanGame() : m_camera(&m_window) {		
 		_initWindow();
+		_initLevels();
 	}
 
 	void PacmanGame::_initWindow() {
@@ -18,7 +19,7 @@ namespace pg {
 	}
 
 	void PacmanGame::run() {
-		_createGame();
+		openNextLevel();
 
 		sf::Clock clock;
 
@@ -55,6 +56,21 @@ namespace pg {
 		_drawGameField();
 	}
 
+	void PacmanGame::openNextLevel() {
+		m_currentLevel += 1;
+
+		if (m_levels.size() <= m_currentLevel) {
+			gameWon();
+			return;
+		}
+
+		_loadLevel(m_levels[m_currentLevel]);
+	}
+
+	void PacmanGame::gameWon() {
+		std::cout << "You won the game";
+	}
+
 	void PacmanGame::_updateGameField() {
 		m_player.update();
 		m_gameField->update(_getGameSize(), m_frameTime);
@@ -62,7 +78,7 @@ namespace pg {
 		m_camera.update();
 
 		if (m_gameField->isWon()) {
-			//loadNextLevel();
+			openNextLevel();
 		}
 	}
 
@@ -74,8 +90,8 @@ namespace pg {
 		}
 	}
 
-	void PacmanGame::_createGame() {
-		m_gameField = m_levelLoader.loadFromTmx("configs/levels/level2.tmx");
+	void PacmanGame::_loadLevel(std::string url) {
+		m_gameField = m_levelLoader.loadFromTmx(url);
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
 
@@ -94,6 +110,14 @@ namespace pg {
 
 	sf::Vector2f PacmanGame::_getGameSize() {
 		return sf::Vector2f(m_camera.getView().getSize());
+	}
+
+	void PacmanGame::_initLevels() {
+
+		m_levels.push_back("configs/levels/level1.tmx");
+		m_levels.push_back("configs/levels/level2.tmx");
+		m_levels.push_back("configs/levels/level3.tmx");
+
 	}
 
 	PacmanGame::~PacmanGame() {
