@@ -9,10 +9,10 @@ namespace pg {
 
 	void PacmanGame::_initWindow() {
 		sf::ContextSettings settings;
-		settings.antialiasingLevel = 0;
+		settings.antialiasingLevel = 8;
 
 		m_window.create(sf::VideoMode(750, 650), "Pacman", sf::Style::Default , settings);
-		m_window.setFramerateLimit(120);
+		//m_window.setFramerateLimit(120);
 
 		m_camera.init();	
 	}
@@ -24,7 +24,7 @@ namespace pg {
 
 		while (m_window.isOpen()) {
 			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
-			m_frameTime = clock.restart().asMicroseconds() / 1000.f;
+			m_frameTime = clock.restart().asMilliseconds();
 
 			sf::Event event;
 			while (m_window.pollEvent(event)) {

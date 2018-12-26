@@ -17,8 +17,7 @@ namespace pg {
 		void go(int frameTime) override;
 
 	private:
-		int m_dir = 0;
-		sf::Vector2f m_prevPosition;
+		
 	};
 
 }; // namespace pg
