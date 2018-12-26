@@ -32,17 +32,30 @@ namespace pg {
 		m_goingRight = false;
 		m_goingBottom = false;
 	}
-
+	
 	void Actor::updateAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 
+		std::string curAnim = m_animationManager->getCurAnimName();
+		std::string type;
 
+		if (m_goingLeft) type = "left";
+		else if (m_goingRight) type = "right";
+		else if (m_goingTop) type = "top";
+		else if (m_goingBottom) type = "bottom";
 
-		if (m_goingLeft) m_animationManager->set("left");
-		else if (m_goingRight) m_animationManager->set("right");
-		else if (m_goingTop) m_animationManager->set("top");
-		else if (m_goingBottom) m_animationManager->set("bottom");
-		else m_animationManager->set("stay");
+		else {
+			std::cout << curAnim << "|";
+			if (curAnim == "left") type = "stayLeft";
+			else if (curAnim == "top") type = "stayTop";
+			else if (curAnim == "right") type = "stayRight";
+			else if (curAnim == "buttom") type = "stayButton";
+			//else m_animationManager->set("stayRight");
+		}
+
+		if (!type.empty()) {
+			m_animationManager->set(type);
+		}
 	}
 
 	void Actor::goLeft() {

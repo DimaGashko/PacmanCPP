@@ -20,6 +20,8 @@ namespace pg {
 		if (!m_playing) return;
 		auto size = m_frames.size();
 
+		if (size == 0) return;
+
 		m_timeToFrameChange -= renderFrameTime;
 		if (m_timeToFrameChange > 0) return;
 

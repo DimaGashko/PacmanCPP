@@ -26,6 +26,8 @@ namespace pg {
 
 		bool set(std::string animationName);
 
+		std::string getCurAnimName();
+
 		void play();
 		void pause();
 

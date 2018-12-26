@@ -38,6 +38,8 @@ namespace pg {
 		};
 
 		struct _TileConfig {
+			int id;
+
 			std::string type;
 			
 			std::vector<std::string> propertyNames;

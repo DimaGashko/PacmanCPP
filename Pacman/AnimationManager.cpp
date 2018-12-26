@@ -39,6 +39,10 @@ namespace pg {
 		return true;
 	}
 
+	std::string AnimationManager::getCurAnimName() {
+		return m_currentAnimationName;
+	}
+
 	void AnimationManager::update(int renderFrameTime) {
 		if (!m_currectAnimation) return;
  		m_currectAnimation->update(renderFrameTime);
