@@ -12,10 +12,9 @@ namespace pg {
 		settings.antialiasingLevel = 0;
 
 		m_window.create(sf::VideoMode(750, 650), "Pacman", sf::Style::Default , settings);
-		//m_window.setFramerateLimit(120);
+		m_window.setFramerateLimit(120);
 
-		m_camera.init();
-		
+		m_camera.init();	
 	}
 
 	void PacmanGame::run() {
@@ -25,8 +24,8 @@ namespace pg {
 
 		while (m_window.isOpen()) {
 			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
-			m_frameTime = clock.restart().asMilliseconds();
-			
+			m_frameTime = clock.restart().asMicroseconds() / 1000.f;
+
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
 				if (event.type == sf::Event::Closed) {
@@ -59,6 +58,10 @@ namespace pg {
 	void PacmanGame::openNextLevel() {
 		m_currentLevel += 1;
 
+		if (m_currentLevel > (int)m_levels.size()) {
+			m_currentLevel = (int)m_levels.size();
+		}
+
 		if (m_levels.size() <= m_currentLevel) {
 			gameWon();
 			return;
@@ -68,7 +71,7 @@ namespace pg {
 	}
 
 	void PacmanGame::gameWon() {
-		std::cout << "You won the game";
+		std::cout << "You won the game \n";
 	}
 
 	void PacmanGame::_updateGameField() {
@@ -78,9 +81,17 @@ namespace pg {
 		m_camera.update();
 	
 		if (m_gameField->checkWon()) {
-			std::cout << "You won the level "
+			std::cout << "You won the level \n"
 				<< (m_currentLevel + 1) << std::endl;
 
+			openNextLevel();
+		}
+
+		if (m_gameField->checkGameOver()) {
+			std::cout << "Game Over \n"
+				<< (m_currentLevel + 1) << std::endl;
+
+			m_currentLevel -= 1;
 			openNextLevel();
 		}
 	}

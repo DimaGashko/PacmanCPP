@@ -8,12 +8,10 @@ namespace pg {
 	public:
 		Actor();
 
-		enum States {Stay, Go}; 
-
 		void update(int frameTime) override;
 		void updateAnimation(int frameTime) override;
 		void setStartAnim() override;
-		void interact(pg::GameObject *obj);
+		void interact(pg::GameObject *obj) override;
 
 		void goLeft();
 		void goTop();
@@ -22,7 +20,7 @@ namespace pg {
 
 		~Actor();
 
-	private:
+	protected:
 		float m_step;
 
 		bool m_goingLeft = false;
@@ -30,7 +28,10 @@ namespace pg {
 		bool m_goingRight = false;
 		bool m_goingBottom = false;
 		
-		void go(int frameTime);
+		virtual void go(int frameTime);
+
+	private:
+
 	};
 
 }; // namespace pg

@@ -29,6 +29,7 @@ namespace pg {
 		Actor* getPlayer();
 
 		bool checkWon();
+		bool checkGameOver();
 
 		enum eSides { Left, Top, Right, Bottom, None };
 
@@ -36,6 +37,7 @@ namespace pg {
 	
 	private:
 		bool m_isWon = false;
+		bool m_gameOver = false;
 		int m_pointsCount = 0;
 		Actor *m_player;
 
@@ -52,6 +54,8 @@ namespace pg {
 		void addToGrid(GameObject *object);
 
 		void removeFromGrid(GameObject *object);
+
+		void gameOver();
 
 		sf::FloatRect _getActiveRange(sf::Vector2f gameSize);
 

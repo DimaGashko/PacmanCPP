@@ -13,7 +13,7 @@ namespace pg {
 		m_cellSize(cellSize),
 		m_grid(size.x, std::vector<std::vector<GameObject*>>(size.y))
 	{
-
+	
 	}
 
 	void GameField::addAllObjects(std::vector<GameObject*> objects) {
@@ -184,10 +184,18 @@ namespace pg {
 		m_grid[coords->x][coords->y] = newCell;
 	}
 
+	void GameField::gameOver() {
+		m_gameOver = true;
+	}
+
 	bool GameField::checkWon() {
 		if (m_pointsCount <= 0) m_isWon = true;
 
 		return m_isWon;
+	}
+
+	bool GameField::checkGameOver() {
+		return m_gameOver;
 	}
 
 	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize) {
@@ -205,7 +213,7 @@ namespace pg {
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
 
 				for (auto &obj : m_grid[x][y]) {
-					if (obj->isDead()) {
+					if (!obj || obj->isDead()) {
 						//removeFromGrid(obj);
 						continue;
 					}
@@ -232,6 +240,10 @@ namespace pg {
 
 	void GameField::setPlayer(Actor* player) {
 		m_player = player;
+
+		m_player->setOnDead([&] {
+			gameOver();
+		});
 	}
 
 	Actor* GameField::getPlayer() {
