@@ -66,7 +66,6 @@ namespace pg {
 
 		for (auto &obj : activeObjects) {
 			auto oldPos = obj->getPosition();
-			obj->update(frameTime);
 			obj->updatePos();
 			auto newPos = obj->getPosition();
 
