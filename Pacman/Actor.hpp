@@ -8,6 +8,8 @@ namespace pg {
 	public:
 		Actor();
 
+		enum States {Stay, Go}; 
+
 		void update(int frameTime) override;
 		void updateAnimation(int frameTime) override;
 

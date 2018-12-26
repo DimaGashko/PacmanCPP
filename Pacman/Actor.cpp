@@ -48,15 +48,12 @@ namespace pg {
 			if (curAnim == "left") type = "stayLeft";
 			else if (curAnim == "top") type = "stayTop";
 			else if (curAnim == "right") type = "stayRight";
-			else if (curAnim == "bottom") type = "stayBotton";
+			else if (curAnim == "bottom") type = "stayBottom";
 		}
 
-		if (!type.empty()) {
+		if (type.size() != 0) {
 			m_animationManager->set(type);
 		} 
-		else {
-			//m_animationManager->set("right");
-		}
 	}
 
 	void Actor::goLeft() {

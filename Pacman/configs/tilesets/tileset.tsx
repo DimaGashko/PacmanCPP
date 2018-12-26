@@ -4,19 +4,19 @@
  <tile id="0" type="Pacman">
   <properties>
    <property name="animationName" value="right"/>
-   <property name="animation_bottom" type="int" value="80"/>
+   <property name="animation_bottom" type="int" value="60"/>
    <property name="animation_die" type="int" value="3"/>
-   <property name="animation_left" type="int" value="41"/>
-   <property name="animation_stayBottom" type="int" value="81"/>
-   <property name="animation_stayLeft" type="int" value="41"/>
+   <property name="animation_left" type="int" value="20"/>
+   <property name="animation_stayBottom" type="int" value="61"/>
+   <property name="animation_stayLeft" type="int" value="21"/>
    <property name="animation_stayRight" type="int" value="1"/>
-   <property name="animation_stayTop" type="int" value="61"/>
-   <property name="animation_top" type="int" value="60"/>
+   <property name="animation_stayTop" type="int" value="41"/>
+   <property name="animation_top" type="int" value="40"/>
   </properties>
   <animation>
-   <frame tileid="0" duration="300"/>
-   <frame tileid="1" duration="300"/>
-   <frame tileid="2" duration="300"/>
+   <frame tileid="0" duration="250"/>
+   <frame tileid="1" duration="250"/>
+   <frame tileid="2" duration="250"/>
   </animation>
  </tile>
  <tile id="1">
@@ -40,12 +40,22 @@
    <frame tileid="13" duration="150"/>
   </animation>
  </tile>
- <tile id="20" type="Wall"/>
- <tile id="21" type="Point"/>
+ <tile id="20">
+  <animation>
+   <frame tileid="20" duration="250"/>
+   <frame tileid="21" duration="250"/>
+   <frame tileid="2" duration="250"/>
+  </animation>
+ </tile>
+ <tile id="21">
+  <animation>
+   <frame tileid="21" duration="250"/>
+  </animation>
+ </tile>
  <tile id="22" type="Blinky">
   <properties>
    <property name="animationName" value="right"/>
-   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_afraid" type="int" value="80"/>
    <property name="animation_bottom" type="int" value="28"/>
    <property name="animation_left" type="int" value="24"/>
    <property name="animation_stayBottom" type="int" value="29"/>
@@ -97,17 +107,11 @@
    <frame tileid="29" duration="150"/>
   </animation>
  </tile>
- <tile id="30">
-  <animation>
-   <frame tileid="30" duration="150"/>
-   <frame tileid="31" duration="150"/>
-  </animation>
- </tile>
  <tile id="40">
   <animation>
-   <frame tileid="40" duration="150"/>
-   <frame tileid="41" duration="150"/>
-   <frame tileid="2" duration="150"/>
+   <frame tileid="40" duration="250"/>
+   <frame tileid="41" duration="250"/>
+   <frame tileid="2" duration="250"/>
   </animation>
  </tile>
  <tile id="41">
@@ -118,7 +122,7 @@
  <tile id="42" type="Pinky">
   <properties>
    <property name="animationName" value="right"/>
-   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_afraid" type="int" value="80"/>
    <property name="animation_bottom" type="int" value="48"/>
    <property name="animation_left" type="int" value="44"/>
    <property name="animation_stayBottom" type="int" value="49"/>
@@ -172,20 +176,20 @@
  </tile>
  <tile id="60">
   <animation>
-   <frame tileid="60" duration="150"/>
-   <frame tileid="61" duration="150"/>
-   <frame tileid="2" duration="150"/>
+   <frame tileid="60" duration="250"/>
+   <frame tileid="61" duration="250"/>
+   <frame tileid="2" duration="250"/>
   </animation>
  </tile>
  <tile id="61">
   <animation>
-   <frame tileid="41" duration="150"/>
+   <frame tileid="61" duration="250"/>
   </animation>
  </tile>
- <tile id="62" type="Inky ">
+ <tile id="62" type="Inky">
   <properties>
    <property name="animationName" value="right"/>
-   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_afraid" type="int" value="80"/>
    <property name="animation_bottom" type="int" value="68"/>
    <property name="animation_left" type="int" value="64"/>
    <property name="animation_stayBottom" type="int" value="69"/>
@@ -239,9 +243,8 @@
  </tile>
  <tile id="80">
   <animation>
-   <frame tileid="80" duration="150"/>
-   <frame tileid="81" duration="150"/>
-   <frame tileid="2" duration="150"/>
+   <frame tileid="80" duration="250"/>
+   <frame tileid="81" duration="250"/>
   </animation>
  </tile>
  <tile id="81">
@@ -252,7 +255,7 @@
  <tile id="82" type="Clyde">
   <properties>
    <property name="animationName" value="right"/>
-   <property name="animation_afraid" type="int" value="30"/>
+   <property name="animation_afraid" type="int" value="80"/>
    <property name="animation_bottom" type="int" value="88"/>
    <property name="animation_left" type="int" value="84"/>
    <property name="animation_stayBottom" type="int" value="89"/>
@@ -310,7 +313,9 @@
  <tile id="104" type="Bonus"/>
  <tile id="105" type="Bonus"/>
  <tile id="106" type="Bonus"/>
- <tile id="107" type="Bonus"/>
+ <tile id="107" type="Key"/>
  <tile id="108" type="BigPoint"/>
+ <tile id="109" type="Point"/>
+ <tile id="140" type="Wall"/>
  <tile id="150" type="Bonus"/>
 </tileset>
