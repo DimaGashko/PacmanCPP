@@ -21,12 +21,6 @@ namespace pg {
 		m_speed.y = 0;
 	}
 
-	void GameObject::updateAnimation(int frameTime) {
-		if (m_animationManager == NULL) return;
-
-		m_animationManager->set("top");
-	}
-
 	inline void GameObject::_useAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 		m_animationManager->update(frameTime);

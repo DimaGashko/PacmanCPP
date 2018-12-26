@@ -20,7 +20,7 @@ namespace pg {
 		if (!m_playing) return;
 		auto size = m_frames.size();
 
-		/*if (size == 0) return;
+		if (size == 0) return;
 
 		if (size == 1) {
 			if (m_currentFrame = 1) return;
@@ -28,7 +28,7 @@ namespace pg {
 			m_currentFrame = 1;
 			m_shape->setTextureRect(m_frames[1]);
 			return;
-		}*/
+		}
 
 		m_timeToFrameChange -= renderFrameTime;
 		if (m_timeToFrameChange > 0) return;

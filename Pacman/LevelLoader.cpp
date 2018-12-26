@@ -60,7 +60,7 @@ namespace pg {
 					else if (type == "Wall") obj = new Wall();
 					else if (type == "Point") obj = new Point();
 
-					else obj = new GameObject();
+					else continue;
 
 					obj->setPosition(coords);
 					obj->setSize(sf::Vector2f(tileSize));

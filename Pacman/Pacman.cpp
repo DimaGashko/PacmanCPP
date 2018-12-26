@@ -8,8 +8,7 @@ namespace pg {
 
 	void Pacman::updateAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
-
-		m_animationManager->set("right");
+		Actor::updateAnimation(frameTime);
 
 		m_animationManager->update(frameTime);
 	}

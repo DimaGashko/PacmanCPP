@@ -40,14 +40,17 @@ namespace pg {
 	}
 
 	void AnimationManager::update(int renderFrameTime) {
-		m_currectAnimation->update(renderFrameTime);
+		if (!m_currectAnimation) return;
+ 		m_currectAnimation->update(renderFrameTime);
 	}
 	 
 	void AnimationManager::play() {
+		if (!m_currectAnimation) return;
 		m_currectAnimation->play();
 	}
 
 	void AnimationManager::pause() {
+		if (!m_currectAnimation) return;
 		m_currectAnimation->pause();
 	}
 

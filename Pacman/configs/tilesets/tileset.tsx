@@ -11,9 +11,9 @@
    <property name="animation_top" type="int" value="60"/>
   </properties>
   <animation>
-   <frame tileid="0" duration="150"/>
-   <frame tileid="1" duration="150"/>
-   <frame tileid="2" duration="150"/>
+   <frame tileid="0" duration="500"/>
+   <frame tileid="1" duration="500"/>
+   <frame tileid="2" duration="500"/>
   </animation>
  </tile>
  <tile id="1">

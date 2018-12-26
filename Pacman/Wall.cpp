@@ -7,6 +7,11 @@ namespace pg {
 		m_isObstacle = true;
 	}
 
+	void Wall::updateAnimation(int frameTime) {
+		if (m_animationManager == NULL) return;
+
+	}
+
 	Wall::~Wall() {
 
 	}

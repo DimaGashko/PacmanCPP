@@ -8,10 +8,12 @@ namespace pg {
 
 	class Bonus : public GameObject {
 	public:
-		Bonus();
-		~Bonus();
 
-	protected: 
+		Bonus();
+
+		void updateAnimation(int frameTime) override;
+
+		~Bonus();
 
 	private:
 		

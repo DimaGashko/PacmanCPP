@@ -27,7 +27,8 @@ namespace pg {
 		bool intersects(GameObject *obj);
 
 		virtual void update(int frameTime);
-		virtual void updateAnimation(int frameTime);
+		virtual void updateAnimation(int frameTime) = 0;
+
 		void updatePos();
 
 		bool isObstacle();

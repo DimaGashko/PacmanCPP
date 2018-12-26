@@ -10,6 +10,8 @@ namespace pg {
 	public:
 		Wall();
 
+		void updateAnimation(int frameTime) override;
+
 		~Wall();
 
 	private:
