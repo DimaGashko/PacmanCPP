@@ -22,12 +22,6 @@ namespace pg {
 		~PacmanGame();
 
 	private:
-		struct _gameStates {
-			bool pause = false;
-		};
-
-		_gameStates m_gameStates;
-
 		GameField *m_gameField;
 		LevelLoader m_levelLoader;
 
