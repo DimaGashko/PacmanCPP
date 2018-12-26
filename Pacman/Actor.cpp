@@ -44,17 +44,18 @@ namespace pg {
 		else if (m_goingTop) type = "top";
 		else if (m_goingBottom) type = "bottom";
 
-		else {
-			std::cout << curAnim << "|";
+		else {			
 			if (curAnim == "left") type = "stayLeft";
 			else if (curAnim == "top") type = "stayTop";
 			else if (curAnim == "right") type = "stayRight";
-			else if (curAnim == "buttom") type = "stayButton";
-			//else m_animationManager->set("stayRight");
+			else if (curAnim == "bottom") type = "stayBotton";
 		}
 
 		if (!type.empty()) {
 			m_animationManager->set(type);
+		} 
+		else {
+			//m_animationManager->set("right");
 		}
 	}
 

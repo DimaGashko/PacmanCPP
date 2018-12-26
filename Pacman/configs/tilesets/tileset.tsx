@@ -6,8 +6,8 @@
    <property name="animationName" value="right"/>
    <property name="animation_bottom" type="int" value="80"/>
    <property name="animation_die" type="int" value="3"/>
-   <property name="animation_left" type="int" value="40"/>
-   <property name="animation_stayButtom" type="int" value="81"/>
+   <property name="animation_left" type="int" value="41"/>
+   <property name="animation_stayBottom" type="int" value="81"/>
    <property name="animation_stayLeft" type="int" value="41"/>
    <property name="animation_stayRight" type="int" value="1"/>
    <property name="animation_stayTop" type="int" value="61"/>
@@ -48,7 +48,7 @@
    <property name="animation_afraid" type="int" value="30"/>
    <property name="animation_bottom" type="int" value="28"/>
    <property name="animation_left" type="int" value="24"/>
-   <property name="animation_stayButtom" type="int" value="29"/>
+   <property name="animation_stayBottom" type="int" value="29"/>
    <property name="animation_stayLeft" type="int" value="25"/>
    <property name="animation_stayRight" type="int" value="23"/>
    <property name="animation_stayTop" type="int" value="27"/>
@@ -121,7 +121,7 @@
    <property name="animation_afraid" type="int" value="30"/>
    <property name="animation_bottom" type="int" value="48"/>
    <property name="animation_left" type="int" value="44"/>
-   <property name="animation_stayButtom" type="int" value="49"/>
+   <property name="animation_stayBottom" type="int" value="49"/>
    <property name="animation_stayLeft" type="int" value="45"/>
    <property name="animation_stayRight" type="int" value="43"/>
    <property name="animation_stayTop" type="int" value="47"/>
@@ -188,7 +188,7 @@
    <property name="animation_afraid" type="int" value="30"/>
    <property name="animation_bottom" type="int" value="68"/>
    <property name="animation_left" type="int" value="64"/>
-   <property name="animation_stayButtom" type="int" value="69"/>
+   <property name="animation_stayBottom" type="int" value="69"/>
    <property name="animation_stayLeft" type="int" value="65"/>
    <property name="animation_stayRight" type="int" value="63"/>
    <property name="animation_stayTop" type="int" value="67"/>
@@ -255,7 +255,7 @@
    <property name="animation_afraid" type="int" value="30"/>
    <property name="animation_bottom" type="int" value="88"/>
    <property name="animation_left" type="int" value="84"/>
-   <property name="animation_stayButtom" type="int" value="89"/>
+   <property name="animation_stayBottom" type="int" value="89"/>
    <property name="animation_stayLeft" type="int" value="85"/>
    <property name="animation_stayRight" type="int" value="83"/>
    <property name="animation_stayTop" type="int" value="87"/>
