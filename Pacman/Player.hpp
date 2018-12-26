@@ -9,9 +9,12 @@ namespace pg {
 	class Player {
 	public:
 		Player();
+
 		void update(int frameTime);
+
 		void setActor(Actor *actor);
 		Actor *getActor();
+
 		~Player();
 
 	private:

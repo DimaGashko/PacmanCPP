@@ -7,6 +7,22 @@ namespace pg {
 		m_isObstacle = false;
 	}
 
+	void Actor::goLeft() {
+		m_goingLeft = true;
+	}
+
+	void Actor::goRight() {
+		m_goingRight = true;
+	}
+
+	void Actor::goTop() {
+		m_goingTop = true;
+	}
+
+	void Actor::goBottom() {
+		m_goingBottom = true;
+	}
+
 	Actor::~Actor() {
 
 	}
