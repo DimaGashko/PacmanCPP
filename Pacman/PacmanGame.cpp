@@ -105,6 +105,8 @@ namespace pg {
 	}
 
 	void PacmanGame::_loadLevel(std::string url) {
+		if (m_gameField) delete m_gameField;
+
 		m_gameField = m_levelLoader.loadFromTmx(url);
 		m_player.setActor(m_gameField->getPlayer());
 		m_camera.setTarget(m_player.getActor());
