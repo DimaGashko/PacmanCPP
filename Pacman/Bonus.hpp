@@ -12,6 +12,7 @@ namespace pg {
 		Bonus();
 
 		void updateAnimation(int frameTime) override;
+		void updateSpeed(int frameTime) override;
 		void setStartAnim() override;
 		void interact(pg::GameObject *obj);
 

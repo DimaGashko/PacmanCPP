@@ -28,6 +28,7 @@ namespace pg {
 		bool intersects(GameObject *obj);
 
 		virtual void update(int frameTime);
+		virtual void updateSpeed(int frameTime) = 0;
 		virtual void updateAnimation(int frameTime) = 0;
 		virtual void setStartAnim() = 0;
 		virtual void interact(pg::GameObject *obj) = 0;

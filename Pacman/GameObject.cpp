@@ -10,6 +10,7 @@ namespace pg {
 	}
 
 	void GameObject::update(int frameTime) {
+		updateSpeed(frameTime);
 		updateAnimation(frameTime);
 		_useAnimation(frameTime);
 	}

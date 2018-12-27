@@ -20,6 +20,10 @@ namespace pg {
 	
 	}
 
+	void Wall::updateSpeed(int frameTime) {
+	
+	}
+
 	Wall::~Wall() {
 
 	}

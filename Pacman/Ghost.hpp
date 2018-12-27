@@ -11,10 +11,8 @@ namespace pg {
 		~Ghost();
 
 		void updateAnimation(int frameTime) override;
+		void updateSpeed(int frameTime) override;
 		void interact(pg::GameObject *obj) override;
-
-	protected:
-		void go(int frameTime) override;
 
 	private:
 		std::string m_dir;

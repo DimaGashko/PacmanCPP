@@ -9,10 +9,10 @@ namespace pg {
 	void Ghost::updateAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 	
-		m_animationManager->set("right");
+		Actor::updateAnimation(frameTime);
 	}
 
-	void Ghost::go(int frameTime) {
+	void Ghost::updateSpeed(int frameTime) {
 		m_stepsRest--;
 
 		if (m_stepsRest <= 0) {

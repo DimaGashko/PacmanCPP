@@ -8,7 +8,7 @@ namespace pg {
 	public:
 		Actor();
 
-		void update(int frameTime) override;
+		void updateSpeed(int frameTime) override;
 		void updateAnimation(int frameTime) override;
 		void setStartAnim() override;
 		void interact(pg::GameObject *obj) override;
@@ -27,8 +27,6 @@ namespace pg {
 		bool m_goingTop = false;
 		bool m_goingRight = false;
 		bool m_goingBottom = false;
-		
-		virtual void go(int frameTime);
 
 	private:
 

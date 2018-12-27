@@ -10,17 +10,11 @@ namespace pg {
 		m_isObstacle = false;
 	}
 
-	void Actor::update(int frameTime) {
-		GameObject::update(frameTime);
-
-		go(frameTime);
-	}
-
 	void Actor::interact(pg::GameObject *obj) {
 
 	}
 
-	void Actor::go(int frameTime) {
+	void Actor::updateSpeed(int frameTime) {
 		auto step = m_step * frameTime;
 		sf::Vector2f dir;
 
@@ -43,10 +37,12 @@ namespace pg {
 		std::string curAnim = m_animationManager->getCurAnimName();
 		std::string type;
 
-		if (m_goingLeft) type = "left";
-		else if (m_goingRight) type = "right";
-		else if (m_goingTop) type = "top";
-		else if (m_goingBottom) type = "bottom";
+		auto speed = getSpeed();
+
+		if (speed.x < 0) type = "left";
+		else if (speed.y < 0) type = "top";
+		else if (speed.x > 0) type = "right";
+		else if (speed.y > 0) type = "bottom";
 
 		else {			
 			if (curAnim == "left") type = "stayLeft";

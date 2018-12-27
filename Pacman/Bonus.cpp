@@ -19,6 +19,10 @@ namespace pg {
 		use(obj);
 	}
 
+	void Bonus::updateSpeed(int frameTime) {
+	
+	}
+
 	Bonus::~Bonus() {
 
 	}
