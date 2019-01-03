@@ -15,7 +15,10 @@ namespace pg {
 	void Ghost::updateSpeed(int frameTime) {
 		m_stepsRest--;
 
-		if (m_stepsRest <= 0) {
+		auto step = m_step * frameTime;
+		auto pos = getPosition();
+
+		if (m_stepsRest <= 0 ) {
 			float k = float(rand()) / RAND_MAX;
 
 			if (k < 0.25) m_dir = "left";
@@ -31,7 +34,6 @@ namespace pg {
 			m_goingBottom = (m_dir == "bottom");
 		}
 
-		auto step = m_step * frameTime;
 		sf::Vector2f dir;
 
 		if (m_dir == "left") dir.x = -step;
