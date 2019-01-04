@@ -11,8 +11,8 @@ namespace pg {
 	public:
 		Point();
 
-		void use(pg::GameObject *obj) override;
-		bool canItUseTheBonus(pg::GameObject *obj) override;
+		void use(pg::GObject *obj) override;
+		bool canItUseTheBonus(pg::GObject *obj) override;
 
 		~Point();
 

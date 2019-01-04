@@ -26,8 +26,8 @@
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clyde.cpp" />
-    <ClCompile Include="GameField.cpp" />
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GField.cpp" />
+    <ClCompile Include="GObject.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Inky.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
@@ -48,8 +48,8 @@
     <ClInclude Include="Bonus.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Clyde.hpp" />
-    <ClInclude Include="GameField.hpp" />
-    <ClInclude Include="GameObject.hpp" />
+    <ClInclude Include="GField.hpp" />
+    <ClInclude Include="GObject.hpp" />
     <ClInclude Include="Ghost.hpp" />
     <ClInclude Include="Inky.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
@@ -126,7 +126,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -142,7 +142,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -162,7 +162,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -182,7 +182,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-audio-d.lib;sfml-main-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>NotSet</SubSystem>
     </Link>
   </ItemDefinitionGroup>

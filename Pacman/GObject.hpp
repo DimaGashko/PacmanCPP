@@ -10,9 +10,9 @@
 
 namespace pg {
 
-	class GameObject {
+	class GObject {
 	public:
-		GameObject();
+		GObject();
 
 		void draw(sf::RenderTarget &window);
 
@@ -25,13 +25,13 @@ namespace pg {
 
 		void setTexture(sf::Texture *texture, sf::IntRect textureRect);
 
-		bool intersects(GameObject *obj);
+		bool intersects(GObject *obj);
 
 		virtual void update(int frameTime);
 		virtual void updateSpeed(int frameTime) = 0;
 		virtual void updateAnimation(int frameTime) = 0;
 		virtual void setStartAnim() = 0;
-		virtual void interact(pg::GameObject *obj) = 0;
+		virtual void interact(pg::GObject *obj) = 0;
 
 		void updatePos();
 
@@ -67,7 +67,7 @@ namespace pg {
 
 		void setOnDead(std::function<void()> onDead);
 
-	    virtual ~GameObject();
+	    virtual ~GObject();
 
 	protected:
 		bool m_isDead = false;

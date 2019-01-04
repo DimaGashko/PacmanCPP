@@ -3,7 +3,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
-#include "GameObject.hpp"
+#include "GObject.hpp"
 
 namespace pg {
 
@@ -16,9 +16,9 @@ namespace pg {
 		void init();
 		void updateSize();
 
-		void setTarget(GameObject *target);
+		void setTarget(GObject *target);
 		
-		GameObject* getTarget();
+		GObject* getTarget();
 		sf::Vector2f getCenter();
 		sf::View getView();
 
@@ -28,7 +28,7 @@ namespace pg {
 		sf::RenderWindow *m_window;
 		sf::View m_view;
 
-		GameObject *m_target;
+		GObject *m_target;
 	};
 
 }

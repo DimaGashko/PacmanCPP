@@ -1,37 +1,37 @@
-#include "GameObject.hpp"
+#include "GObject.hpp"
  
 namespace pg {
 
-	GameObject::GameObject() :
+	GObject::GObject() :
 		m_isMovable(false),
 		m_isObstacle(false)
 	{
 		
 	}
 
-	void GameObject::update(int frameTime) {
+	void GObject::update(int frameTime) {
 		updateSpeed(frameTime);
 		updateAnimation(frameTime);
 		_useAnimation(frameTime);
 	}
 
-	void GameObject::updatePos() {
+	void GObject::updatePos() {
 		move(m_speed);
 
 		m_speed.x = 0;
 		m_speed.y = 0;
 	}
 
-	inline void GameObject::_useAnimation(int frameTime) {
+	inline void GObject::_useAnimation(int frameTime) {
 		if (m_animationManager == NULL) return;
 		m_animationManager->update(frameTime);
 	}
 
-	void GameObject::draw(sf::RenderTarget &window) {
+	void GObject::draw(sf::RenderTarget &window) {
 		window.draw(m_rect);
 	}
 
-	void GameObject::setAnimations(
+	void GObject::setAnimations(
 		sf::Texture *texture, 
 		std::vector<std::string> &names, 
 		std::vector<std::vector<sf::IntRect>> &frames, 
@@ -42,12 +42,12 @@ namespace pg {
 		setStartAnim();
 	}
 
-	void GameObject::setTexture(sf::Texture *texture, sf::IntRect textureRect) {
+	void GObject::setTexture(sf::Texture *texture, sf::IntRect textureRect) {
 		m_rect.setTexture(texture);
 		m_rect.setTextureRect(textureRect);
 	}
 
-	bool GameObject::intersects(GameObject *obj) {
+	bool GObject::intersects(GObject *obj) {
 		if (obj == this) return false;
 
 		auto a = getBounds();
@@ -59,74 +59,74 @@ namespace pg {
 		);
 	}
 
-	sf::FloatRect GameObject::getBounds() {
+	sf::FloatRect GObject::getBounds() {
 		auto pos = getPosition();
 		auto size = getSize();
 
 		return sf::FloatRect(pos.x+1, pos.y+1, size.x-2, size.y-2);
 	}
 
-	sf::Vector2f GameObject::getPosition() {
+	sf::Vector2f GObject::getPosition() {
 		return m_rect.getPosition();
 	}
 	 
-	void GameObject::setPosition(sf::Vector2f coords) {
+	void GObject::setPosition(sf::Vector2f coords) {
 		m_rect.setPosition(coords); 
 	}
 
-	void GameObject::setEndPos(sf::Vector2f coords) {
+	void GObject::setEndPos(sf::Vector2f coords) {
 		m_rect.setPosition(coords - getSize());
 	}
 
-	sf::Vector2f GameObject::getEndPos() {
+	sf::Vector2f GObject::getEndPos() {
 		return getPosition() + getSize();
 	}
 
-	sf::Vector2f GameObject::getTopRight() {
+	sf::Vector2f GObject::getTopRight() {
 		auto pos = getPosition();
 		auto size = getSize();
 
 		return sf::Vector2f(pos.x + size.x, pos.y);
 	}
 
-	void GameObject::setTopRight(sf::Vector2f coords) {
+	void GObject::setTopRight(sf::Vector2f coords) {
 		auto size = getSize();
 		setPosition(sf::Vector2f(coords.x - size.x, coords.y));
 	}
 
-	sf::Vector2f GameObject::getBottomLeft() {
+	sf::Vector2f GObject::getBottomLeft() {
 		auto pos = getPosition();
 		auto size = getSize();
 
 		return sf::Vector2f(pos.x, pos.y + size.y);
 	}
 
-	void GameObject::setBottomLeft(sf::Vector2f coords) {
+	void GObject::setBottomLeft(sf::Vector2f coords) {
 		auto size = getSize();
 		setPosition(sf::Vector2f(coords.x, coords.y - size.y));
 	}
 
-	void GameObject::move(sf::Vector2f offset) {
+	void GObject::move(sf::Vector2f offset) {
 		m_rect.move(offset);
 	}
 
-	void GameObject::setSize(sf::Vector2f size) {
+	void GObject::setSize(sf::Vector2f size) {
 		m_rect.setSize(size);
 	}
 
-	sf::Vector2f GameObject::getSize() {
+	sf::Vector2f GObject::getSize() {
 		return m_rect.getSize();
 	}
 
-	void GameObject::setPosInGrid(sf::Vector2i *coords) {
+	void GObject::setPosInGrid(sf::Vector2i *coords) {
 		m_posInGrid = coords;
 	}
 
-	sf::Vector2i* GameObject::getPosInGrid() {
+	sf::Vector2i* GObject::getPosInGrid() {
 		return m_posInGrid;
 	}
 
-	bool GameObject::die() {
+	bool GObject::die() {
 		m_isDead = true;
 
 		//if (m_onDead == NULL) {
@@ -136,43 +136,43 @@ namespace pg {
 		return true;
 	}
 
-	void GameObject::setOnDead(std::function<void()> onDead) {
+	void GObject::setOnDead(std::function<void()> onDead) {
 		m_onDead = onDead;
 	}
 
-	sf::Vector2f GameObject::getCenter() {
+	sf::Vector2f GObject::getCenter() {
 		return getPosition() + getSize() / 2.f;
 	}
 
-	void GameObject::addToSpeed(sf::Vector2f dSpeed) {
+	void GObject::addToSpeed(sf::Vector2f dSpeed) {
 		m_speed += dSpeed;
 	}
 
-	void GameObject::setSpeed(sf::Vector2f speed) {
+	void GObject::setSpeed(sf::Vector2f speed) {
 		m_speed = speed;
 	}
 
-	sf::Vector2f GameObject::getSpeed() {
+	sf::Vector2f GObject::getSpeed() {
 		return m_speed;
 	}
 
-	void GameObject::setCenter(sf::Vector2f center) {
+	void GObject::setCenter(sf::Vector2f center) {
 		setPosition(center - getSize() / 2.f);
 	}
 
-	bool GameObject::isObstacle() {
+	bool GObject::isObstacle() {
 		return m_isObstacle;
 	}
 
-	bool GameObject::isDead() {
+	bool GObject::isDead() {
 		return m_isDead;
 	}
 
-	bool GameObject::isMovable() {
+	bool GObject::isMovable() {
 		return m_isMovable;
 	}
 
-	GameObject::~GameObject() {
+	GObject::~GObject() {
 		delete m_posInGrid;
 	}
 

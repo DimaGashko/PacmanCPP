@@ -1,28 +1,28 @@
-#include "GameField.hpp"
+#include "GField.hpp"
 
 namespace pg {
 
-	GameField::GameField() :
-		GameField(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
+	GField::GField() :
+		GField(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
 	{
 
 	}
 
-	GameField::GameField(sf::Vector2i size, sf::Vector2i cellSize) :
+	GField::GField(sf::Vector2i size, sf::Vector2i cellSize) :
 		m_size(size),
 		m_cellSize(cellSize),
-		m_grid(size.x, std::vector<std::vector<GameObject*>>(size.y))
+		m_grid(size.x, std::vector<std::vector<GObject*>>(size.y))
 	{
 	
 	}
 
-	void GameField::addAllObjects(std::vector<GameObject*> objects) {
+	void GField::addAllObjects(std::vector<GObject*> objects) {
 		for (auto &obj : objects) {
 			addObject(obj);
 		}
 	}
 
-	void GameField::addObject(GameObject *object) {
+	void GField::addObject(GObject *object) {
 		if (dynamic_cast<Point*>(object) != nullptr) {
 			m_pointsCount++;
 
@@ -37,8 +37,8 @@ namespace pg {
 
 	}
 
-	void GameField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
-		std::vector<GameObject*> visibleObjects;
+	void GField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
+		std::vector<GObject*> visibleObjects;
 		getObjectsOfRange(visibleRange, visibleObjects);
 
 		for (auto &obj : visibleObjects) {
@@ -46,8 +46,8 @@ namespace pg {
 		}
 	}
 
-	void GameField::update(sf::Vector2f gameSize, int frameTime) {
-		std::vector<GameObject*> activeObjects;
+	void GField::update(sf::Vector2f gameSize, int frameTime) {
+		std::vector<GObject*> activeObjects;
 		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
 		for (auto &obj : activeObjects) {
@@ -60,7 +60,7 @@ namespace pg {
 			auto oldPos = obj1->getPosition();
 			sf::FloatRect candidatesRange(oldPos - m_cellSize, cellSize2);
 
-			std::vector<GameObject*> candidates;
+			std::vector<GObject*> candidates;
 			getObjectsOfRange(candidatesRange, candidates, 50);
 
 			for (auto &obj2 : candidates) {
@@ -86,7 +86,7 @@ namespace pg {
 		}
 	}
 
-	void GameField::procCollision(GameObject *obj1, GameObject *obj2) {
+	void GField::procCollision(GObject *obj1, GObject *obj2) {
 		if (!obj1->isMovable() || !obj2->isObstacle()) {
 			return;
 		}
@@ -113,7 +113,7 @@ namespace pg {
 		else obj1->setSpeed(sf::Vector2f(0.f, 0.f));
 	}
 
-	GameField::eSides GameField::_getCollisionSide(GameObject *obj1, GameObject *obj2) {
+	GField::eSides GField::_getCollisionSide(GObject *obj1, GObject *obj2) {
 		auto o1 = obj1->getCenter();
 		auto o2 = obj2->getCenter();
 
@@ -127,14 +127,14 @@ namespace pg {
 		return eSides::None;
 	}
 
-	sf::FloatRect GameField::_getActiveRange(sf::Vector2f gameSize) {
+	sf::FloatRect GField::_getActiveRange(sf::Vector2f gameSize) {
 		auto size = gameSize * 1.f;
 		auto coords = m_player->getPosition() - size / 2.f;
 
 		return sf::FloatRect(coords, size);
 	}
 
-	void GameField::addToGrid(GameObject *object) {
+	void GField::addToGrid(GObject *object) {
 		sf::Vector2f objCoords = object->getPosition();
 		sf::Vector2i coords = _getCoordsInGrid(objCoords);
 
@@ -165,14 +165,14 @@ namespace pg {
 		cell.push_back(object);
 	}
 
-	void GameField::removeFromGrid(GameObject *object) {
+	void GField::removeFromGrid(GObject *object) {
 		auto coords = object->getPosInGrid();
 
 		if (!_hasCell(*coords)) return;
 		auto &cell = m_grid[coords->x][coords->y];
 		auto size = cell.size();
 
-		std::vector<GameObject*> newCell(size - 1);
+		std::vector<GObject*> newCell(size - 1);
 
 		for (int i = 0; i < size; i++) {
 			if (cell[i] != object) {
@@ -184,22 +184,22 @@ namespace pg {
 		m_grid[coords->x][coords->y] = newCell;
 	}
 
-	void GameField::gameOver() {
+	void GField::gameOver() {
 		m_gameOver = true;
 	}
 
-	bool GameField::checkWon() {
+	bool GField::checkWon() {
 		if (m_pointsCount <= 0) m_isWon = true;
 
 		return m_isWon;
 	}
 
-	bool GameField::checkGameOver() {
+	bool GField::checkGameOver() {
 		return m_gameOver;
 	}
 
-	void GameField::getObjectsOfRange(sf::FloatRect range, std::vector<GameObject*> &res, int maxSize) {
-		std::vector<GameObject*> tmp(maxSize);
+	void GField::getObjectsOfRange(sf::FloatRect range, std::vector<GObject*> &res, int maxSize) {
+		std::vector<GObject*> tmp(maxSize);
 		int len = 0;
 
 		auto _range = sf::IntRect(
@@ -229,16 +229,16 @@ namespace pg {
 		std::move(tmp.begin(), tmp.begin() + len, res.begin());
 	}
 
-	inline bool GameField::_hasCell(sf::Vector2i coords) {
+	inline bool GField::_hasCell(sf::Vector2i coords) {
 		return coords.x >= 0 && coords.y >= 0
 			&& coords.y < m_size.y && coords.x < m_size.x;
 	}
 
-	inline sf::Vector2i GameField::_getCoordsInGrid(sf::Vector2f coords) {
+	inline sf::Vector2i GField::_getCoordsInGrid(sf::Vector2f coords) {
 		return sf::Vector2i(int(coords.x / m_cellSize.x), int(coords.y / m_cellSize.y));
 	}
 
-	void GameField::setPlayer(Actor* player) {
+	void GField::setPlayer(Actor* player) {
 		m_player = player;
 
 		m_player->setOnDead([&] {
@@ -246,11 +246,11 @@ namespace pg {
 		});
 	}
 
-	Actor* GameField::getPlayer() {
+	Actor* GField::getPlayer() {
 		return m_player;
 	}
 
-	GameField::~GameField() {
+	GField::~GField() {
 
 		for (auto &row : m_grid) {
 			for (auto &cell : row) {

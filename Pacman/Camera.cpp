@@ -51,7 +51,7 @@ namespace pg {
 		use();
 	}
 
-	void Camera::setTarget(GameObject * target) {
+	void Camera::setTarget(GObject * target) {
 		m_target = target;
 
 		if (!m_target) return;
@@ -59,7 +59,7 @@ namespace pg {
 		m_view.setCenter(m_target->getPosition());
 	}
 
-	GameObject* Camera::getTarget() {
+	GObject* Camera::getTarget() {
 		return m_target;
 	}
 

@@ -2,7 +2,7 @@
 
 namespace pg {
 
-	Bonus::Bonus() : GameObject() {
+	Bonus::Bonus() : GObject() {
 		m_isMovable = false;
 		m_isObstacle = false;
 	}
@@ -15,7 +15,7 @@ namespace pg {
 
 	}
 
-	void Bonus::interact(pg::GameObject *obj) {
+	void Bonus::interact(pg::GObject *obj) {
 		use(obj);
 	}
 

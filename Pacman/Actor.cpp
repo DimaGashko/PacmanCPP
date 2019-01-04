@@ -3,14 +3,14 @@
 namespace pg {
 
 	Actor::Actor() : 
-		GameObject(),
+		GObject(),
 		m_step(0.1f)
 	{
 		m_isMovable = true;
 		m_isObstacle = false;
 	}
 
-	void Actor::interact(pg::GameObject *obj) {
+	void Actor::interact(pg::GObject *obj) {
 
 	}
 
