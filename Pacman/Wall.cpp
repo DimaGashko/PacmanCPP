@@ -2,7 +2,7 @@
 
 namespace pg {
 
-	Wall::Wall() : GameObject() {
+	Wall::Wall() : GObject() {
 		m_isMovable = false;
 		m_isObstacle = true;
 	}
@@ -16,7 +16,7 @@ namespace pg {
 
 	}
 
-	void Wall::interact(pg::GameObject *obj) {
+	void Wall::interact(pg::GObject *obj) {
 	
 	}
 

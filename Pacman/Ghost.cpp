@@ -44,7 +44,7 @@ namespace pg {
 		addToSpeed(dir);
 	}
 
-	void Ghost::interact(pg::GameObject *obj) {
+	void Ghost::interact(pg::GObject *obj) {
 		if (dynamic_cast<Pacman*>(obj) != nullptr) {
 			obj->die();
 		}

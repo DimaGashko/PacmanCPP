@@ -5,9 +5,9 @@
 #include <SFML/Graphics.hpp>
 
 #include "Camera.hpp"
-#include "GameField.hpp"
+#include "GField.hpp"
 
-#include "GameObject.hpp"
+#include "GObject.hpp"
 #include "LevelLoader.hpp"
 #include "Player.hpp" 
 
@@ -22,7 +22,7 @@ namespace pg {
 		~PacmanGame();
 
 	private:
-		GameField *m_gameField;
+		GField *m_gameField;
 		LevelLoader m_levelLoader;
 
 		Player m_player;

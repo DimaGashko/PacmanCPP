@@ -12,7 +12,7 @@ namespace pg {
 
 		void updateAnimation(int frameTime) override;
 		void updateSpeed(int frameTime) override;
-		void interact(pg::GameObject *obj) override;
+		void interact(pg::GObject *obj) override;
 
 	private:
 		std::string m_dir;

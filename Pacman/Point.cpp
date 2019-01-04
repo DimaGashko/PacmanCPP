@@ -6,13 +6,13 @@ namespace pg {
 
 	}
 
-	void Point::use(pg::GameObject *obj) {
+	void Point::use(pg::GObject *obj) {
 		if (!canItUseTheBonus(obj)) return;
 
 		die();
 	}
 
-	bool Point::canItUseTheBonus(pg::GameObject *obj) {
+	bool Point::canItUseTheBonus(pg::GObject *obj) {
 		if (dynamic_cast<Pacman*>(obj) != nullptr) return true;
 		return false;
 	}

@@ -2,11 +2,11 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "GameObject.hpp"
+#include "GObject.hpp"
 
 namespace pg {
 
-	class Bonus : public GameObject {
+	class Bonus : public GObject {
 	public:
 
 		Bonus();
@@ -14,10 +14,10 @@ namespace pg {
 		void updateAnimation(int frameTime) override;
 		void updateSpeed(int frameTime) override;
 		void setStartAnim() override;
-		void interact(pg::GameObject *obj);
+		void interact(pg::GObject *obj);
 
-		virtual void use(pg::GameObject *obj) = 0;
-		virtual bool canItUseTheBonus(pg::GameObject *obj) = 0;
+		virtual void use(pg::GObject *obj) = 0;
+		virtual bool canItUseTheBonus(pg::GObject *obj) = 0;
 
 		~Bonus();
 

@@ -8,8 +8,8 @@
 
 #include "lib/tinyxml2.h"
 
-#include "GameField.hpp"
-#include "GameObject.hpp"
+#include "GField.hpp"
+#include "GObject.hpp"
 #include "Wall.hpp"
 #include "Point.hpp"
 #include "Pacman.hpp"
@@ -25,8 +25,8 @@ namespace pg {
 	public:
 		LevelLoader();
 		
-		GameField* loadFromTmx(std::string url);
-		GameField* loadFromTxt(std::string url);
+		GField* loadFromTmx(std::string url);
+		GField* loadFromTxt(std::string url);
 		
 		~LevelLoader();
 
@@ -68,7 +68,7 @@ namespace pg {
 		void createAnimationConfigs();
 		void parseTiles(tinyxml2::XMLElement *xmlTileset);
 
-		GameField* _creatLevel(_LevelConfig levelConfig);
+		GField* _creatLevel(_LevelConfig levelConfig);
 		_LevelConfig _parseXmlLevel(tinyxml2::XMLDocument &xmlLevel);
 	
 		sf::IntRect _getTextureRectByTileId(int id);

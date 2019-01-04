@@ -6,7 +6,7 @@ namespace pg {
 
 	}
 
-	GameField* LevelLoader::loadFromTmx(std::string url) {
+	GField* LevelLoader::loadFromTmx(std::string url) {
 		if (!m_tilesetConfig) {
 			loadTileset();
 		} 
@@ -24,11 +24,11 @@ namespace pg {
 		return _creatLevel(levelConfig);
 	}
 	 
-	GameField* LevelLoader::_creatLevel(_LevelConfig levelConfig) {
+	GField* LevelLoader::_creatLevel(_LevelConfig levelConfig) {
 		auto size = levelConfig.size;
 		auto tileSize = m_tilesetConfig->tileSize;
 
-		GameField* gameField = new GameField(size, tileSize);
+		GField* gField = new GField(size, tileSize);
 
 		for (auto gids : levelConfig.gids) {
 			for (int x = 0; x < size.x; x++) {
@@ -41,14 +41,14 @@ namespace pg {
 					auto tile = m_tilesetConfig->tiles[id];
 					auto type = tile.type;
 
-					GameObject *obj;
+					GObject *obj;
 
 					sf::Vector2f coords(float(x * tileSize.x), float(y * tileSize.y));
 
 					if (type == "Pacman") {
 						Pacman *pacman = new Pacman();
 
-						gameField->setPlayer(pacman);
+						gField->setPlayer(pacman);
 						obj = pacman;
 					}
 
@@ -86,12 +86,12 @@ namespace pg {
 
 					}
 
-					gameField->addObject(obj);
+					gField->addObject(obj);
 				}
 			}
 		}
 
-		return gameField;
+		return gField;
 	}
 
 	LevelLoader::_LevelConfig LevelLoader::_parseXmlLevel(tinyxml2::XMLDocument &xmlLevel) {
@@ -270,17 +270,17 @@ namespace pg {
 		);
 	}
 
-	GameField* LevelLoader::loadFromTxt(std::string url) {
+	GField* LevelLoader::loadFromTxt(std::string url) {
 		std::ifstream fin(url);
 
 		if (!fin) {
 			std::cerr << "Can't load level" << std::endl;
-			return new GameField();
+			return new GField();
 		}
 
 		Actor *player = nullptr;
 
-		std::vector<GameObject*> objects;
+		std::vector<GObject*> objects;
 		sf::Vector2i tileSize(16, 16);
 	    sf::Vector2i size(0, 0);
 
@@ -294,7 +294,7 @@ namespace pg {
 			for (int x = 0; x < width; x++) {
 				char key = row[x];
 				sf::Vector2f realCoords(float(x * tileSize.x), float(y * tileSize.y));
-				GameObject *obj = nullptr;
+				GObject *obj = nullptr;
 
 				if (key == '#') {
 					obj = new Wall();
@@ -319,11 +319,11 @@ namespace pg {
 		size.x = width;
 		size.y = height;
 
-		auto gameField = new GameField(size, tileSize);
-		gameField->addAllObjects(objects);
-		gameField->setPlayer(player);
+		auto gField = new GField(size, tileSize);
+		gField->addAllObjects(objects);
+		gField->setPlayer(player);
 
-		return gameField;
+		return gField;
 	}
 
 	LevelLoader::~LevelLoader() {

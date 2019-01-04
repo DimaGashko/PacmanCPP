@@ -1,17 +1,17 @@
 #pragma once
 
-#include "GameObject.hpp"
+#include "GObject.hpp"
 
 namespace pg {
 
-	class Actor : public GameObject {
+	class Actor : public GObject {
 	public:
 		Actor();
 
 		void updateSpeed(int frameTime) override;
 		void updateAnimation(int frameTime) override;
 		void setStartAnim() override;
-		void interact(pg::GameObject *obj) override;
+		void interact(pg::GObject *obj) override;
 
 		void goLeft();
 		void goTop();
