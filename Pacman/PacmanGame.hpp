@@ -14,7 +14,7 @@
 namespace pg {
 
 	class PacmanGame {
-	public:
+	public: 
 		PacmanGame();
 
 		void run();
