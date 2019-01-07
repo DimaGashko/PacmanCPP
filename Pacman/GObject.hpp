@@ -39,6 +39,16 @@ namespace pg {
 		bool isMovable();
 		bool isDead();
 
+		void setLeft(float val);
+		void setTop(float val);
+		void setRight(float val);
+		void setBottom(float val);
+
+		float getLeft();
+		float getTop();
+		float getRight();
+		float getBottom();
+
 		void setBottomLeft(sf::Vector2f coords);
 		void setTopRight(sf::Vector2f coords);
 		void setPosition(sf::Vector2f coords);
