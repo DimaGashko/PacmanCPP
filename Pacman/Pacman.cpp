@@ -12,6 +12,14 @@ namespace pg {
 
 	}
 
+	void Pacman::interact(pg::GObject *obj) {
+		Actor::interact(obj);
+
+		if (dynamic_cast<Point*>(obj) != nullptr) {
+			//playSound("")
+		}
+	}
+
 	Pacman::~Pacman() {
 
 	}

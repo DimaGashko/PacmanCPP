@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Actor.hpp"
+#include "Point.hpp"
 
 namespace pg {
 
@@ -11,6 +12,7 @@ namespace pg {
 		Pacman();
 
 		void updateAnimation(int frameTime) override;
+		void interact(pg::GObject *obj) override;
 
 		~Pacman();
 
