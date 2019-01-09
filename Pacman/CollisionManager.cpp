@@ -91,7 +91,7 @@ namespace pg {
 		if (Math::intersectsL2(o1, o2, leftBottom, rightBottom)) return Bottom;
 		if (Math::intersectsL2(o1, o2, leftTop, rightTop)) return Top;
 
-		// Например, если объект внутри другого объекта
+		// Если объект внутри другого объекта или объекты не пересекаются
 		return _eSides::None;
 	}
 

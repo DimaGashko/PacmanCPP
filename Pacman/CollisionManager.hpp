@@ -21,8 +21,6 @@ namespace pg {
 		// ¬озвращает сторону obj2, с которой столкнулс€ obj1
 		_eSides _getCollisionSide(GObject *obj1, GObject *obj2);
 
-		
-
 	};
 
 }; // nampespace pg
