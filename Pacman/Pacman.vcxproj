@@ -26,6 +26,7 @@
     <ClCompile Include="Bonus.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Clyde.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="GField.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="Ghost.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Bonus.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Clyde.hpp" />
+    <ClInclude Include="CollisionManager.hpp" />
     <ClInclude Include="GField.hpp" />
     <ClInclude Include="GObject.hpp" />
     <ClInclude Include="Ghost.hpp" />
