@@ -66,24 +66,8 @@ namespace pg {
 		return sf::FloatRect(pos.x+1, pos.y+1, size.x-2, size.y-2);
 	}
 
-	sf::Vector2f GObject::getPosition() {
-		return m_rect.getPosition();
-	}
-	 
-	void GObject::setPosition(sf::Vector2f coords) {
-		m_rect.setPosition(coords); 
-	}
-
 	void GObject::move(sf::Vector2f offset) {
 		m_rect.move(offset);
-	}
-
-	void GObject::setSize(sf::Vector2f size) {
-		m_rect.setSize(size);
-	}
-
-	sf::Vector2f GObject::getSize() {
-		return m_rect.getSize();
 	}
 
 	void GObject::setPosInGrid(sf::Vector2i *coords) {
@@ -108,32 +92,40 @@ namespace pg {
 		m_onDead = onDead;
 	}
 
-	sf::Vector2f GObject::getCenter() {
-		return getPosition() + getSize() / 2.f;
-	}
-
 	void GObject::addToSpeed(sf::Vector2f dSpeed) {
 		m_speed += dSpeed;
 	}
 
-	void GObject::setSpeed(sf::Vector2f speed) {
-		m_speed = speed;
-	}
-
-	sf::Vector2f GObject::getSpeed() {
-		return m_speed;
+	void GObject::setPosition(sf::Vector2f coords) {
+		m_rect.setPosition(coords);
 	}
 
 	void GObject::setCenter(sf::Vector2f center) {
 		setPosition(center - getSize() / 2.f);
 	}
 
-	bool GObject::isObstacle() {
-		return m_isObstacle;
+	void GObject::setSpeed(sf::Vector2f speed) {
+		m_speed = speed;
 	}
 
-	bool GObject::isDead() {
-		return m_isDead;
+	void GObject::setSize(sf::Vector2f size) {
+		m_rect.setSize(size);
+	}
+
+	sf::Vector2f GObject::getPosition() {
+		return m_rect.getPosition();
+	}
+
+	sf::Vector2f GObject::getCenter() {
+		return getPosition() + getSize() / 2.f;
+	}
+
+	sf::Vector2f GObject::getSpeed() {
+		return m_speed;
+	}
+
+	sf::Vector2f GObject::getSize() {
+		return m_rect.getSize();
 	}
 
 	void GObject::setLeft(float val) {
@@ -166,6 +158,14 @@ namespace pg {
 
 	float GObject::getBottom() {
 		return getPosition().y + getSize().y;
+	}
+
+	bool GObject::isObstacle() {
+		return m_isObstacle;
+	}
+
+	bool GObject::isDead() {
+		return m_isDead;
 	}
 
 	bool GObject::isMovable() {

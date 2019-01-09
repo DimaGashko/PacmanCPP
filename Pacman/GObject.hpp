@@ -39,16 +39,6 @@ namespace pg {
 		bool isMovable();
 		bool isDead();
 
-		void setLeft(float val);
-		void setTop(float val);
-		void setRight(float val);
-		void setBottom(float val);
-
-		float getLeft();
-		float getTop(); 
-		float getRight();
-		float getBottom();
-
 		void setPosition(sf::Vector2f coords);
 		void setCenter(sf::Vector2f center);
 		void setSpeed(sf::Vector2f speed);
@@ -58,6 +48,16 @@ namespace pg {
 		sf::Vector2f getCenter();
 		sf::Vector2f getSpeed();
 		sf::Vector2f getSize();
+
+		void setLeft(float val);
+		void setTop(float val);
+		void setRight(float val);
+		void setBottom(float val);
+
+		float getLeft();
+		float getTop();
+		float getRight();
+		float getBottom();
 
 		sf::FloatRect getBounds();
 
