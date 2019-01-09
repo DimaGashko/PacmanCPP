@@ -17,6 +17,7 @@ namespace pg {
 	private:
 		std::string m_dir;
 		int m_stepsRest;
+		bool m_wasInteract;
 		
 	};
 

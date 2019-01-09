@@ -18,7 +18,12 @@ namespace pg {
 		auto step = m_step * frameTime;
 		auto pos = getPosition();
 
-		if (m_stepsRest <= 0 ) {
+		bool isEndCoords = pos.x - (int)pos.x < step * 2
+			&& pos.y - (int)pos.y < step * 2;
+
+		if ((m_stepsRest <= 0 && isEndCoords) || m_wasInteract) {
+			m_wasInteract = false;
+
 			float k = float(rand()) / RAND_MAX;
 
 			if (k < 0.25) m_dir = "left";
@@ -26,7 +31,7 @@ namespace pg {
 			else if (k < 0.75) m_dir = "right";
 			else if (k < 1) m_dir = "bottom";
 
-			m_stepsRest = rand() % 1000;
+			m_stepsRest = rand() % 200 + 10;
 
 			m_goingLeft = (m_dir == "left");
 			m_goingTop = (m_dir == "top");
@@ -45,6 +50,10 @@ namespace pg {
 	}
 
 	void Ghost::interact(pg::GObject *obj) {
+		if (obj->isObstacle()) {
+			m_wasInteract = true;
+		}
+
 		if (dynamic_cast<Pacman*>(obj) != nullptr) {
 			obj->die();
 		}
