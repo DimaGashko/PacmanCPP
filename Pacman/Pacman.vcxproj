@@ -29,6 +29,7 @@
     <ClCompile Include="GField.cpp" />
     <ClCompile Include="GObject.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Inky.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="lib\tinyxml2.cpp" />
@@ -51,6 +52,7 @@
     <ClInclude Include="GField.hpp" />
     <ClInclude Include="GObject.hpp" />
     <ClInclude Include="Ghost.hpp" />
+    <ClInclude Include="Grid.hpp" />
     <ClInclude Include="Inky.hpp" />
     <ClInclude Include="LevelLoader.hpp" />
     <ClInclude Include="lib\tinyxml2.h" />
