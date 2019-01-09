@@ -3,21 +3,17 @@
 namespace pg {
 
 	PacmanGame::PacmanGame() : m_camera(&m_window) {		
-		_initWindow();
-		_initLevels();
-	}
-
-	void PacmanGame::_initWindow() {
-		sf::ContextSettings settings;
-		settings.antialiasingLevel = 8;
-
-		m_window.create(sf::VideoMode(750, 650), "Pacman", sf::Style::Default , settings);
-		//m_window.setFramerateLimit(120);
-
-		m_camera.init();	
+		
 	}
 
 	void PacmanGame::run() {
+		_initWindow();
+		_initLevels();
+
+		auto bgSound = soundsManager.get("sounds/pacman_chomp.wav");
+		bgSound->setLoop(true);
+		bgSound->play();
+
 		openNextLevel();
 
 		sf::Clock clock;
@@ -44,6 +40,16 @@ namespace pg {
 			}
 
 		}
+	}
+
+	void PacmanGame::_initWindow() {
+		sf::ContextSettings settings;
+		settings.antialiasingLevel = 8;
+
+		m_window.create(sf::VideoMode(750, 650), "Pacman", sf::Style::Default, settings);
+		//m_window.setFramerateLimit(120);
+
+		m_camera.init();
 	}
 
 	void PacmanGame::update() {

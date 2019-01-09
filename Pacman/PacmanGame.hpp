@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "SoundManager.hpp"
 #include "Camera.hpp"
 #include "GField.hpp"
 
@@ -27,12 +28,14 @@ namespace pg {
 
 		Player m_player;
 		Camera m_camera;
+
+		SoundManager soundsManager;
 		
 		sf::RenderWindow m_window;
 
 		int m_frameTime = 0;
 
-		int m_currentLevel = 1;
+		int m_currentLevel = -1;
 		std::vector<std::string> m_levels;
 
 		void update();

@@ -14,7 +14,7 @@ namespace pg {
 		// Возвращает SoundыSource по пути к нему
 		// Если звук ранее не добавлялся
 		// То сначала добавляется через get
-		sf::SoundSource* get(std::string url);
+		sf::Sound* get(std::string url);
 
 		// Добавляет звук в SoundManager
 		bool add(std::string url);
