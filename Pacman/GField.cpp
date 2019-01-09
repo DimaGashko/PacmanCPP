@@ -74,7 +74,7 @@ namespace pg {
 	}
 
 	sf::FloatRect GField::_getActiveRange(sf::Vector2f gameSize) {
-		auto size = gameSize * 1.f;
+		auto size = gameSize * 1.5f;
 		auto coords = m_player->getPosition() - size / 2.f;
 
 		return sf::FloatRect(coords, size);

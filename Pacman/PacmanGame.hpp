@@ -32,7 +32,7 @@ namespace pg {
 
 		int m_frameTime = 0;
 
-		int m_currentLevel = -1;
+		int m_currentLevel = 1;
 		std::vector<std::string> m_levels;
 
 		void update();
