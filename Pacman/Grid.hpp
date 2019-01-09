@@ -9,7 +9,7 @@ namespace pg {
 	class Grid {
 	public:
 		Grid();
-		Grid(sf::Vector2i size, sf::Vector2f cellSize);
+		Grid(sf::Vector2i size, sf::Vector2i cellSize);
 
 		// Добавляет объект в сетку
 		// Если объект уже был в сетке, то от сначала удаляется с предыдущего места
@@ -20,13 +20,13 @@ namespace pg {
 		void getObjectsOfRange(sf::FloatRect range, std::vector<GObject*> &res, int maxSize = 5000);
 
 		sf::Vector2i getSize();
-		sf::Vector2f getCellSize();
+		sf::Vector2i getCellSize();
 
 		~Grid();
 
 	private:
 		sf::Vector2i m_size;
-		sf::Vector2f m_cellSize;
+		sf::Vector2i m_cellSize;
 
 		std::vector<std::vector<std::vector<GObject *>>> m_grid;
 

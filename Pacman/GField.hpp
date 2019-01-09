@@ -18,7 +18,7 @@ namespace pg {
 	class GField {
 	public:
 		GField();
-		GField(sf::Vector2i size, sf::Vector2f cellSize);
+		GField(sf::Vector2i size, sf::Vector2i cellSize);
 
 		void addAllObjects(std::vector<GObject*> objects);
 		void addObject(GObject *object);

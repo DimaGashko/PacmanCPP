@@ -3,14 +3,15 @@
 namespace pg {
 
 	Grid::Grid() :
-		Grid(sf::Vector2i(10, 10), sf::Vector2f(16, 16))
+		Grid(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
 	{
 	
 	}
 
-	Grid::Grid(sf::Vector2i size, sf::Vector2f cellSize) :
+	Grid::Grid(sf::Vector2i size, sf::Vector2i cellSize) :
 		m_size(size),
-		m_cellSize(cellSize)
+		m_cellSize(cellSize),
+		m_grid(m_size.x, std::vector<std::vector<GObject*>>(m_size.y))
 	{
 
 	}
@@ -100,7 +101,7 @@ namespace pg {
 		return m_size;
 	}
 
-	sf::Vector2f Grid::getCellSize() {
+	sf::Vector2i Grid::getCellSize() {
 		return m_cellSize;
 	}
 

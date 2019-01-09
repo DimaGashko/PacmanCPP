@@ -7,7 +7,7 @@ namespace pg {
 
 	}
 
-	GField::GField(sf::Vector2i size, sf::Vector2f cellSize) :
+	GField::GField(sf::Vector2i size, sf::Vector2i cellSize) :
 		grid(size, cellSize)
 	{
 	
@@ -51,11 +51,11 @@ namespace pg {
 			obj->update(frameTime);
 		}
 
-		auto cellSize2 = grid.getCellSize() * 2.f;
+		sf::Vector2f cellSize(grid.getCellSize());
 
 		for (auto &obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
-			sf::FloatRect candidatesRange(oldPos - grid.getCellSize(), cellSize2);
+			sf::FloatRect candidatesRange(oldPos - cellSize, cellSize * 2.f);
 
 			std::vector<GObject*> candidates;
 			grid.getObjectsOfRange(candidatesRange, candidates, 50);
