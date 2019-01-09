@@ -2,16 +2,13 @@
 
 namespace pg {
 
-	GField::GField() :
-		GField(sf::Vector2i(10, 10), sf::Vector2i(16, 16))
+	GField::GField()
 	{
 
 	}
 
-	GField::GField(sf::Vector2i size, sf::Vector2i cellSize) :
-		m_size(size),
-		m_cellSize(cellSize),
-		m_grid(size.x, std::vector<std::vector<GObject*>>(size.y))
+	GField::GField(sf::Vector2i size, sf::Vector2f cellSize) :
+		grid(size, cellSize)
 	{
 	
 	}
@@ -33,13 +30,13 @@ namespace pg {
 			});
 		}
 
-		addToGrid(object);
+		grid.add(object);
 
 	}
 
 	void GField::draw(sf::RenderWindow &window, sf::FloatRect visibleRange) {
 		std::vector<GObject*> visibleObjects;
-		getObjectsOfRange(visibleRange, visibleObjects);
+		grid.getObjectsOfRange(visibleRange, visibleObjects);
 
 		for (auto &obj : visibleObjects) {
 			obj->draw(window);
@@ -48,20 +45,20 @@ namespace pg {
 
 	void GField::update(sf::Vector2f gameSize, int frameTime) {
 		std::vector<GObject*> activeObjects;
-		getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
+		grid.getObjectsOfRange(_getActiveRange(gameSize), activeObjects);
 
 		for (auto &obj : activeObjects) {
 			obj->update(frameTime);
 		}
 
-		auto cellSize2 = m_cellSize * 2.f;
+		auto cellSize2 = grid.getCellSize() * 2.f;
 
 		for (auto &obj1 : activeObjects) {
 			auto oldPos = obj1->getPosition();
-			sf::FloatRect candidatesRange(oldPos - m_cellSize, cellSize2);
+			sf::FloatRect candidatesRange(oldPos - grid.getCellSize(), cellSize2);
 
 			std::vector<GObject*> candidates;
-			getObjectsOfRange(candidatesRange, candidates, 50);
+			grid.getObjectsOfRange(candidatesRange, candidates, 50);
 
 			for (auto &obj2 : candidates) {
 				obj1->move(obj1->getSpeed());
@@ -80,7 +77,7 @@ namespace pg {
 			auto newPos = obj->getPosition();
 
 			if (oldPos.x != newPos.x || oldPos.y != newPos.y) {
-				addToGrid(obj);
+				grid.add(obj);
 			}
 
 		}
@@ -139,56 +136,6 @@ namespace pg {
 		return sf::FloatRect(coords, size);
 	}
 
-	void GField::addToGrid(GObject *object) {
-		sf::Vector2f objCoords = object->getPosition();
-		sf::Vector2i coords = _getCoordsInGrid(objCoords);
-
-		//Oбъект уже есть в сетке
-		auto prev = object->getPosInGrid();
-
-		if (prev) {
-			if (prev->x == coords.x && prev->y == coords.y) {
-				//И уже находится в нужной ячейке
-				return;
-			}
-			else {
-				removeFromGrid(object);
-			}
-		}
-		else {
-			object->setPosInGrid(new sf::Vector2i());
-		}
-
-		if (!_hasCell(coords)) return;
-		auto &cell = m_grid[coords.x][coords.y];
-
-		auto posInGrid = object->getPosInGrid();
-
-		posInGrid->x = coords.x;
-		posInGrid->y = coords.y;
-
-		cell.push_back(object);
-	}
-
-	void GField::removeFromGrid(GObject *object) {
-		auto coords = object->getPosInGrid();
-
-		if (!_hasCell(*coords)) return;
-		auto &cell = m_grid[coords->x][coords->y];
-		auto size = cell.size();
-
-		std::vector<GObject*> newCell(size - 1);
-
-		for (int i = 0; i < size; i++) {
-			if (cell[i] != object) {
-				if (i < size - 1) newCell[i] = cell[i];
-				else newCell.push_back(cell[i]);
-			}
-		}
-
-		m_grid[coords->x][coords->y] = newCell;
-	}
-
 	void GField::gameOver() {
 		m_gameOver = true;
 	}
@@ -201,46 +148,6 @@ namespace pg {
 
 	bool GField::checkGameOver() {
 		return m_gameOver;
-	}
-
-	void GField::getObjectsOfRange(sf::FloatRect range, std::vector<GObject*> &res, int maxSize) {
-		std::vector<GObject*> tmp(maxSize);
-		int len = 0;
-
-		auto _range = sf::IntRect(
-			_getCoordsInGrid(sf::Vector2f(range.left, range.top)),
-			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
-		);
-
-		for (int x = _range.left; x <= _range.left + _range.width; x++) {
-			for (int y = _range.top; y <= _range.top + _range.height; y++) {
-
-				if (!_hasCell(sf::Vector2i(x, y))) continue;
-
-				for (auto &obj : m_grid[x][y]) {
-					if (!obj || obj->isDead()) {
-						//removeFromGrid(obj);
-						continue;
-					}
-
-					tmp[len++] = obj;
-				}
-
-			}
-		}
-
-		res.resize(len);
-
-		std::move(tmp.begin(), tmp.begin() + len, res.begin());
-	}
-
-	inline bool GField::_hasCell(sf::Vector2i coords) {
-		return coords.x >= 0 && coords.y >= 0
-			&& coords.y < m_size.y && coords.x < m_size.x;
-	}
-
-	inline sf::Vector2i GField::_getCoordsInGrid(sf::Vector2f coords) {
-		return sf::Vector2i(int(coords.x / m_cellSize.x), int(coords.y / m_cellSize.y));
 	}
 
 	void GField::setPlayer(Actor* player) {
@@ -256,14 +163,6 @@ namespace pg {
 	}
 
 	GField::~GField() {
-
-		for (auto &row : m_grid) {
-			for (auto &cell : row) {
-				for (auto &obj : cell) {
-					delete obj;
-				}
-			}
-		}
 
 	}
 

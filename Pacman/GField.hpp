@@ -8,6 +8,7 @@
 #include <typeinfo>
 
 #include "Math.hpp"
+#include "Grid.hpp"
 #include "GObject.hpp"
 #include "Actor.hpp"
 #include "Point.hpp"
@@ -17,7 +18,7 @@ namespace pg {
 	class GField {
 	public:
 		GField();
-		GField(sf::Vector2i size, sf::Vector2i cellSize);
+		GField(sf::Vector2i size, sf::Vector2f cellSize);
 
 		void addAllObjects(std::vector<GObject*> objects);
 		void addObject(GObject *object);
@@ -36,31 +37,16 @@ namespace pg {
 		~GField();
 	
 	private:
+		Grid grid;
+
 		bool m_isWon = false;
 		bool m_gameOver = false;
 		int m_pointsCount = 0;
-		Actor *m_player;
-
-		sf::Vector2f m_size;
-		sf::Vector2f m_cellSize;
-		 
-		// Cетка игры
-		std::vector<std::vector<std::vector<GObject *>>> m_grid;
-
-		void getObjectsOfRange(sf::FloatRect range, std::vector<GObject*> &res, int maxSize = 5000);
-
-		// Добавляет объект в сетку
-		// Если объект уже был в сетке, то от сначала удаляется с предыдущего места
-		void addToGrid(GObject *object);
-
-		void removeFromGrid(GObject *object);
+		Actor *m_player; 
 
 		void gameOver();
 
 		sf::FloatRect _getActiveRange(sf::Vector2f gameSize);
-
-		bool _hasCell(sf::Vector2i coords);
-		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);
 
 		void procCollision(GObject *obj1, GObject *obj2);
 
