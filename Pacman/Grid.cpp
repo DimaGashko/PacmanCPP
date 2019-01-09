@@ -48,6 +48,8 @@ namespace pg {
 	}
 
 	void Grid::remove(GObject *object) {
+		if (!object) return;
+
 		auto coords = object->getPosInGrid();
 
 		if (!_hasCell(*coords)) return;
@@ -82,7 +84,7 @@ namespace pg {
 
 				for (auto &obj : m_grid[x][y]) {
 					if (!obj || obj->isDead()) {
-						//removeFromGrid(obj);
+						remove(obj);
 						continue;
 					}
 
