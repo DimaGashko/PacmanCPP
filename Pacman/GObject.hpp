@@ -45,7 +45,7 @@ namespace pg {
 		void setBottom(float val);
 
 		float getLeft();
-		float getTop();
+		float getTop(); 
 		float getRight();
 		float getBottom();
 

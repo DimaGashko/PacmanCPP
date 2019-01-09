@@ -74,38 +74,6 @@ namespace pg {
 		m_rect.setPosition(coords); 
 	}
 
-	void GObject::setEndPos(sf::Vector2f coords) {
-		m_rect.setPosition(coords - getSize());
-	}
-
-	sf::Vector2f GObject::getEndPos() {
-		return getPosition() + getSize();
-	}
-
-	sf::Vector2f GObject::getTopRight() {
-		auto pos = getPosition();
-		auto size = getSize();
-
-		return sf::Vector2f(pos.x + size.x, pos.y);
-	}
-
-	void GObject::setTopRight(sf::Vector2f coords) {
-		auto size = getSize();
-		setPosition(sf::Vector2f(coords.x - size.x, coords.y));
-	}
-
-	sf::Vector2f GObject::getBottomLeft() {
-		auto pos = getPosition();
-		auto size = getSize();
-
-		return sf::Vector2f(pos.x, pos.y + size.y);
-	}
-
-	void GObject::setBottomLeft(sf::Vector2f coords) {
-		auto size = getSize();
-		setPosition(sf::Vector2f(coords.x, coords.y - size.y));
-	}
-
 	void GObject::move(sf::Vector2f offset) {
 		m_rect.move(offset);
 	}
@@ -166,6 +134,22 @@ namespace pg {
 
 	bool GObject::isDead() {
 		return m_isDead;
+	}
+
+	void GObject::setLeft(float val) {
+		setPosition(sf::Vector2f(val, getPosition().y));
+	}
+
+	void GObject::setTop(float val) {
+		setPosition(sf::Vector2f(getPosition().x, val));
+	}
+
+	float GObject::getLeft() {
+		return getPosition().x;
+	}
+
+	float GObject::getTop() {
+		return getPosition().y;
 	}
 
 	bool GObject::isMovable() {
