@@ -117,11 +117,16 @@ namespace pg {
 		auto o1 = obj1->getCenter();
 		auto o2 = obj2->getCenter();
 
-		if (Math::intersectsL2(o1, o2, obj2->getTopRight(), obj2->getEndPos())) return eSides::Right;
-		if (Math::intersectsL2(o1, o2, obj2->getPosition(), obj2->getBottomLeft())) return eSides::Left;
+		sf::Vector2f leftTop(obj2->getPosition());
+		sf::Vector2f leftBottom(obj2->getLeft(), obj2->getBottom());
+		sf::Vector2f rightTop(obj2->getRight(), obj2->getTop());
+		sf::Vector2f rightBottom(obj2->getRight(), obj2->getBottom());
 
-		if (Math::intersectsL2(o1, o2, obj2->getBottomLeft(), obj2->getEndPos())) return eSides::Bottom;
-		if (Math::intersectsL2(o1, o2, obj2->getPosition(), obj2->getTopRight())) return eSides::Top;
+		if (Math::intersectsL2(o1, o2, rightTop, rightBottom)) return eSides::Right;
+		if (Math::intersectsL2(o1, o2, leftTop, leftBottom)) return eSides::Left;
+
+		if (Math::intersectsL2(o1, o2, leftBottom, rightBottom)) return eSides::Bottom;
+		if (Math::intersectsL2(o1, o2, leftTop, rightTop)) return eSides::Top;
 
 		// Например, если объект внутри другого объекта
 		return eSides::None;
