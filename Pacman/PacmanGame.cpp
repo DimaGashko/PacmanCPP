@@ -11,8 +11,8 @@ namespace pg {
 		_initLevels();
 
 		auto bgSound = soundsManager.get("sounds/pacman_chomp.wav");
-		bgSound->setLoop(true);
-		bgSound->play();
+		bgSound.setLoop(true);
+		bgSound.play();
 
 		openNextLevel();
 

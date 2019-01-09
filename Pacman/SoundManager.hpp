@@ -11,10 +11,10 @@ namespace pg {
 	public:
 		SoundManager();
 
-		// Возвращает SoundыSource по пути к нему
+		// Возвращает Звук по пути к нему
 		// Если звук ранее не добавлялся
 		// То сначала добавляется через get
-		sf::Sound* get(std::string url);
+		sf::Sound get(std::string url);
 
 		// Добавляет звук в SoundManager
 		bool add(std::string url);
@@ -23,11 +23,11 @@ namespace pg {
 
 	private:
 
-		// unordered_map добавленных звуков (так же является кэшем)
+		// unordered_map добавленных звуков
 		// (не static, так как в этом случае при вызове 
 		// Деструктора придется удалять все звуки, а они 
 		// В этом рвемя могут использоваться в других экземплярах)
-		std::unordered_map<std::string, sf::Sound*> m_sounds;
+		std::unordered_map<std::string, sf::SoundBuffer*> m_soundBuffers;
 
 
 	};

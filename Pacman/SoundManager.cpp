@@ -6,34 +6,28 @@ namespace pg {
 	
 	}
 
-	sf::Sound* SoundManager::get(std::string url) {
+	sf::Sound SoundManager::get(std::string url) {
 		add(url);
 
-		return m_sounds[url];
+		return sf::Sound(*m_soundBuffers[url]);
 	}
 
 	bool SoundManager::add(std::string url) {
-		if (m_sounds[url]) return true;
+		if (m_soundBuffers[url]) return true;
 
-		sf::SoundBuffer buffer;
+		sf::SoundBuffer *buffer = new sf::SoundBuffer();
 
-		if (!buffer.loadFromFile(url)) {
+		if (!buffer->loadFromFile(url)) {
 			return false;
 		}
-		
-		sf::Sound *sound = new sf::Sound();
-		sound->setBuffer(buffer);
 
-		m_sounds[url] = sound;
+		m_soundBuffers[url] = buffer;
 
 		return true;
 	}
 
-	
-
-
 	SoundManager::~SoundManager() {
-		m_sounds.clear();
+		m_soundBuffers.clear();
 	}
 
 }; // namespace pg
