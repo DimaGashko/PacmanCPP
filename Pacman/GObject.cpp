@@ -144,12 +144,28 @@ namespace pg {
 		setPosition(sf::Vector2f(getPosition().x, val));
 	}
 
+	void GObject::setRight(float val) {
+		setPosition(sf::Vector2f(val - getSize().x, getPosition().y));
+	}
+
+	void GObject::setBottom(float val) {
+		setPosition(sf::Vector2f(getPosition().x, val - getSize().y));
+	}
+
 	float GObject::getLeft() {
 		return getPosition().x;
 	}
 
 	float GObject::getTop() {
 		return getPosition().y;
+	}
+
+	float GObject::getRight() {
+		return getPosition().x + getSize().x;
+	}
+
+	float GObject::getBottom() {
+		return getPosition().y + getSize().y;
 	}
 
 	bool GObject::isMovable() {
