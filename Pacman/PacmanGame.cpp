@@ -10,11 +10,13 @@ namespace pg {
 		_initWindow();
 		_initLevels();
 
-		auto bgBuffer = soundsManager.getBuffer("sounds/chomp.wav");
-		sf::Sound bgSound(*bgBuffer);
+		auto bgBuffer = soundsManager.getBuffer("sounds/siren.wav");
+		sf::Sound bgSound;
 		
 		if (bgBuffer) {
+			bgSound.setBuffer(*bgBuffer);
 			bgSound.setLoop(true);
+			bgSound.setPlayingOffset(0.1);
 			bgSound.play();
 		}
 
