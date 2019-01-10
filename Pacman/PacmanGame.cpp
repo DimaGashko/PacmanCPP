@@ -16,7 +16,6 @@ namespace pg {
 		if (bgBuffer) {
 			bgSound.setBuffer(*bgBuffer);
 			bgSound.setLoop(true);
-			bgSound.setPlayingOffset(0.1);
 			bgSound.play();
 		}
 
