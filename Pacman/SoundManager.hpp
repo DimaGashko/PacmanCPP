@@ -11,13 +11,13 @@ namespace pg {
 	public:
 		SoundManager();
 
-		// Возвращает Звук по пути к нему
+		// Возвращает SoundBuffer по пути к нему
 		// Если звук ранее не добавлялся
-		// То сначала добавляется через get
-		sf::Sound get(std::string url);
+		// То сначала добавляется через addBuffer
+		sf::SoundBuffer* getBuffer(std::string url);
 
-		// Добавляет звук в SoundManager
-		bool add(std::string url);
+		// Добавляет SoundBuffer в SoundManager
+		bool addBuffer(std::string url);
 
 		~SoundManager();
 

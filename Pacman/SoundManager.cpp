@@ -6,13 +6,13 @@ namespace pg {
 	
 	}
 
-	sf::Sound SoundManager::get(std::string url) {
-		add(url);
+	sf::SoundBuffer* SoundManager::getBuffer(std::string url) {
+		addBuffer(url);
 
-		return sf::Sound(*m_soundBuffers[url]);
+		return m_soundBuffers[url];
 	}
 
-	bool SoundManager::add(std::string url) {
+	bool SoundManager::addBuffer(std::string url) {
 		if (m_soundBuffers[url]) return true;
 
 		sf::SoundBuffer *buffer = new sf::SoundBuffer();

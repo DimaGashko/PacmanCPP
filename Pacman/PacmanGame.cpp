@@ -10,9 +10,13 @@ namespace pg {
 		_initWindow();
 		_initLevels();
 
-		auto bgSound = soundsManager.get("sounds/pacman_chomp.wav");
-		bgSound.setLoop(true);
-		bgSound.play();
+		auto bgBuffer = soundsManager.getBuffer("sounds/pacman_chomp.wav");
+		sf::Sound bgSound(*bgBuffer);
+		
+		if (bgBuffer) {
+			bgSound.setLoop(true);
+			bgSound.play();
+		}
 
 		openNextLevel();
 
