@@ -10,14 +10,7 @@ namespace pg {
 		_initWindow();
 		_initLevels();
 
-		auto bgBuffer = soundsManager.getBuffer("sounds/siren.wav");
-		sf::Sound bgSound;
-		
-		if (bgBuffer) {
-			bgSound.setBuffer(*bgBuffer);
-			bgSound.setLoop(true);
-			bgSound.play();
-		}
+		_playBgSound();
 
 		openNextLevel();
 
@@ -145,6 +138,17 @@ namespace pg {
 		m_levels.push_back("configs/levels/level2.tmx");
 		m_levels.push_back("configs/levels/level3.tmx");
 
+	}
+
+	void PacmanGame::_playBgSound() {
+		auto bgBuffer = soundsManager.getBuffer("sounds/siren.wav");
+		sf::Sound bgSound;
+
+		if (bgBuffer) {
+			bgSound.setBuffer(*bgBuffer);
+			bgSound.setLoop(true);
+			bgSound.play();
+		}
 	}
 
 	PacmanGame::~PacmanGame() {

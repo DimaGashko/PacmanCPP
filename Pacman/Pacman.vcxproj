@@ -40,6 +40,7 @@
     <ClCompile Include="Pinky.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -65,6 +66,7 @@
     <ClInclude Include="Pinky.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Point.hpp" />
+    <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="SoundManager.hpp" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>

@@ -52,6 +52,8 @@ namespace pg {
 
 		void _initWindow();
 		void _initLevels();
+
+		void _playBgSound();
 		
 		sf::Vector2f _getGameSize();
 
