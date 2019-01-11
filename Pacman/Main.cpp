@@ -1,15 +1,20 @@
 #include <iostream>
 #include <string>
-#include <SFML/Graphics.hpp>
 
-#include "lib/tinyxml2.h"
 #include "PacmanGame.hpp"
+#include "Wall.hpp"
+#include "Singleton.hpp"
 
 using namespace std;
-using namespace tinyxml2;
 
 int main() {
 	srand((int)time(0));
+
+	pg::Wall wall = pg::Singleton<pg::Wall>::getInstance();
+
+	cout << wall.getPosition().x << endl;
+
+	system("pause");
 
 	//system("pause");
 
