@@ -4,6 +4,8 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "Singleton.hpp"
+#include "SoundBuffersManager.hpp"
 #include "SoundManager.hpp"
 #include "Camera.hpp"
 #include "GField.hpp"
@@ -29,7 +31,7 @@ namespace pg {
 		Player m_player;
 		Camera m_camera;
 
-		SoundManager soundsManager;
+		SoundManager *m_soundsManager;
 		
 		sf::RenderWindow m_window;
 
@@ -52,8 +54,6 @@ namespace pg {
 
 		void _initWindow();
 		void _initLevels();
-
-		void _playBgSound();
 		
 		sf::Vector2f _getGameSize();
 

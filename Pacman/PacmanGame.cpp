@@ -2,7 +2,10 @@
 
 namespace pg {
 
-	PacmanGame::PacmanGame() : m_camera(&m_window) {		
+	PacmanGame::PacmanGame() : 
+		m_camera(&m_window),
+		m_soundsManager(new SoundManager(Singleton<SoundBuffersManager>::getInstance()))
+	{		
 		
 	}
 
@@ -10,9 +13,9 @@ namespace pg {
 		_initWindow();
 		_initLevels();
 
-		_playBgSound();
-
 		openNextLevel();
+
+
 
 		sf::Clock clock;
 
@@ -138,17 +141,6 @@ namespace pg {
 		m_levels.push_back("configs/levels/level2.tmx");
 		m_levels.push_back("configs/levels/level3.tmx");
 
-	}
-
-	void PacmanGame::_playBgSound() {
-		auto bgBuffer = soundsManager.getBuffer("sounds/siren.wav");
-		sf::Sound bgSound;
-
-		if (bgBuffer) {
-			bgSound.setBuffer(*bgBuffer);
-			bgSound.setLoop(true);
-			bgSound.play();
-		}
 	}
 
 	PacmanGame::~PacmanGame() {
