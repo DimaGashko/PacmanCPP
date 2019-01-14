@@ -15,7 +15,7 @@ namespace pg {
 
 		openNextLevel();
 
-
+		m_soundsManager->playLoop("sounds/siren.wav");
 
 		sf::Clock clock;
 

@@ -16,6 +16,8 @@ namespace pg {
 		}
 
 		m_buffers[url] = buffer;
+
+		return true;
 	}
 
 	sf::SoundBuffer* SoundBuffersManager::get(std::string url) {
