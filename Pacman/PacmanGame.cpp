@@ -15,7 +15,8 @@ namespace pg {
 
 		openNextLevel();
 
-		m_sounds.playLoop("sounds/siren.wav");
+		m_sounds.playOnce("sounds/beginning.wav");
+		m_sounds.playLoop("sounds/siren.wav", 50);
 
 		sf::Clock clock;
 
@@ -79,6 +80,7 @@ namespace pg {
 
 	void PacmanGame::gameWon() {
 		std::cout << "You won the game \n";
+		m_sounds.playOnce("sounds/intermission.wav");
 	}
 
 	void PacmanGame::_updateGameField() {
@@ -91,6 +93,8 @@ namespace pg {
 			std::cout << "You won the level \n"
 				<< (m_currentLevel + 1) << std::endl;
 
+			m_sounds.playOnce("sounds/beginning.wav");
+
 			openNextLevel();
 		}
 
@@ -99,6 +103,9 @@ namespace pg {
 				<< (m_currentLevel + 1) << std::endl;
 
 			m_currentLevel -= 1;
+
+			m_sounds.playOnce("sounds/death.wav");
+
 			openNextLevel();
 		}
 	}
