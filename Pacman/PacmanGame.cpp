@@ -4,7 +4,7 @@ namespace pg {
 
 	PacmanGame::PacmanGame() : 
 		m_camera(&m_window),
-		m_soundsManager(new SoundManager(Singleton<SoundBuffersManager>::getInstance()))
+		m_sounds(Singleton<SoundBuffersManager>::getInstance())	
 	{		
 		
 	}
@@ -15,7 +15,7 @@ namespace pg {
 
 		openNextLevel();
 
-		m_soundsManager->playLoop("sounds/siren.wav");
+		m_sounds.playLoop("sounds/siren.wav");
 
 		sf::Clock clock;
 

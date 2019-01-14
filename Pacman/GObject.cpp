@@ -4,7 +4,8 @@ namespace pg {
 
 	GObject::GObject() :
 		m_isMovable(false),
-		m_isObstacle(false)
+		m_isObstacle(false),
+		m_sounds(Singleton<SoundBuffersManager>::getInstance())
 	{
 		
 	}

@@ -31,7 +31,7 @@ namespace pg {
 		Player m_player;
 		Camera m_camera;
 
-		SoundManager *m_soundsManager;
+		SoundManager m_sounds;
 		
 		sf::RenderWindow m_window;
 

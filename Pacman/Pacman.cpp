@@ -16,8 +16,12 @@ namespace pg {
 		Actor::interact(obj);
 
 		if (dynamic_cast<Point*>(obj) != nullptr) {
-			//playSound("")
+			onPointEat();
 		}
+	}
+
+	void Pacman::onPointEat() {
+		m_sounds.playOnce("sounds/eatfruit.wav");
 	}
 
 	Pacman::~Pacman() {

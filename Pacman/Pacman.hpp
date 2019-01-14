@@ -17,6 +17,8 @@ namespace pg {
 		~Pacman();
 
 	private:
+
+		void onPointEat();
 		
 	};
 

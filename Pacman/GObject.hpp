@@ -5,6 +5,8 @@
 #include <string>
 
 #include "Math.hpp"
+#include "Singleton.hpp"
+#include "SoundManager.hpp"
 #include "AnimationManager.hpp"
 #include <functional>
 
@@ -78,7 +80,9 @@ namespace pg {
 		bool m_isObstacle;
 		bool m_isMovable;
 
-		pg::AnimationManager *m_animationManager;
+		AnimationManager *m_animationManager;
+
+		SoundManager m_sounds;
 
 	private:
 		sf::RectangleShape m_rect;
