@@ -161,7 +161,7 @@
     <ClInclude Include="Singleton.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="SoundBuffersManager.h">
+    <ClInclude Include="SoundBuffersManager.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

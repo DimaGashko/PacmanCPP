@@ -1,4 +1,4 @@
-#include "SoundBuffersManager.h"
+#include "SoundBuffersManager.hpp"
 
 namespace pg {
 

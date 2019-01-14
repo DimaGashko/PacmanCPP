@@ -67,7 +67,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Point.hpp" />
     <ClInclude Include="Singleton.hpp" />
-    <ClInclude Include="SoundBuffersManager.h" />
+    <ClInclude Include="SoundBuffersManager.hpp" />
     <ClInclude Include="SoundManager.hpp" />
     <ClInclude Include="Wall.hpp" />
   </ItemGroup>
