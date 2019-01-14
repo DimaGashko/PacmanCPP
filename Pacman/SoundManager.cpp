@@ -8,17 +8,21 @@ namespace pg {
 	
 	}
 
-	void SoundManager::playOnce(std::string url) {
+	void SoundManager::playOnce(std::string url, float volume) {
 		auto sound = get(url);
+		if (!sound) return;
 
 		sound->setLoop(false);
+		sound->setVolume(volume);
 		sound->play();
 	}
 
-	void SoundManager::playLoop(std::string url) {
+	void SoundManager::playLoop(std::string url, float volume) {
 		auto sound = get(url);
+		if (!sound) return;
 
 		sound->setLoop(true);
+		sound->setVolume(volume);
 		sound->play();
 	}
 

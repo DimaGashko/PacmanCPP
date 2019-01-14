@@ -3,7 +3,7 @@
 namespace pg {
 
 	Pacman::Pacman() : Actor() {
-
+		
 	}
 
 	void Pacman::updateAnimation(int frameTime) {
@@ -21,7 +21,7 @@ namespace pg {
 	}
 
 	void Pacman::onPointEat() {
-		m_sounds.playOnce("sounds/eatfruit.wav");
+		m_sounds.playOnce("sounds/eatpoint.wav");
 	}
 
 	Pacman::~Pacman() {

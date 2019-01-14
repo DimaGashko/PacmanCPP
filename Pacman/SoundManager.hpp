@@ -13,8 +13,8 @@ namespace pg {
 	public:
 		SoundManager(SoundBuffersManager *buffers);
 
-		void playOnce(std::string url);
-		void playLoop(std::string url);
+		void playOnce(std::string url, float volume = 100);
+		void playLoop(std::string url, float volume = 100);
 
 		void pause(std::string url);
 
