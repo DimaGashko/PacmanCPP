@@ -16,7 +16,12 @@ namespace pg {
 		openNextLevel();
 
 		m_sounds.playOnce("sounds/beginning.wav");
-		m_sounds.playLoop("sounds/siren.wav", 50);
+
+		sf::Music bgMusic;
+		if (bgMusic.openFromFile("sounds/music/bg.ogg")) {
+			bgMusic.setVolume(50);
+			bgMusic.play();
+		}
 
 		sf::Clock clock;
 
@@ -72,7 +77,6 @@ namespace pg {
 
 		if (m_levels.size() <= m_currentLevel) {
 			gameWon();
-			return;
 		}
 
 		_loadLevel(m_levels[m_currentLevel]);
