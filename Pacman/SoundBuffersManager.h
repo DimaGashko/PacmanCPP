@@ -13,15 +13,15 @@ namespace pg {
 
 		bool add(std::string url);
 
-		sf::SoundBuffer get(std::string url);
-
-		void remove(std::string url);
+		sf::SoundBuffer* get(std::string url);
 
 		bool has(std::string url);
-		
-		std::unordered_map<std::string, sf::SoundBuffer> m_buffers;
 
 		~SoundBuffersManager();
+
+	private:
+
+		std::unordered_map<std::string, sf::SoundBuffer*> m_buffers;
 	};
 
 }; // namespace pg
