@@ -14,6 +14,9 @@ namespace pg {
 		void updateSpeed(int frameTime) override;
 		void interact(pg::GObject *obj) override;
 
+	protected:
+		float m_step;
+
 	private:
 		std::string m_dir;
 		int m_stepsRest;

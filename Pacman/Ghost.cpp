@@ -2,7 +2,9 @@
 
 namespace pg {
 
-	Ghost::Ghost() : Actor() {
+	Ghost::Ghost() : Actor(),
+		m_step(0.11f)
+	{
 
 	}
 

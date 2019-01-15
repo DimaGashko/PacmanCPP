@@ -440,6 +440,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="63"/>
    <tile/>
    <tile/>
    <tile/>
@@ -516,7 +517,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="43"/>
    <tile/>
    <tile/>
    <tile/>
@@ -610,7 +610,6 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="63"/>
    <tile/>
    <tile/>
    <tile/>
@@ -637,6 +636,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="43"/>
    <tile/>
    <tile/>
    <tile/>
