@@ -14,7 +14,7 @@
    <property name="animation_top" type="int" value="40"/>
   </properties>
   <objectgroup draworder="index">
-   <object id="1" x="2" y="2" width="13" height="13"/>
+   <object id="5" x="1" y="1" width="14" height="14"/>
   </objectgroup>
   <animation>
    <frame tileid="0" duration="250"/>

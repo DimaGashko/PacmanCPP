@@ -49,6 +49,8 @@ namespace pg {
 		if (m_dir == "bottom") dir.y = step;
 
 		addToSpeed(dir);
+
+		//std::cout << getSpeed().x << "|" << getSpeed().y << std::endl;
 	}
 
 	void Ghost::interact(pg::GObject *obj) {
