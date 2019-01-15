@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Singleton.hpp"
+#include "FrameTimeManager.hpp"
 #include "SoundBuffersManager.hpp"
 #include "SoundManager.hpp"
 #include "Camera.hpp"
@@ -32,13 +33,14 @@ namespace pg {
 		Camera m_camera;
 
 		SoundManager m_sounds;
+		FrameTimeManager m_frameTime;
 		
 		sf::RenderWindow m_window;
 
-		int m_frameTime = 0;
-
-		int m_currentLevel = -1;
+		int m_currentLevel = 1 - 2;
 		std::vector<std::string> m_levels;
+
+		sf::Music m_bgMusic;
 
 		void update();
 		void draw();
@@ -58,6 +60,8 @@ namespace pg {
 		sf::Vector2f _getGameSize();
 
 		sf::FloatRect _getVisibleRange();
+		
+		void _playBgMusic();
 	};
 
 }; // namespace pg

@@ -12,22 +12,16 @@ namespace pg {
 	void PacmanGame::run() {
 		_initWindow();
 		_initLevels();
+		_playBgMusic();
 
 		openNextLevel();
-
-		sf::Music bgMusic;
-		if (bgMusic.openFromFile("sounds/music/bg.ogg")) {
-			bgMusic.setVolume(70);
-			bgMusic.play();
-		}
-
-		sf::Clock clock;
+		
 
 		while (m_window.isOpen()) {
-			//std::cout << 1000 / (m_frameTime + 0.01) << std::endl;
-			
-			m_frameTime = clock.restart().asMilliseconds();
-			if (m_frameTime > 64) m_frameTime = 64; 
+			if (!m_window.hasFocus()) continue;
+
+			m_frameTime.update();
+			//std::cout << 1000 / (m_frameTime.get() + 0.01) << std::endl;
 
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
@@ -39,13 +33,10 @@ namespace pg {
 				}
 			}
 
-			if (m_window.hasFocus()) {
-				m_window.clear();
-				update();
-				draw();
-				m_window.display();
-			}
-
+			m_window.clear();
+			update();
+			draw();
+			m_window.display();
 		}
 	}
 
@@ -53,8 +44,8 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 8;
 
-		m_window.create(sf::VideoMode(750, 650), "Pacman", sf::Style::Default, settings);
-		//m_window.setFramerateLimit(120);
+		m_window.create(sf::VideoMode(1200, 650), "Pacman", sf::Style::Default, settings);
+		m_window.setFramerateLimit(180);
 
 		m_camera.init();
 	}
@@ -89,7 +80,7 @@ namespace pg {
 
 	void PacmanGame::_updateGameField() {
 		m_player.update();
-		m_gameField->update(_getGameSize(), m_frameTime);
+		m_gameField->update(_getGameSize(), m_frameTime.get());
 
 		m_camera.update();
 	
@@ -150,6 +141,14 @@ namespace pg {
 		m_levels.push_back("configs/levels/level2.tmx");
 		m_levels.push_back("configs/levels/level3.tmx");
 
+	}
+
+	void PacmanGame::_playBgMusic() {
+		if (m_bgMusic.openFromFile("sounds/music/bg.ogg")) {
+			m_bgMusic.setVolume(85);
+			m_bgMusic.setLoop(true);
+			m_bgMusic.play();
+		}
 	}
 
 	PacmanGame::~PacmanGame() {

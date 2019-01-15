@@ -21,6 +21,8 @@ namespace pg {
 		sf::Clock m_clock;
 
 		int m_frameTime;
+
+		const static int MAX_FRAME_TIME;
 	};
 
 }; // namespace pg
