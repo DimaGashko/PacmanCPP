@@ -41,7 +41,6 @@ namespace pg {
 		bool isMovable();
 		bool isDead();
 
-		
 		void setPosition(sf::Vector2f coords);
 		void setCenter(sf::Vector2f center);
 		void setSpeed(sf::Vector2f speed);
