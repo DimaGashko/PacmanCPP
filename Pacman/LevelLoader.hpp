@@ -36,13 +36,13 @@ namespace pg {
 			std::vector<std::vector<int>> gids;
 			std::string tilesetUrl;
 		};
-
+		
 		struct _TileConfig {
 			int id;
 
 			std::string type;
 
-			sf::IntRect collisionRect;
+			sf::FloatRect collisionOffset;
 			
 			std::vector<std::string> propertyNames;
 			std::vector<std::string> propertyTypes;

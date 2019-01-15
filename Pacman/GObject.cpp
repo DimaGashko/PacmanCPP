@@ -51,8 +51,8 @@ namespace pg {
 	bool GObject::intersects(GObject *obj) {
 		if (obj == this) return false;
 
-		auto a = getBounds();
-		auto b = obj->getBounds();
+		auto a = _getCollisionRect();
+		auto b = obj->_getCollisionRect();
 
 		return Math::intersectsNormalRect(
 			a.left, a.top, a.left + a.width, a.top + a.height,
@@ -129,6 +129,14 @@ namespace pg {
 		return m_rect.getSize();
 	}
 
+	void GObject::setCollisionOffset(sf::FloatRect rect) {
+		m_collisionOffset = rect;
+	}
+
+	sf::FloatRect GObject::getCollisionOffset() {
+		return m_collisionOffset;
+	}
+
 	void GObject::setLeft(float val) {
 		setPosition(sf::Vector2f(val, getPosition().y));
 	}
@@ -171,6 +179,19 @@ namespace pg {
 
 	bool GObject::isMovable() {
 		return m_isMovable;
+	}
+
+	sf::FloatRect GObject::_getCollisionRect() {
+		auto pos = getPosition();
+
+		sf::FloatRect collisionRect(
+			pos.x + m_collisionOffset.left,
+			pos.y + m_collisionOffset.top,
+			m_collisionOffset.width,
+			m_collisionOffset.height
+		);
+
+		return collisionRect;
 	}
 
 	GObject::~GObject() {

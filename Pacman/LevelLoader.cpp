@@ -64,7 +64,8 @@ namespace pg {
 
 					obj->setPosition(coords);
 					obj->setSize(sf::Vector2f(tileSize));
-
+					obj->setCollisionOffset(tile.collisionOffset);
+					
 					auto animNames = m_tilesetConfig->animationNames;
 					bool hasAnim = animNames.find(type) != animNames.end();
 
@@ -213,16 +214,18 @@ namespace pg {
 			if (xmlCollisionRectContainer) {
 				auto xmlCollisionRect = xmlCollisionRectContainer->FirstChildElement("object");
 
-				tile.collisionRect = sf::IntRect(
-					xmlCollisionRect->IntAttribute("x"),
-					xmlCollisionRect->IntAttribute("y"),
-					xmlCollisionRect->IntAttribute("width"),
-					xmlCollisionRect->IntAttribute("height")
+				tile.collisionOffset = sf::FloatRect(
+					(float)xmlCollisionRect->IntAttribute("x"),
+					(float)xmlCollisionRect->IntAttribute("y"),
+					(float)xmlCollisionRect->IntAttribute("width"),
+					(float)xmlCollisionRect->IntAttribute("height")
 				);
 			}
 			else {
 				auto tilesize = m_tilesetConfig->tileSize;
-				tile.collisionRect = sf::IntRect(0, 0, tilesize.x, tilesize.y);
+				tile.collisionOffset = sf::FloatRect(
+					0.f, 0.f, (float)tilesize.x, (float)tilesize.y
+				);
 			}
 
 			config->tiles[id] = tile;

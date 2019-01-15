@@ -41,15 +41,19 @@ namespace pg {
 		bool isMovable();
 		bool isDead();
 
+		
 		void setPosition(sf::Vector2f coords);
 		void setCenter(sf::Vector2f center);
 		void setSpeed(sf::Vector2f speed);
 		void setSize(sf::Vector2f size);
-
+		
 		sf::Vector2f getPosition();
 		sf::Vector2f getCenter();
 		sf::Vector2f getSpeed();
 		sf::Vector2f getSize();
+
+		void setCollisionOffset(sf::FloatRect rect);
+		sf::FloatRect getCollisionOffset();
 
 		void setLeft(float val);
 		void setTop(float val);
@@ -86,10 +90,13 @@ namespace pg {
 
 	private:
 		sf::RectangleShape m_rect;
+		sf::FloatRect m_collisionOffset;
 		sf::Vector2f m_speed;
 		sf::Vector2i *m_posInGrid;
 
 		std::function<void()> m_onDead;
+
+		sf::FloatRect _getCollisionRect();
 
 		void _useAnimation(int frameTime);
 	};
