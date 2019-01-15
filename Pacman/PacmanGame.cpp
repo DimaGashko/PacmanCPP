@@ -68,6 +68,8 @@ namespace pg {
 
 		if (m_levels.size() <= m_currentLevel) {
 			gameWon();
+
+			m_currentLevel = m_levels.size() - 1;
 		}
 
 		_loadLevel(m_levels[m_currentLevel]);
@@ -138,8 +140,8 @@ namespace pg {
 	void PacmanGame::_initLevels() {
 
 		m_levels.push_back("configs/levels/level1.tmx");
-		m_levels.push_back("configs/levels/level2.tmx");
-		m_levels.push_back("configs/levels/level3.tmx");
+		//m_levels.push_back("configs/levels/level2.tmx");
+		//m_levels.push_back("configs/levels/level3.tmx");
 
 	}
 
