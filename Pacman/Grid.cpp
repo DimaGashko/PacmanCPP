@@ -11,7 +11,7 @@ namespace pg {
 	Grid::Grid(sf::Vector2i size, sf::Vector2i cellSize) :
 		m_size(size),
 		m_cellSize(cellSize),
-		m_grid(m_size.x, std::vector<std::vector<GObject*>>(m_size.y))
+		m_grid(m_size.x, std::vector<std::list<GObject*>>(m_size.y))
 	{
 
 	}
@@ -54,22 +54,12 @@ namespace pg {
 
 		if (!_hasCell(*coords)) return;
 		auto &cell = m_grid[coords->x][coords->y];
-		auto size = cell.size();
 
-		int newLen = size - 1;
-		if (newLen < 1) newLen = 1;
-		else if (newLen > 10000) newLen = 10000;
+		cell.remove(object);
+	}
 
-		std::vector<GObject*> newCell(size - 1);
-
-		for (int i = 0; i < size; i++) {
-			if (cell[i] != object) {
-				if (i < size - 1) newCell[i] = cell[i];
-				else newCell.push_back(cell[i]);
-			}
-		}
-
-		m_grid[coords->x][coords->y] = newCell;
+	bool removeIf(GObject *obj) {
+		return !obj || obj->isDead();
 	}
 
 	void Grid::getObjectsOfRange(sf::FloatRect range, std::vector<GObject*> &res, int maxSize) {
@@ -81,14 +71,19 @@ namespace pg {
 			_getCoordsInGrid(sf::Vector2f(range.width, range.height))
 		);
 
+		std::vector<GObject*> toDelete;
+
 		for (int x = _range.left; x <= _range.left + _range.width; x++) {
 			for (int y = _range.top; y <= _range.top + _range.height; y++) {
 
 				if (!_hasCell(sf::Vector2i(x, y))) continue;
+				auto &cell = m_grid[x][y];
 
-				for (auto &obj : m_grid[x][y]) {
-					if (!obj || obj->isDead()) {
-						remove(obj);
+				for (auto obj : cell) {
+					if (!obj) continue;
+
+					if (obj->isDead()) {
+						toDelete.push_back(obj);
 						continue;
 					}
 
@@ -96,6 +91,10 @@ namespace pg {
 				}
 
 			}
+		}
+
+		for (auto obj : toDelete) {
+			remove(obj);
 		}
 
 		res.resize(len);

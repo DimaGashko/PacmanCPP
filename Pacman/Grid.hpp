@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 #include <SFML/Graphics.hpp>
 
 #include "GObject.hpp"
@@ -28,7 +30,7 @@ namespace pg {
 		sf::Vector2i m_size;
 		sf::Vector2i m_cellSize;
 
-		std::vector<std::vector<std::vector<GObject *>>> m_grid;
+		std::vector<std::vector<std::list<GObject *>>> m_grid;
 
 		bool _hasCell(sf::Vector2i coords);
 		sf::Vector2i _getCoordsInGrid(sf::Vector2f coords);

@@ -17,6 +17,7 @@ namespace pg {
 
 		if (dynamic_cast<Point*>(obj) != nullptr) {
 			onPointEat();
+
 		}
 	}
 
