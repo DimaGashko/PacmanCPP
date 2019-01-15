@@ -15,11 +15,9 @@ namespace pg {
 
 		openNextLevel();
 
-		m_sounds.playOnce("sounds/beginning.wav");
-
 		sf::Music bgMusic;
 		if (bgMusic.openFromFile("sounds/music/bg.ogg")) {
-			bgMusic.setVolume(50);
+			bgMusic.setVolume(70);
 			bgMusic.play();
 		}
 
@@ -96,8 +94,6 @@ namespace pg {
 		if (m_gameField->checkWon()) {
 			std::cout << "You won the level \n"
 				<< (m_currentLevel + 1) << std::endl;
-
-			m_sounds.playOnce("sounds/beginning.wav");
 
 			openNextLevel();
 		}
