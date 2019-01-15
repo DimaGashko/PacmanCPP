@@ -37,7 +37,7 @@ namespace pg {
 		
 		sf::RenderWindow m_window;
 
-		int m_currentLevel = 4 - 2;
+		int m_currentLevel = 3 - 2;
 		std::vector<std::string> m_levels;
 
 		sf::Music m_bgMusic;

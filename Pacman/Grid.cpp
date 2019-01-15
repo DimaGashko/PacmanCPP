@@ -56,6 +56,10 @@ namespace pg {
 		auto &cell = m_grid[coords->x][coords->y];
 		auto size = cell.size();
 
+		int newLen = size - 1;
+		if (newLen < 1) newLen = 1;
+		else if (newLen > 10000) newLen = 10000;
+
 		std::vector<GObject*> newCell(size - 1);
 
 		for (int i = 0; i < size; i++) {
