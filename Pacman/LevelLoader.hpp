@@ -41,6 +41,8 @@ namespace pg {
 			int id;
 
 			std::string type;
+
+			sf::IntRect collisionRect;
 			
 			std::vector<std::string> propertyNames;
 			std::vector<std::string> propertyTypes;

@@ -208,6 +208,23 @@ namespace pg {
 				nextFrame = nextFrame->NextSiblingElement("frame");
 			}
 
+			auto xmlCollisionRectContainer = nextTile->FirstChildElement("objectgroup");
+
+			if (xmlCollisionRectContainer) {
+				auto xmlCollisionRect = xmlCollisionRectContainer->FirstChildElement("object");
+
+				tile.collisionRect = sf::IntRect(
+					xmlCollisionRect->IntAttribute("x"),
+					xmlCollisionRect->IntAttribute("y"),
+					xmlCollisionRect->IntAttribute("width"),
+					xmlCollisionRect->IntAttribute("height")
+				);
+			}
+			else {
+				auto tilesize = m_tilesetConfig->tileSize;
+				tile.collisionRect = sf::IntRect(0, 0, tilesize.x, tilesize.y);
+			}
+
 			config->tiles[id] = tile;
 			nextTile = nextTile->NextSiblingElement("tile");
 		}

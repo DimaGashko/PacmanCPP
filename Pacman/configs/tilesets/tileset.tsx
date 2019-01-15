@@ -13,6 +13,9 @@
    <property name="animation_stayTop" type="int" value="41"/>
    <property name="animation_top" type="int" value="40"/>
   </properties>
+  <objectgroup draworder="index">
+   <object id="1" x="2" y="2" width="13" height="13"/>
+  </objectgroup>
   <animation>
    <frame tileid="0" duration="250"/>
    <frame tileid="1" duration="250"/>
@@ -64,6 +67,9 @@
    <property name="animation_stayTop" type="int" value="27"/>
    <property name="animation_top" type="int" value="26"/>
   </properties>
+  <objectgroup draworder="index">
+   <object id="1" x="1" y="1" width="14" height="14"/>
+  </objectgroup>
   <animation>
    <frame tileid="22" duration="150"/>
    <frame tileid="23" duration="150"/>
@@ -131,6 +137,9 @@
    <property name="animation_stayTop" type="int" value="47"/>
    <property name="animation_top" type="int" value="46"/>
   </properties>
+  <objectgroup draworder="index">
+   <object id="1" x="1" y="1" width="14" height="14"/>
+  </objectgroup>
   <animation>
    <frame tileid="42" duration="150"/>
    <frame tileid="43" duration="150"/>
@@ -198,6 +207,9 @@
    <property name="animation_stayTop" type="int" value="67"/>
    <property name="animation_top" type="int" value="66"/>
   </properties>
+  <objectgroup draworder="index">
+   <object id="1" x="1" y="1" width="14" height="14"/>
+  </objectgroup>
   <animation>
    <frame tileid="62" duration="150"/>
    <frame tileid="63" duration="150"/>
@@ -264,6 +276,9 @@
    <property name="animation_stayTop" type="int" value="87"/>
    <property name="animation_top" type="int" value="86"/>
   </properties>
+  <objectgroup draworder="index">
+   <object id="1" x="1" y="1" width="14" height="14"/>
+  </objectgroup>
   <animation>
    <frame tileid="82" duration="150"/>
    <frame tileid="83" duration="150"/>
@@ -315,7 +330,11 @@
  <tile id="106" type="Bonus"/>
  <tile id="107" type="Key"/>
  <tile id="108" type="BigPoint"/>
- <tile id="109" type="Point"/>
+ <tile id="109" type="Point">
+  <objectgroup draworder="index">
+   <object id="1" x="6" y="7" width="4" height="4"/>
+  </objectgroup>
+ </tile>
  <tile id="140" type="Wall"/>
  <tile id="150" type="Bonus"/>
 </tileset>
