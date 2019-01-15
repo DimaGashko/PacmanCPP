@@ -44,7 +44,7 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 8;
 
-		m_window.create(sf::VideoMode(1200, 650), "Pacman", sf::Style::Default, settings);
+		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default, settings);
 		m_window.setFramerateLimit(180);
 
 		m_camera.init();
