@@ -44,7 +44,7 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 8;
 
-		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default, settings);
+		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Fullscreen, settings);
 		m_window.setFramerateLimit(180);
 
 		m_camera.init();
@@ -69,7 +69,7 @@ namespace pg {
 		if (m_levels.size() <= m_currentLevel) {
 			gameWon();
 
-			m_currentLevel = m_levels.size() - 1;
+			m_currentLevel = (int)m_levels.size() - 1;
 		}
 
 		_loadLevel(m_levels[m_currentLevel]);
@@ -140,8 +140,10 @@ namespace pg {
 	void PacmanGame::_initLevels() {
 
 		m_levels.push_back("configs/levels/level1.tmx");
-		//m_levels.push_back("configs/levels/level2.tmx");
-		//m_levels.push_back("configs/levels/level3.tmx");
+		m_levels.push_back("configs/levels/level2.tmx");
+		m_levels.push_back("configs/levels/level3.tmx");
+		m_levels.push_back("configs/levels/level4.tmx");
+		//m_levels.push_back("configs/levels/level5.tmx");
 
 	}
 
