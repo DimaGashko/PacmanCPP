@@ -21,7 +21,7 @@ namespace pg {
 			if (!m_window.hasFocus()) continue;
 
 			m_frameTime.update();
-			std::cout << 1000 / (m_frameTime.get() + 0.01) << std::endl;
+			//std::cout << 1000 / (m_frameTime.get() + 0.01) << std::endl;
 
 			sf::Event event;
 			while (m_window.pollEvent(event)) {
@@ -44,7 +44,7 @@ namespace pg {
 		sf::ContextSettings settings;
 		settings.antialiasingLevel = 8;
 
-		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default, settings);
+		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Fullscreen, settings);
 		m_window.setFramerateLimit(180);
 
 		m_camera.init();
@@ -150,7 +150,7 @@ namespace pg {
 	void PacmanGame::_playBgMusic() {
 		if (m_bgMusic.openFromFile("sounds/music/bg.ogg")) {
 			m_bgMusic.setVolume(85);
-			//m_bgMusic.setPlayingOffset(sf::seconds(0));
+			m_bgMusic.setPlayingOffset(sf::seconds(5 * 60 + 15));
 			m_bgMusic.setLoop(true);
 			m_bgMusic.play();
 		}
