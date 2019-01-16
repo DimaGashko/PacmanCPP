@@ -150,7 +150,7 @@ namespace pg {
 	void PacmanGame::_playBgMusic() {
 		if (m_bgMusic.openFromFile("sounds/music/bg.ogg")) {
 			m_bgMusic.setVolume(85);
-			m_bgMusic.setPlayingOffset(sf::seconds(5 * 60 + 15));
+			//m_bgMusic.setPlayingOffset(sf::seconds(0));
 			m_bgMusic.setLoop(true);
 			m_bgMusic.play();
 		}
