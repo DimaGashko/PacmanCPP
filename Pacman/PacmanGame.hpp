@@ -49,6 +49,8 @@ namespace pg {
 
 		void gameWon();
 
+		void keyReleasedEvent();
+
 		void _updateGameField();
 		void _drawGameField();
 

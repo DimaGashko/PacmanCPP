@@ -31,6 +31,9 @@ namespace pg {
 				else if (event.type == sf::Event::Resized) {
 					m_camera.updateSize();
 				}
+				else if (event.type == sf::Event::KeyReleased) {
+					keyReleasedEvent();
+				}
 			}
 
 			m_window.clear();
@@ -40,12 +43,21 @@ namespace pg {
 		}
 	}
 
-	void PacmanGame::_initWindow() {
-		sf::ContextSettings settings;
-		settings.antialiasingLevel = 8;
+	void PacmanGame::keyReleasedEvent() {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+			//m_window.
+		}
+	}
 
-		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Fullscreen, settings);
+	void PacmanGame::_initWindow() {
+		m_window.create(sf::VideoMode(800, 650), "Pacman", sf::Style::Default);
 		m_window.setFramerateLimit(180);
+
+		sf::Image icon;
+		if (icon.loadFromFile("img/icon.png")) {
+			auto size = icon.getSize();
+			m_window.setIcon(size.x, size.y, icon.getPixelsPtr());
+		}
 
 		m_camera.init();
 	}
