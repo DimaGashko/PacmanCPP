@@ -170,5 +170,39 @@
     <ClInclude Include="FrameTimeManager.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="img\icon.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="icon1.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\icon32.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\png2.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\icon64.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\icon1.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\icon32.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="img\icon256.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

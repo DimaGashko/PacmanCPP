@@ -68,10 +68,24 @@
     <ClInclude Include="Pinky.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Point.hpp" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Singleton.hpp" />
     <ClInclude Include="SoundBuffersManager.hpp" />
     <ClInclude Include="SoundManager.hpp" />
     <ClInclude Include="Wall.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico" />
+    <Image Include="img\icon.png" />
+    <Image Include="img\icon1.ico" />
+    <Image Include="img\icon256.ico" />
+    <Image Include="img\icon32.bmp" />
+    <Image Include="img\icon32.png" />
+    <Image Include="img\icon64.bmp" />
+    <Image Include="img\png2.png" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -174,7 +188,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -194,7 +208,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)/dlls;$(VCInstallDir)/SFML-2.5.1/lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system.lib;sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <SubSystem>NotSet</SubSystem>
+      <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

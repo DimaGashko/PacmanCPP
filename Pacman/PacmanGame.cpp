@@ -54,7 +54,7 @@ namespace pg {
 		m_window.setFramerateLimit(180);
 
 		sf::Image icon;
-		if (icon.loadFromFile("img/icon.png")) {
+		if (icon.loadFromFile("img/icon64.png")) {
 			auto size = icon.getSize();
 			m_window.setIcon(size.x, size.y, icon.getPixelsPtr());
 		}
@@ -152,7 +152,7 @@ namespace pg {
 	void PacmanGame::_initLevels() {
 
 		m_levels.push_back("configs/levels/level1.tmx");
-		m_levels.push_back("configs/levels/level2.tmx");
+		//m_levels.push_back("configs/levels/level2.tmx");
 		m_levels.push_back("configs/levels/level3.tmx");
 		m_levels.push_back("configs/levels/level4.tmx");
 		//m_levels.push_back("configs/levels/level5.tmx");
