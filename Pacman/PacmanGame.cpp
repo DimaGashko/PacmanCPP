@@ -45,7 +45,7 @@ namespace pg {
 
 	void PacmanGame::keyReleasedEvent() {
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-			//m_window.
+			
 		}
 	}
 
