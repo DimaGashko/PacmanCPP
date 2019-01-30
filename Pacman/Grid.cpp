@@ -28,9 +28,8 @@ namespace pg {
 				//И уже находится в нужной ячейке
 				return;
 			}
-			else {
-				remove(object);
-			}
+			
+			remove(object);
 		}
 		else {
 			object->setPosInGrid(new sf::Vector2i());
