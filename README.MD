@@ -2,7 +2,7 @@
 
 YouTube: https://youtu.be/XfgQP0AOVUk
 
-Download: <a href="./Build/Pacman.zip">Pacman.zip</a>
+Download (windows): <a href="./Build/Pacman.zip">Pacman.zip</a>
 
 ![Screenshot](./presentation/screenshot.png)
 
