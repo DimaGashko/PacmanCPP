@@ -1,4 +1,4 @@
-# Pacman written in C++ using SFML library
+# Pacman written in C++ with SFML library
 
 YouTube: https://youtu.be/XfgQP0AOVUk
 
